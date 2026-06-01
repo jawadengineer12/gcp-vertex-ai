@@ -1,0 +1,66 @@
+classDiagram
+    class LayoutProject {
+        ProjectInfo projectInfo
+        DocumentSettings documentSettings
+        List~Page~ pages
+    }
+
+    class ProjectInfo {
+        str projectName
+        Optional~str~ templateID
+    }
+
+    class DocumentSettings {
+        float pageWidth
+        float pageHeight
+    }
+
+    class Page {
+        int pageIndex
+        List~Asset~ assets
+    }
+
+    class Asset {
+        Literal Article_Image_Ad assetType
+        Position position
+        Size size
+        AssetContent content
+        Optional~int~ columns = 1
+        Optional~float~ gutterSize = 0.0
+        Optional~Dict~ margins
+        Optional~TextStyle~ textStyle
+    }
+
+    class Position {
+        float startX
+        float startY
+    }
+
+    class Size {
+        float width
+        float height
+    }
+
+    class AssetContent {
+        Optional~str~ imageUrl
+        Optional~str~ textBody
+    }
+
+    class TextStyle {
+        Optional~str~ fontFamily = Arial
+        Optional~float~ fontSize = 12.0
+        Optional~bool~ bold = false
+        Optional~bool~ italic = false
+        Optional~bool~ underline = false
+        Optional~str~ color = 000000
+        Optional~bool~ autoFit = false
+    }
+
+    LayoutProject --> ProjectInfo
+    LayoutProject --> DocumentSettings
+    LayoutProject --> Page
+    Page --> Asset
+    Asset --> Position
+    Asset --> Size
+    Asset --> AssetContent
+    Asset --> TextStyle
