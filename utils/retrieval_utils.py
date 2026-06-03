@@ -2,7 +2,6 @@ import json
 import re
 from pathlib import Path
 
-
 TOP_K = 3
 MAX_SCORE = 25
 
@@ -11,7 +10,6 @@ STOPWORDS = {
     "using", "create", "make", "page", "one", "this", "is", "in",
     "for", "as", "by", "it", "that", "has", "have", "contains"
 }
-
 
 BOOST_WORDS = {
     "cover": 10,
@@ -42,11 +40,24 @@ BOOST_WORDS = {
     "feature": 5,
 }
 
+# New: phrase boosts
+PHRASE_BOOSTS = {
+    "cover page": 10,
+    "full bleed": 8,
+    "full page": 6,
+    "background image": 6,
+    "masthead logo": 7,
+    "image overlay": 5,
+    "two text boxes": 6,
+    "overflow continuation": 7,
+    "feature story": 6,
+    "pet of the month": 6,
+}
+
 
 def load_library(path: Path):
     if not path.exists():
         raise FileNotFoundError(f"Library file not found: {path}")
-
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -67,14 +78,27 @@ def tokenize(text: str):
 
 
 def score_prompt(user_prompt: str, example_text: str) -> int:
+    """
+    Returns a normalized 1-10 score using keyword + phrase boosts.
+    """
+    # Keyword scoring
     user_words = tokenize(user_prompt)
     example_words = set(tokenize(example_text))
 
     score = 0
-
     for word in user_words:
         if word in example_words:
             score += BOOST_WORDS.get(word, 1)
+
+    # Phrase scoring
+    user_lower = normalize_text(user_prompt)
+    example_lower = normalize_text(example_text)
+
+    for phrase, weight in PHRASE_BOOSTS.items():
+        if phrase in user_lower and phrase in example_lower:
+            score += weight
+
+    # Normalize to 1-10
     normalized_score = int((score / MAX_SCORE) * 10)
     return max(1, min(normalized_score, 10))
 

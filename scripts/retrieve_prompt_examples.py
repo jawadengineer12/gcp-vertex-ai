@@ -2,7 +2,7 @@ import json
 import sys
 from pathlib import Path
 
-from utils.retrieval import load_library, find_top_matches
+from utils.retrieval_utils import load_library, find_top_matches
 
 
 LIBRARY_PATH = Path("normalized_data/layout_prompt_library.json")
