@@ -1,0 +1,33 @@
+{
+  "pageIndex": 1,
+  "assets": [
+    {
+      "assetType": "Image",
+      "position": {
+        "startX": -0.125,
+        "startY": -0.125
+      },
+      "size": {
+        "width": 8.75,
+        "height": 11.25
+      },
+      "content": {
+        "imageUrl": "placeholder_background.png"
+      }
+    },
+    {
+      "assetType": "Image",
+      "position": {
+        "startX": 1.25,
+        "startY": 1.0
+      },
+      "size": {
+        "width": 6.0,
+        "height": 1.5
+      },
+      "content": {
+        "imageUrl": "placeholder_header_text.png"
+      }
+    }
+  ]
+}
