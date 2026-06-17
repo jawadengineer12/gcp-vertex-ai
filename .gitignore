@@ -221,3 +221,5 @@ __init__*
 gcp-sa-key.json
 ~$*
 *.csv
+config/
+.vscode/
