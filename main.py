@@ -1,126 +1,158 @@
-import os
 import sys
 import json
-from pathlib import Path
+
+from json import JSONDecodeError
 from pydantic import ValidationError
 
-# Import Stage 1 & Stage 2 Retrieval/Rerank Components
-from utils.retrieval_utils import load_library, find_top_matches, rerank_matches
-# Import Generation Component
-from scripts.generate_layout import generate_layout
-# Import Stage 3 Schema Validation Layer
-from schemas.layout_schema import Page
+from core.config import (
+    UPDATED_LIBRARY_PATH,
+    STAGE_1_TOP_K,
+    FINAL_TOP_K,
+    MAX_RETRIES,
+    GENERATED_LAYOUT_PATH,
+)
 
-LIBRARY_PATH = Path("normalized_data/layout_prompt_library_updated.json")
-STAGE_1_TOP_K = 10  # Broad lexical + semantic retrieval window
-FINAL_TOP_K = 2     # Laser-focused context window sent to Gemini
-MAX_RETRIES = 3
+from core.run_recorder import RunRecorder
+from core.logger import setup_logging, get_logger
+
+from services.retrieval_service import load_library, retrieve_hybrid_matches
+from services.reranker_service import rerank_matches
+from services.generation_service import generate_layout
+from services.validation_service import parse_and_validate_layout
 
 
-def main():
-    print("Enter your design brief for layout generation:")
-    user_prompt = input("> ")
+# -----------------------------
+# INIT LOGGING
+# -----------------------------
+setup_logging()
+LOGGER = get_logger(__name__)
 
-    if not user_prompt.strip():
-        print("User prompt cannot be empty.")
-        return
 
-    print(f"User Input Received: '{user_prompt}'")
+# -----------------------------
+# PIPELINE
+# -----------------------------
+def run_pipeline(user_prompt: str):
 
-    # --- [STAGE 1 & 2: TWO-STAGE RETRIEVAL PIPELINE] ---
-    print("\n==================================================")
-    print("--- [STAGE 1: RUNNING LIGHTWEIGHT RETRIEVAL] ---")
-    print("==================================================")
-    library = load_library(LIBRARY_PATH)
-
-    # Step 1: Cast a wide net using your custom hybrid search formula
-    broad_matches = find_top_matches(user_prompt, library, top_k=STAGE_1_TOP_K)
-    print(
-        f"Successfully retrieved top {len(broad_matches)} historical candidates via Hybrid Search.")
+    LOGGER.info("PIPELINE STARTED")
+    LOGGER.info("User prompt received | length=%s", len(user_prompt))
 
     print("\n==================================================")
-    print("--- [STAGE 2: RUNNING CROSS-ENCODER RERANKER] ---")
+    print("🚀 STAGE 1: HYBRID RETRIEVAL")
     print("==================================================")
-    # Step 2: Use deep attention cross-encoder to select structurally accurate templates
-    reranked_matches = rerank_matches(user_prompt, broad_matches)
 
-    # Slice the highest quality contexts
-    final_context_matches = reranked_matches[:FINAL_TOP_K]
-    print(
-        f"Distilled down to the top {len(final_context_matches)} highest-precision structural patterns.")
+    recorder = RunRecorder()
+    recorder.set_prompt(user_prompt)
+    
+    # 1. Load library
+    library = load_library(UPDATED_LIBRARY_PATH)
+    LOGGER.info("Library loaded | size=%s", len(library))
 
-    # Pass the precision matches and initial prompt to the context tracker
-    active_prompt = user_prompt
-    history_context = final_context_matches
+    # 2. Hybrid retrieval
+    candidates = retrieve_hybrid_matches(
+        user_prompt=user_prompt,
+        library=library,
+        top_k=STAGE_1_TOP_K,
+    )
 
-    # --- [STAGES 3 & 4: GENERATION & AGENTIC SELF-CORRECTION LOOP] ---
-    attempt = 0
-    validated_layout = None
-    final_json_data = None
+    recorder.set_retrieval(candidates)
+    LOGGER.info("Hybrid retrieval done | candidates=%s", len(candidates))
 
-    while attempt < MAX_RETRIES:
-        attempt += 1
-        print(f"\n==================================================")
-        print(f"--- [RUNNING INFERENCE - ATTEMPT {attempt}/{MAX_RETRIES}] ---")
-        print(f"==================================================")
+    # 3. Reranking
+    print("\n==================================================")
+    print("🎯 STAGE 2: RERANKING")
+    print("==================================================")
 
-        raw_ai_response = generate_layout(active_prompt, history_context)
+    reranked = rerank_matches(user_prompt, candidates)
+    context = reranked[:FINAL_TOP_K]
+    
+    recorder.set_reranked(reranked)
+    recorder.set_context(context)
+    LOGGER.info("Reranking done | final_context=%s", len(context))
 
-        if not raw_ai_response:
-            print(
-                f"[ERROR]: Live text generation failed on attempt {attempt}.")
+    # -----------------------------
+    # GENERATION + VALIDATION LOOP
+    # -----------------------------
+    final_json = None
+
+    for attempt in range(1, MAX_RETRIES + 1):
+
+        print("\n==================================================")
+        print(f"🤖 STAGE 3: GENERATION (Attempt {attempt})")
+        print("==================================================")
+
+        LOGGER.info("Generation attempt started | attempt=%s", attempt)
+
+        raw_response = generate_layout(user_prompt, context)
+
+        if not raw_response:
+            LOGGER.error("Empty response from model")
             continue
+        
+        recorder.set_generation(raw_response)
+        LOGGER.info("Raw response received | chars=%s", len(raw_response))
 
-        print(f"\n--- [RAW RESPONSE RECEIVED] ---")
-        print(raw_ai_response)
-        print("------------------------------------------------")
+        print("\n--- RAW RESPONSE ---\n")
+        print(raw_response)
 
-        print("\n--- [RUNNING PYDANTIC VALIDATION GATE] ---")
+        print("\n==================================================")
+        print("🔍 STAGE 4: VALIDATION")
+        print("==================================================")
+
         try:
-            # Convert raw text response text cleanly into a dictionary object
-            final_json_data = json.loads(raw_ai_response.strip())
+            final_json, _ = parse_and_validate_layout(raw_response)
 
-            # Run data contract validations against your strict layout model
-            validated_layout = Page(**final_json_data)
+            recorder.set_validation_status("success")
+            LOGGER.info("VALIDATION SUCCESS | attempt=%s", attempt)
+            print("\n🎉 SUCCESS: Valid layout generated!")
 
-            # If it compiles without exceptions, break out immediately
-            print(
-                f"\n🎉 [SUCCESS]: Layout validated perfectly on attempt {attempt}!")
             break
 
-        except (json.JSONDecodeError, ValidationError) as error:
-            print(f"\n❌ [VALIDATION FAILED ON ATTEMPT {attempt}]:")
-            print(str(error))
+        except (JSONDecodeError, ValidationError) as e:
+            recorder.set_validation_status("failed")
+            LOGGER.error(
+                "Validation failed | attempt=%s | error=%s", attempt, str(e))
 
             if attempt == MAX_RETRIES:
-                print(
-                    "\n[CRITICAL]: Maximum retry threshold exhausted without repair. Terminating.")
+                LOGGER.critical("MAX RETRIES REACHED — FAILING PIPELINE")
+                print("\n❌ Pipeline failed after max retries")
                 sys.exit(1)
 
-            print(
-                "\n🔄 [FEEDBACK ENGINES ENGAGED]: Compiling error trace back to Gemini...")
+            print("\n⚠️ Fixing and retrying...\n")
 
-            # Transform the strict error text into structural correction metadata
-            feedback_brief = (
-                f"Your previous JSON response failed our automated schema validation checks.\n"
-                f"STRICT ERROR TRACE FROM CLIENT RUNTIME:\n{str(error)}\n\n"
-                f"Please fix the schema naming issues or coordinate values listed above, "
-                f"re-evaluate your rules mapping, and provide the entire corrected JSON structure."
+            user_prompt = (
+                user_prompt
+                + "\n\n[FIX REQUIRED]\n"
+                + str(e)
             )
 
-            # Mutate active instruction string to inject loop context
-            active_prompt = f"{user_prompt}\n\n[CRITICAL FIX REQUIRED]:\n{feedback_brief}"
+    # -----------------------------
+    # SAVE OUTPUT
+    # -----------------------------
+    if final_json:
+        GENERATED_LAYOUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-    # --- [STAGE 5: PERSISTENCE EXPORT] ---
-    output_file = Path("outputs/generated_layout.json")
-    output_file.parent.mkdir(exist_ok=True)
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(final_json_data, f, indent=2)
+        with open(GENERATED_LAYOUT_PATH, "w", encoding="utf-8") as f:
+            json.dump(final_json, f, indent=2)
 
-    print(f"\n🚀 Validated layout configuration safely saved to: {output_file}")
+        LOGGER.info("OUTPUT SAVED | path=%s", GENERATED_LAYOUT_PATH)
+
+        print("\n💾 Saved output to:", GENERATED_LAYOUT_PATH)
+        
+        run_file = recorder.save()
+        LOGGER.info("Run trace saved | file=%s", run_file)
+        print(f"\n📦 Full run saved at: {run_file}")
+
+    LOGGER.info("PIPELINE FINISHED")
+
+    return final_json
 
 
+# -----------------------------
+# ENTRY POINT
+# -----------------------------
 if __name__ == "__main__":
-    main()
 
-    print("\n🎉 [SUCCESS]: Layout generation pipeline completed successfully.")
+    print("Enter your design prompt:")
+    prompt = input("> ")
+
+    run_pipeline(prompt)

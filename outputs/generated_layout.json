@@ -1,35 +1,35 @@
 {
-  "pageIndex": 0,
+  "pageIndex": 1,
   "assets": [
     {
       "assetType": "Image",
       "position": {
-        "startX": 0.4,
-        "startY": 0.7
+        "startX": 0.5,
+        "startY": 1.5
       },
       "size": {
-        "width": 7.7,
-        "height": 4.0
+        "width": 3.5,
+        "height": 4.5
       },
       "content": {
-        "imageUrl": "placeholder_image.jpg"
+        "assetId": "guest_writer_photo_id",
+        "description": "Biographical photo of guest writer"
       }
     },
     {
       "assetType": "Article",
       "position": {
-        "startX": 0.4,
-        "startY": 5.0
+        "startX": 0.5,
+        "startY": 6.2
       },
       "size": {
-        "width": 7.7,
-        "height": 5.6
+        "width": 3.5,
+        "height": 3.0
       },
       "content": {
-        "textBody": "This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality. This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality. This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality. This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality. This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality.",
-        "overflow": true
+        "textBody": "We are thrilled to introduce our guest writer for this issue, [Guest Writer's Name]. With a distinguished career spanning [number] years in [field/industry], [Guest Writer's Name] brings a wealth of knowledge and unique perspective to our pages. Their insightful contributions have been featured in numerous publications, and we are honored to share their expertise with our readers. In this piece, [he/she/they] delves into [brief topic description], offering fresh insights and thought-provoking analysis. We hope you enjoy this special feature."
       },
-      "columns": 2,
+      "columns": 1,
       "gutterSize": 0.16666666666667,
       "margins": {
         "top": 0,
@@ -40,6 +40,99 @@
       "textStyle": {
         "fontFamily": "Adobe Garamond Pro",
         "fontSize": 10,
+        "bold": false,
+        "italic": false,
+        "underline": false,
+        "color": "#000000",
+        "autoFit": false
+      }
+    },
+    {
+      "assetType": "Article",
+      "position": {
+        "startX": 4.5,
+        "startY": 1.5
+      },
+      "size": {
+        "width": 3.5,
+        "height": 7.7
+      },
+      "content": {
+        "textBody": "Our Core Publication Contributors\n\n[Contributor Name 1]\nEditor-in-Chief\n\n[Contributor Name 2]\nManaging Editor\n\n[Contributor Name 3]\nArt Director\n\n[Contributor Name 4]\nSenior Writer\n\n[Contributor Name 5]\nStaff Photographer\n\n[Contributor Name 6]\nCopy Editor\n\n[Contributor Name 7]\nDigital Content Manager\n\n[Contributor Name 8]\nMarketing & Outreach"
+      },
+      "columns": 1,
+      "gutterSize": 0.16666666666667,
+      "margins": {
+        "top": 0,
+        "left": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "textStyle": {
+        "fontFamily": "Montserrat",
+        "fontSize": 10,
+        "bold": false,
+        "italic": false,
+        "underline": false,
+        "color": "#000000",
+        "autoFit": false
+      }
+    },
+    {
+      "assetType": "Article",
+      "position": {
+        "startX": 0.5,
+        "startY": 10.5375
+      },
+      "size": {
+        "width": 4.48,
+        "height": 0.19499999999999
+      },
+      "content": {
+        "textBody": "www.CanyonCreekLife.com"
+      },
+      "columns": 1,
+      "gutterSize": 0.16666666666667,
+      "margins": {
+        "top": 0,
+        "left": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "textStyle": {
+        "fontFamily": "Helvetica Neue LT Std",
+        "fontSize": 8,
+        "bold": false,
+        "italic": false,
+        "underline": false,
+        "color": "#000000",
+        "autoFit": false
+      }
+    },
+    {
+      "assetType": "Article",
+      "position": {
+        "startX": 7.76725806451613,
+        "startY": 10.5375
+      },
+      "size": {
+        "width": 0.23274193548387,
+        "height": 0.19499999999999
+      },
+      "content": {
+        "textBody": "1"
+      },
+      "columns": 1,
+      "gutterSize": 0.16666666666667,
+      "margins": {
+        "top": 0,
+        "left": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "textStyle": {
+        "fontFamily": "Helvetica Neue LT Std",
+        "fontSize": 9,
         "bold": false,
         "italic": false,
         "underline": false,

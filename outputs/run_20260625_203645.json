@@ -1,0 +1,5155 @@
+{
+  "timestamp": "20260625_203645",
+  "user_prompt": "Please build an editorial page layout configuration. On the left side of the page, I need a large biographical photo of our guest writer accompanied by their introductory message text box below it. On the right side of the page, organize a clean block listing the names and credentials of our core publication contributors. Ensure all text formatting parameters and custom styles match our standard magazine rules.",
+  "retrieval_candidates": [
+    {
+      "pageIndex": 10,
+      "natural_language_intent": "Create a magazine page layout with a bold headline \u201cThen vs. Now\u201d in large, light-colored sans-serif font at the top center, positioned above two columns of text. Below the headline, place two side-by-side text blocks, each with a narrow vertical gap between them, containing detailed paragraphs about Richardson\u2019s past and present. At the top left, add a small \u201cADVERTISEMENT\u201d label in black sans-serif font. At the bottom right, include the magazine name \u201cRICHARDSON LIFE MAGAZINE\u201d in small black font, with a small black numeral \u201c18\u201d to its left. All gray rectangles (images) should be placed at the top center, spanning the full width of the page, with no content inside.",
+      "expected_layout_json": {
+        "pageIndex": 10,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.56111111111111,
+              "startY": 6.2736111111111
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.17083333333335
+            },
+            "content": {
+              "textBody": "still know each other. Schools are still top-tier. Community events, local businesses, and strong city services make it a place people are proud to call home.\n\nWhy Kobs & Martin\nAt Kobs & Martin, we\u2019re more than just realtors\u2014we\u2019re your local guides. With deep roots in Richardson and years of area experience, we help clients navigate where the city has been and where it\u2019s going. Whether you\u2019re buying or selling, we bring the knowledge, strategy, and care you need.\n\nRichardson has grown, but its soul is unchanged\u2014and we get to live in the \u201cBest Of\u201d it.\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.98055555555556,
+              "startY": 6.2736111111111
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.17083333333335
+            },
+            "content": {
+              "textBody": "exceptional schools, plus added amenities and lifestyle perks. Developments like CityLine and the CORE District have brought new restaurants, retail, entertainment, and walkable living. Public transportation has expanded, and the city continues to invest in parks, trails, and infrastructure.\n\nModern buyers are drawn to a mix of beautifully maintained mid-century homes and new construction options. Median home prices now range from $375,000 to over $550,000 in some neighborhoods and from $750,000 to $1,200,000 and over in others. Most new builds in Richardson start at $1,800,000 and go up from there\u2014proof of strong appreciation and long-term value. Whether it\u2019s first-time buyers, growing families, or downsizing empty nesters, Richardson real estate offers something for everyone.\n\nWhat Hasn\u2019t Changed\nDespite the growth, the heart of Richardson remains the same. Neighbors "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0,
+              "startY": 4.48888888888889
+            },
+            "size": {
+              "width": 6.575,
+              "height": 1.45555555555556
+            },
+            "content": {
+              "textBody": "Then vs. Now\nHow Richardson Real Estate \nBecame the Best"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 36,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#EFE6DD",
+              "autoFit": true
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 6.30299800031671
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.13198877217004
+            },
+            "content": {
+              "textBody": "When people first moved to Richardson decades ago, it was all about family-friendly neighborhoods, top-rated schools, and a quieter pace of life just outside the Dallas hustle. As local realtors, we\u2019ve watched the city evolve without losing the qualities that made it special in the first place.\n\nThen: A Suburban Gem\nIn the 1970s and \u201980s, Richardson was a hidden gem\u2014safe, suburban, and community-oriented. Young families were drawn in by strong RISD schools, affordable homes, and the promise of a quality life. Homes ranged from $40,000 to $80,000, with established neighborhoods like Canyon Creek and Greenwood Hills offering charm and space. The nearby Telecom Corridor made Richardson an ideal spot for professionals working in tech and engineering.\nNow: A Connected, Modern Community\nToday, Richardson is no longer a secret. It\u2019s a thriving, connected city with the same "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 9,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#003D5C",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.38944444444444,
+              "startY": 0.39999999999998
+            },
+            "size": {
+              "width": 7.58555555555556,
+              "height": 0.3777777777778
+            },
+            "content": {
+              "textBody": "ADVERTISEMENT"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 17,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.82718637992831,
+              "startY": 10.5652777777778
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "RICHARDSON LIFE MAGAZINE"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "MS Reference Sans Serif",
+              "fontSize": 7,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5069444444444
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 11,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.875,
+      "vector_score": 0.6894315399379524,
+      "final_score": 0.7451020779565667
+    },
+    {
+      "pageIndex": 10,
+      "natural_language_intent": "Create a layout for a magazine page titled \u201cBusiness of the Month\u201d with a bold, modern aesthetic. Top left corner: large, centered title \u201cCH\u00c9RIE LANE\u201d in bold pink Montserrat 48pt, beneath it \u201cA brand new boutique in Canyon Creek!\u201d in smaller pink Montserrat. Below that, a paragraph in black Montserrat 10pt introducing Abby Lane and her boutique. To the right of this, a column in pink Gotham Narrow 10pt titled \u201cHow did you come up with the name...\u201d with text beneath. Below the main title, another column in black Adobe Garamond Pro 10pt explaining the brand\u2019s ethos. A small italicized credit \u201cPhoto credit: Natalie Embry Photography\u201d in black, 7pt, centered below the main title. Bottom right corner: website \u201cwww.CanyonCreekLife.com\u201d in small black Helvetica Neue LT Std 8pt. All text blocks aligned to left, with consistent 0.1667\u201d gutter between columns.",
+      "expected_layout_json": {
+        "pageIndex": 10,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.895,
+              "startY": 3.06420138888889
+            },
+            "size": {
+              "width": 2.49944444444444,
+              "height": 0.16996527777777
+            },
+            "content": {
+              "textBody": "Photo credit: Natalie Embry Photography"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 7,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.56111111111111,
+              "startY": 8.53250000000001
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 1.74527777777776
+            },
+            "content": {
+              "textBody": "How did you come up with the name Ch\u00e9rie Lane and how is the name pronounced?\nThe name came from my sorority\u2019s little sister, meaning \u201csweetheart\u201d in French. It\u2019s pronounced \u201cshuh-REE lane.\u201d\n Why II Creeks?\nWe chose II Creeks because it truly reflects the heart of our brand. Richardson is a vibrant, growing community filled with "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FE0096",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.98055555555556,
+              "startY": 8.5525
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 1.72527777777778
+            },
+            "content": {
+              "textBody": "collections and luxe denim to timeless seasonal capsules, Ch\u00e9rie Lane is more than just a boutique; it\u2019s a community where fashion and empowerment go hand in hand.\n\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 1.78430555555556
+            },
+            "size": {
+              "width": 7.575,
+              "height": 1.18138888888889
+            },
+            "content": {
+              "textBody": "CH\u00c9RIE LANE\nA brand new boutique in Canyon Creek!"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 48,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FE0096",
+              "autoFit": true
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 8.55469447575371
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 1.72308330202407
+            },
+            "content": {
+              "textBody": "Tell us about yourself and Ch\u00e9rie Lane.\n Hi! My name is Abby Lane and I am the owner of Ch\u00e9rie Lane, a fashion-forward boutique built on the belief that every woman deserves to feel confident, beautiful and unforgettable in every setting. Our signature style is classy, chic, and sparkly\u2014curated for tenacious and driven women who love to make a statement. From bold game day "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FE0096",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.87194444444445
+            },
+            "size": {
+              "width": 7.575,
+              "height": 0.81166666666666
+            },
+            "content": {
+              "textBody": "Hi my name is Abby Lane and I am the owner of Ch\u00e9rie Lane. Ch\u00e9rie Lane is a fashion-forward boutique built on the belief that every woman deserves to feel confident, beautiful, and unforgettable in every setting she walks into. Founded in 2022 as a college project at Baylor University, Ch\u00e9rie Lane has grown into a thriving e-commerce brand \\nd now a flagship storefront in Richardson, Texas."
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.40416666666668
+            },
+            "size": {
+              "width": 7.575,
+              "height": 0.37777777777778
+            },
+            "content": {
+              "textBody": "Business of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 18,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.8333333333333334,
+      "vector_score": 0.683822850430056,
+      "final_score": 0.7286759953010391
+    },
+    {
+      "pageIndex": 4,
+      "natural_language_intent": "Create a layout with a large gray rectangle at top left, positioned above the main text block. Below it, center-aligned, place the title \u201cLetter From the Publisher\u201d in bold Raleway 17pt. To the right of the title, add a small gray rectangle (image) with no content, positioned below the title. The main body text in Trajan Pro 3 9pt starts just below the title, left-aligned, occupying most of the page width. At the bottom, place \u201cRICHARDSON LIFE MAGAZINE\u201d in small MS Reference Sans Serif 7pt, right-aligned, with a small bold Raleway 11pt number \u201c2\u201d to its left. At the bottom right, add a small gray rectangle (image) with no content, positioned below the magazine name.",
+      "expected_layout_json": {
+        "pageIndex": 4,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 6.125,
+              "startY": 9.38888888888889
+            },
+            "size": {
+              "width": 1.85,
+              "height": 0.4336111111111
+            },
+            "content": {
+              "textBody": "Kyla Obert"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 13,
+              "bold": true,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 4.21430555555555
+            },
+            "size": {
+              "width": 7.575,
+              "height": 5.69444444444446
+            },
+            "content": {
+              "textBody": "The word BEST, by definition, means: that which is the most excellent, outstanding, or desirable. \n\nRICHARDSON: a city in Texas boasting a population of close to 120,000 people, is the city we call home. \n\nBEST OF RICHARDSON: a contest compromised of businesses, organizations, people, events and locations throughout the city that is voted on by readers and members of the community, representing all that makes Richardson the best place to call home.\n\nWhat\u2019s exciting about the Best of Richardson awards is that being named the Best of Richardson in any category is a prestigious honor. If you followed along this voting journey, you know it\u2019s been a methodical process of gathering all the names of the beloved people, places and businesses around Richardson during the April nomination phase. In this first round, the readers of Richardson Life Magazine showed up with more than 950 nominations in 200+ categories\u2014amazing! \n\nThen, as the contest narrowed, the top three nominees with the most nominations in each category advanced to the finalist voting round in June. That round, you cast more than 50,000 votes to get us to today\u2019s announcement of the winners by category. The moment so many have been waiting for. The BEST of Richardson. \n\nThank you, Richardson Life Magazine readers, for showing up to support your community. And thank you to all the businesses and individuals for taking part and rallying your supporters. There are so many unbelievable places here to see and experience. I hope you\u2019ll also check out our online directory, which includes not only the winners in each category, but the finalists as well. \n\nWe\u2019ll be back next year with another edition of Best of Richardson. If you don\u2019t see one of your favorites listed, you can always nominate them next year to bring them to the winner\u2019s circle.\n\nWe believe Richardson is the absolute BEST place to live. \n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Trajan Pro 3",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.40384353741497,
+              "startY": 0.4
+            },
+            "size": {
+              "width": 7.57115646258503,
+              "height": 0.37777777777778
+            },
+            "content": {
+              "textBody": "Letter From the Publisher"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 17,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.82718637992831,
+              "startY": 10.5652777777778
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "RICHARDSON LIFE MAGAZINE"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "MS Reference Sans Serif",
+              "fontSize": 7,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5069444444444
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19500000000001
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 11,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.7916666666666666,
+      "vector_score": 0.6973291151398725,
+      "final_score": 0.7256303805979107
+    },
+    {
+      "pageIndex": 16,
+      "natural_language_intent": "Create a layout for a \u201cStudent Athlete of the Month\u201d feature with a bold, centered title at top left. Below, place two columns of text: left column for personal info (name, school, grade, hobbies), right column for brag section (honors, awards, academic info). Position a small italic photo credit below the main title. At bottom right, add a thin horizontal line with website URL. All gray rectangles are images; focus only on their position and size relative to text blocks.",
+      "expected_layout_json": {
+        "pageIndex": 16,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.24984529625454,
+              "startY": 8.625
+            },
+            "size": {
+              "width": 2.715,
+              "height": 0.15152777777778
+            },
+            "content": {
+              "textBody": "Photo credit: Juan Pe\u00f1a"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 7,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.27083333333333,
+              "startY": 8.84305555555555
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 1.76805555555556
+            },
+            "content": {
+              "textBody": "\nBrag on yourself: tell us your honors and awards in and out of school. \nI am going into my 3rd season starting on the varsity football team at Pearce and my 2nd year as a captain. I have been awarded all-district recognition the past two years and was awarded sophomore player of the year my first year as a varsity player. I am an A and B student in school and have always prided myself on working extremely hard at everything I do. \n\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#00309A",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 8.84305555555558
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 1.76621574748524
+            },
+            "content": {
+              "textBody": "Tell us your name, school you\u2019re attending, and grade. \nMy name is Will Miltenberger and I am a senior at Pearce High School.\n\nTell us about yourself. \nMy hobbies are playing sports and spending time with friends and family. I like to spend my time out of school watching college football (when in season), spending time outside, hunting, fishing, and being active in any way. \n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#00309A",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.40416666666668
+            },
+            "size": {
+              "width": 7.575,
+              "height": 0.37777777777778
+            },
+            "content": {
+              "textBody": "Student Athlete of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 18,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.7083333333333334,
+      "vector_score": 0.6994936004553394,
+      "final_score": 0.7021455203187376
+    },
+    {
+      "pageIndex": 23,
+      "natural_language_intent": "Create a layout with two columns of text, left-aligned, using Montserrat for the left column (bolded headline: \"2025 National Night Out Coming Soon!\") and Adobe Garamond Pro for the right column. Below the headline, place a large gray rectangle (image) centered horizontally, occupying the full width of the page. Beneath the image, position two text blocks side by side: the left block starts at the top left, the right block starts below it, both extending to the right edge. Bottom right corner contains a small gray rectangle (image) with a page number. All text should be in black, with the headline in dark blue.",
+      "expected_layout_json": {
+        "pageIndex": 23,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.9475,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 7.74225806451613,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.27083333333333,
+              "startY": 7.71083333333334
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 2.66666666666667
+            },
+            "content": {
+              "textBody": "are interested in becoming a Canyon Creek Block Captain and hosting a party, please contact Sharon Odell at sharon@the-odells.com. \nBlock Captains have until September 19, 2025, to register their National Night Out events at richardsonpolice.net/services/community-engagement/national-night-out/nno-block-party-registration. For National Night Out 2025 questions, contact RPD Officer David Beregszaszy at (972) 744-4938.\nAs always, residents are encouraged to donate canned goods to the Network of Community Ministries\u2019 food pantry during neighborhood events. Collected canned foods will be picked up by Richardson police officers, firefighters, paramedics and city government officials who will visit registered gatherings.\nLet\u2019s celebrate this special evening that ties our Canyon Creek community together on Tuesday, October 7th by visiting with "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 7.71083333333334
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 2.66666666666667
+            },
+            "content": {
+              "textBody": "National Night Out is celebrating its 36th year in Richardson! The City of Richardson and the Canyon Creek Homeowners Association invite residents to participate in block parties or similar gatherings on Tuesday, October 7, 2025, from 6:00 pm to 8:00 pm. These events aim to increase connections among neighbors and strengthen police-community relations by engaging with First Responders. As RPD Chief Gary Tittle stated in Richardson\u2019s 2025 National Night Out preview video, \"We are strongest when we stand together.\"\nNo official theme has been designated for this year\u2019s National Night Out, but residents of Canyon Creek are encouraged to display blue bows on trees as a demonstration of support. \nCanyon Creek is proud to host more block parties in Richardson than any other area. In 2024, for instance, 38 out of the city's 114 registered block parties took place in Canyon Creek. If you "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#2B378F",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.875,
+      "vector_score": 0.6163804274114776,
+      "final_score": 0.6939662991880343
+    },
+    {
+      "pageIndex": 6,
+      "natural_language_intent": "Create a layout with \u201cLETTER FROM THE EDITOR\u201d at top center, bold 17pt Raleway. Below, a full-width article in 9pt Trajan Pro 3, starting just below the headline. At top right, place \u201cPatti Otte\u201d in 13pt bold italic Raleway. At bottom center, place \u201cRICHARDSON LIFE MAGAZINE\u201d in 7pt MS Reference Sans Serif. To its left, a small 11pt bold Raleway numeral \u201c4\u201d. All text aligned to left margin, with consistent 0.1667\u201d gutter.",
+      "expected_layout_json": {
+        "pageIndex": 6,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.75631038835999,
+              "startY": 9.41194444444444
+            },
+            "size": {
+              "width": 2.21868961164001,
+              "height": 0.33305519951714
+            },
+            "content": {
+              "textBody": "Patti Otte"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 13,
+              "bold": true,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.4
+            },
+            "size": {
+              "width": 7.575,
+              "height": 0.37777777777778
+            },
+            "content": {
+              "textBody": "LETTER FROM THE EDITOR"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 17,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.39444444444445,
+              "startY": 4.01388888888889
+            },
+            "size": {
+              "width": 7.58055555555555,
+              "height": 6.58138888888889
+            },
+            "content": {
+              "textBody": "Happy August! If you\u2019ve been a regular reader of Richardson Life Magazine, you\u2019ll notice that this issue looks a little\u2014actually, a lot\u2014different than the usual. Some of our normally featured articles are absent and the calendar of events and Scene section are missing. They\u2019ll be back in future issues. Instead, the pages of this Best of Richardson issue are dedicated to the companies, individuals and organizations you all voted as 2025 stand-outs. \n\nIn spite of the temporary changes, you\u2019ll still get to hear from our new mayor, Amir Omar, about his first ninety days in office. And you\u2019ll see how RISD kicked off the school year by celebrating its teachers and offering hands-on training to prepare them for the school year. They truly are the BEST school district, thanks to Superintendent Tabitha Branum\u2019s leadership, her administrative team and all the teachers, counselors, principals, culinary team members, support staff and others who make RISD run. In spite of recent budget cuts, Branum and her team continue to deliver a top-notch education to Richardson\u2019s students.\n\nAnd although we may not have a calendar in this issue, I\u2019d like to point out a couple of important upcoming events. On August 28 at 7:00 pm, the 15th annual Richardson Real Heroes Awards Celebration, sponsored by the City of Richardson, will take place at the Eisemann Center\u2019s Bank of America Theatre. 2025 award recipients Dr. Mona Alnaeemi and Neil Stampe will be honored for their outstanding volunteer service to the Richardson community, along with the 2025 nominees. The awards ceremony\u2019s special guest will be Texas-based singer/songwriter/speaker Sara Hickman, who will weave song into her talk about the power of giving back.  Tickets are free but must be obtained from the Eisemann Center Box Office. Details can be found at the RRH website at richardsonrealheroes.com/awardsceremony.  \n\nAdditionally, Network is hosting its 28th Annual Golf Outing on Friday, September 12, at Sherrill Park. If you\u2019re a golfer and want to support an amazing cause, sign up today at thenetwork.org/golf. Network continues to meet the needs of our community in large ways and small and needs our support now more than ever. If you\u2019re not a golfer, visit Network\u2019s website to see how your gifts and talents align with their mission.\n\nAren\u2019t we lucky to live in Richardson? I know I am!\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Trajan Pro 3",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.82718637992831,
+              "startY": 10.5652777777778
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "RICHARDSON LIFE MAGAZINE"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "MS Reference Sans Serif",
+              "fontSize": 7,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5069444444444
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19500000000001
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 11,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.6666666666666666,
+      "vector_score": 0.6989859728740497,
+      "final_score": 0.6892901810118348
+    },
+    {
+      "pageIndex": 8,
+      "natural_language_intent": "Create a layout with two columns of text, each with distinct fonts and spacing. Top left: a small gray rectangle (image) positioned above a caption. Below it, a larger gray rectangle (image) centered beneath the text block. The text should flow naturally with the images, using specified fonts and sizes. All gray rectangles are placeholders for images; focus only on their placement and size relative to text.",
+      "expected_layout_json": {
+        "pageIndex": 8,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.56111111111111,
+              "startY": 10.19125
+            },
+            "size": {
+              "width": 2.715,
+              "height": 0.15152777777778
+            },
+            "content": {
+              "textBody": "Owen enjoying a day out and about"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 7,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 6.03534722222222
+            },
+            "size": {
+              "width": 4.835,
+              "height": 0.16215277777777
+            },
+            "content": {
+              "textBody": "Olivia in her photo op installation at the 2024 Wildflower! Arts & Music festival"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 7,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.98055555555556,
+              "startY": 6.27777777777778
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.00000000000001
+            },
+            "content": {
+              "textBody": "Work and Community\nBy day, Mike is VP of Marketing for a Romanian FinTech company, while Julie manages an interior design office in Dallas. Beyond their careers, both are deeply woven into the Richardson arts scene. They serve on the Executive Steering Committee for the Wildflower! Arts and Music Festival, helping produce the Budding Talent Vocal Competition each year. Julie also lends her talents to the Richardson Symphony Orchestra\u2019s Beaujolais Bash fundraiser, while Mike dedicated years as Scoutmaster for Troop 895. Together, they host block parties, organize National Night Out, and jump at any chance to build community through music and connection.\n\nPassions and Pastimes\nOutside of work and volunteering, Mike can often be found at White Rock Lake, sailing with the Corinthian Sailing Club. While his official title is board member, "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#35353D",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 6.27777777777778
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.00000000000001
+            },
+            "content": {
+              "textBody": "home with them after two rehomings, may be eight years old but still acts like a big baby. Then there\u2019s Harry Styles\u2014the hound dog, not the pop star\u2014who joined the family as a puppy and has been Bennie\u2019s partner-in-crime ever since. But make no mistake: the real boss is Lupe, their sociable 10-year-old cat who keeps everyone in line.\n\nFamily Time, Then and Now\nWith the kids grown, family time looks a little different these days, but traditions remain strong. Whether it\u2019s storytelling around a campfire, a lively game night, or planning trips centered on music festivals, the Hughes family always finds a way to connect. One of their favorite adventures was road-tripping to Montana for the Decemberists\u2019 Traveling Rest Festival, with a detour to Yellowstone.\n\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.6666666666666666,
+      "vector_score": 0.6866162450268618,
+      "final_score": 0.6806313715188033
+    },
+    {
+      "pageIndex": 3,
+      "natural_language_intent": "Create a layout with a bold \"CONTENTS\" title at top center. Below, arrange four gray rectangles in a 2x2 grid: top-left and top-right for article listings (10 BRY-JO Roofing and Remodeling, 13 Fall Sports Schedules on left; 20 Canyon Creek Chronicles, 27 Canyon Creek Allstate Insurance on right). Bottom-left and bottom-right for \"Student of the Month\" and \"Pet of the Month\" with large numbers (14 and 18) above them. Top-left of the grid has \"Family of the Month\" (4) and top-right has \"Business of the Month\" (8), both with large numbers above. Add small footer text at bottom center with website URL and page number.",
+      "expected_layout_json": {
+        "pageIndex": 3,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.9475,
+              "startY": 10.475
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 7.74225806451613,
+              "startY": 10.475
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.9475,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 7.74225806451613,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.27087411139322,
+              "startY": 5.15777777777777
+            },
+            "size": {
+              "width": 3.70412588860678,
+              "height": 0.72916666666667
+            },
+            "content": {
+              "textBody": "20\tCanyon Creek Chronicles\n27\tCanyon Creek Allstate Insurance\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 13.5,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#F71A01",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.40642777777776,
+              "startY": 5.15777777777777
+            },
+            "size": {
+              "width": 3.70095277777783,
+              "height": 0.72376543209877
+            },
+            "content": {
+              "textBody": "10\tBRY-JO Roofing and Remodeling\n13\t Fall Sports Schedules\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 13.5,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#F71A01",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.19916666666667,
+              "startY": 9.92389450042314
+            },
+            "size": {
+              "width": 2.80034612077696,
+              "height": 0.22027777777778
+            },
+            "content": {
+              "textBody": "Student of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 14,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.04999999999999,
+              "startY": 9.92389450042314
+            },
+            "size": {
+              "width": 2.80034612077696,
+              "height": 0.22027777777778
+            },
+            "content": {
+              "textBody": "Pet of the month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 14,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.43999999999999,
+              "startY": 9.70557594458549
+            },
+            "size": {
+              "width": 0.585,
+              "height": 0.4777369997179
+            },
+            "content": {
+              "textBody": "18"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 36,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.85426499033415,
+              "startY": 7.59056116708981
+            },
+            "size": {
+              "width": 2.80034612077696,
+              "height": 0.22027777777778
+            },
+            "content": {
+              "textBody": "Business of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 14,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.98343165700082,
+              "startY": 7.59056116708981
+            },
+            "size": {
+              "width": 2.80034612077696,
+              "height": 0.24805555555556
+            },
+            "content": {
+              "textBody": "Family of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 14,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.56916666666666,
+              "startY": 9.70557594458549
+            },
+            "size": {
+              "width": 0.585,
+              "height": 0.4777369997179
+            },
+            "content": {
+              "textBody": "14"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 36,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.38639905541449,
+              "startY": 7.37224261125216
+            },
+            "size": {
+              "width": 0.44008815714188,
+              "height": 0.4777369997179
+            },
+            "content": {
+              "textBody": "8"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 36,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.51556572208116,
+              "startY": 7.39279255527346
+            },
+            "size": {
+              "width": 0.44008815714188,
+              "height": 0.4777369997179
+            },
+            "content": {
+              "textBody": "4"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 36,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.4
+            },
+            "size": {
+              "width": 7.57232033305126,
+              "height": 0.54444444444445
+            },
+            "content": {
+              "textBody": "CONTENTS"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 40,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.7083333333333334,
+      "vector_score": 0.6664511594782909,
+      "final_score": 0.6790158116348036
+    },
+    {
+      "pageIndex": 20,
+      "natural_language_intent": "Create a layout with \u201cPet of the Month\u201d at top left, large bold title below it, and three columns of text to the right. Include a small page number at bottom left and website URL at bottom right. Use gray rectangles for images, positioning them to the right of the title and above the text blocks.",
+      "expected_layout_json": {
+        "pageIndex": 20,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.56111111111111,
+              "startY": 6.3775
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.09750000000001
+            },
+            "content": {
+              "textBody": "has a married son and my granddaughter will soon be 24. I\u2019m proud of my family for sure. I worked for Safeco Insurance Company for 30 years before retiring. My hubby, Bob, passed away in 2017. We would have been married 61 years this year.\n\nWhat are your involvements either in Canyon Creek, through your church, or within the community?\nI\u2019m a member of the Richardson Woman\u2019s Club and have held several different positions over the years. I\u2019m also a member of First United Methodist Church Richardson and play Bridge in several area groups.\n\nWhat do you love most about living in Canyon Creek? \nWhat I love about living in Canyon Creek is the people. We are all like family on our block. If you are in need, just let a neighbor know and your prayers will be "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#3B2F47",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.98055555555556,
+              "startY": 6.3775
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 3.95000000000002
+            },
+            "content": {
+              "textBody": "the streets of Dallas when Doodle Dandy picked him up and found a home for him. He\u2019s my buddy and is settled into my routine. I\u2019m so grateful to have him as he\u2019s a wonderful companion. We\u2019ve been together 6 years and I don\u2019t know what I would do without him.\n\nTell us about your family. How long have you lived in Canyon Creek?\nI\u2019ve lived in Canyon Creek for 48 years and that is a record for me. When I was growing up, we would move every 3 years. I went to 3 elementary schools, 3 high schools, and 3 colleges. I have two grown daughters who live in the area. Lynn lives in Rockwall and is the CFO of Chiloso Bistro Restaurants. She has 3 boys who have all graduated from college and are working in the area.   \nKristen lives in Allen and is an executive assistant to the HR officer of a large worldwide construction company. She "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#3B2F47",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 6.38750000000007
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 3.99916770703284
+            },
+            "content": {
+              "textBody": "Tell us your name and the name of your pet(s). What type of pet is he/she?\nI\u2019m Georgia Nelson and my dog\u2019s name is Murphy. He is a border collie/poodle (bordoodle).\n\nHow did Murphy become a member of your family? \nI used to dog sit for people in the neighborhood who had gotten him as a rescue from Doodle Dandy. One time I sat for two weeks with Murphy while his owner was in Seattle. When she came home, she told me she was going to return Murphy to Doodle Dandy. I asked her not to because Murphy and I had bonded and we were friends, so she offered him to me. Naturally I stepped up and took him!\n\nTell us more about Murphy.\nI\u2019ve had dogs all my life, but never this lovable and sweet. Murphy just wants to be loved. We found out he was roaming "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#3B2F47",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.40833333333335
+            },
+            "size": {
+              "width": 2.7575,
+              "height": 0.36944444444445
+            },
+            "content": {
+              "textBody": "Pet of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 18,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.7083333333333334,
+      "vector_score": 0.658808257537215,
+      "final_score": 0.6736657802760504
+    },
+    {
+      "pageIndex": 24,
+      "natural_language_intent": "Create a layout for CCHOA 2025 YOQ 3rd Quarter Winners with a large bold title at top center, followed by a subtitle below it. Below that, a centered line of text crediting the photos. Arrange four gray rectangles (images) in a 2x2 grid, each with a blue banner underneath containing the address and names. The top-left image is above the top-right image, and the bottom-left image is below the top-left, with the bottom-right image to the right of the bottom-left. At the bottom, place a paragraph of text centered, and at the very bottom, a small website URL.",
+      "expected_layout_json": {
+        "pageIndex": 24,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.4,
+              "startY": 8.86361111111112
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.60861111111111
+            },
+            "content": {
+              "textBody": "400 Arborcrest Dr\nDominique Tsakonas, Asher & Lauren (not pictured)\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.52500004238553,
+              "startY": 8.85881944444443
+            },
+            "size": {
+              "width": 3.295,
+              "height": 0.61340277777779
+            },
+            "content": {
+              "textBody": "2211 Flat Creek Dr\nBrett Dixon, Lauren Leto and Bailey"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.375,
+              "startY": 5.84472222222222
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.43305555555556
+            },
+            "content": {
+              "textBody": "316 W Lookout Dr\nGeoff & Catherine Ka\u2019alani"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.52500004238553,
+              "startY": 5.84722222222222
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.41305555555558
+            },
+            "content": {
+              "textBody": "2926 Whitemarsh Circle\nLuke & Tammy, Cooper & Cherry\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.220625,
+              "startY": 9.56944444444444
+            },
+            "size": {
+              "width": 5.93375000000001,
+              "height": 0.65277777777778
+            },
+            "content": {
+              "textBody": "For volunteer information and other information about your \nCanyon Creek HOA, please visit the CCHOA website at\ncanyoncreekhomeowners.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.13055555555556,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 15.7,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 2.94444444444444
+            },
+            "size": {
+              "width": 7.57500000000001,
+              "height": 0.25541666666666
+            },
+            "content": {
+              "textBody": "All Yard of the Month photos courtesy of Meredith Embry Photography."
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 17,
+              "bold": true,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 1.70819444444447
+            },
+            "size": {
+              "width": 7.575,
+              "height": 1
+            },
+            "content": {
+              "textBody": "CCHOA 2025 \nYOQ 3rd Quarter Winners"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 35,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": true
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.75,
+      "vector_score": 0.6401435113281938,
+      "final_score": 0.6731004579297356
+    }
+  ],
+  "reranked_candidates": [
+    {
+      "pageIndex": 23,
+      "natural_language_intent": "Create a layout with two columns of text, left-aligned, using Montserrat for the left column (bolded headline: \"2025 National Night Out Coming Soon!\") and Adobe Garamond Pro for the right column. Below the headline, place a large gray rectangle (image) centered horizontally, occupying the full width of the page. Beneath the image, position two text blocks side by side: the left block starts at the top left, the right block starts below it, both extending to the right edge. Bottom right corner contains a small gray rectangle (image) with a page number. All text should be in black, with the headline in dark blue.",
+      "expected_layout_json": {
+        "pageIndex": 23,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.9475,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 7.74225806451613,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.27083333333333,
+              "startY": 7.71083333333334
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 2.66666666666667
+            },
+            "content": {
+              "textBody": "are interested in becoming a Canyon Creek Block Captain and hosting a party, please contact Sharon Odell at sharon@the-odells.com. \nBlock Captains have until September 19, 2025, to register their National Night Out events at richardsonpolice.net/services/community-engagement/national-night-out/nno-block-party-registration. For National Night Out 2025 questions, contact RPD Officer David Beregszaszy at (972) 744-4938.\nAs always, residents are encouraged to donate canned goods to the Network of Community Ministries\u2019 food pantry during neighborhood events. Collected canned foods will be picked up by Richardson police officers, firefighters, paramedics and city government officials who will visit registered gatherings.\nLet\u2019s celebrate this special evening that ties our Canyon Creek community together on Tuesday, October 7th by visiting with "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 7.71083333333334
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 2.66666666666667
+            },
+            "content": {
+              "textBody": "National Night Out is celebrating its 36th year in Richardson! The City of Richardson and the Canyon Creek Homeowners Association invite residents to participate in block parties or similar gatherings on Tuesday, October 7, 2025, from 6:00 pm to 8:00 pm. These events aim to increase connections among neighbors and strengthen police-community relations by engaging with First Responders. As RPD Chief Gary Tittle stated in Richardson\u2019s 2025 National Night Out preview video, \"We are strongest when we stand together.\"\nNo official theme has been designated for this year\u2019s National Night Out, but residents of Canyon Creek are encouraged to display blue bows on trees as a demonstration of support. \nCanyon Creek is proud to host more block parties in Richardson than any other area. In 2024, for instance, 38 out of the city's 114 registered block parties took place in Canyon Creek. If you "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#2B378F",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.875,
+      "vector_score": 0.6163804274114776,
+      "final_score": 0.6939662991880343,
+      "rerank_score": -2.1533422470092773
+    },
+    {
+      "pageIndex": 24,
+      "natural_language_intent": "Create a layout for CCHOA 2025 YOQ 3rd Quarter Winners with a large bold title at top center, followed by a subtitle below it. Below that, a centered line of text crediting the photos. Arrange four gray rectangles (images) in a 2x2 grid, each with a blue banner underneath containing the address and names. The top-left image is above the top-right image, and the bottom-left image is below the top-left, with the bottom-right image to the right of the bottom-left. At the bottom, place a paragraph of text centered, and at the very bottom, a small website URL.",
+      "expected_layout_json": {
+        "pageIndex": 24,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.4,
+              "startY": 8.86361111111112
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.60861111111111
+            },
+            "content": {
+              "textBody": "400 Arborcrest Dr\nDominique Tsakonas, Asher & Lauren (not pictured)\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.52500004238553,
+              "startY": 8.85881944444443
+            },
+            "size": {
+              "width": 3.295,
+              "height": 0.61340277777779
+            },
+            "content": {
+              "textBody": "2211 Flat Creek Dr\nBrett Dixon, Lauren Leto and Bailey"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.375,
+              "startY": 5.84472222222222
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.43305555555556
+            },
+            "content": {
+              "textBody": "316 W Lookout Dr\nGeoff & Catherine Ka\u2019alani"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.52500004238553,
+              "startY": 5.84722222222222
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.41305555555558
+            },
+            "content": {
+              "textBody": "2926 Whitemarsh Circle\nLuke & Tammy, Cooper & Cherry\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.220625,
+              "startY": 9.56944444444444
+            },
+            "size": {
+              "width": 5.93375000000001,
+              "height": 0.65277777777778
+            },
+            "content": {
+              "textBody": "For volunteer information and other information about your \nCanyon Creek HOA, please visit the CCHOA website at\ncanyoncreekhomeowners.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.13055555555556,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 15.7,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 2.94444444444444
+            },
+            "size": {
+              "width": 7.57500000000001,
+              "height": 0.25541666666666
+            },
+            "content": {
+              "textBody": "All Yard of the Month photos courtesy of Meredith Embry Photography."
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 17,
+              "bold": true,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 1.70819444444447
+            },
+            "size": {
+              "width": 7.575,
+              "height": 1
+            },
+            "content": {
+              "textBody": "CCHOA 2025 \nYOQ 3rd Quarter Winners"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 35,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": true
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.75,
+      "vector_score": 0.6401435113281938,
+      "final_score": 0.6731004579297356,
+      "rerank_score": -3.1154632568359375
+    },
+    {
+      "pageIndex": 20,
+      "natural_language_intent": "Create a layout with \u201cPet of the Month\u201d at top left, large bold title below it, and three columns of text to the right. Include a small page number at bottom left and website URL at bottom right. Use gray rectangles for images, positioning them to the right of the title and above the text blocks.",
+      "expected_layout_json": {
+        "pageIndex": 20,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.56111111111111,
+              "startY": 6.3775
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.09750000000001
+            },
+            "content": {
+              "textBody": "has a married son and my granddaughter will soon be 24. I\u2019m proud of my family for sure. I worked for Safeco Insurance Company for 30 years before retiring. My hubby, Bob, passed away in 2017. We would have been married 61 years this year.\n\nWhat are your involvements either in Canyon Creek, through your church, or within the community?\nI\u2019m a member of the Richardson Woman\u2019s Club and have held several different positions over the years. I\u2019m also a member of First United Methodist Church Richardson and play Bridge in several area groups.\n\nWhat do you love most about living in Canyon Creek? \nWhat I love about living in Canyon Creek is the people. We are all like family on our block. If you are in need, just let a neighbor know and your prayers will be "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#3B2F47",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.98055555555556,
+              "startY": 6.3775
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 3.95000000000002
+            },
+            "content": {
+              "textBody": "the streets of Dallas when Doodle Dandy picked him up and found a home for him. He\u2019s my buddy and is settled into my routine. I\u2019m so grateful to have him as he\u2019s a wonderful companion. We\u2019ve been together 6 years and I don\u2019t know what I would do without him.\n\nTell us about your family. How long have you lived in Canyon Creek?\nI\u2019ve lived in Canyon Creek for 48 years and that is a record for me. When I was growing up, we would move every 3 years. I went to 3 elementary schools, 3 high schools, and 3 colleges. I have two grown daughters who live in the area. Lynn lives in Rockwall and is the CFO of Chiloso Bistro Restaurants. She has 3 boys who have all graduated from college and are working in the area.   \nKristen lives in Allen and is an executive assistant to the HR officer of a large worldwide construction company. She "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#3B2F47",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 6.38750000000007
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 3.99916770703284
+            },
+            "content": {
+              "textBody": "Tell us your name and the name of your pet(s). What type of pet is he/she?\nI\u2019m Georgia Nelson and my dog\u2019s name is Murphy. He is a border collie/poodle (bordoodle).\n\nHow did Murphy become a member of your family? \nI used to dog sit for people in the neighborhood who had gotten him as a rescue from Doodle Dandy. One time I sat for two weeks with Murphy while his owner was in Seattle. When she came home, she told me she was going to return Murphy to Doodle Dandy. I asked her not to because Murphy and I had bonded and we were friends, so she offered him to me. Naturally I stepped up and took him!\n\nTell us more about Murphy.\nI\u2019ve had dogs all my life, but never this lovable and sweet. Murphy just wants to be loved. We found out he was roaming "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#3B2F47",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.40833333333335
+            },
+            "size": {
+              "width": 2.7575,
+              "height": 0.36944444444445
+            },
+            "content": {
+              "textBody": "Pet of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 18,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.7083333333333334,
+      "vector_score": 0.658808257537215,
+      "final_score": 0.6736657802760504,
+      "rerank_score": -3.3221755027770996
+    },
+    {
+      "pageIndex": 4,
+      "natural_language_intent": "Create a layout with a large gray rectangle at top left, positioned above the main text block. Below it, center-aligned, place the title \u201cLetter From the Publisher\u201d in bold Raleway 17pt. To the right of the title, add a small gray rectangle (image) with no content, positioned below the title. The main body text in Trajan Pro 3 9pt starts just below the title, left-aligned, occupying most of the page width. At the bottom, place \u201cRICHARDSON LIFE MAGAZINE\u201d in small MS Reference Sans Serif 7pt, right-aligned, with a small bold Raleway 11pt number \u201c2\u201d to its left. At the bottom right, add a small gray rectangle (image) with no content, positioned below the magazine name.",
+      "expected_layout_json": {
+        "pageIndex": 4,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 6.125,
+              "startY": 9.38888888888889
+            },
+            "size": {
+              "width": 1.85,
+              "height": 0.4336111111111
+            },
+            "content": {
+              "textBody": "Kyla Obert"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 13,
+              "bold": true,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 4.21430555555555
+            },
+            "size": {
+              "width": 7.575,
+              "height": 5.69444444444446
+            },
+            "content": {
+              "textBody": "The word BEST, by definition, means: that which is the most excellent, outstanding, or desirable. \n\nRICHARDSON: a city in Texas boasting a population of close to 120,000 people, is the city we call home. \n\nBEST OF RICHARDSON: a contest compromised of businesses, organizations, people, events and locations throughout the city that is voted on by readers and members of the community, representing all that makes Richardson the best place to call home.\n\nWhat\u2019s exciting about the Best of Richardson awards is that being named the Best of Richardson in any category is a prestigious honor. If you followed along this voting journey, you know it\u2019s been a methodical process of gathering all the names of the beloved people, places and businesses around Richardson during the April nomination phase. In this first round, the readers of Richardson Life Magazine showed up with more than 950 nominations in 200+ categories\u2014amazing! \n\nThen, as the contest narrowed, the top three nominees with the most nominations in each category advanced to the finalist voting round in June. That round, you cast more than 50,000 votes to get us to today\u2019s announcement of the winners by category. The moment so many have been waiting for. The BEST of Richardson. \n\nThank you, Richardson Life Magazine readers, for showing up to support your community. And thank you to all the businesses and individuals for taking part and rallying your supporters. There are so many unbelievable places here to see and experience. I hope you\u2019ll also check out our online directory, which includes not only the winners in each category, but the finalists as well. \n\nWe\u2019ll be back next year with another edition of Best of Richardson. If you don\u2019t see one of your favorites listed, you can always nominate them next year to bring them to the winner\u2019s circle.\n\nWe believe Richardson is the absolute BEST place to live. \n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Trajan Pro 3",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.40384353741497,
+              "startY": 0.4
+            },
+            "size": {
+              "width": 7.57115646258503,
+              "height": 0.37777777777778
+            },
+            "content": {
+              "textBody": "Letter From the Publisher"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 17,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.82718637992831,
+              "startY": 10.5652777777778
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "RICHARDSON LIFE MAGAZINE"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "MS Reference Sans Serif",
+              "fontSize": 7,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5069444444444
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19500000000001
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 11,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.7916666666666666,
+      "vector_score": 0.6973291151398725,
+      "final_score": 0.7256303805979107,
+      "rerank_score": -3.373042583465576
+    },
+    {
+      "pageIndex": 16,
+      "natural_language_intent": "Create a layout for a \u201cStudent Athlete of the Month\u201d feature with a bold, centered title at top left. Below, place two columns of text: left column for personal info (name, school, grade, hobbies), right column for brag section (honors, awards, academic info). Position a small italic photo credit below the main title. At bottom right, add a thin horizontal line with website URL. All gray rectangles are images; focus only on their position and size relative to text blocks.",
+      "expected_layout_json": {
+        "pageIndex": 16,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.24984529625454,
+              "startY": 8.625
+            },
+            "size": {
+              "width": 2.715,
+              "height": 0.15152777777778
+            },
+            "content": {
+              "textBody": "Photo credit: Juan Pe\u00f1a"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 7,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.27083333333333,
+              "startY": 8.84305555555555
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 1.76805555555556
+            },
+            "content": {
+              "textBody": "\nBrag on yourself: tell us your honors and awards in and out of school. \nI am going into my 3rd season starting on the varsity football team at Pearce and my 2nd year as a captain. I have been awarded all-district recognition the past two years and was awarded sophomore player of the year my first year as a varsity player. I am an A and B student in school and have always prided myself on working extremely hard at everything I do. \n\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#00309A",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 8.84305555555558
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 1.76621574748524
+            },
+            "content": {
+              "textBody": "Tell us your name, school you\u2019re attending, and grade. \nMy name is Will Miltenberger and I am a senior at Pearce High School.\n\nTell us about yourself. \nMy hobbies are playing sports and spending time with friends and family. I like to spend my time out of school watching college football (when in season), spending time outside, hunting, fishing, and being active in any way. \n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#00309A",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.40416666666668
+            },
+            "size": {
+              "width": 7.575,
+              "height": 0.37777777777778
+            },
+            "content": {
+              "textBody": "Student Athlete of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 18,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.7083333333333334,
+      "vector_score": 0.6994936004553394,
+      "final_score": 0.7021455203187376,
+      "rerank_score": -3.8803186416625977
+    },
+    {
+      "pageIndex": 10,
+      "natural_language_intent": "Create a magazine page layout with a bold headline \u201cThen vs. Now\u201d in large, light-colored sans-serif font at the top center, positioned above two columns of text. Below the headline, place two side-by-side text blocks, each with a narrow vertical gap between them, containing detailed paragraphs about Richardson\u2019s past and present. At the top left, add a small \u201cADVERTISEMENT\u201d label in black sans-serif font. At the bottom right, include the magazine name \u201cRICHARDSON LIFE MAGAZINE\u201d in small black font, with a small black numeral \u201c18\u201d to its left. All gray rectangles (images) should be placed at the top center, spanning the full width of the page, with no content inside.",
+      "expected_layout_json": {
+        "pageIndex": 10,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.56111111111111,
+              "startY": 6.2736111111111
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.17083333333335
+            },
+            "content": {
+              "textBody": "still know each other. Schools are still top-tier. Community events, local businesses, and strong city services make it a place people are proud to call home.\n\nWhy Kobs & Martin\nAt Kobs & Martin, we\u2019re more than just realtors\u2014we\u2019re your local guides. With deep roots in Richardson and years of area experience, we help clients navigate where the city has been and where it\u2019s going. Whether you\u2019re buying or selling, we bring the knowledge, strategy, and care you need.\n\nRichardson has grown, but its soul is unchanged\u2014and we get to live in the \u201cBest Of\u201d it.\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.98055555555556,
+              "startY": 6.2736111111111
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.17083333333335
+            },
+            "content": {
+              "textBody": "exceptional schools, plus added amenities and lifestyle perks. Developments like CityLine and the CORE District have brought new restaurants, retail, entertainment, and walkable living. Public transportation has expanded, and the city continues to invest in parks, trails, and infrastructure.\n\nModern buyers are drawn to a mix of beautifully maintained mid-century homes and new construction options. Median home prices now range from $375,000 to over $550,000 in some neighborhoods and from $750,000 to $1,200,000 and over in others. Most new builds in Richardson start at $1,800,000 and go up from there\u2014proof of strong appreciation and long-term value. Whether it\u2019s first-time buyers, growing families, or downsizing empty nesters, Richardson real estate offers something for everyone.\n\nWhat Hasn\u2019t Changed\nDespite the growth, the heart of Richardson remains the same. Neighbors "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0,
+              "startY": 4.48888888888889
+            },
+            "size": {
+              "width": 6.575,
+              "height": 1.45555555555556
+            },
+            "content": {
+              "textBody": "Then vs. Now\nHow Richardson Real Estate \nBecame the Best"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 36,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#EFE6DD",
+              "autoFit": true
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 6.30299800031671
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.13198877217004
+            },
+            "content": {
+              "textBody": "When people first moved to Richardson decades ago, it was all about family-friendly neighborhoods, top-rated schools, and a quieter pace of life just outside the Dallas hustle. As local realtors, we\u2019ve watched the city evolve without losing the qualities that made it special in the first place.\n\nThen: A Suburban Gem\nIn the 1970s and \u201980s, Richardson was a hidden gem\u2014safe, suburban, and community-oriented. Young families were drawn in by strong RISD schools, affordable homes, and the promise of a quality life. Homes ranged from $40,000 to $80,000, with established neighborhoods like Canyon Creek and Greenwood Hills offering charm and space. The nearby Telecom Corridor made Richardson an ideal spot for professionals working in tech and engineering.\nNow: A Connected, Modern Community\nToday, Richardson is no longer a secret. It\u2019s a thriving, connected city with the same "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 9,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#003D5C",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.38944444444444,
+              "startY": 0.39999999999998
+            },
+            "size": {
+              "width": 7.58555555555556,
+              "height": 0.3777777777778
+            },
+            "content": {
+              "textBody": "ADVERTISEMENT"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 17,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.82718637992831,
+              "startY": 10.5652777777778
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "RICHARDSON LIFE MAGAZINE"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "MS Reference Sans Serif",
+              "fontSize": 7,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5069444444444
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 11,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.875,
+      "vector_score": 0.6894315399379524,
+      "final_score": 0.7451020779565667,
+      "rerank_score": -4.207085132598877
+    },
+    {
+      "pageIndex": 8,
+      "natural_language_intent": "Create a layout with two columns of text, each with distinct fonts and spacing. Top left: a small gray rectangle (image) positioned above a caption. Below it, a larger gray rectangle (image) centered beneath the text block. The text should flow naturally with the images, using specified fonts and sizes. All gray rectangles are placeholders for images; focus only on their placement and size relative to text.",
+      "expected_layout_json": {
+        "pageIndex": 8,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.56111111111111,
+              "startY": 10.19125
+            },
+            "size": {
+              "width": 2.715,
+              "height": 0.15152777777778
+            },
+            "content": {
+              "textBody": "Owen enjoying a day out and about"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 7,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 6.03534722222222
+            },
+            "size": {
+              "width": 4.835,
+              "height": 0.16215277777777
+            },
+            "content": {
+              "textBody": "Olivia in her photo op installation at the 2024 Wildflower! Arts & Music festival"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 7,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.98055555555556,
+              "startY": 6.27777777777778
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.00000000000001
+            },
+            "content": {
+              "textBody": "Work and Community\nBy day, Mike is VP of Marketing for a Romanian FinTech company, while Julie manages an interior design office in Dallas. Beyond their careers, both are deeply woven into the Richardson arts scene. They serve on the Executive Steering Committee for the Wildflower! Arts and Music Festival, helping produce the Budding Talent Vocal Competition each year. Julie also lends her talents to the Richardson Symphony Orchestra\u2019s Beaujolais Bash fundraiser, while Mike dedicated years as Scoutmaster for Troop 895. Together, they host block parties, organize National Night Out, and jump at any chance to build community through music and connection.\n\nPassions and Pastimes\nOutside of work and volunteering, Mike can often be found at White Rock Lake, sailing with the Corinthian Sailing Club. While his official title is board member, "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#35353D",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 6.27777777777778
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 4.00000000000001
+            },
+            "content": {
+              "textBody": "home with them after two rehomings, may be eight years old but still acts like a big baby. Then there\u2019s Harry Styles\u2014the hound dog, not the pop star\u2014who joined the family as a puppy and has been Bennie\u2019s partner-in-crime ever since. But make no mistake: the real boss is Lupe, their sociable 10-year-old cat who keeps everyone in line.\n\nFamily Time, Then and Now\nWith the kids grown, family time looks a little different these days, but traditions remain strong. Whether it\u2019s storytelling around a campfire, a lively game night, or planning trips centered on music festivals, the Hughes family always finds a way to connect. One of their favorite adventures was road-tripping to Montana for the Decemberists\u2019 Traveling Rest Festival, with a detour to Yellowstone.\n\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.6666666666666666,
+      "vector_score": 0.6866162450268618,
+      "final_score": 0.6806313715188033,
+      "rerank_score": -4.810459136962891
+    },
+    {
+      "pageIndex": 6,
+      "natural_language_intent": "Create a layout with \u201cLETTER FROM THE EDITOR\u201d at top center, bold 17pt Raleway. Below, a full-width article in 9pt Trajan Pro 3, starting just below the headline. At top right, place \u201cPatti Otte\u201d in 13pt bold italic Raleway. At bottom center, place \u201cRICHARDSON LIFE MAGAZINE\u201d in 7pt MS Reference Sans Serif. To its left, a small 11pt bold Raleway numeral \u201c4\u201d. All text aligned to left margin, with consistent 0.1667\u201d gutter.",
+      "expected_layout_json": {
+        "pageIndex": 6,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.75631038835999,
+              "startY": 9.41194444444444
+            },
+            "size": {
+              "width": 2.21868961164001,
+              "height": 0.33305519951714
+            },
+            "content": {
+              "textBody": "Patti Otte"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 13,
+              "bold": true,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.4
+            },
+            "size": {
+              "width": 7.575,
+              "height": 0.37777777777778
+            },
+            "content": {
+              "textBody": "LETTER FROM THE EDITOR"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 17,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.39444444444445,
+              "startY": 4.01388888888889
+            },
+            "size": {
+              "width": 7.58055555555555,
+              "height": 6.58138888888889
+            },
+            "content": {
+              "textBody": "Happy August! If you\u2019ve been a regular reader of Richardson Life Magazine, you\u2019ll notice that this issue looks a little\u2014actually, a lot\u2014different than the usual. Some of our normally featured articles are absent and the calendar of events and Scene section are missing. They\u2019ll be back in future issues. Instead, the pages of this Best of Richardson issue are dedicated to the companies, individuals and organizations you all voted as 2025 stand-outs. \n\nIn spite of the temporary changes, you\u2019ll still get to hear from our new mayor, Amir Omar, about his first ninety days in office. And you\u2019ll see how RISD kicked off the school year by celebrating its teachers and offering hands-on training to prepare them for the school year. They truly are the BEST school district, thanks to Superintendent Tabitha Branum\u2019s leadership, her administrative team and all the teachers, counselors, principals, culinary team members, support staff and others who make RISD run. In spite of recent budget cuts, Branum and her team continue to deliver a top-notch education to Richardson\u2019s students.\n\nAnd although we may not have a calendar in this issue, I\u2019d like to point out a couple of important upcoming events. On August 28 at 7:00 pm, the 15th annual Richardson Real Heroes Awards Celebration, sponsored by the City of Richardson, will take place at the Eisemann Center\u2019s Bank of America Theatre. 2025 award recipients Dr. Mona Alnaeemi and Neil Stampe will be honored for their outstanding volunteer service to the Richardson community, along with the 2025 nominees. The awards ceremony\u2019s special guest will be Texas-based singer/songwriter/speaker Sara Hickman, who will weave song into her talk about the power of giving back.  Tickets are free but must be obtained from the Eisemann Center Box Office. Details can be found at the RRH website at richardsonrealheroes.com/awardsceremony.  \n\nAdditionally, Network is hosting its 28th Annual Golf Outing on Friday, September 12, at Sherrill Park. If you\u2019re a golfer and want to support an amazing cause, sign up today at thenetwork.org/golf. Network continues to meet the needs of our community in large ways and small and needs our support now more than ever. If you\u2019re not a golfer, visit Network\u2019s website to see how your gifts and talents align with their mission.\n\nAren\u2019t we lucky to live in Richardson? I know I am!\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Trajan Pro 3",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.82718637992831,
+              "startY": 10.5652777777778
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "RICHARDSON LIFE MAGAZINE"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "MS Reference Sans Serif",
+              "fontSize": 7,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5069444444444
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19500000000001
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Raleway",
+              "fontSize": 11,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.6666666666666666,
+      "vector_score": 0.6989859728740497,
+      "final_score": 0.6892901810118348,
+      "rerank_score": -5.324024200439453
+    },
+    {
+      "pageIndex": 10,
+      "natural_language_intent": "Create a layout for a magazine page titled \u201cBusiness of the Month\u201d with a bold, modern aesthetic. Top left corner: large, centered title \u201cCH\u00c9RIE LANE\u201d in bold pink Montserrat 48pt, beneath it \u201cA brand new boutique in Canyon Creek!\u201d in smaller pink Montserrat. Below that, a paragraph in black Montserrat 10pt introducing Abby Lane and her boutique. To the right of this, a column in pink Gotham Narrow 10pt titled \u201cHow did you come up with the name...\u201d with text beneath. Below the main title, another column in black Adobe Garamond Pro 10pt explaining the brand\u2019s ethos. A small italicized credit \u201cPhoto credit: Natalie Embry Photography\u201d in black, 7pt, centered below the main title. Bottom right corner: website \u201cwww.CanyonCreekLife.com\u201d in small black Helvetica Neue LT Std 8pt. All text blocks aligned to left, with consistent 0.1667\u201d gutter between columns.",
+      "expected_layout_json": {
+        "pageIndex": 10,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.895,
+              "startY": 3.06420138888889
+            },
+            "size": {
+              "width": 2.49944444444444,
+              "height": 0.16996527777777
+            },
+            "content": {
+              "textBody": "Photo credit: Natalie Embry Photography"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 7,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.56111111111111,
+              "startY": 8.53250000000001
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 1.74527777777776
+            },
+            "content": {
+              "textBody": "How did you come up with the name Ch\u00e9rie Lane and how is the name pronounced?\nThe name came from my sorority\u2019s little sister, meaning \u201csweetheart\u201d in French. It\u2019s pronounced \u201cshuh-REE lane.\u201d\n Why II Creeks?\nWe chose II Creeks because it truly reflects the heart of our brand. Richardson is a vibrant, growing community filled with "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FE0096",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.98055555555556,
+              "startY": 8.5525
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 1.72527777777778
+            },
+            "content": {
+              "textBody": "collections and luxe denim to timeless seasonal capsules, Ch\u00e9rie Lane is more than just a boutique; it\u2019s a community where fashion and empowerment go hand in hand.\n\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 1.78430555555556
+            },
+            "size": {
+              "width": 7.575,
+              "height": 1.18138888888889
+            },
+            "content": {
+              "textBody": "CH\u00c9RIE LANE\nA brand new boutique in Canyon Creek!"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 48,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FE0096",
+              "autoFit": true
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 8.55469447575371
+            },
+            "size": {
+              "width": 2.41388888888889,
+              "height": 1.72308330202407
+            },
+            "content": {
+              "textBody": "Tell us about yourself and Ch\u00e9rie Lane.\n Hi! My name is Abby Lane and I am the owner of Ch\u00e9rie Lane, a fashion-forward boutique built on the belief that every woman deserves to feel confident, beautiful and unforgettable in every setting. Our signature style is classy, chic, and sparkly\u2014curated for tenacious and driven women who love to make a statement. From bold game day "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham Narrow",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FE0096",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.87194444444445
+            },
+            "size": {
+              "width": 7.575,
+              "height": 0.81166666666666
+            },
+            "content": {
+              "textBody": "Hi my name is Abby Lane and I am the owner of Ch\u00e9rie Lane. Ch\u00e9rie Lane is a fashion-forward boutique built on the belief that every woman deserves to feel confident, beautiful, and unforgettable in every setting she walks into. Founded in 2022 as a college project at Baylor University, Ch\u00e9rie Lane has grown into a thriving e-commerce brand \\nd now a flagship storefront in Richardson, Texas."
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.40416666666668
+            },
+            "size": {
+              "width": 7.575,
+              "height": 0.37777777777778
+            },
+            "content": {
+              "textBody": "Business of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 18,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.8333333333333334,
+      "vector_score": 0.683822850430056,
+      "final_score": 0.7286759953010391,
+      "rerank_score": -5.446354866027832
+    },
+    {
+      "pageIndex": 3,
+      "natural_language_intent": "Create a layout with a bold \"CONTENTS\" title at top center. Below, arrange four gray rectangles in a 2x2 grid: top-left and top-right for article listings (10 BRY-JO Roofing and Remodeling, 13 Fall Sports Schedules on left; 20 Canyon Creek Chronicles, 27 Canyon Creek Allstate Insurance on right). Bottom-left and bottom-right for \"Student of the Month\" and \"Pet of the Month\" with large numbers (14 and 18) above them. Top-left of the grid has \"Family of the Month\" (4) and top-right has \"Business of the Month\" (8), both with large numbers above. Add small footer text at bottom center with website URL and page number.",
+      "expected_layout_json": {
+        "pageIndex": 3,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.9475,
+              "startY": 10.475
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 7.74225806451613,
+              "startY": 10.475
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.9475,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 7.74225806451613,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.195
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.27087411139322,
+              "startY": 5.15777777777777
+            },
+            "size": {
+              "width": 3.70412588860678,
+              "height": 0.72916666666667
+            },
+            "content": {
+              "textBody": "20\tCanyon Creek Chronicles\n27\tCanyon Creek Allstate Insurance\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 13.5,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#F71A01",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.40642777777776,
+              "startY": 5.15777777777777
+            },
+            "size": {
+              "width": 3.70095277777783,
+              "height": 0.72376543209877
+            },
+            "content": {
+              "textBody": "10\tBRY-JO Roofing and Remodeling\n13\t Fall Sports Schedules\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 13.5,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#F71A01",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.19916666666667,
+              "startY": 9.92389450042314
+            },
+            "size": {
+              "width": 2.80034612077696,
+              "height": 0.22027777777778
+            },
+            "content": {
+              "textBody": "Student of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 14,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 5.04999999999999,
+              "startY": 9.92389450042314
+            },
+            "size": {
+              "width": 2.80034612077696,
+              "height": 0.22027777777778
+            },
+            "content": {
+              "textBody": "Pet of the month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 14,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.43999999999999,
+              "startY": 9.70557594458549
+            },
+            "size": {
+              "width": 0.585,
+              "height": 0.4777369997179
+            },
+            "content": {
+              "textBody": "18"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 36,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.85426499033415,
+              "startY": 7.59056116708981
+            },
+            "size": {
+              "width": 2.80034612077696,
+              "height": 0.22027777777778
+            },
+            "content": {
+              "textBody": "Business of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 14,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.98343165700082,
+              "startY": 7.59056116708981
+            },
+            "size": {
+              "width": 2.80034612077696,
+              "height": 0.24805555555556
+            },
+            "content": {
+              "textBody": "Family of the Month"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 14,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.56916666666666,
+              "startY": 9.70557594458549
+            },
+            "size": {
+              "width": 0.585,
+              "height": 0.4777369997179
+            },
+            "content": {
+              "textBody": "14"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 36,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.38639905541449,
+              "startY": 7.37224261125216
+            },
+            "size": {
+              "width": 0.44008815714188,
+              "height": 0.4777369997179
+            },
+            "content": {
+              "textBody": "8"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 36,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.51556572208116,
+              "startY": 7.39279255527346
+            },
+            "size": {
+              "width": 0.44008815714188,
+              "height": 0.4777369997179
+            },
+            "content": {
+              "textBody": "4"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Gotham",
+              "fontSize": 36,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 0.4
+            },
+            "size": {
+              "width": 7.57232033305126,
+              "height": 0.54444444444445
+            },
+            "content": {
+              "textBody": "CONTENTS"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 40,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.7083333333333334,
+      "vector_score": 0.6664511594782909,
+      "final_score": 0.6790158116348036,
+      "rerank_score": -5.687072277069092
+    }
+  ],
+  "final_context": [
+    {
+      "pageIndex": 23,
+      "natural_language_intent": "Create a layout with two columns of text, left-aligned, using Montserrat for the left column (bolded headline: \"2025 National Night Out Coming Soon!\") and Adobe Garamond Pro for the right column. Below the headline, place a large gray rectangle (image) centered horizontally, occupying the full width of the page. Beneath the image, position two text blocks side by side: the left block starts at the top left, the right block starts below it, both extending to the right edge. Bottom right corner contains a small gray rectangle (image) with a page number. All text should be in black, with the headline in dark blue.",
+      "expected_layout_json": {
+        "pageIndex": 23,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.9475,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 7.74225806451613,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.27083333333333,
+              "startY": 7.71083333333334
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 2.66666666666667
+            },
+            "content": {
+              "textBody": "are interested in becoming a Canyon Creek Block Captain and hosting a party, please contact Sharon Odell at sharon@the-odells.com. \nBlock Captains have until September 19, 2025, to register their National Night Out events at richardsonpolice.net/services/community-engagement/national-night-out/nno-block-party-registration. For National Night Out 2025 questions, contact RPD Officer David Beregszaszy at (972) 744-4938.\nAs always, residents are encouraged to donate canned goods to the Network of Community Ministries\u2019 food pantry during neighborhood events. Collected canned foods will be picked up by Richardson police officers, firefighters, paramedics and city government officials who will visit registered gatherings.\nLet\u2019s celebrate this special evening that ties our Canyon Creek community together on Tuesday, October 7th by visiting with "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 7.71083333333334
+            },
+            "size": {
+              "width": 3.70416666666667,
+              "height": 2.66666666666667
+            },
+            "content": {
+              "textBody": "National Night Out is celebrating its 36th year in Richardson! The City of Richardson and the Canyon Creek Homeowners Association invite residents to participate in block parties or similar gatherings on Tuesday, October 7, 2025, from 6:00 pm to 8:00 pm. These events aim to increase connections among neighbors and strengthen police-community relations by engaging with First Responders. As RPD Chief Gary Tittle stated in Richardson\u2019s 2025 National Night Out preview video, \"We are strongest when we stand together.\"\nNo official theme has been designated for this year\u2019s National Night Out, but residents of Canyon Creek are encouraged to display blue bows on trees as a demonstration of support. \nCanyon Creek is proud to host more block parties in Richardson than any other area. In 2024, for instance, 38 out of the city's 114 registered block parties took place in Canyon Creek. If you "
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 10,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#2B378F",
+              "autoFit": false
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.875,
+      "vector_score": 0.6163804274114776,
+      "final_score": 0.6939662991880343,
+      "rerank_score": -2.1533422470092773
+    },
+    {
+      "pageIndex": 24,
+      "natural_language_intent": "Create a layout for CCHOA 2025 YOQ 3rd Quarter Winners with a large bold title at top center, followed by a subtitle below it. Below that, a centered line of text crediting the photos. Arrange four gray rectangles (images) in a 2x2 grid, each with a blue banner underneath containing the address and names. The top-left image is above the top-right image, and the bottom-left image is below the top-left, with the bottom-right image to the right of the bottom-left. At the bottom, place a paragraph of text centered, and at the very bottom, a small website URL.",
+      "expected_layout_json": {
+        "pageIndex": 24,
+        "assets": [
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 2.0725,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 4.48,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "www.CanyonCreekLife.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 8,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.525,
+              "startY": 10.5375
+            },
+            "size": {
+              "width": 0.23274193548387,
+              "height": 0.19499999999999
+            },
+            "content": {
+              "textBody": "\u0018"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.4,
+              "startY": 8.86361111111112
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.60861111111111
+            },
+            "content": {
+              "textBody": "400 Arborcrest Dr\nDominique Tsakonas, Asher & Lauren (not pictured)\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.52500004238553,
+              "startY": 8.85881944444443
+            },
+            "size": {
+              "width": 3.295,
+              "height": 0.61340277777779
+            },
+            "content": {
+              "textBody": "2211 Flat Creek Dr\nBrett Dixon, Lauren Leto and Bailey"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 4.375,
+              "startY": 5.84472222222222
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.43305555555556
+            },
+            "content": {
+              "textBody": "316 W Lookout Dr\nGeoff & Catherine Ka\u2019alani"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.52500004238553,
+              "startY": 5.84722222222222
+            },
+            "size": {
+              "width": 3.275,
+              "height": 0.41305555555558
+            },
+            "content": {
+              "textBody": "2926 Whitemarsh Circle\nLuke & Tammy, Cooper & Cherry\n"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Helvetica Neue LT Std",
+              "fontSize": 9,
+              "bold": false,
+              "italic": true,
+              "underline": false,
+              "color": "#FFFFFF",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 1.220625,
+              "startY": 9.56944444444444
+            },
+            "size": {
+              "width": 5.93375000000001,
+              "height": 0.65277777777778
+            },
+            "content": {
+              "textBody": "For volunteer information and other information about your \nCanyon Creek HOA, please visit the CCHOA website at\ncanyoncreekhomeowners.com"
+            },
+            "columns": 1,
+            "gutterSize": 0.13055555555556,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 15.7,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 2.94444444444444
+            },
+            "size": {
+              "width": 7.57500000000001,
+              "height": 0.25541666666666
+            },
+            "content": {
+              "textBody": "All Yard of the Month photos courtesy of Meredith Embry Photography."
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Adobe Garamond Pro",
+              "fontSize": 17,
+              "bold": true,
+              "italic": true,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": false
+            }
+          },
+          {
+            "assetType": "Article",
+            "position": {
+              "startX": 0.4,
+              "startY": 1.70819444444447
+            },
+            "size": {
+              "width": 7.575,
+              "height": 1
+            },
+            "content": {
+              "textBody": "CCHOA 2025 \nYOQ 3rd Quarter Winners"
+            },
+            "columns": 1,
+            "gutterSize": 0.16666666666667,
+            "margins": {
+              "top": 0,
+              "left": 0,
+              "bottom": 0,
+              "right": 0
+            },
+            "textStyle": {
+              "fontFamily": "Montserrat",
+              "fontSize": 35,
+              "bold": true,
+              "italic": false,
+              "underline": false,
+              "color": "#000000",
+              "autoFit": true
+            }
+          }
+        ]
+      },
+      "bm25_score": 0.75,
+      "vector_score": 0.6401435113281938,
+      "final_score": 0.6731004579297356,
+      "rerank_score": -3.1154632568359375
+    }
+  ],
+  "generation_response": "{\n  \"pageIndex\": 1,\n  \"assets\": [\n    {\n      \"assetType\": \"Image\",\n      \"position\": {\n        \"startX\": 0.5,\n        \"startY\": 1.5\n      },\n      \"size\": {\n        \"width\": 3.5,\n        \"height\": 4.5\n      },\n      \"content\": {\n        \"assetId\": \"guest_writer_photo_id\",\n        \"description\": \"Biographical photo of guest writer\"\n      }\n    },\n    {\n      \"assetType\": \"Article\",\n      \"position\": {\n        \"startX\": 0.5,\n        \"startY\": 6.2\n      },\n      \"size\": {\n        \"width\": 3.5,\n        \"height\": 3.0\n      },\n      \"content\": {\n        \"textBody\": \"We are thrilled to introduce our guest writer for this issue, [Guest Writer's Name]. With a distinguished career spanning [number] years in [field/industry], [Guest Writer's Name] brings a wealth of knowledge and unique perspective to our pages. Their insightful contributions have been featured in numerous publications, and we are honored to share their expertise with our readers. In this piece, [he/she/they] delves into [brief topic description], offering fresh insights and thought-provoking analysis. We hope you enjoy this special feature.\"\n      },\n      \"columns\": 1,\n      \"gutterSize\": 0.16666666666667,\n      \"margins\": {\n        \"top\": 0,\n        \"left\": 0,\n        \"bottom\": 0,\n        \"right\": 0\n      },\n      \"textStyle\": {\n        \"fontFamily\": \"Adobe Garamond Pro\",\n        \"fontSize\": 10,\n        \"bold\": false,\n        \"italic\": false,\n        \"underline\": false,\n        \"color\": \"#000000\",\n        \"autoFit\": false\n      }\n    },\n    {\n      \"assetType\": \"Article\",\n      \"position\": {\n        \"startX\": 4.5,\n        \"startY\": 1.5\n      },\n      \"size\": {\n        \"width\": 3.5,\n        \"height\": 7.7\n      },\n      \"content\": {\n        \"textBody\": \"Our Core Publication Contributors\\n\\n[Contributor Name 1]\\nEditor-in-Chief\\n\\n[Contributor Name 2]\\nManaging Editor\\n\\n[Contributor Name 3]\\nArt Director\\n\\n[Contributor Name 4]\\nSenior Writer\\n\\n[Contributor Name 5]\\nStaff Photographer\\n\\n[Contributor Name 6]\\nCopy Editor\\n\\n[Contributor Name 7]\\nDigital Content Manager\\n\\n[Contributor Name 8]\\nMarketing & Outreach\"\n      },\n      \"columns\": 1,\n      \"gutterSize\": 0.16666666666667,\n      \"margins\": {\n        \"top\": 0,\n        \"left\": 0,\n        \"bottom\": 0,\n        \"right\": 0\n      },\n      \"textStyle\": {\n        \"fontFamily\": \"Montserrat\",\n        \"fontSize\": 10,\n        \"bold\": false,\n        \"italic\": false,\n        \"underline\": false,\n        \"color\": \"#000000\",\n        \"autoFit\": false\n      }\n    },\n    {\n      \"assetType\": \"Article\",\n      \"position\": {\n        \"startX\": 0.5,\n        \"startY\": 10.5375\n      },\n      \"size\": {\n        \"width\": 4.48,\n        \"height\": 0.19499999999999\n      },\n      \"content\": {\n        \"textBody\": \"www.CanyonCreekLife.com\"\n      },\n      \"columns\": 1,\n      \"gutterSize\": 0.16666666666667,\n      \"margins\": {\n        \"top\": 0,\n        \"left\": 0,\n        \"bottom\": 0,\n        \"right\": 0\n      },\n      \"textStyle\": {\n        \"fontFamily\": \"Helvetica Neue LT Std\",\n        \"fontSize\": 8,\n        \"bold\": false,\n        \"italic\": false,\n        \"underline\": false,\n        \"color\": \"#000000\",\n        \"autoFit\": false\n      }\n    },\n    {\n      \"assetType\": \"Article\",\n      \"position\": {\n        \"startX\": 7.76725806451613,\n        \"startY\": 10.5375\n      },\n      \"size\": {\n        \"width\": 0.23274193548387,\n        \"height\": 0.19499999999999\n      },\n      \"content\": {\n        \"textBody\": \"1\"\n      },\n      \"columns\": 1,\n      \"gutterSize\": 0.16666666666667,\n      \"margins\": {\n        \"top\": 0,\n        \"left\": 0,\n        \"bottom\": 0,\n        \"right\": 0\n      },\n      \"textStyle\": {\n        \"fontFamily\": \"Helvetica Neue LT Std\",\n        \"fontSize\": 9,\n        \"bold\": false,\n        \"italic\": false,\n        \"underline\": false,\n        \"color\": \"#000000\",\n        \"autoFit\": false\n      }\n    }\n  ]\n}",
+  "validation_status": "success"
+}

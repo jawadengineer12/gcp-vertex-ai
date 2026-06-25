@@ -1,56 +1,59 @@
 import json
-from pathlib import Path
-from google import genai
 
-# -------------------------------
-# CONFIG
-# -------------------------------
-LIBRARY_PATH = Path("normalized_data/layout_prompt_library_updated.json")
-OUTPUT_PATH = Path("normalized_data/vertex_index_data.jsonl")
+from core.config import UPDATED_LIBRARY_PATH, VERTEX_INDEX_PATH, EMBEDDING_MODEL
+from core.logger import setup_logging, get_logger
+from core.vertex_client import get_vertex_client
+
+setup_logging()
+LOGGER = get_logger(__name__)
 
 
-def main():
-    print("🚀 Initializing Vertex AI Embedding Client...")
-    # Initialize your enterprise client
-    client = genai.Client(
-        vertexai=True,
-        project="indesign-layout-ai",
-        location="us-central1"
-    )
-    embedding_model = "text-embedding-004"
+def main() -> None:
+    LOGGER.info("Prepare Vertex vector data script started.")
 
-    # 1. Load the existing prompt library
-    print(f"📂 Loading library from {LIBRARY_PATH}...")
-    with open(LIBRARY_PATH, "r", encoding="utf-8") as f:
+    if not UPDATED_LIBRARY_PATH.exists():
+        raise FileNotFoundError(UPDATED_LIBRARY_PATH)
+
+    client = get_vertex_client()
+
+    with open(UPDATED_LIBRARY_PATH, "r", encoding="utf-8") as f:
         library = json.load(f)
 
-    # 2. Extract intents for batch embedding
-    intents = [item['natural_language_intent'] for item in library]
+    LOGGER.info("Loaded library | records=%s", len(library))
 
-    # 3. Generate embeddings for the entire library (Doing this ONCE)
-    print(f"🧠 Generating embeddings for {len(intents)} items...")
+    intents = [item["natural_language_intent"] for item in library]
+
+    LOGGER.info("Generating embeddings | count=%s", len(intents))
+
     response = client.models.embed_content(
-        model=embedding_model,
-        contents=intents
+        model=EMBEDDING_MODEL,
+        contents=intents,
     )
 
-    # 4. Write to Vertex AI required JSONL format
-    print(f"✍️ Writing Vertex AI Vector Search file to {OUTPUT_PATH}...")
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as out_file:
-        for idx, item in enumerate(library):
-            # We use the pageIndex as the unique ID for the Vector Search
-            vector_id = str(item['pageIndex'])
-            embedding_values = response.embeddings[idx].values
+    # -----------------------------
+    # BUILD CLEAN JSON STRUCTURE
+    # -----------------------------
+    vector_db = []
 
-            # Create the exact JSON schema Vertex Vector Search requires
-            vertex_record = {
-                "id": vector_id,
-                "embedding": embedding_values
-            }
-            # Write as a single line JSON (JSONL)
-            out_file.write(json.dumps(vertex_record) + "\n")
+    for idx, item in enumerate(library):
+        vector_db.append({
+            "pageIndex": item["pageIndex"],
+            "natural_language_intent": item["natural_language_intent"],
+            "expected_layout_json": item["expected_layout_json"],
+            "embedding": response.embeddings[idx].values
+        })
 
-    print("✅ Success! Your data is ready to be uploaded to Google Cloud Storage.")
+    # -----------------------------
+    # WRITE VALID JSON ARRAY
+    # -----------------------------
+    VERTEX_INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(VERTEX_INDEX_PATH, "w", encoding="utf-8") as f:
+        json.dump(vector_db, f, indent=2)
+
+    LOGGER.info("Vector DB written successfully | path=%s", VERTEX_INDEX_PATH)
+
+    print(f"✅ Success: {VERTEX_INDEX_PATH}")
 
 
 if __name__ == "__main__":
