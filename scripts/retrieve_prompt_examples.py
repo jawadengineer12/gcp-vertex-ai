@@ -5,16 +5,12 @@ from pathlib import Path
 from utils.retrieval_utils import load_library, find_top_matches
 
 
-LIBRARY_PATH = Path("normalized_data/layout_prompt_library.json")
+LIBRARY_PATH = Path("normalized_data/layout_prompt_library_updated.json")
 TOP_K = 3
 
 
 def main():
-    if len(sys.argv) < 2:
-        print('Usage: python scripts/retrieve_prompt_examples.py "your layout prompt here"')
-        return
-
-    user_prompt = " ".join(sys.argv[1:])
+    user_prompt = input("Enter your natural language prompt: ")
     library = load_library(LIBRARY_PATH)
 
     matches = find_top_matches(user_prompt, library, top_k=TOP_K)

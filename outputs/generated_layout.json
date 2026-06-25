@@ -1,32 +1,35 @@
 {
-  "pageIndex": 1,
+  "pageIndex": 3,
   "assets": [
     {
-      "assetType": "Image",
+      "assetType": "Article",
       "position": {
-        "startX": -0.125,
-        "startY": -0.125
+        "startX": 7.74225806451613,
+        "startY": 10.475
       },
       "size": {
-        "width": 8.75,
-        "height": 11.25
+        "width": 0.23274193548387,
+        "height": 0.195
       },
       "content": {
-        "imageUrl": "placeholder_background.png"
-      }
-    },
-    {
-      "assetType": "Image",
-      "position": {
-        "startX": 1.25,
-        "startY": 1.0
+        "textBody": "\u0018"
       },
-      "size": {
-        "width": 6.0,
-        "height": 1.5
+      "columns": 1,
+      "gutterSize": 0.16666666666667,
+      "margins": {
+        "top": 0,
+        "left": 0,
+        "bottom": 0,
+        "right": 0
       },
-      "content": {
-        "imageUrl": "placeholder_header_text.png"
+      "textStyle": {
+        "fontFamily": "Helvetica Neue LT Std",
+        "fontSize": 9,
+        "bold": false,
+        "italic": false,
+        "underline": false,
+        "color": "#000000",
+        "autoFit": false
       }
     }
   ]

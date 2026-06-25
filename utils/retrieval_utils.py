@@ -3,12 +3,17 @@ import re
 from pathlib import Path
 
 TOP_K = 3
-MAX_SCORE = 25
 
+# Expanded to strip recurring database technical parameters
 STOPWORDS = {
     "a", "an", "the", "with", "and", "or", "to", "of", "on", "at",
     "using", "create", "make", "page", "one", "this", "is", "in",
-    "for", "as", "by", "it", "that", "has", "have", "contains"
+    "for", "as", "by", "it", "that", "has", "have", "contains",
+    # Added layout boilerplate parameters to stop inflation
+    "startx", "starty", "width", "height", "heith", "textbody",
+    "formatting", "margins", "style", "fontfamily", "fontsize",
+    "bold", "italic", "underline", "color", "autofit", "positions", "fit",
+    "width", "height", "heith", "heith.", "textbody", "texts", "aregiven"
 }
 
 BOOST_WORDS = {
@@ -40,7 +45,6 @@ BOOST_WORDS = {
     "feature": 5,
 }
 
-# New: phrase boosts
 PHRASE_BOOSTS = {
     "cover page": 10,
     "full bleed": 8,
@@ -77,11 +81,11 @@ def tokenize(text: str):
     return [word for word in words if word not in STOPWORDS]
 
 
-def score_prompt(user_prompt: str, example_text: str) -> int:
+def score_prompt(user_prompt: str, example_text: str) -> float:
     """
-    Returns a normalized 1-10 score using keyword + phrase boosts.
+    Returns an UN-CLAMPED raw keyword + phrase boost score.
+    Normalization is now handled dynamically across the entire pipeline.
     """
-    # Keyword scoring
     user_words = tokenize(user_prompt)
     example_words = set(tokenize(example_text))
 
@@ -90,7 +94,6 @@ def score_prompt(user_prompt: str, example_text: str) -> int:
         if word in example_words:
             score += BOOST_WORDS.get(word, 1)
 
-    # Phrase scoring
     user_lower = normalize_text(user_prompt)
     example_lower = normalize_text(example_text)
 
@@ -98,20 +101,29 @@ def score_prompt(user_prompt: str, example_text: str) -> int:
         if phrase in user_lower and phrase in example_lower:
             score += weight
 
-    # Normalize to 1-10
-    normalized_score = int((score / MAX_SCORE) * 10)
-    return max(1, min(normalized_score, 10))
+    return float(score)
 
 
 def find_top_matches(user_prompt: str, library: list, top_k: int = TOP_K):
     scored_items = []
 
+    # Calculate raw scores first
+    raw_scores = []
     for item in library:
         intent = item.get("natural_language_intent", "")
-        score = score_prompt(user_prompt, intent)
+        raw_scores.append((item, score_prompt(user_prompt, intent)))
+
+    # Dynamically find the relative max ceiling for this specific query run
+    max_raw = max([s[1] for s in raw_scores]) if raw_scores else 0
+    max_divisor = max_raw if max_raw > 0 else 1.0
+
+    for item, raw_score in raw_scores:
+        intent = item.get("natural_language_intent", "")
+        # Scale smoothly between 0.0 and 1.0 relative to the best keyword match
+        normalized_score = raw_score / max_divisor
 
         scored_items.append({
-            "score": score,
+            "score": normalized_score,
             "pageIndex": item.get("pageIndex"),
             "natural_language_intent": intent,
             "expected_layout_json": item.get("expected_layout_json"),
@@ -119,3 +131,4 @@ def find_top_matches(user_prompt: str, library: list, top_k: int = TOP_K):
 
     scored_items.sort(key=lambda x: x["score"], reverse=True)
     return scored_items[:top_k]
+ 
