@@ -1,3 +1,4 @@
+from sentence_transformers import CrossEncoder
 import json
 import re
 from pathlib import Path
@@ -131,4 +132,41 @@ def find_top_matches(user_prompt: str, library: list, top_k: int = TOP_K):
 
     scored_items.sort(key=lambda x: x["score"], reverse=True)
     return scored_items[:top_k]
- 
+
+
+# Load a highly-optimized, lightweight reranking model
+# (This downloads once and runs instantly on your local CPU)
+print("Loading Reranker Model...")
+reranker_model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+
+
+def rerank_matches(user_prompt: str, top_k_candidates: list) -> list:
+    """
+    Takes the Top-K candidates from the Hybrid Search and reranks them
+    using a deep-attention Cross-Encoder.
+    """
+    # 1. Prepare the pairs for the Cross-Encoder
+    # Format: [(User Prompt, Candidate Intent 1), (User Prompt, Candidate Intent 2), ...]
+    pairs = [
+        (user_prompt, candidate['natural_language_intent'])
+        for candidate in top_k_candidates
+    ]
+
+    # 2. Score the pairs
+    # The model outputs a list of float scores representing semantic relevance
+    scores = reranker_model.predict(pairs)
+
+    # 3. Attach the new reranked scores to the candidates
+    for idx, candidate in enumerate(top_k_candidates):
+        candidate['rerank_score'] = float(scores[idx])
+
+    # 4. Sort the candidates by the new rerank score (highest to lowest)
+    reranked_candidates = sorted(
+        top_k_candidates, key=lambda x: x['rerank_score'], reverse=True)
+
+    return reranked_candidates
+
+# --- EXAMPLE INTEGRATION ---
+# Assuming `hybrid_matches` is the Top 10 list from your current hybrid_retrieval_scoring.py
+# top_10_hybrid = find_top_matches(user_prompt, library, top_k=10)
+# final_top_3 = rerank_matches(user_prompt, top_10_hybrid)[:3]

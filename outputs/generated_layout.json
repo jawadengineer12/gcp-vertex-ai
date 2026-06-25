@@ -1,20 +1,35 @@
 {
-  "pageIndex": 3,
+  "pageIndex": 0,
   "assets": [
+    {
+      "assetType": "Image",
+      "position": {
+        "startX": 0.4,
+        "startY": 0.7
+      },
+      "size": {
+        "width": 7.7,
+        "height": 4.0
+      },
+      "content": {
+        "imageUrl": "placeholder_image.jpg"
+      }
+    },
     {
       "assetType": "Article",
       "position": {
-        "startX": 7.74225806451613,
-        "startY": 10.475
+        "startX": 0.4,
+        "startY": 5.0
       },
       "size": {
-        "width": 0.23274193548387,
-        "height": 0.195
+        "width": 7.7,
+        "height": 5.6
       },
       "content": {
-        "textBody": "\u0018"
+        "textBody": "This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality. This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality. This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality. This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality. This is a long article that will span multiple columns and overflow to the next page. The content here is just a placeholder to demonstrate the structural layout. The design requires this text to continue seamlessly onto a subsequent page block, indicating that the 'overflow' property should be set to true. This article is structured into two columns to optimize readability and visual flow within the given space. The layout prioritizes the image at the top, followed by the multi-column text block, ensuring a clear hierarchy of information. The margins and gutter sizes are consistent with standard design practices to maintain a clean and professional appearance. This text will continue on the next page, demonstrating the overflow functionality.",
+        "overflow": true
       },
-      "columns": 1,
+      "columns": 2,
       "gutterSize": 0.16666666666667,
       "margins": {
         "top": 0,
@@ -23,8 +38,8 @@
         "right": 0
       },
       "textStyle": {
-        "fontFamily": "Helvetica Neue LT Std",
-        "fontSize": 9,
+        "fontFamily": "Adobe Garamond Pro",
+        "fontSize": 10,
         "bold": false,
         "italic": false,
         "underline": false,

@@ -4,7 +4,7 @@ import numpy as np
 from numpy import dot
 from numpy.linalg import norm
 
-from utils.retrieval_utils import load_library, score_prompt
+from utils.retrieval_utils import load_library, score_prompt, rerank_matches
 from google import genai
 from google.genai import types
 
@@ -104,11 +104,25 @@ for idx, example in enumerate(library):
 # -------------------------------
 top_candidates = sorted(
     scored_entries, key=lambda x: x['final_score'], reverse=True)[:TOP_K]
-
+reranked_candidates = rerank_matches(user_prompt, top_candidates)
 # -------------------------------
 # DISPLAY RESULTS
 # -------------------------------
+print("Top Candidates")
 for idx, match in enumerate(top_candidates, start=1):
+    print("\n" + "="*80)
+    print(f"RANK: {idx}")
+    print(f"FINAL SCORE: {match['final_score']:.4f}")
+    print(f"BM25 SCORE: {match['bm25_score']:.4f}")
+    print(f"VECTOR SCORE: {match['vector_score']:.4f}")
+    print(f"PAGE INDEX: {match['pageIndex']}")
+    print("\nMATCHED NATURAL LANGUAGE INTENT:")
+    print(match['natural_language_intent'])
+    
+    
+    
+print("Reranked Candidates")
+for idx, match in enumerate(reranked_candidates, start=1):
     print("\n" + "="*80)
     print(f"RANK: {idx}")
     print(f"FINAL SCORE: {match['final_score']:.4f}")

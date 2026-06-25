@@ -4,16 +4,16 @@ import json
 from pathlib import Path
 from pydantic import ValidationError
 
-
-# Import Stage 1 Retrieval Components
-from utils.retrieval_utils import load_library, find_top_matches
-# Import Stage 2 Generation Component
+# Import Stage 1 & Stage 2 Retrieval/Rerank Components
+from utils.retrieval_utils import load_library, find_top_matches, rerank_matches
+# Import Generation Component
 from scripts.generate_layout import generate_layout
 # Import Stage 3 Schema Validation Layer
 from schemas.layout_schema import Page
 
-LIBRARY_PATH = Path("normalized_data/layout_prompt_library.json")
-TOP_K = 2
+LIBRARY_PATH = Path("normalized_data/layout_prompt_library_updated.json")
+STAGE_1_TOP_K = 10  # Broad lexical + semantic retrieval window
+FINAL_TOP_K = 2     # Laser-focused context window sent to Gemini
 MAX_RETRIES = 3
 
 
@@ -27,20 +27,33 @@ def main():
 
     print(f"User Input Received: '{user_prompt}'")
 
-    # --- [STAGE 1: RETRIEVING REFERENCE CONTEXT] ---
+    # --- [STAGE 1 & 2: TWO-STAGE RETRIEVAL PIPELINE] ---
     print("\n==================================================")
     print("--- [STAGE 1: RUNNING LIGHTWEIGHT RETRIEVAL] ---")
     print("==================================================")
     library = load_library(LIBRARY_PATH)
-    matches = find_top_matches(user_prompt, library, top_k=TOP_K)
+
+    # Step 1: Cast a wide net using your custom hybrid search formula
+    broad_matches = find_top_matches(user_prompt, library, top_k=STAGE_1_TOP_K)
     print(
-        f"Successfully retrieved top {len(matches)} historical reference cases.")
+        f"Successfully retrieved top {len(broad_matches)} historical candidates via Hybrid Search.")
 
-    # We will pass the matches and the initial user intent prompt to our tracking context
+    print("\n==================================================")
+    print("--- [STAGE 2: RUNNING CROSS-ENCODER RERANKER] ---")
+    print("==================================================")
+    # Step 2: Use deep attention cross-encoder to select structurally accurate templates
+    reranked_matches = rerank_matches(user_prompt, broad_matches)
+
+    # Slice the highest quality contexts
+    final_context_matches = reranked_matches[:FINAL_TOP_K]
+    print(
+        f"Distilled down to the top {len(final_context_matches)} highest-precision structural patterns.")
+
+    # Pass the precision matches and initial prompt to the context tracker
     active_prompt = user_prompt
-    history_context = matches
+    history_context = final_context_matches
 
-    # --- [STAGES 2 & 3: GENERATION & SELF-CORRECTION LOOP] ---
+    # --- [STAGES 3 & 4: GENERATION & AGENTIC SELF-CORRECTION LOOP] ---
     attempt = 0
     validated_layout = None
     final_json_data = None
@@ -67,10 +80,10 @@ def main():
             # Convert raw text response text cleanly into a dictionary object
             final_json_data = json.loads(raw_ai_response.strip())
 
-            # Run data contract validations
+            # Run data contract validations against your strict layout model
             validated_layout = Page(**final_json_data)
 
-            # If it compiles, break out of the retry cycle immediately!
+            # If it compiles without exceptions, break out immediately
             print(
                 f"\n🎉 [SUCCESS]: Layout validated perfectly on attempt {attempt}!")
             break
@@ -98,7 +111,7 @@ def main():
             # Mutate active instruction string to inject loop context
             active_prompt = f"{user_prompt}\n\n[CRITICAL FIX REQUIRED]:\n{feedback_brief}"
 
-    # --- [STAGE 4: PERSISTENCE EXPORT] ---
+    # --- [STAGE 5: PERSISTENCE EXPORT] ---
     output_file = Path("outputs/generated_layout.json")
     output_file.parent.mkdir(exist_ok=True)
     with open(output_file, "w", encoding="utf-8") as f:
@@ -109,3 +122,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    print("\n🎉 [SUCCESS]: Layout generation pipeline completed successfully.")
