@@ -1,158 +1,190 @@
+# main.py
 import sys
 import json
+import logging
+from pathlib import Path
 
-from json import JSONDecodeError
-from pydantic import ValidationError
+from core.logger import setup_logging
+from config.config import AppConfig
+from services.retrieval_service import RetrievalService
+from services.reranker_service import RerankerService
+from services.generation_service import GenerationService
+from services.validation_service import ValidationService
+from services.trace_service import build_trace, write_trace
 
-from core.config import (
-    UPDATED_LIBRARY_PATH,
-    STAGE_1_TOP_K,
-    FINAL_TOP_K,
-    MAX_RETRIES,
-    GENERATED_LAYOUT_PATH,
-)
-
-from core.run_recorder import RunRecorder
-from core.logger import setup_logging, get_logger
-
-from services.retrieval_service import load_library, retrieve_hybrid_matches
-from services.reranker_service import rerank_matches
-from services.generation_service import generate_layout
-from services.validation_service import parse_and_validate_layout
-
-
-# -----------------------------
-# INIT LOGGING
-# -----------------------------
+# Must be first — initializes console + file logging before any other import logs
 setup_logging()
-LOGGER = get_logger(__name__)
+logger = logging.getLogger(__name__)
 
 
-# -----------------------------
-# PIPELINE
-# -----------------------------
-def run_pipeline(user_prompt: str):
+def main() -> None:
+    logger.info("=" * 60)
+    logger.info("Layout Generation Pipeline started.")
 
-    LOGGER.info("PIPELINE STARTED")
-    LOGGER.info("User prompt received | length=%s", len(user_prompt))
+    print("Enter your design brief for layout generation:")
+    user_prompt = input("> ").strip()
 
-    print("\n==================================================")
-    print("🚀 STAGE 1: HYBRID RETRIEVAL")
-    print("==================================================")
+    if not user_prompt:
+        logger.error("Empty prompt. Exiting.")
+        print("User prompt cannot be empty.")
+        sys.exit(1)
 
-    recorder = RunRecorder()
-    recorder.set_prompt(user_prompt)
-    
-    # 1. Load library
-    library = load_library(UPDATED_LIBRARY_PATH)
-    LOGGER.info("Library loaded | size=%s", len(library))
+    logger.info("User prompt received | length=%d", len(user_prompt))
 
-    # 2. Hybrid retrieval
-    candidates = retrieve_hybrid_matches(
-        user_prompt=user_prompt,
-        library=library,
-        top_k=STAGE_1_TOP_K,
+    # ── Initialize services ───────────────────────────────────────────────────
+    reranker = RerankerService()
+    retrieval = RetrievalService()
+    generator = GenerationService()
+    validator = ValidationService()
+
+    # ── Stage 1 & 2: Hybrid retrieval + reranking ─────────────────────────────
+    print("\n" + "=" * 60)
+    print("--- [STAGE 1: HYBRID RETRIEVAL (VECTOR + BM25)] ---")
+    retrieval_result = retrieval.execute_pipeline(user_prompt)
+
+    vector_candidates = retrieval_result["vector_candidates"]
+    bm25_candidates = retrieval_result["bm25_candidates"]
+    merged_candidates = retrieval_result["merged_candidates"]
+
+    print(f"\n  ▸ Vector candidates :  {len(vector_candidates)}")
+    for c in vector_candidates:
+        print(
+            f"    ID={c['id']}  pageIndex={c['pageIndex']}  vector_score={c['vector_score']:.4f}")
+
+    print(f"\n  ▸ BM25 candidates   :  {len(bm25_candidates)}")
+    for c in bm25_candidates:
+        print(
+            f"    ID={c['id']}  pageIndex={c['pageIndex']}  bm25_score={c['bm25_score']:.4f}")
+
+    print(f"\n  ▸ Merged candidates :  {len(merged_candidates)}")
+    for c in merged_candidates:
+        print(
+            f"    ID={c['id']}  pageIndex={c['pageIndex']}  "
+            f"final_score={c['final_score']:.4f}  "
+            f"(v={c['vector_score']:.4f} bm25={c['bm25_score']:.4f})"
+        )
+
+    print("\n" + "=" * 60)
+    print("--- [STAGE 2: CROSS-ENCODER RERANKING] ---")
+    reranked_candidates = reranker.rerank_candidates(
+        user_prompt, merged_candidates)
+    selected_context = reranked_candidates[: AppConfig.TOP_K_CONTEXT]
+
+    print(f"\n  ▸ Reranked candidates : {len(reranked_candidates)}")
+    for c in reranked_candidates:
+        print(
+            f"    ID={c['id']}  pageIndex={c['pageIndex']}  "
+            f"rerank_score={c['rerank_score']:.4f}"
+        )
+
+    print(f"\n  ▸ Selected context   : {len(selected_context)} examples")
+    for c in selected_context:
+        print(f"    ID={c['id']}  pageIndex={c['pageIndex']}")
+
+    logger.info(
+        "Retrieval complete | vector=%d | bm25=%d | merged=%d | reranked=%d | context=%d",
+        len(vector_candidates),
+        len(bm25_candidates),
+        len(merged_candidates),
+        len(reranked_candidates),
+        len(selected_context),
     )
 
-    recorder.set_retrieval(candidates)
-    LOGGER.info("Hybrid retrieval done | candidates=%s", len(candidates))
+    # ── Stage 3 & 4: Generation + agentic self-correction loop ───────────────
+    active_prompt = user_prompt
+    attempt = 0
+    final_json_data = None
+    gemini_raw_response = ""
+    validation_success = False
+    validation_errors: list[str] = []
 
-    # 3. Reranking
-    print("\n==================================================")
-    print("🎯 STAGE 2: RERANKING")
-    print("==================================================")
+    while attempt < AppConfig.MAX_RETRIES:
+        attempt += 1
 
-    reranked = rerank_matches(user_prompt, candidates)
-    context = reranked[:FINAL_TOP_K]
-    
-    recorder.set_reranked(reranked)
-    recorder.set_context(context)
-    LOGGER.info("Reranking done | final_context=%s", len(context))
+        print(f"\n{'=' * 60}")
+        print(
+            f"--- [RUNNING INFERENCE — ATTEMPT {attempt}/{AppConfig.MAX_RETRIES}] ---")
+        print("=" * 60)
 
-    # -----------------------------
-    # GENERATION + VALIDATION LOOP
-    # -----------------------------
-    final_json = None
+        raw_ai_response = generator.generate_layout_json(
+            active_prompt, selected_context)
+        gemini_raw_response = raw_ai_response or ""
 
-    for attempt in range(1, MAX_RETRIES + 1):
-
-        print("\n==================================================")
-        print(f"🤖 STAGE 3: GENERATION (Attempt {attempt})")
-        print("==================================================")
-
-        LOGGER.info("Generation attempt started | attempt=%s", attempt)
-
-        raw_response = generate_layout(user_prompt, context)
-
-        if not raw_response:
-            LOGGER.error("Empty response from model")
+        if not raw_ai_response:
+            logger.error("Generation failed on attempt %d.", attempt)
+            print(f"[ERROR]: Generation failed on attempt {attempt}.")
             continue
-        
-        recorder.set_generation(raw_response)
-        LOGGER.info("Raw response received | chars=%s", len(raw_response))
 
-        print("\n--- RAW RESPONSE ---\n")
-        print(raw_response)
+        print("\n--- [RAW GEMINI RESPONSE] ---")
+        print(raw_ai_response)
+        print("-" * 48)
 
-        print("\n==================================================")
-        print("🔍 STAGE 4: VALIDATION")
-        print("==================================================")
-
+        print("\n--- [RUNNING PYDANTIC VALIDATION GATE] ---")
         try:
-            final_json, _ = parse_and_validate_layout(raw_response)
-
-            recorder.set_validation_status("success")
-            LOGGER.info("VALIDATION SUCCESS | attempt=%s", attempt)
-            print("\n🎉 SUCCESS: Valid layout generated!")
-
+            final_json_data = validator.validate_payload(raw_ai_response)
+            validation_success = True
+            validation_errors = []
+            logger.info("Validation passed on attempt %d.", attempt)
+            print(f"\n🎉 [SUCCESS]: Layout validated on attempt {attempt}!")
             break
 
-        except (JSONDecodeError, ValidationError) as e:
-            recorder.set_validation_status("failed")
-            LOGGER.error(
-                "Validation failed | attempt=%s | error=%s", attempt, str(e))
+        except Exception as error:
+            error_str = str(error)
+            validation_errors.append(error_str)
+            logger.warning(
+                "Validation failed on attempt %d: %s", attempt, error_str
+            )
+            print(f"\n❌ [VALIDATION FAILED on attempt {attempt}]:")
+            print(error_str)
 
-            if attempt == MAX_RETRIES:
-                LOGGER.critical("MAX RETRIES REACHED — FAILING PIPELINE")
-                print("\n❌ Pipeline failed after max retries")
+            if attempt == AppConfig.MAX_RETRIES:
+                logger.error(
+                    "Max retries (%d) exhausted. Terminating.", AppConfig.MAX_RETRIES
+                )
+                print(
+                    "\n[CRITICAL]: Maximum retry threshold exhausted. Terminating.")
                 sys.exit(1)
 
-            print("\n⚠️ Fixing and retrying...\n")
-
-            user_prompt = (
-                user_prompt
-                + "\n\n[FIX REQUIRED]\n"
-                + str(e)
+            print("\n🔄 [SELF-CORRECTION]: Sending error trace back to Gemini...")
+            feedback_brief = (
+                f"Your previous JSON response failed our automated schema validation checks.\n"
+                f"STRICT ERROR TRACE FROM CLIENT RUNTIME:\n{error_str}\n\n"
+                f"Please fix the schema naming issues or coordinate values listed above, "
+                f"re-evaluate your rules mapping, and provide the entire corrected JSON structure."
             )
+            active_prompt = f"{user_prompt}\n\n[CRITICAL FIX REQUIRED]:\n{feedback_brief}"
 
-    # -----------------------------
-    # SAVE OUTPUT
-    # -----------------------------
-    if final_json:
-        GENERATED_LAYOUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    # ── Stage 5: Save output ──────────────────────────────────────────────────
+    output_file = AppConfig.OUTPUT_FILE
+    output_file.parent.mkdir(parents=True, exist_ok=True)
 
-        with open(GENERATED_LAYOUT_PATH, "w", encoding="utf-8") as f:
-            json.dump(final_json, f, indent=2)
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(final_json_data, f, indent=2)
 
-        LOGGER.info("OUTPUT SAVED | path=%s", GENERATED_LAYOUT_PATH)
+    logger.info("Output saved: %s", output_file)
+    print(f"\n🚀 Validated layout saved to: {output_file}")
 
-        print("\n💾 Saved output to:", GENERATED_LAYOUT_PATH)
-        
-        run_file = recorder.save()
-        LOGGER.info("Run trace saved | file=%s", run_file)
-        print(f"\n📦 Full run saved at: {run_file}")
+    # ── Stage 6: Write run trace ──────────────────────────────────────────────
+    trace = build_trace(
+        user_prompt=user_prompt,
+        vector_candidates=vector_candidates,
+        bm25_candidates=bm25_candidates,
+        merged_candidates=merged_candidates,
+        reranked_candidates=reranked_candidates,
+        selected_context=selected_context,
+        gemini_raw_response=gemini_raw_response,
+        parsed_json=final_json_data,
+        validation_success=validation_success,
+        validation_errors=validation_errors,
+        output_file=str(output_file),
+    )
+    trace_path = write_trace(trace)
+    if trace_path:
+        print(f"📋 Run trace saved to: {trace_path}")
 
-    LOGGER.info("PIPELINE FINISHED")
+    logger.info("Pipeline completed successfully.")
+    print("\n🎉 [SUCCESS]: Layout generation pipeline completed.")
 
-    return final_json
 
-
-# -----------------------------
-# ENTRY POINT
-# -----------------------------
 if __name__ == "__main__":
-
-    print("Enter your design prompt:")
-    prompt = input("> ")
-
-    run_pipeline(prompt)
+    main()

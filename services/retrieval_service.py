@@ -1,200 +1,267 @@
-import json
-import re
+# services/retrieval_service.py
+"""
+Hybrid retrieval service: Vertex AI Vector Search + BM25 lexical scoring.
+
+Pipeline:
+  1. Embed user query via Vertex AI.
+  2. Retrieve vector candidates from Vertex AI Vector Search.
+  3. Retrieve BM25 candidates from the full local prompt library.
+  4. Normalize both score sets independently.
+  5. Merge candidates by stable unique ID.
+  6. Combine scores with configurable weights.
+  7. Sort and return top merged candidates for reranking.
+"""
+import logging
 from pathlib import Path
 
-import numpy as np
-from numpy import dot
-from numpy.linalg import norm
-
-from core.config import (
-    EMBEDDING_MODEL,
-    WEIGHT_VECTOR,
-    WEIGHT_BM25,
+from config.config import AppConfig
+from core.vertex_client import vertex_client
+from services.vector_store import VertexVectorStore
+from utils.retrieval_utils import (
+    load_library,
+    score_prompt,
+    find_top_matches,
+    build_stable_id,
 )
-from core.vertex_client import get_vertex_client
-from core.logger import get_logger
-from services.vector_store import load_vector_store
 
-LOGGER = get_logger(__name__)
-
-STOPWORDS = {
-    "a", "an", "the", "with", "and", "or", "to", "of", "on", "at",
-    "using", "create", "make", "page", "one", "this", "is", "in",
-    "for", "as", "by", "it", "that", "has", "have", "contains",
-    "startx", "starty", "width", "height", "heith", "textbody",
-    "formatting", "margins", "style", "fontfamily", "fontsize",
-    "bold", "italic", "underline", "color", "autofit", "positions", "fit",
-    "heith.", "texts", "aregiven",
-}
-
-BOOST_WORDS = {
-    "cover": 10,
-    "bleed": 8,
-    "advertisement": 7,
-    "ad": 7,
-    "masthead": 7,
-    "logo": 6,
-    "article": 6,
-    "text": 5,
-    "image": 4,
-    "images": 4,
-    "pdf": 5,
-    "background": 5,
-    "full": 4,
-    "large": 3,
-    "font": 4,
-    "black": 4,
-    "size": 3,
-    "columns": 5,
-    "overlay": 6,
-    "overlayed": 6,
-    "overflow": 8,
-    "continuation": 7,
-    "negative": 5,
-    "coordinates": 4,
-    "pet": 6,
-    "feature": 5,
-}
-
-PHRASE_BOOSTS = {
-    "cover page": 10,
-    "full bleed": 8,
-    "full page": 6,
-    "background image": 6,
-    "masthead logo": 7,
-    "image overlay": 5,
-    "two text boxes": 6,
-    "overflow continuation": 7,
-    "feature story": 6,
-    "pet of the month": 6,
-}
+logger = logging.getLogger(__name__)
 
 
-vector_db = load_vector_store()
-LOGGER.info("Vector store loaded | size=%s", len(vector_db))
-
-# Pre-extract embeddings ONCE (no recomputation ever again)
-library_embeddings = [
-    np.array(item["embedding"])
-    for item in vector_db
-]
-
-def normalize_text(text: str) -> str:
-    text = text.lower()
-    text = text.replace("coverpage", "cover page")
-    text = text.replace("fullpage", "full page")
-    text = text.replace("thefull", "the full")
-    text = text.replace("overlayed", "overlay")
-    return text
-
-
-def tokenize(text: str) -> list[str]:
-    text = normalize_text(text)
-    words = re.findall(r"[a-zA-Z0-9#]+", text)
-    return [word for word in words if word not in STOPWORDS]
-
-# -----------------------------
-# BM25-LIKE SCORE
-# -----------------------------
-def score_prompt(user_prompt: str, example_text: str) -> float:
-    user_words = tokenize(user_prompt)
-    example_words = set(tokenize(example_text))
-
-    score = 0.0
-
-    for w in user_words:
-        if w in example_words:
-            score += BOOST_WORDS.get(w, 1)
-
-    user_lower = normalize_text(user_prompt)
-    example_lower = normalize_text(example_text)
-
-    for phrase, weight in PHRASE_BOOSTS.items():
-        if phrase in user_lower and phrase in example_lower:
-            score += weight
-
-    return score
-
-
-# -----------------------------
-# COSINE SIMILARITY
-# -----------------------------
-def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
-    denom = norm(a) * norm(b)
-    if denom == 0:
-        return 0.0
-    return float(dot(a, b) / denom)
-
-
-# -----------------------------
-# EMBED USER QUERY ONLY
-# -----------------------------
-def embed_text(text: str) -> np.ndarray:
-    client = get_vertex_client()
-
-    response = client.models.embed_content(
-        model=EMBEDDING_MODEL,
-        contents=text,
-    )
-
-    return np.array(response.embeddings[0].values)
-
-
-# -----------------------------
-# HYBRID RETRIEVAL (FINAL FIXED)
-# -----------------------------
-def retrieve_hybrid_matches(user_prompt: str, top_k: int = 5) -> list[dict]:
+class RetrievalService:
     """
-    Hybrid retrieval:
-    - BM25-like lexical scoring
-    - Precomputed vector embeddings (NO recomputation)
-    - Weighted final ranking
+    Executes the full hybrid retrieval pipeline and returns context candidates
+    ready for reranking.
     """
 
-    LOGGER.info("Running hybrid retrieval | top_k=%s", top_k)
-
-    # Embed ONLY user prompt
-    user_embedding = embed_text(user_prompt)
-
-    # BM25 scores
-    raw_bm25 = [
-        score_prompt(user_prompt, item["natural_language_intent"])
-        for item in vector_db
-    ]
-
-    max_bm25 = max(raw_bm25) if raw_bm25 else 1.0
-
-    scored = []
-
-    for idx, item in enumerate(vector_db):
-        bm25 = raw_bm25[idx] / max_bm25
-        vector = cosine_similarity(user_embedding, library_embeddings[idx])
-
-        final = (WEIGHT_VECTOR * vector) + (WEIGHT_BM25 * bm25)
-
-        scored.append({
-            "pageIndex": item["pageIndex"],
-            "natural_language_intent": item["natural_language_intent"],
-            "expected_layout_json": item["expected_layout_json"],
-            "bm25_score": bm25,
-            "vector_score": vector,
-            "final_score": final,
-        })
-
-    scored.sort(key=lambda x: x["final_score"], reverse=True)
-
-    top = scored[:top_k]
-
-    LOGGER.info("Hybrid retrieval completed | returned=%s", len(top))
-
-    for i, r in enumerate(top, 1):
-        LOGGER.info(
-            "Match | rank=%s | page=%s | final=%.4f | vec=%.4f | bm25=%.4f",
-            i,
-            r["pageIndex"],
-            r["final_score"],
-            r["vector_score"],
-            r["bm25_score"],
+    def __init__(self) -> None:
+        self.vector_store = VertexVectorStore()
+        self.library = self._load_library(AppConfig.PROMPT_LIBRARY_PATH)
+        # Build a fast ID → item lookup map
+        self._id_map: dict[str, dict] = {
+            item.get("id", build_stable_id(item, idx)): item
+            for idx, item in enumerate(self.library)
+        }
+        logger.info(
+            "RetrievalService initialized | library_size=%d", len(self.library)
         )
 
-    return top
+    def _load_library(self, path: Path) -> list:
+        return load_library(path)
+
+    # ── Public entry point ────────────────────────────────────────────────────
+
+    def execute_pipeline(self, user_prompt: str) -> dict:
+        """
+        Runs the full hybrid retrieval pipeline.
+
+        Returns a dict with all intermediate stages for run tracing:
+        {
+            "vector_candidates": [...],
+            "bm25_candidates":   [...],
+            "merged_candidates": [...],
+        }
+        """
+        # 1. Embed user query
+        logger.info("Generating query embedding.")
+        embedding_response = vertex_client.models.embed_content(
+            model=AppConfig.EMBEDDING_MODEL,
+            contents=[user_prompt],
+        )
+        query_embedding = embedding_response.embeddings[0].values
+
+        # 2. Vector candidates
+        vector_candidates = self._get_vector_candidates(query_embedding)
+
+        # 3. BM25 candidates
+        bm25_candidates = self._get_bm25_candidates(user_prompt)
+
+        # 4. Merge
+        merged_candidates = self._merge_candidates(
+            vector_candidates, bm25_candidates)
+
+        return {
+            "vector_candidates": vector_candidates,
+            "bm25_candidates": bm25_candidates,
+            "merged_candidates": merged_candidates,
+        }
+
+    # ── Stage: Vector retrieval ───────────────────────────────────────────────
+
+    def _get_vector_candidates(self, query_embedding: list[float]) -> list[dict]:
+        """Fetch top-K candidates from Vertex AI Vector Search."""
+        logger.info(
+            "Querying Vertex AI Vector Search | top_k=%d", AppConfig.TOP_K_VECTOR
+        )
+        candidate_ids = self.vector_store.find_nearest_neighbors(
+            query_embedding, k=AppConfig.TOP_K_VECTOR
+        )
+
+        if not candidate_ids:
+            logger.warning("Vector Search returned zero candidates.")
+            return []
+
+        candidates = []
+        for rank, cid in enumerate(candidate_ids):
+            item = self._id_map.get(cid)
+            if item is None:
+                logger.warning(
+                    "Vector Search returned ID not found in library: %s", cid
+                )
+                continue
+            # Score: rank-based (1.0 for rank 0, decaying)
+            vector_score = 1.0 - (rank / max(len(candidate_ids), 1))
+            candidates.append({
+                "id": cid,
+                "pageIndex": item.get("pageIndex"),
+                "natural_language_intent": item.get("natural_language_intent", ""),
+                "expected_layout_json": item.get("expected_layout_json"),
+                "vector_score": vector_score,
+                "bm25_score": 0.0,
+                "final_score": 0.0,
+            })
+
+        logger.info("Vector candidates hydrated | count=%d", len(candidates))
+        return candidates
+
+    # ── Stage: BM25 retrieval ─────────────────────────────────────────────────
+
+    def _get_bm25_candidates(self, user_prompt: str) -> list[dict]:
+        """Score the full library with BM25 and return top-K."""
+        logger.info(
+            "Running BM25 lexical scoring | top_k=%d", AppConfig.TOP_K_BM25
+        )
+        raw_scores = []
+        for idx, item in enumerate(self.library):
+            intent = item.get("natural_language_intent", "")
+            raw = score_prompt(user_prompt, intent)
+            raw_scores.append((idx, item, raw))
+
+        max_raw = max((r[2] for r in raw_scores), default=0)
+        max_divisor = max_raw if max_raw > 0 else 1.0
+
+        candidates = []
+        for idx, item, raw in raw_scores:
+            bm25_score = raw / max_divisor
+            item_id = item.get("id", build_stable_id(item, idx))
+            candidates.append({
+                "id": item_id,
+                "pageIndex": item.get("pageIndex"),
+                "natural_language_intent": item.get("natural_language_intent", ""),
+                "expected_layout_json": item.get("expected_layout_json"),
+                "vector_score": 0.0,
+                "bm25_score": bm25_score,
+                "final_score": 0.0,
+            })
+
+        candidates.sort(key=lambda x: x["bm25_score"], reverse=True)
+        top = candidates[: AppConfig.TOP_K_BM25]
+
+        if not top or top[0]["bm25_score"] == 0.0:
+            logger.warning(
+                "BM25 returned zero-score candidates for this query.")
+
+        logger.info("BM25 candidates | count=%d", len(top))
+        return top
+
+    # ── Stage: Merge ──────────────────────────────────────────────────────────
+
+    def _merge_candidates(
+        self,
+        vector_candidates: list[dict],
+        bm25_candidates: list[dict],
+    ) -> list[dict]:
+        """
+        Merge vector and BM25 candidates by stable ID.
+        Combine scores using configurable weights.
+        """
+        if not vector_candidates and not bm25_candidates:
+            raise RuntimeError(
+                "Both vector and BM25 retrieval returned zero candidates. "
+                "Cannot proceed. Check your prompt library, index, and query."
+            )
+
+        merged: dict[str, dict] = {}
+
+        for c in vector_candidates:
+            cid = c["id"]
+            merged[cid] = {**c}
+
+        for c in bm25_candidates:
+            cid = c["id"]
+            if cid in merged:
+                merged[cid]["bm25_score"] = c["bm25_score"]
+            else:
+                merged[cid] = {**c}
+
+        vw = AppConfig.VECTOR_WEIGHT
+        bw = AppConfig.BM25_WEIGHT
+
+        for cid, c in merged.items():
+            c["final_score"] = vw * c["vector_score"] + bw * c["bm25_score"]
+
+        result = sorted(merged.values(),
+                        key=lambda x: x["final_score"], reverse=True)
+        result = result[: AppConfig.TOP_K_MERGED]
+
+        logger.info(
+            "Merge complete | vector=%d | bm25=%d | merged=%d | weights=(v=%.2f, b=%.2f)",
+            len(vector_candidates),
+            len(bm25_candidates),
+            len(result),
+            vw,
+            bw,
+        )
+        return result
+
+
+# ── Module-level convenience function (for standalone scripts) ────────────────
+
+def load_library(path: Path) -> list:
+    """Re-exported for scripts that import directly from this module."""
+    from utils.retrieval_utils import load_library as _load
+    return _load(path)
+
+
+def retrieve_hybrid_matches(
+    user_prompt: str,
+    library: list,
+    top_k: int = 10,
+) -> list[dict]:
+    """
+    Standalone hybrid scorer for scripts (no Vertex Vector Search).
+    Uses only BM25 over a supplied library list.
+    Useful for local testing or the hybrid_retrieval_scoring.py script.
+    """
+    from utils.retrieval_utils import score_prompt, build_stable_id
+
+    raw_scores = []
+    for idx, item in enumerate(library):
+        intent = item.get("natural_language_intent", "")
+        raw = score_prompt(user_prompt, intent)
+        raw_scores.append((idx, item, raw))
+
+    max_raw = max((r[2] for r in raw_scores), default=0)
+    max_divisor = max_raw if max_raw > 0 else 1.0
+
+    candidates = []
+    for idx, item, raw in raw_scores:
+        bm25_score = raw / max_divisor
+        item_id = item.get("id", build_stable_id(item, idx))
+        candidates.append({
+            "id": item_id,
+            "pageIndex": item.get("pageIndex"),
+            "natural_language_intent": item.get("natural_language_intent", ""),
+            "expected_layout_json": item.get("expected_layout_json"),
+            "bm25_score": bm25_score,
+            "vector_score": 0.0,
+            "final_score": bm25_score,
+        })
+
+    candidates.sort(key=lambda x: x["final_score"], reverse=True)
+    return candidates[:top_k]
+
+
+def find_top_matches(user_prompt: str, library: list, top_k: int = 3) -> list[dict]:
+    """Re-exported alias for scripts that import find_top_matches from this module."""
+    from utils.retrieval_utils import find_top_matches as _ftm
+    return _ftm(user_prompt, library, top_k)

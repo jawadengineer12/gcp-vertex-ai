@@ -1,26 +1,18 @@
-from functools import lru_cache
-
+# core/vertex_client.py
 from google import genai
+from config.config import AppConfig
 
-from core.config import VERTEX_PROJECT, VERTEX_LOCATION
-from core.logger import get_logger
+# Module-level singleton — initialized once, reused everywhere.
+vertex_client = genai.Client(
+    vertexai=True,
+    project=AppConfig.PROJECT_ID,
+    location=AppConfig.LOCATION,
+)
 
-LOGGER = get_logger(__name__)
 
-
-@lru_cache(maxsize=1)
 def get_vertex_client() -> genai.Client:
     """
-    Instantiates and returns the Google GenAI client using Vertex AI.
+    Returns the shared Vertex AI GenAI client singleton.
+    Use this factory import in scripts that need an explicit function call.
     """
-    LOGGER.info(
-        "Initializing Vertex AI client | project=%s | location=%s",
-        VERTEX_PROJECT,
-        VERTEX_LOCATION,
-    )
-
-    return genai.Client(
-        vertexai=True,
-        project=VERTEX_PROJECT,
-        location=VERTEX_LOCATION,
-    )
+    return vertex_client

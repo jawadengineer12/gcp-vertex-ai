@@ -1,11 +1,21 @@
+# scripts/build_context_pair.py
+"""
+Parses the raw layout description text file and builds the initial
+prompt library JSON with stable IDs.
+
+Run this once to generate normalized_data/layout_prompt_library.json
+from the raw text data file.
+"""
 import json
 import re
+from pathlib import Path
 
-from core.config import RAW_TEXT_DATA_PATH, LIBRARY_PATH
+from config.config import AppConfig
 from core.logger import setup_logging, get_logger
+from utils.retrieval_utils import build_stable_id
 
 setup_logging()
-LOGGER = get_logger(__name__)
+logger = get_logger(__name__)
 
 
 def extract_valid_json_block(text: str, start_idx: int) -> tuple[str | None, int]:
@@ -33,33 +43,34 @@ def extract_valid_json_block(text: str, start_idx: int) -> tuple[str | None, int
             brace_count += 1
         elif char == "}":
             brace_count -= 1
-
             if brace_count == 0:
-                return text[start_idx:i + 1], i
+                return text[start_idx: i + 1], i
 
     return None, -1
 
 
-def process_description_dataset_certified() -> None:
-    LOGGER.info("Build context pair script started.")
-    LOGGER.info("Raw text data path: %s", RAW_TEXT_DATA_PATH)
-    LOGGER.info("Output prompt library path: %s", LIBRARY_PATH)
+def process_description_dataset() -> None:
+    raw_data_path = AppConfig.RAW_TEXT_DATA_PATH
+    output_path = AppConfig.PROMPT_LIBRARY_PATH
 
-    if not RAW_TEXT_DATA_PATH.exists():
-        LOGGER.error("Raw description file not found: %s", RAW_TEXT_DATA_PATH)
-        print(f"Error: Could not find raw file at '{RAW_TEXT_DATA_PATH}'")
+    logger.info("Build context pair script started.")
+    logger.info("Raw text data path: %s", raw_data_path)
+    logger.info("Output prompt library path: %s", output_path)
+
+    if not raw_data_path.exists():
+        logger.error("Raw description file not found: %s", raw_data_path)
+        print(f"Error: Could not find raw file at '{raw_data_path}'")
         return
 
-    with open(RAW_TEXT_DATA_PATH, "r", encoding="utf-8") as f:
+    with open(raw_data_path, "r", encoding="utf-8") as f:
         file_text = f.read()
 
-    LOGGER.info("Raw description file loaded | chars=%s", len(file_text))
+    logger.info("Raw file loaded | chars=%d", len(file_text))
     print("Running pipeline...")
 
     raw_blocks = re.split(r'(?={"pageIndex":\d+)', file_text)
     final_library = []
-
-    LOGGER.info("Split raw text into blocks | block_count=%s", len(raw_blocks))
+    logger.info("Split raw text into blocks | count=%d", len(raw_blocks))
 
     for block_idx, block in enumerate(raw_blocks):
         if not block.strip():
@@ -72,15 +83,15 @@ def process_description_dataset_certified() -> None:
         )
 
         if not json_match:
-            LOGGER.debug(
-                "No JSON match found in block | block_index=%s", block_idx)
+            logger.debug("No JSON match in block | block_index=%d", block_idx)
             continue
 
         json_str, _ = extract_valid_json_block(json_match.group(1), 0)
 
         if not json_str:
-            LOGGER.warning(
-                "Could not extract balanced JSON block | block_index=%s", block_idx)
+            logger.warning(
+                "Could not extract balanced JSON | block_index=%d", block_idx
+            )
             continue
 
         try:
@@ -88,7 +99,6 @@ def process_description_dataset_certified() -> None:
             page_index = page_data["pageIndex"]
 
             text_context = block.replace(json_str, "").strip()
-
             clean_intent = re.sub(r"[\r\n\t]+", " ", text_context)
             clean_intent = re.sub(
                 r"^(Description:\s*|,\s*|Description\s*:\s*)",
@@ -100,43 +110,43 @@ def process_description_dataset_certified() -> None:
 
             if not clean_intent or len(clean_intent) < 10:
                 clean_intent = (
-                    f"Generate the layout grid and component coordinate structure "
-                    f"for Page {page_index}."
+                    f"Generate the layout grid and component coordinate "
+                    f"structure for Page {page_index}."
                 )
 
-            final_library.append({
+            entry = {
                 "pageIndex": page_index,
                 "natural_language_intent": clean_intent,
                 "expected_layout_json": page_data,
-            })
+            }
+            # Assign stable ID at build time
+            entry["id"] = build_stable_id(entry, len(final_library))
 
-            LOGGER.info(
-                "Extracted page successfully | pageIndex=%s", page_index)
-            print(f"✅ Extracted Page Index [{page_index}] successfully.")
+            final_library.append(entry)
+            logger.info("Extracted page | pageIndex=%d | id=%s",
+                        page_index, entry["id"])
+            print(f"✅ Extracted Page Index [{page_index}] — ID: {entry['id']}")
 
         except (json.JSONDecodeError, KeyError) as error:
-            LOGGER.warning(
-                "Skipping block due to JSON/key error | block_index=%s | error=%s",
-                block_idx,
-                str(error),
+            logger.warning(
+                "Skipping block | block_index=%d | error=%s", block_idx, str(
+                    error)
             )
             continue
 
     final_library.sort(key=lambda x: x["pageIndex"])
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    LIBRARY_PATH.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(LIBRARY_PATH, "w", encoding="utf-8") as out_f:
+    with open(output_path, "w", encoding="utf-8") as out_f:
         json.dump(final_library, out_f, indent=2)
 
-    LOGGER.info("Prompt library built successfully | path=%s | records=%s",
-                LIBRARY_PATH, len(final_library))
-
-    print(
-        f"\nVerification Successful! Certified prompt library at: '{LIBRARY_PATH}'")
-    print(
-        f"Total perfectly aligned reasoning blocks ready: {len(final_library)}")
+    logger.info(
+        "Prompt library built | path=%s | records=%d", output_path, len(
+            final_library)
+    )
+    print(f"\n✅ Prompt library saved to: '{output_path}'")
+    print(f"Total entries: {len(final_library)}")
 
 
 if __name__ == "__main__":
-    process_description_dataset_certified()
+    process_description_dataset()

@@ -1,57 +1,53 @@
-from functools import lru_cache
-
+# services/reranker_service.py
+import logging
 from sentence_transformers import CrossEncoder
+from config.config import AppConfig
 
-from core.config import RERANKER_MODEL
-from core.logger import get_logger
-
-LOGGER = get_logger(__name__)
+logger = logging.getLogger(__name__)
 
 
-@lru_cache(maxsize=1)
-def get_reranker_model() -> CrossEncoder:
-    LOGGER.info("Loading reranker model | model=%s", RERANKER_MODEL)
-    model = CrossEncoder(RERANKER_MODEL)
-    LOGGER.info("Reranker model loaded successfully.")
-    return model
+class RerankerService:
+    """
+    Wraps a CrossEncoder model for deep-attention reranking.
+    Model is loaded once on first instantiation and kept warm in memory.
+    """
+
+    def __init__(self) -> None:
+        logger.info("Loading reranker model: %s",
+                    AppConfig.RERANKER_MODEL_NAME)
+        self.model = CrossEncoder(AppConfig.RERANKER_MODEL_NAME)
+        logger.info("Reranker model loaded.")
+
+    def rerank_candidates(self, user_prompt: str, candidates: list[dict]) -> list[dict]:
+        """
+        Reranks a list of candidates using the CrossEncoder.
+        Attaches 'rerank_score' to each candidate dict and returns sorted list.
+        """
+        if not candidates:
+            logger.warning("Reranker called with empty candidate list.")
+            return []
+
+        pairs = [
+            (user_prompt, candidate["natural_language_intent"])
+            for candidate in candidates
+        ]
+
+        scores = self.model.predict(pairs)
+
+        for idx, candidate in enumerate(candidates):
+            candidate["rerank_score"] = float(scores[idx])
+
+        reranked = sorted(
+            candidates, key=lambda x: x["rerank_score"], reverse=True)
+        logger.info("Reranking complete | input=%d | output=%d",
+                    len(candidates), len(reranked))
+        return reranked
 
 
 def rerank_matches(user_prompt: str, top_k_candidates: list[dict]) -> list[dict]:
-    LOGGER.info("Running reranker | candidates=%s", len(top_k_candidates))
-
-    if not top_k_candidates:
-        LOGGER.warning("No candidates provided to reranker.")
-        return []
-
-    pairs = [
-        (user_prompt, candidate["natural_language_intent"])
-        for candidate in top_k_candidates
-    ]
-
-    model = get_reranker_model()
-    scores = model.predict(pairs)
-
-    reranked_candidates = []
-
-    for idx, candidate in enumerate(top_k_candidates):
-        enriched_candidate = dict(candidate)
-        enriched_candidate["rerank_score"] = float(scores[idx])
-        reranked_candidates.append(enriched_candidate)
-
-    reranked_candidates.sort(
-        key=lambda x: x["rerank_score"],
-        reverse=True,
-    )
-
-    LOGGER.info("Reranking completed.")
-
-    for rank, match in enumerate(reranked_candidates, start=1):
-        LOGGER.info(
-            "Reranked match | rank=%s | pageIndex=%s | rerank_score=%.4f | final_score=%.4f",
-            rank,
-            match.get("pageIndex"),
-            match.get("rerank_score", 0.0),
-            match.get("final_score", 0.0),
-        )
-
-    return reranked_candidates
+    """
+    Module-level convenience function for scripts that don't use the class directly.
+    Creates a temporary RerankerService instance and reranks the candidates.
+    """
+    service = RerankerService()
+    return service.rerank_candidates(user_prompt, top_k_candidates)

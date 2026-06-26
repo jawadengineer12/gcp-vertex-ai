@@ -1,41 +1,63 @@
+# services/validation_service.py
+"""
+Validation service.
+
+The original working main.py validates Gemini output as a single Page:
+    Page(**final_json_data)
+
+This is correct because Gemini is prompted to return a single-page JSON:
+    { "pageIndex": <int>, "assets": [...] }
+
+LayoutProject (with projectInfo / documentSettings / pages) is NOT what
+Gemini returns. Do not validate against LayoutProject here.
+"""
 import json
-from typing import Any
-
+import logging
 from pydantic import ValidationError
-
 from schemas.layout_schema import Page
-from core.logger import get_logger
 
-LOGGER = get_logger(__name__)
-
-
-def parse_json_response(raw_ai_response: str) -> dict[str, Any]:
-    LOGGER.info("Parsing raw AI response into JSON.")
-
-    try:
-        parsed = json.loads(raw_ai_response.strip())
-        LOGGER.info("AI response parsed successfully.")
-        return parsed
-
-    except json.JSONDecodeError:
-        LOGGER.exception("AI response failed JSON parsing.")
-        raise
+logger = logging.getLogger(__name__)
 
 
-def validate_layout_page(layout_data: dict[str, Any]) -> Page:
-    LOGGER.info("Running Pydantic layout validation.")
+class ValidationService:
+    """
+    Validates the raw Gemini text response against the Page schema.
+    """
 
-    try:
-        validated_layout = Page(**layout_data)
-        LOGGER.info("Pydantic validation passed.")
-        return validated_layout
+    @staticmethod
+    def validate_payload(raw_text: str) -> dict:
+        """
+        Parses and validates raw Gemini output.
 
-    except ValidationError:
-        LOGGER.exception("Pydantic validation failed.")
-        raise
+        - Strips accidental markdown fences (```json ... ```)
+        - Parses JSON
+        - Validates against Page schema
+        - Returns the validated dict on success
+        - Raises json.JSONDecodeError or ValidationError on failure (caller handles retry)
+        """
+        cleaned = raw_text.strip()
 
+        # Strip markdown code fences if Gemini leaked them despite instructions
+        if cleaned.startswith("```"):
+            lines = cleaned.split("\n")
+            # Drop the opening fence line (e.g. ```json or ```)
+            lines = lines[1:]
+            # Drop the closing fence if present
+            if lines and lines[-1].strip() == "```":
+                lines = lines[:-1]
+            cleaned = "\n".join(lines).strip()
 
-def parse_and_validate_layout(raw_ai_response: str) -> tuple[dict[str, Any], Page]:
-    layout_data = parse_json_response(raw_ai_response)
-    validated_layout = validate_layout_page(layout_data)
-    return layout_data, validated_layout
+        try:
+            json_data = json.loads(cleaned)
+        except json.JSONDecodeError as e:
+            logger.error("JSON parse failed: %s", str(e))
+            raise
+
+        try:
+            Page(**json_data)
+        except ValidationError as e:
+            logger.error("Schema validation failed: %s", str(e))
+            raise
+
+        logger.info("Validation passed.")
+        return json_data

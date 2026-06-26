@@ -1,36 +1,21 @@
 {
-  "pageIndex": 1,
+  "pageIndex": 0,
   "assets": [
-    {
-      "assetType": "Image",
-      "position": {
-        "startX": 0.5,
-        "startY": 1.5
-      },
-      "size": {
-        "width": 3.5,
-        "height": 4.5
-      },
-      "content": {
-        "assetId": "guest_writer_photo_id",
-        "description": "Biographical photo of guest writer"
-      }
-    },
     {
       "assetType": "Article",
       "position": {
-        "startX": 0.5,
-        "startY": 6.2
+        "startX": 0.4,
+        "startY": 0.8
       },
       "size": {
-        "width": 3.5,
-        "height": 3.0
+        "width": 4.75,
+        "height": 0.6
       },
       "content": {
-        "textBody": "We are thrilled to introduce our guest writer for this issue, [Guest Writer's Name]. With a distinguished career spanning [number] years in [field/industry], [Guest Writer's Name] brings a wealth of knowledge and unique perspective to our pages. Their insightful contributions have been featured in numerous publications, and we are honored to share their expertise with our readers. In this piece, [he/she/they] delves into [brief topic description], offering fresh insights and thought-provoking analysis. We hope you enjoy this special feature."
+        "textBody": "Guest Writer | [Writer's Name]"
       },
       "columns": 1,
-      "gutterSize": 0.16666666666667,
+      "gutterSize": 0.25943373576659,
       "margins": {
         "top": 0,
         "left": 0,
@@ -39,7 +24,7 @@
       },
       "textStyle": {
         "fontFamily": "Adobe Garamond Pro",
-        "fontSize": 10,
+        "fontSize": 30,
         "bold": false,
         "italic": false,
         "underline": false,
@@ -48,20 +33,34 @@
       }
     },
     {
-      "assetType": "Article",
+      "assetType": "Image",
       "position": {
-        "startX": 4.5,
-        "startY": 1.5
+        "startX": 0.4,
+        "startY": 1.6
       },
       "size": {
-        "width": 3.5,
-        "height": 7.7
+        "width": 4.75,
+        "height": 3.5
       },
       "content": {
-        "textBody": "Our Core Publication Contributors\n\n[Contributor Name 1]\nEditor-in-Chief\n\n[Contributor Name 2]\nManaging Editor\n\n[Contributor Name 3]\nArt Director\n\n[Contributor Name 4]\nSenior Writer\n\n[Contributor Name 5]\nStaff Photographer\n\n[Contributor Name 6]\nCopy Editor\n\n[Contributor Name 7]\nDigital Content Manager\n\n[Contributor Name 8]\nMarketing & Outreach"
+        "imageUrl": "[Path to Guest Writer Biographical Photo]"
+      }
+    },
+    {
+      "assetType": "Article",
+      "position": {
+        "startX": 0.4,
+        "startY": 5.4
+      },
+      "size": {
+        "width": 4.75,
+        "height": 5.1
+      },
+      "content": {
+        "textBody": "This is the introductory message from our guest writer. It will provide context about their background, their insights, and what they hope to share with our readers in this issue. The text will flow naturally, covering their perspective on the topic at hand or a personal reflection that resonates with the magazine's theme. We aim for an engaging and welcoming tone, inviting readers into the main content of the article. This section serves to connect the writer directly with the audience, establishing their voice and expertise within the publication."
       },
       "columns": 1,
-      "gutterSize": 0.16666666666667,
+      "gutterSize": 0.27070159590485,
       "margins": {
         "top": 0,
         "left": 0,
@@ -69,8 +68,8 @@
         "right": 0
       },
       "textStyle": {
-        "fontFamily": "Montserrat",
-        "fontSize": 10,
+        "fontFamily": "Adobe Garamond Pro",
+        "fontSize": 9,
         "bold": false,
         "italic": false,
         "underline": false,
@@ -79,48 +78,31 @@
       }
     },
     {
-      "assetType": "Article",
+      "assetType": "Image",
       "position": {
-        "startX": 0.5,
-        "startY": 10.5375
+        "startX": 5.56111111111111,
+        "startY": 0.67724279433397
       },
       "size": {
-        "width": 4.48,
-        "height": 0.19499999999999
+        "width": 2.41388888888889,
+        "height": 0.76720165011048
       },
       "content": {
-        "textBody": "www.CanyonCreekLife.com"
-      },
-      "columns": 1,
-      "gutterSize": 0.16666666666667,
-      "margins": {
-        "top": 0,
-        "left": 0,
-        "bottom": 0,
-        "right": 0
-      },
-      "textStyle": {
-        "fontFamily": "Helvetica Neue LT Std",
-        "fontSize": 8,
-        "bold": false,
-        "italic": false,
-        "underline": false,
-        "color": "#000000",
-        "autoFit": false
+        "imageUrl": "C:\\Users\\pt\\Downloads\\New folder (99)\\LAS 4_V8_links._Export\\Images\\Life Around Senoia_MASTHEAD BLACK.png"
       }
     },
     {
       "assetType": "Article",
       "position": {
-        "startX": 7.76725806451613,
-        "startY": 10.5375
+        "startX": 5.55194444444444,
+        "startY": 1.86500000000002
       },
       "size": {
-        "width": 0.23274193548387,
-        "height": 0.19499999999999
+        "width": 2.42305555555556,
+        "height": 8.635
       },
       "content": {
-        "textBody": "1"
+        "textBody": "Publisher\nKevin Thompson\n\nAd Sales \nBlake Adams\n\nDesigner\nOpen Look Business Solutions \n\nDirector of Everything Else\nDylan Bayer\n\nContributors\n Jeremy Watkins, Kevin Tuttle, \nKristel Thompson\n\nSpecial Thanks\nThe Jenkins Family, Kevin Barbee, \nMia Henrich, David and Shayla Quinn, Margaret Ordo\u00f1ez, \nLaura Mack Photography, \nPeek \u2018n Click Photography\n\nCover Photo \nLaura Mack Photography\n\nFor Advertising Questions, please email\nblake@kartpathmedia.com\n\nFor Editoral Requests, please email\neditorial@kartpathmedia.com\n\nKartPath Media\nPeachtree City, GA \n\nManaging Partners\nChief Kart & Soul Officer, Kevin Thompson\nChief Knock & Talk Officer, Blake Adams\n"
       },
       "columns": 1,
       "gutterSize": 0.16666666666667,

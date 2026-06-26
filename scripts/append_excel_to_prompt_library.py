@@ -1,81 +1,92 @@
+# scripts/append_excel_to_prompt_library.py
+"""
+Appends new training examples from an Excel file to the existing prompt library.
+Assigns stable IDs to all new entries.
+Run prepare_vertex_vector_data.py after this to regenerate embeddings.
+"""
 import json
-
 import pandas as pd
-
-from core.config import EXCEL_FILE_PATH, LIBRARY_PATH, UPDATED_LIBRARY_PATH
+from config.config import AppConfig
 from core.logger import setup_logging, get_logger
+from utils.retrieval_utils import build_stable_id
 
 setup_logging()
-LOGGER = get_logger(__name__)
+logger = get_logger(__name__)
 
 
 def main() -> None:
-    LOGGER.info("Append Excel script started.")
-    LOGGER.info("Base library path: %s", LIBRARY_PATH)
-    LOGGER.info("Excel file path: %s", EXCEL_FILE_PATH)
-    LOGGER.info("Output library path: %s", UPDATED_LIBRARY_PATH)
+    library_path = AppConfig.PROMPT_LIBRARY_PATH
+    excel_path = AppConfig.EXCEL_FILE_PATH
 
-    if not LIBRARY_PATH.exists():
-        LOGGER.error("Base prompt library not found: %s", LIBRARY_PATH)
-        raise FileNotFoundError(
-            f"Base prompt library not found: {LIBRARY_PATH}")
+    logger.info("Append Excel script started.")
+    logger.info("Library path: %s", library_path)
+    logger.info("Excel path: %s", excel_path)
 
-    if not EXCEL_FILE_PATH.exists():
-        LOGGER.error("Excel training file not found: %s", EXCEL_FILE_PATH)
-        raise FileNotFoundError(
-            f"Excel training file not found: {EXCEL_FILE_PATH}")
+    if not library_path.exists():
+        raise FileNotFoundError(f"Prompt library not found: {library_path}")
 
-    with open(LIBRARY_PATH, "r", encoding="utf-8") as f:
-        library = json.load(f)
+    if not excel_path.exists():
+        raise FileNotFoundError(f"Excel file not found: {excel_path}")
 
-    LOGGER.info("Loaded base prompt library | records=%s", len(library))
+    with open(library_path, "r", encoding="utf-8") as f:
+        library: list[dict] = json.load(f)
 
-    df = pd.read_excel(EXCEL_FILE_PATH)
-    LOGGER.info("Loaded Excel training data | rows=%s", len(df))
+    logger.info("Loaded existing library | records=%d", len(library))
 
-    appended_count = 0
-    skipped_invalid_json = 0
-    skipped_empty_assets = 0
+    # Ensure all existing entries have stable IDs
+    updated_existing = False
+    for idx, item in enumerate(library):
+        if "id" not in item or not item["id"]:
+            item["id"] = build_stable_id(item, idx)
+            updated_existing = True
 
-    for idx, row in df.iterrows():
+    df = pd.read_excel(excel_path)
+    logger.info("Loaded Excel | rows=%d", len(df))
+
+    appended = 0
+    skipped_invalid = 0
+    skipped_empty = 0
+    start_index = len(library)
+
+    for row_idx, row in df.iterrows():
         expected_json_str = row.get("Expected JSON Object (Output)")
 
         try:
             expected_json = json.loads(expected_json_str)
         except Exception:
-            skipped_invalid_json += 1
-            LOGGER.warning(
-                "Skipping row due to invalid JSON | row_index=%s", idx)
+            skipped_invalid += 1
+            logger.warning("Skipping row — invalid JSON | row=%s", row_idx)
             continue
 
         if expected_json.get("assets") == []:
-            skipped_empty_assets += 1
-            LOGGER.info("Skipping row with empty assets | row_index=%s", idx)
+            skipped_empty += 1
+            logger.info("Skipping row — empty assets | row=%s", row_idx)
             continue
 
-        new_entry = {
+        entry: dict = {
             "pageIndex": int(row["Page Number"]),
             "natural_language_intent": row["Generated Prompt (Input)"],
             "expected_layout_json": expected_json,
         }
+        entry["id"] = build_stable_id(entry, start_index + appended)
 
-        library.append(new_entry)
-        appended_count += 1
+        library.append(entry)
+        appended += 1
 
-    UPDATED_LIBRARY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    library_path.parent.mkdir(parents=True, exist_ok=True)
 
-    with open(UPDATED_LIBRARY_PATH, "w", encoding="utf-8") as f:
+    with open(library_path, "w", encoding="utf-8") as f:
         json.dump(library, f, indent=2)
 
-    LOGGER.info("Updated prompt library saved: %s", UPDATED_LIBRARY_PATH)
-    LOGGER.info("Append summary | appended=%s | invalid_json=%s | empty_assets=%s | final_records=%s",
-                appended_count, skipped_invalid_json, skipped_empty_assets, len(library))
-
-    print(f"Updated library saved to {UPDATED_LIBRARY_PATH}")
-    print(f"Appended rows: {appended_count}")
-    print(f"Skipped invalid JSON rows: {skipped_invalid_json}")
-    print(f"Skipped empty asset rows: {skipped_empty_assets}")
-    print(f"Final library size: {len(library)}")
+    logger.info(
+        "Append complete | appended=%d | invalid=%d | empty=%d | total=%d",
+        appended, skipped_invalid, skipped_empty, len(library),
+    )
+    print(f"✅ Library updated: {library_path}")
+    print(
+        f"   Appended: {appended} | Skipped invalid: {skipped_invalid} | Skipped empty: {skipped_empty}")
+    print(f"   Total records: {len(library)}")
+    print("\nNext: run scripts/prepare_vertex_vector_data.py to regenerate embeddings.")
 
 
 if __name__ == "__main__":
