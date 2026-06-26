@@ -1,3 +1,5 @@
+import numpy as np
+from google.cloud import aiplatform_v1
 from sentence_transformers import CrossEncoder
 import json
 import re
@@ -60,6 +62,43 @@ PHRASE_BOOSTS = {
 }
 
 
+# Configuration - Keep these as environment variables in production
+API_ENDPOINT = "1724666999.us-central1-147394368706.vdb.vertexai.goog"
+INDEX_ENDPOINT = "projects/147394368706/locations/us-central1/indexEndpoints/3727812810114072576"
+DEPLOYED_INDEX_ID = "layout_rag_index_1782458807772"
+
+
+def get_vertex_retrieval(query_embedding: list[float], k=10):
+    """Retrieves top-k neighbors from the Vertex AI cloud index."""
+
+    # Configure client
+    client_options = {"api_endpoint": API_ENDPOINT}
+    vector_search_client = aiplatform_v1.MatchServiceClient(
+        client_options=client_options)
+
+    # Prepare request
+    datapoint = aiplatform_v1.IndexDatapoint(feature_vector=query_embedding)
+    query = aiplatform_v1.FindNeighborsRequest.Query(
+        datapoint=datapoint,
+        neighbor_count=k
+    )
+    request = aiplatform_v1.FindNeighborsRequest(
+        index_endpoint=INDEX_ENDPOINT,
+        deployed_index_id=DEPLOYED_INDEX_ID,
+        queries=[query],
+        return_full_datapoint=False,
+    )
+
+    # Query the cloud
+    response = vector_search_client.find_neighbors(request)
+
+    # Extract IDs from the response
+    # The response is structured as: response.nearest_neighbors[0].neighbors
+    results = []
+    for neighbor in response.nearest_neighbors[0].neighbors:
+        results.append(neighbor.datapoint.datapoint_id)
+
+    return results
 def load_library(path: Path):
     if not path.exists():
         raise FileNotFoundError(f"Library file not found: {path}")

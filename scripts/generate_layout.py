@@ -12,7 +12,7 @@ def generate_layout(user_prompt: str, matched_context_examples: list) -> str | N
     # Instantiate the standard modern Google GenAI Client pointing to Vertex AI gateway
     client = genai.Client(
         vertexai=True,
-        project="indesign-layout-ai",
+        project="project-df3ee720-da3e-4aa4-863",
         location="us-central1"
     )
 

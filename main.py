@@ -2,10 +2,11 @@ import os
 import sys
 import json
 from pathlib import Path
+from google import genai
 from pydantic import ValidationError
 
 # Import Stage 1 & Stage 2 Retrieval/Rerank Components
-from utils.retrieval_utils import load_library, find_top_matches, rerank_matches
+from utils.retrieval_utils import get_vertex_retrieval, load_library, find_top_matches, rerank_matches
 # Import Generation Component
 from scripts.generate_layout import generate_layout
 # Import Stage 3 Schema Validation Layer
@@ -28,32 +29,37 @@ def main():
     print(f"User Input Received: '{user_prompt}'")
 
     # --- [STAGE 1 & 2: TWO-STAGE RETRIEVAL PIPELINE] ---
-    print("\n==================================================")
-    print("--- [STAGE 1: RUNNING LIGHTWEIGHT RETRIEVAL] ---")
-    print("==================================================")
-    library = load_library(LIBRARY_PATH)
+# 1. Generate Query Embedding
+    client = genai.Client(
+        vertexai=True, project="project-df3ee720-da3e-4aa4-863", location="us-central1")
+    embedding_response = client.models.embed_content(
+        model="text-embedding-004", contents=[user_prompt]
+    )
+    query_embedding = embedding_response.embeddings[0].values
 
-    # Step 1: Cast a wide net using your custom hybrid search formula
-    broad_matches = find_top_matches(user_prompt, library, top_k=STAGE_1_TOP_K)
+    # 2. Stage 1: Cloud Retrieval
+    print("\n--- [STAGE 1: FETCHING CLOUD CANDIDATES] ---")
+    candidate_ids = get_vertex_retrieval(query_embedding, k=10)
+
+    # 3. Fetch full data for these IDs
+    full_library = load_library(LIBRARY_PATH)
+    # Filter full_library to ONLY contain the retrieved candidates
+    broad_matches = [item for item in full_library if str(
+        item['pageIndex']) in candidate_ids]
+
     print(
-        f"Successfully retrieved top {len(broad_matches)} historical candidates via Hybrid Search.")
+        f"Successfully retrieved {len(broad_matches)} candidates from Vertex AI.")
 
     print("\n==================================================")
     print("--- [STAGE 2: RUNNING CROSS-ENCODER RERANKER] ---")
     print("==================================================")
-    # Step 2: Use deep attention cross-encoder to select structurally accurate templates
+    # 4. Stage 2: Rerank the narrow subset (NOT the whole library)
     reranked_matches = rerank_matches(user_prompt, broad_matches)
-
-    # Slice the highest quality contexts
-    final_context_matches = reranked_matches[:FINAL_TOP_K]
-    print(
-        f"Distilled down to the top {len(final_context_matches)} highest-precision structural patterns.")
-
-    # Pass the precision matches and initial prompt to the context tracker
-    active_prompt = user_prompt
-    history_context = final_context_matches
-
+    # Step 2: Use deep attention cross-encoder to select structurally accurate templates
     # --- [STAGES 3 & 4: GENERATION & AGENTIC SELF-CORRECTION LOOP] ---
+    
+    active_prompt = user_prompt
+    history_context = reranked_matches[:FINAL_TOP_K]  # Only send the top 2 candidates to Gemini
     attempt = 0
     validated_layout = None
     final_json_data = None

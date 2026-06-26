@@ -1,12 +1,20 @@
 import json
 from pathlib import Path
 from google import genai
+import numpy as np
 
 # -------------------------------
 # CONFIG
 # -------------------------------
 LIBRARY_PATH = Path("normalized_data/layout_prompt_library_updated.json")
 OUTPUT_PATH = Path("normalized_data/vertex_index_data.jsonl")
+
+
+def normalize_vector(embedding):
+    """Normalize a vector to unit length (L2 norm)."""
+    vec = np.array(embedding)
+    norm = np.linalg.norm(vec)
+    return (vec / norm).tolist() if norm > 0 else vec.tolist()
 
 
 def main():
@@ -40,12 +48,14 @@ def main():
         for idx, item in enumerate(library):
             # We use the pageIndex as the unique ID for the Vector Search
             vector_id = str(item['pageIndex'])
-            embedding_values = response.embeddings[idx].values
+            # Apply normalization BEFORE saving
+            normalized_embedding = normalize_vector(
+                response.embeddings[idx].values)
 
             # Create the exact JSON schema Vertex Vector Search requires
             vertex_record = {
                 "id": vector_id,
-                "embedding": embedding_values
+                "embedding": normalized_embedding
             }
             # Write as a single line JSON (JSONL)
             out_file.write(json.dumps(vertex_record) + "\n")
