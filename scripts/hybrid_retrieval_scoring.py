@@ -1,133 +1,61 @@
-import json
-from pathlib import Path
-import numpy as np
-from numpy import dot
-from numpy.linalg import norm
+# scripts/hybrid_retrieval_scoring.py
+"""
+Standalone script for testing hybrid BM25 + vector scoring locally.
+Uses the module-level convenience functions (no Vertex Vector Search call).
+"""
+from config.config import AppConfig, UPDATED_LIBRARY_PATH, STAGE_1_TOP_K
+from core.logger import setup_logging, get_logger
+from services.retrieval_service import load_library, retrieve_hybrid_matches
+from services.reranker_service import rerank_matches
 
-from utils.retrieval_utils import load_library, score_prompt, rerank_matches
-from google import genai
-from google.genai import types
-
-# -------------------------------
-# CONFIG
-# -------------------------------
-LIBRARY_PATH = Path("normalized_data/layout_prompt_library_updated.json")
-TOP_K = 5
-WEIGHT_VECTOR = 0.7
-WEIGHT_BM25 = 0.3
-
-# -------------------------------
-# UTILS
-# -------------------------------
+setup_logging()
+logger = get_logger(__name__)
 
 
-def cosine_similarity(a, b):
-    # Ensure inputs are standard numpy arrays for rapid matrix arithmetic
-    return dot(a, b) / (norm(a) * norm(b))
+def print_candidates(title: str, candidates: list[dict]) -> None:
+    print(f"\n{title}")
+    for idx, c in enumerate(candidates, start=1):
+        print("\n" + "=" * 80)
+        print(f"RANK: {idx}")
+        print(f"FINAL SCORE : {c.get('final_score', 0.0):.4f}")
+        print(f"BM25 SCORE  : {c.get('bm25_score', 0.0):.4f}")
+        print(f"VECTOR SCORE: {c.get('vector_score', 0.0):.4f}")
+        if "rerank_score" in c:
+            print(f"RERANK SCORE: {c['rerank_score']:.4f}")
+        print(f"PAGE INDEX  : {c.get('pageIndex')}")
+        print(f"ID          : {c.get('id')}")
+        print("\nMATCHED NATURAL LANGUAGE INTENT:")
+        print(c.get("natural_language_intent", ""))
 
 
-# -------------------------------
-# LOAD LIBRARY
-# -------------------------------
-library = load_library(LIBRARY_PATH)
+def main() -> None:
+    logger.info("Hybrid retrieval scoring script started.")
 
-# -------------------------------
-# VERTEX AI EMBEDDING CLIENT
-# -------------------------------
-# Correct client initialization for Vertex AI models in google-genai
-embedding_client = genai.Client(
-    vertexai=True,
-    project="indesign-layout-ai",
-    location="us-central1"
-)
-embedding_model = "text-embedding-004"
+    user_prompt = input("Enter your natural language prompt: ").strip()
+    if not user_prompt:
+        print("Prompt cannot be empty.")
+        return
 
-# -------------------------------
-# GET USER PROMPT
-# -------------------------------
-user_prompt = input("Enter your natural language prompt: ")
+    logger.info("User prompt | length=%d", len(user_prompt))
 
-# Generate embedding for user prompt using correct SDK syntax
-user_response = embedding_client.models.embed_content(
-    model=embedding_model,
-    contents=user_prompt
-)
-user_embedding = np.array(user_response.embeddings[0].values)
+    library = load_library(UPDATED_LIBRARY_PATH)
+    logger.info("Library loaded | records=%d", len(library))
 
-# -------------------------------
-# BATCHED LIBRARY EMBEDDINGS (Performance Fix)
-# -------------------------------
-# Batch-fetch all intents at once to respect API token constraints and prevent lag
-intents = [example['natural_language_intent'] for example in library]
+    top_candidates = retrieve_hybrid_matches(
+        user_prompt=user_prompt,
+        library=library,
+        top_k=STAGE_1_TOP_K,
+    )
+    logger.info("Hybrid candidates | count=%d", len(top_candidates))
 
-print(f"Generating embeddings for {len(intents)} library entries...")
-library_response = embedding_client.models.embed_content(
-    model=embedding_model,
-    contents=intents
-)
-# Map vector dimensions cleanly to match array positions
-library_embeddings = [np.array(e.values) for e in library_response.embeddings]
+    reranked = rerank_matches(user_prompt=user_prompt,
+                              top_k_candidates=top_candidates)
+    logger.info("Reranked candidates | count=%d", len(reranked))
 
-# -------------------------------
-# COMPUTE SCORES (Updated Loop Section)
-# -------------------------------
-scored_entries = []
-
-# First pass: Get all raw token scores
-raw_bm25_scores = [score_prompt(
-    user_prompt, ex['natural_language_intent']) for ex in library]
-max_bm25_ceil = max(raw_bm25_scores) if max(raw_bm25_scores) > 0 else 1.0
-
-for idx, example in enumerate(library):
-    # Dynamic 0.0 to 1.0 keyword normalization based on max run capacity
-    bm25_score = raw_bm25_scores[idx] / max_bm25_ceil
-
-    # Extract embedding value arrays
-    example_embedding = library_embeddings[idx]
-    vector_score = cosine_similarity(user_embedding, example_embedding)
-
-    # Hybrid weighted calculation remains clean
-    final_score = WEIGHT_VECTOR * vector_score + WEIGHT_BM25 * bm25_score
+    print_candidates("▸ Top Hybrid Candidates (BM25)", top_candidates)
+    print_candidates("▸ Reranked Candidates (CrossEncoder)", reranked)
+    logger.info("Script complete.")
 
 
-    scored_entries.append({
-        "pageIndex": example['pageIndex'],
-        "natural_language_intent": example['natural_language_intent'],
-        "expected_layout_json": example['expected_layout_json'],
-        "bm25_score": bm25_score,
-        "vector_score": vector_score,
-        "final_score": final_score
-    })
-
-# -------------------------------
-# SORT TOP RESULTS
-# -------------------------------
-top_candidates = sorted(
-    scored_entries, key=lambda x: x['final_score'], reverse=True)[:TOP_K]
-reranked_candidates = rerank_matches(user_prompt, top_candidates)
-# -------------------------------
-# DISPLAY RESULTS
-# -------------------------------
-print("Top Candidates")
-for idx, match in enumerate(top_candidates, start=1):
-    print("\n" + "="*80)
-    print(f"RANK: {idx}")
-    print(f"FINAL SCORE: {match['final_score']:.4f}")
-    print(f"BM25 SCORE: {match['bm25_score']:.4f}")
-    print(f"VECTOR SCORE: {match['vector_score']:.4f}")
-    print(f"PAGE INDEX: {match['pageIndex']}")
-    print("\nMATCHED NATURAL LANGUAGE INTENT:")
-    print(match['natural_language_intent'])
-    
-    
-    
-print("Reranked Candidates")
-for idx, match in enumerate(reranked_candidates, start=1):
-    print("\n" + "="*80)
-    print(f"RANK: {idx}")
-    print(f"FINAL SCORE: {match['final_score']:.4f}")
-    print(f"BM25 SCORE: {match['bm25_score']:.4f}")
-    print(f"VECTOR SCORE: {match['vector_score']:.4f}")
-    print(f"PAGE INDEX: {match['pageIndex']}")
-    print("\nMATCHED NATURAL LANGUAGE INTENT:")
-    print(match['natural_language_intent'])
+if __name__ == "__main__":
+    main()

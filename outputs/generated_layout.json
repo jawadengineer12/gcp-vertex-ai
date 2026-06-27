@@ -1,0 +1,126 @@
+{
+  "pageIndex": 0,
+  "assets": [
+    {
+      "assetType": "Article",
+      "position": {
+        "startX": 0.4,
+        "startY": 0.8
+      },
+      "size": {
+        "width": 4.75,
+        "height": 0.6
+      },
+      "content": {
+        "textBody": "Guest Writer | [Writer's Name]"
+      },
+      "columns": 1,
+      "gutterSize": 0.25943373576659,
+      "margins": {
+        "top": 0,
+        "left": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "textStyle": {
+        "fontFamily": "Adobe Garamond Pro",
+        "fontSize": 30,
+        "bold": false,
+        "italic": false,
+        "underline": false,
+        "color": "#000000",
+        "autoFit": false
+      }
+    },
+    {
+      "assetType": "Image",
+      "position": {
+        "startX": 0.4,
+        "startY": 1.6
+      },
+      "size": {
+        "width": 4.75,
+        "height": 3.5
+      },
+      "content": {
+        "imageUrl": "[Path to Guest Writer Biographical Photo]"
+      }
+    },
+    {
+      "assetType": "Article",
+      "position": {
+        "startX": 0.4,
+        "startY": 5.4
+      },
+      "size": {
+        "width": 4.75,
+        "height": 5.1
+      },
+      "content": {
+        "textBody": "This is the introductory message from our guest writer. It will provide context about their background, their insights, and what they hope to share with our readers in this issue. The text will flow naturally, covering their perspective on the topic at hand or a personal reflection that resonates with the magazine's theme. We aim for an engaging and welcoming tone, inviting readers into the main content of the article. This section serves to connect the writer directly with the audience, establishing their voice and expertise within the publication."
+      },
+      "columns": 1,
+      "gutterSize": 0.27070159590485,
+      "margins": {
+        "top": 0,
+        "left": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "textStyle": {
+        "fontFamily": "Adobe Garamond Pro",
+        "fontSize": 9,
+        "bold": false,
+        "italic": false,
+        "underline": false,
+        "color": "#000000",
+        "autoFit": false
+      }
+    },
+    {
+      "assetType": "Image",
+      "position": {
+        "startX": 5.56111111111111,
+        "startY": 0.67724279433397
+      },
+      "size": {
+        "width": 2.41388888888889,
+        "height": 0.76720165011048
+      },
+      "content": {
+        "imageUrl": "C:\\Users\\pt\\Downloads\\New folder (99)\\LAS 4_V8_links._Export\\Images\\Life Around Senoia_MASTHEAD BLACK.png"
+      }
+    },
+    {
+      "assetType": "Article",
+      "position": {
+        "startX": 5.55194444444444,
+        "startY": 1.86500000000002
+      },
+      "size": {
+        "width": 2.42305555555556,
+        "height": 8.635
+      },
+      "content": {
+        "textBody": "Publisher\nKevin Thompson\n\nAd Sales \nBlake Adams\n\nDesigner\nOpen Look Business Solutions \n\nDirector of Everything Else\nDylan Bayer\n\nContributors\n Jeremy Watkins, Kevin Tuttle, \nKristel Thompson\n\nSpecial Thanks\nThe Jenkins Family, Kevin Barbee, \nMia Henrich, David and Shayla Quinn, Margaret Ordo\u00f1ez, \nLaura Mack Photography, \nPeek \u2018n Click Photography\n\nCover Photo \nLaura Mack Photography\n\nFor Advertising Questions, please email\nblake@kartpathmedia.com\n\nFor Editoral Requests, please email\neditorial@kartpathmedia.com\n\nKartPath Media\nPeachtree City, GA \n\nManaging Partners\nChief Kart & Soul Officer, Kevin Thompson\nChief Knock & Talk Officer, Blake Adams\n"
+      },
+      "columns": 1,
+      "gutterSize": 0.16666666666667,
+      "margins": {
+        "top": 0,
+        "left": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "textStyle": {
+        "fontFamily": "Helvetica Neue LT Std",
+        "fontSize": 9,
+        "bold": false,
+        "italic": false,
+        "underline": false,
+        "color": "#000000",
+        "autoFit": false
+      }
+    }
+  ]
+}
