@@ -1,9 +1,16 @@
 [project]
 name = "gcp-vertex-ai"
 version = "0.1.0"
-description = "Add your description here"
+description = "Vertex AI RAG pipeline for generating and validating InDesign layout JSON"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "google-cloud-aiplatform>=1.95.0",
+    "google-cloud-storage>=2.19.0",
+    "google-genai>=1.20.0",
+    "numpy>=2.0.0",
+    "pandas>=2.2.0",
     "pydantic>=2.13.4",
+    "python-dotenv>=1.1.0",
+    "sentence-transformers>=4.1.0",
 ]

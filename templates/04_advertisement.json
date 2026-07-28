@@ -1,0 +1,23 @@
+{
+  "id": "advertisement",
+  "name": "Advertisement",
+  "defaultSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11,
+    "bleed": 0.125
+  },
+  "requiredFields": [
+    {
+      "name": "advertiser_name",
+      "type": "text",
+      "required": false,
+      "question": "Advertiser name"
+    },
+    {
+      "name": "advertisement_image_url",
+      "type": "image",
+      "required": true,
+      "question": "Advertisement HTTPS URL"
+    }
+  ]
+}

@@ -10,7 +10,7 @@ import json
 import re
 from pathlib import Path
 
-from config.config import AppConfig
+from core.config import AppConfig
 from core.logger import setup_logging, get_logger
 from utils.retrieval_utils import build_stable_id
 

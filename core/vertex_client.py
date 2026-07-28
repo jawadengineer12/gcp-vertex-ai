@@ -1,6 +1,8 @@
 # core/vertex_client.py
 from google import genai
-from config.config import AppConfig
+from core.config import AppConfig
+
+AppConfig.validate_vertex_config()
 
 # Module-level singleton — initialized once, reused everywhere.
 vertex_client = genai.Client(

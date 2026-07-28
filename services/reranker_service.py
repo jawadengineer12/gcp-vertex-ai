@@ -1,7 +1,7 @@
 # services/reranker_service.py
 import logging
 from sentence_transformers import CrossEncoder
-from config.config import AppConfig
+from core.config import AppConfig
 
 logger = logging.getLogger(__name__)
 

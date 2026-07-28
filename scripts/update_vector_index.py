@@ -7,10 +7,10 @@ without wanting to rebuild the entire index from scratch.
 
 Workflow:
   1. Add new examples to prompt library JSON.
-  2. Run prepare_vertex_vector_data.py to regenerate the full JSONL.
+  2. Run prepare_vertex_vector_data.py to regenerate the full vector JSON.
   3. Run this script to upsert only the new/changed datapoints.
 
-The script reads the JSONL file and upserts all records.
+The script reads the newline-delimited JSON file and upserts all records.
 Vertex AI handles deduplication by ID — existing IDs are updated,
 new IDs are inserted.
 """
@@ -18,7 +18,7 @@ import json
 from google.cloud import aiplatform
 from google.cloud.aiplatform_v1 import IndexServiceClient
 from google.cloud.aiplatform_v1.types import index as index_types
-from config.config import AppConfig
+from core.config import AppConfig
 from core.logger import setup_logging, get_logger
 
 setup_logging()
@@ -28,16 +28,16 @@ logger = get_logger(__name__)
 def main() -> None:
     logger.info("Update vector index script started.")
 
-    jsonl_path = AppConfig.VERTEX_INDEX_DATA_PATH
-    if not jsonl_path.exists():
+    vector_data_path = AppConfig.VERTEX_INDEX_DATA_PATH
+    if not vector_data_path.exists():
         raise FileNotFoundError(
-            f"JSONL file not found: {jsonl_path}. "
+            f"Vector data file not found: {vector_data_path}. "
             f"Run prepare_vertex_vector_data.py first."
         )
 
-    # Load all datapoints from JSONL
+    # Load all datapoints from newline-delimited JSON.
     datapoints = []
-    with open(jsonl_path, "r", encoding="utf-8") as f:
+    with open(vector_data_path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:
@@ -50,8 +50,8 @@ def main() -> None:
                 )
             )
 
-    logger.info("Loaded datapoints from JSONL | count=%d", len(datapoints))
-    print(f"📦 Loaded {len(datapoints)} datapoints from {jsonl_path}")
+    logger.info("Loaded datapoints from vector JSON | count=%d", len(datapoints))
+    print(f"📦 Loaded {len(datapoints)} datapoints from {vector_data_path}")
 
     # Extract index ID from the full resource name stored in INDEX_ENDPOINT
     # INDEX_ENDPOINT format: projects/{num}/locations/{loc}/indexEndpoints/{id}

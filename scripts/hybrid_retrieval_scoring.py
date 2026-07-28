@@ -3,7 +3,7 @@
 Standalone script for testing hybrid BM25 + vector scoring locally.
 Uses the module-level convenience functions (no Vertex Vector Search call).
 """
-from config.config import AppConfig, UPDATED_LIBRARY_PATH, STAGE_1_TOP_K
+from core.config import AppConfig, UPDATED_LIBRARY_PATH, STAGE_1_TOP_K
 from core.logger import setup_logging, get_logger
 from services.retrieval_service import load_library, retrieve_hybrid_matches
 from services.reranker_service import rerank_matches

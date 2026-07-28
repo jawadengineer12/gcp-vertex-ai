@@ -1,0 +1,31 @@
+{
+  "id": "cover_page",
+  "name": "Cover Page",
+  "defaultSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11,
+    "margin": 0.25,
+    "bleed": 0.125,
+    "fontFamily": "Gotham\\tBook"
+  },
+  "requiredFields": [
+    {
+      "name": "publication_name",
+      "type": "text",
+      "required": true,
+      "question": "Publication name"
+    },
+    {
+      "name": "cover_image_url",
+      "type": "image",
+      "required": true,
+      "question": "Cover image HTTPS URL"
+    },
+    {
+      "name": "issue_date",
+      "type": "text",
+      "required": false,
+      "question": "Issue date"
+    }
+  ]
+}
