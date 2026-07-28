@@ -1,7 +1,7 @@
 # scripts/prepare_vertex_vector_data.py
 """
 Generates embeddings for every prompt library entry and writes them
-in Vertex AI Vector Search JSONL format.
+as newline-delimited JSON in a Vertex-supported .json file.
 
 Output format (one JSON object per line):
     {"id": "<stable_id>", "embedding": [0.1, 0.2, ...]}
@@ -15,7 +15,7 @@ import json
 import numpy as np
 from pathlib import Path
 
-from config.config import AppConfig
+from core.config import AppConfig
 from core.logger import setup_logging, get_logger
 from core.vertex_client import get_vertex_client
 from utils.retrieval_utils import build_stable_id
@@ -79,7 +79,8 @@ def main() -> None:
             normalized_embedding = normalize_vector(
                 response.embeddings[idx].values)
 
-            # Vertex AI Vector Search required JSONL format
+            # Vertex AI expects one JSON object per line, but batch import
+            # requires the filename to use a supported .json extension.
             vertex_record = {
                 "id": stable_id,
                 "embedding": normalized_embedding,
@@ -88,7 +89,7 @@ def main() -> None:
             written += 1
 
     logger.info(
-        "JSONL written | path=%s | records=%d", output_path, written
+        "Vector JSON written | path=%s | records=%d", output_path, written
     )
     print(f"✅ Success! {written} records written to: {output_path}")
     print("Next step: upload this file to GCS and rebuild/update the index.")

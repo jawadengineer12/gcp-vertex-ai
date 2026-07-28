@@ -4,7 +4,7 @@ Standalone script for testing pure BM25/keyword retrieval locally.
 No Vertex Vector Search is used — useful for fast local testing.
 """
 import json
-from config.config import UPDATED_LIBRARY_PATH
+from core.config import UPDATED_LIBRARY_PATH
 from core.logger import setup_logging, get_logger
 from services.retrieval_service import load_library, find_top_matches
 

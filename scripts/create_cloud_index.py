@@ -1,16 +1,14 @@
 # scripts/create_cloud_index.py
 """
 Creates a new Vertex AI Vector Search index from a GCS bucket.
-Run this once after uploading vertex_index_data.jsonl to GCS.
+Run this once after uploading vertex_index_data.json to GCS.
 
 NOTE: Index creation takes 15–30 minutes. The script prints the index ID
 when provisioning begins — save it for your .env / deployment config.
 """
 from google.cloud import aiplatform
-from config.config import AppConfig
+from core.config import AppConfig
 from core.logger import setup_logging, get_logger
-from google.cloud import aiplatform
-from google.cloud.aiplatform.matching_engine import MatchingEngineIndexConfig
 
 setup_logging()
 logger = get_logger(__name__)
@@ -36,6 +34,8 @@ def main() -> None:
         dimensions=DIMENSIONS,
         approximate_neighbors_count=10,
         distance_measure_type="COSINE_DISTANCE",
+        leaf_node_embedding_count=50,
+        leaf_nodes_to_search_percent=10,
     )
 
     logger.info("Index created | name=%s", my_index.name)

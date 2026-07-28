@@ -1,7 +1,7 @@
 # services/vector_store.py
 import logging
 from google.cloud import aiplatform_v1
-from config.config import AppConfig
+from core.config import AppConfig
 
 logger = logging.getLogger(__name__)
 

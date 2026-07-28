@@ -8,7 +8,7 @@ import json
 import logging
 from datetime import datetime
 from pathlib import Path
-from config.config import AppConfig
+from core.config import AppConfig
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +40,8 @@ def write_trace(trace: dict) -> Path | None:
 
 def build_trace(
     user_prompt: str,
+    template: dict | None,
+    collected_fields: dict[str, str],
     vector_candidates: list,
     bm25_candidates: list,
     merged_candidates: list,
@@ -49,11 +51,15 @@ def build_trace(
     parsed_json: dict | None,
     validation_success: bool,
     validation_errors: list[str],
-    output_file: str,
+    destinations: dict[str, str],
 ) -> dict:
     """Assembles the full trace dict."""
     return {
         "user_prompt": user_prompt,
+        "template": {
+            key: value for key, value in (template or {}).items() if key != "_source"
+        },
+        "collected_fields": collected_fields,
         "vector_candidates": _slim(vector_candidates),
         "bm25_candidates": _slim(bm25_candidates),
         "merged_candidates": _slim(merged_candidates),
@@ -65,7 +71,7 @@ def build_trace(
             "success": validation_success,
             "errors": validation_errors,
         },
-        "output_file": output_file,
+        "destinations": destinations,
     }
 
 

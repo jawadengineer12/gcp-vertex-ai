@@ -145,15 +145,11 @@ def load_library(path: Path) -> list:
 def build_stable_id(item: dict, example_index: int) -> str:
     """
     Builds a globally unique stable ID for a prompt library entry.
-    Format: projectName_pageIndex_exampleIndex
-    Falls back gracefully if projectName is absent.
+    Format: example_pageIndex_exampleIndex
+
+    Library entries store a single-page ``expected_layout_json`` (no
+    projectInfo), so the ID is derived from pageIndex + a running index,
+    which is already guaranteed unique across the whole library.
     """
-    project_name = (
-        item.get("expected_layout_json", {})
-            .get("projectInfo", {})
-            .get("projectName", "example")
-    )
     page_index = item.get("pageIndex", 0)
-    # Sanitize project name for use as an ID component
-    safe_name = re.sub(r"[^a-zA-Z0-9]", "_", str(project_name)).lower()
-    return f"{safe_name}_{page_index}_{example_index}"
+    return f"example_{page_index}_{example_index}"

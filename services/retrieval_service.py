@@ -14,7 +14,7 @@ Pipeline:
 import logging
 from pathlib import Path
 
-from config.config import AppConfig
+from core.config import AppConfig
 from core.vertex_client import vertex_client
 from services.vector_store import VertexVectorStore
 from utils.retrieval_utils import (

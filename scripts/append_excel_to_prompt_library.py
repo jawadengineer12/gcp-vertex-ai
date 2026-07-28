@@ -6,7 +6,7 @@ Run prepare_vertex_vector_data.py after this to regenerate embeddings.
 """
 import json
 import pandas as pd
-from config.config import AppConfig
+from core.config import AppConfig
 from core.logger import setup_logging, get_logger
 from utils.retrieval_utils import build_stable_id
 

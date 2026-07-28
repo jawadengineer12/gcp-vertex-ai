@@ -1,0 +1,32 @@
+{
+  "id": "editorial_page",
+  "name": "Editorial Page",
+  "defaultSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11,
+    "margin": 0.25,
+    "columns": 2,
+    "gutter": 0.2,
+    "fontFamily": "Adobe Garamond Pro\\tRegular"
+  },
+  "requiredFields": [
+    {
+      "name": "guest_writer_name",
+      "type": "text",
+      "required": true,
+      "question": "Guest writer name"
+    },
+    {
+      "name": "guest_writer_photo_url",
+      "type": "image",
+      "required": true,
+      "question": "Guest writer photo HTTPS URL"
+    },
+    {
+      "name": "publisher_name",
+      "type": "text",
+      "required": false,
+      "question": "Publisher name"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import logging
 import sys
 from logging.handlers import RotatingFileHandler
 
-from config.config import (
+from core.config import (
     PIPELINE_LOG_PATH,
     LOG_LEVEL,
     LOG_MAX_BYTES,

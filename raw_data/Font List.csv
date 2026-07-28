@@ -1,0 +1,685 @@
+Font Family,Font Style,Exact InDesign Name,PostScript Name
+EmojiOne,Color,EmojiOne\tColor,EmojiOneColor
+Noto Color Emoji SVG,Regular,Noto Color Emoji SVG\tRegular,NotoColorEmoji-SVG
+Segoe UI Emoji,Regular,Segoe UI Emoji\tRegular,SegoeUIEmoji
+Acumin Variable Concept,ExtraLight-194.286,Acumin Variable Concept\tExtraLight-194.286,AcuminConcept_194.286wght
+Acumin Variable Concept,ExtraCondensed Thin,Acumin Variable Concept\tExtraCondensed Thin,AcuminConcept-ExtraCondThin
+Acumin Variable Concept,ExtraCondensed Thin Italic,Acumin Variable Concept\tExtraCondensed Thin Italic,AcuminConcept-ExtraCondThinItalic
+Acumin Variable Concept,ExtraCondensed ExtraLight,Acumin Variable Concept\tExtraCondensed ExtraLight,AcuminConcept-ExtraCondExtraLight
+Acumin Variable Concept,ExtraCondensed ExtraLight Italic,Acumin Variable Concept\tExtraCondensed ExtraLight Italic,AcuminConcept-ExtraCondExtraLightItalic
+Acumin Variable Concept,ExtraCondensed Light,Acumin Variable Concept\tExtraCondensed Light,AcuminConcept-ExtraCondLight
+Acumin Variable Concept,ExtraCondensed Light Italic,Acumin Variable Concept\tExtraCondensed Light Italic,AcuminConcept-ExtraCondLightItalic
+Acumin Variable Concept,ExtraCondensed,Acumin Variable Concept\tExtraCondensed,AcuminConcept-ExtraCond
+Acumin Variable Concept,ExtraCondensed Italic,Acumin Variable Concept\tExtraCondensed Italic,AcuminConcept-ExtraCondItalic
+Acumin Variable Concept,ExtraCondensed Medium,Acumin Variable Concept\tExtraCondensed Medium,AcuminConcept-ExtraCondMedium
+Acumin Variable Concept,ExtraCondensed Medium Italic,Acumin Variable Concept\tExtraCondensed Medium Italic,AcuminConcept-ExtraCondMediumItalic
+Acumin Variable Concept,ExtraCondensed Semibold,Acumin Variable Concept\tExtraCondensed Semibold,AcuminConcept-ExtraCondSemibold
+Acumin Variable Concept,ExtraCondensed Semibold Italic,Acumin Variable Concept\tExtraCondensed Semibold Italic,AcuminConcept-ExtraCondSemiboldItalic
+Acumin Variable Concept,ExtraCondensed Bold,Acumin Variable Concept\tExtraCondensed Bold,AcuminConcept-ExtraCondBold
+Acumin Variable Concept,ExtraCondensed Bold Italic,Acumin Variable Concept\tExtraCondensed Bold Italic,AcuminConcept-ExtraCondBoldItalic
+Acumin Variable Concept,ExtraCondensed Black,Acumin Variable Concept\tExtraCondensed Black,AcuminConcept-ExtraCondBlack
+Acumin Variable Concept,ExtraCondensed Black Italic,Acumin Variable Concept\tExtraCondensed Black Italic,AcuminConcept-ExtraCondBlackItalic
+Acumin Variable Concept,ExtraCondensed UltraBlack,Acumin Variable Concept\tExtraCondensed UltraBlack,AcuminConcept-ExtraCondUltraBlack
+Acumin Variable Concept,ExtraCondensed UltraBlack Italic,Acumin Variable Concept\tExtraCondensed UltraBlack Italic,AcuminConcept-ExtraCondUltraBlackItalic
+Acumin Variable Concept,Condensed Thin,Acumin Variable Concept\tCondensed Thin,AcuminConcept-CondThin
+Acumin Variable Concept,Condensed Thin Italic,Acumin Variable Concept\tCondensed Thin Italic,AcuminConcept-CondThinItalic
+Acumin Variable Concept,Condensed ExtraLight,Acumin Variable Concept\tCondensed ExtraLight,AcuminConcept-CondExtraLight
+Acumin Variable Concept,Condensed ExtraLight Italic,Acumin Variable Concept\tCondensed ExtraLight Italic,AcuminConcept-CondExtraLightItalic
+Acumin Variable Concept,Condensed Light,Acumin Variable Concept\tCondensed Light,AcuminConcept-CondLight
+Acumin Variable Concept,Condensed Light Italic,Acumin Variable Concept\tCondensed Light Italic,AcuminConcept-CondLightItalic
+Acumin Variable Concept,Condensed,Acumin Variable Concept\tCondensed,AcuminConcept-Cond
+Acumin Variable Concept,Condensed Italic,Acumin Variable Concept\tCondensed Italic,AcuminConcept-CondItalic
+Acumin Variable Concept,Condensed Medium,Acumin Variable Concept\tCondensed Medium,AcuminConcept-CondMedium
+Acumin Variable Concept,Condensed Medium Italic,Acumin Variable Concept\tCondensed Medium Italic,AcuminConcept-CondMediumItalic
+Acumin Variable Concept,Condensed Semibold,Acumin Variable Concept\tCondensed Semibold,AcuminConcept-CondSemibold
+Acumin Variable Concept,Condensed Semibold Italic,Acumin Variable Concept\tCondensed Semibold Italic,AcuminConcept-CondSemiboldItalic
+Acumin Variable Concept,Condensed Bold,Acumin Variable Concept\tCondensed Bold,AcuminConcept-CondBold
+Acumin Variable Concept,Condensed Bold Italic,Acumin Variable Concept\tCondensed Bold Italic,AcuminConcept-CondBoldItalic
+Acumin Variable Concept,Condensed Black,Acumin Variable Concept\tCondensed Black,AcuminConcept-CondBlack
+Acumin Variable Concept,Condensed Black Italic,Acumin Variable Concept\tCondensed Black Italic,AcuminConcept-CondBlackItalic
+Acumin Variable Concept,Condensed UltraBlack,Acumin Variable Concept\tCondensed UltraBlack,AcuminConcept-CondUltraBlack
+Acumin Variable Concept,Condensed UltraBlack Italic,Acumin Variable Concept\tCondensed UltraBlack Italic,AcuminConcept-CondUltraBlackItalic
+Acumin Variable Concept,SemiCondensed Thin,Acumin Variable Concept\tSemiCondensed Thin,AcuminConcept-SemiCondThin
+Acumin Variable Concept,SemiCondensed Thin Italic,Acumin Variable Concept\tSemiCondensed Thin Italic,AcuminConcept-SemiCondThinItalic
+Acumin Variable Concept,SemiCondensed ExtraLight,Acumin Variable Concept\tSemiCondensed ExtraLight,AcuminConcept-SemiCondExtraLight
+Acumin Variable Concept,SemiCondensed ExtraLight Italic,Acumin Variable Concept\tSemiCondensed ExtraLight Italic,AcuminConcept-SemiCondExtraLightItalic
+Acumin Variable Concept,SemiCondensed Light,Acumin Variable Concept\tSemiCondensed Light,AcuminConcept-SemiCondLight
+Acumin Variable Concept,SemiCondensed Light Italic,Acumin Variable Concept\tSemiCondensed Light Italic,AcuminConcept-SemiCondLightItalic
+Acumin Variable Concept,SemiCondensed,Acumin Variable Concept\tSemiCondensed,AcuminConcept-SemiCond
+Acumin Variable Concept,SemiCondensed Italic,Acumin Variable Concept\tSemiCondensed Italic,AcuminConcept-SemiCondItalic
+Acumin Variable Concept,SemiCondensed Medium,Acumin Variable Concept\tSemiCondensed Medium,AcuminConcept-SemiCondMedium
+Acumin Variable Concept,SemiCondensed Medium Italic,Acumin Variable Concept\tSemiCondensed Medium Italic,AcuminConcept-SemiCondMediumItalic
+Acumin Variable Concept,SemiCondensed Semibold,Acumin Variable Concept\tSemiCondensed Semibold,AcuminConcept-SemiCondSemibold
+Acumin Variable Concept,SemiCondensed Semibold Italic,Acumin Variable Concept\tSemiCondensed Semibold Italic,AcuminConcept-SemiCondSemiboldItalic
+Acumin Variable Concept,SemiCondensed Bold,Acumin Variable Concept\tSemiCondensed Bold,AcuminConcept-SemiCondBold
+Acumin Variable Concept,SemiCondensed Bold Italic,Acumin Variable Concept\tSemiCondensed Bold Italic,AcuminConcept-SemiCondBoldItalic
+Acumin Variable Concept,SemiCondensed Black,Acumin Variable Concept\tSemiCondensed Black,AcuminConcept-SemiCondBlack
+Acumin Variable Concept,SemiCondensed Black Italic,Acumin Variable Concept\tSemiCondensed Black Italic,AcuminConcept-SemiCondBlackItalic
+Acumin Variable Concept,SemiCondensed UltraBlack,Acumin Variable Concept\tSemiCondensed UltraBlack,AcuminConcept-SemiCondUltraBlack
+Acumin Variable Concept,SemiCondensed UltraBlack Italic,Acumin Variable Concept\tSemiCondensed UltraBlack Italic,AcuminConcept-SemiCondUltraBlackItalic
+Acumin Variable Concept,Thin,Acumin Variable Concept\tThin,AcuminConcept-Thin
+Acumin Variable Concept,Thin Italic,Acumin Variable Concept\tThin Italic,AcuminConcept-ThinItalic
+Acumin Variable Concept,ExtraLight,Acumin Variable Concept\tExtraLight,AcuminConcept-ExtraLight
+Acumin Variable Concept,ExtraLight Italic,Acumin Variable Concept\tExtraLight Italic,AcuminConcept-ExtraLightItalic
+Acumin Variable Concept,Light,Acumin Variable Concept\tLight,AcuminConcept-Light
+Acumin Variable Concept,Light Italic,Acumin Variable Concept\tLight Italic,AcuminConcept-LightItalic
+Acumin Variable Concept,Regular,Acumin Variable Concept\tRegular,AcuminConcept-Regular
+Acumin Variable Concept,Italic,Acumin Variable Concept\tItalic,AcuminConcept-Italic
+Acumin Variable Concept,Medium,Acumin Variable Concept\tMedium,AcuminConcept-Medium
+Acumin Variable Concept,Medium Italic,Acumin Variable Concept\tMedium Italic,AcuminConcept-MediumItalic
+Acumin Variable Concept,Semibold,Acumin Variable Concept\tSemibold,AcuminConcept-Semibold
+Acumin Variable Concept,Semibold Italic,Acumin Variable Concept\tSemibold Italic,AcuminConcept-SemiboldItalic
+Acumin Variable Concept,Bold,Acumin Variable Concept\tBold,AcuminConcept-Bold
+Acumin Variable Concept,Bold Italic,Acumin Variable Concept\tBold Italic,AcuminConcept-BoldItalic
+Acumin Variable Concept,Black,Acumin Variable Concept\tBlack,AcuminConcept-Black
+Acumin Variable Concept,Black Italic,Acumin Variable Concept\tBlack Italic,AcuminConcept-BlackItalic
+Acumin Variable Concept,UltraBlack,Acumin Variable Concept\tUltraBlack,AcuminConcept-UltraBlack
+Acumin Variable Concept,UltraBlack Italic,Acumin Variable Concept\tUltraBlack Italic,AcuminConcept-UltraBlackItalic
+Acumin Variable Concept,Wide Thin,Acumin Variable Concept\tWide Thin,AcuminConcept-WideThin
+Acumin Variable Concept,Wide Thin Italic,Acumin Variable Concept\tWide Thin Italic,AcuminConcept-WideThinItalic
+Acumin Variable Concept,Wide ExtraLight,Acumin Variable Concept\tWide ExtraLight,AcuminConcept-WideExtraLight
+Acumin Variable Concept,Wide ExtraLight Italic,Acumin Variable Concept\tWide ExtraLight Italic,AcuminConcept-WideExtraLightItalic
+Acumin Variable Concept,Wide Light,Acumin Variable Concept\tWide Light,AcuminConcept-WideLight
+Acumin Variable Concept,Wide Light Italic,Acumin Variable Concept\tWide Light Italic,AcuminConcept-WideLightItalic
+Acumin Variable Concept,Wide,Acumin Variable Concept\tWide,AcuminConcept-Wide
+Acumin Variable Concept,Wide Italic,Acumin Variable Concept\tWide Italic,AcuminConcept-WideItalic
+Acumin Variable Concept,Wide Medium,Acumin Variable Concept\tWide Medium,AcuminConcept-WideMedium
+Acumin Variable Concept,Wide Medium Italic,Acumin Variable Concept\tWide Medium Italic,AcuminConcept-WideMediumItalic
+Acumin Variable Concept,Wide Semibold,Acumin Variable Concept\tWide Semibold,AcuminConcept-WideSemibold
+Acumin Variable Concept,Wide Semibold Italic,Acumin Variable Concept\tWide Semibold Italic,AcuminConcept-WideSemiboldItalic
+Acumin Variable Concept,Wide Bold,Acumin Variable Concept\tWide Bold,AcuminConcept-WideBold
+Acumin Variable Concept,Wide Bold Italic,Acumin Variable Concept\tWide Bold Italic,AcuminConcept-WideBoldItalic
+Acumin Variable Concept,Wide Black,Acumin Variable Concept\tWide Black,AcuminConcept-WideBlack
+Acumin Variable Concept,Wide Black Italic,Acumin Variable Concept\tWide Black Italic,AcuminConcept-WideBlackItalic
+Acumin Variable Concept,Wide UltraBlack,Acumin Variable Concept\tWide UltraBlack,AcuminConcept-WideUltraBlack
+Acumin Variable Concept,Wide UltraBlack Italic,Acumin Variable Concept\tWide UltraBlack Italic,AcuminConcept-WideUltraBlackItalic
+Agency FB,Regular,Agency FB\tRegular,AgencyFB-Reg
+Agency FB,Bold,Agency FB\tBold,AgencyFB-Bold
+Algerian,Regular,Algerian\tRegular,Algerian
+Arial,Narrow,Arial\tNarrow,ArialNarrow
+Arial,Narrow Italic,Arial\tNarrow Italic,ArialNarrow-Italic
+Arial,Narrow Bold,Arial\tNarrow Bold,ArialNarrow-Bold
+Arial,Narrow Bold Italic,Arial\tNarrow Bold Italic,ArialNarrow-BoldItalic
+Arial,Regular,Arial\tRegular,ArialMT
+Arial,Italic,Arial\tItalic,Arial-ItalicMT
+Arial,Bold,Arial\tBold,Arial-BoldMT
+Arial,Bold Italic,Arial\tBold Italic,Arial-BoldItalicMT
+Arial,Black,Arial\tBlack,Arial-Black
+Arial Rounded MT Bold,Regular,Arial Rounded MT Bold\tRegular,ArialRoundedMTBold
+Bahnschrift,Light Condensed,Bahnschrift\tLight Condensed,Bahnschrift-LightCondensed
+Bahnschrift,Light SemiCondensed,Bahnschrift\tLight SemiCondensed,Bahnschrift-LightSemiCondensed
+Bahnschrift,Light,Bahnschrift\tLight,Bahnschrift-Light
+Bahnschrift,SemiLight Condensed,Bahnschrift\tSemiLight Condensed,Bahnschrift-SemiLightCondensed
+Bahnschrift,SemiLight SemiCondensed,Bahnschrift\tSemiLight SemiCondensed,Bahnschrift-SemiLightSemiCondensed
+Bahnschrift,SemiLight,Bahnschrift\tSemiLight,Bahnschrift-SemiLight
+Bahnschrift,Condensed,Bahnschrift\tCondensed,Bahnschrift-Condensed
+Bahnschrift,SemiCondensed,Bahnschrift\tSemiCondensed,Bahnschrift-SemiCondensed
+Bahnschrift,Regular,Bahnschrift\tRegular,Bahnschrift-Regular
+Bahnschrift,SemiBold Condensed,Bahnschrift\tSemiBold Condensed,Bahnschrift-SemiBoldCondensed
+Bahnschrift,SemiBold SemiCondensed,Bahnschrift\tSemiBold SemiCondensed,Bahnschrift-SemiBoldSemiCondensed
+Bahnschrift,SemiBold,Bahnschrift\tSemiBold,Bahnschrift-SemiBold
+Bahnschrift,Bold Condensed,Bahnschrift\tBold Condensed,Bahnschrift-BoldCondensed
+Bahnschrift,Bold SemiCondensed,Bahnschrift\tBold SemiCondensed,Bahnschrift-BoldSemiCondensed
+Bahnschrift,Bold,Bahnschrift\tBold,Bahnschrift-Bold
+Baskerville Old Face,Regular,Baskerville Old Face\tRegular,BaskOldFace
+Bauhaus 93,Regular,Bauhaus 93\tRegular,Bauhaus93
+Bell MT,Regular,Bell MT\tRegular,BellMT
+Bell MT,Italic,Bell MT\tItalic,BellMTItalic
+Bell MT,Bold,Bell MT\tBold,BellMTBold
+Berlin Sans FB,Regular,Berlin Sans FB\tRegular,BerlinSansFB-Reg
+Berlin Sans FB,Bold,Berlin Sans FB\tBold,BerlinSansFB-Bold
+Berlin Sans FB Demi,Bold,Berlin Sans FB Demi\tBold,BerlinSansFBDemi-Bold
+Bernard MT Condensed,Regular,Bernard MT Condensed\tRegular,BernardMT-Condensed
+Blackadder ITC,Regular,Blackadder ITC\tRegular,BlackadderITC-Regular
+Blenny,Black,Blenny\tBlack,Blenny-Black
+Bodoni MT,Poster Compressed,Bodoni MT\tPoster Compressed,BodoniMTPosterCompressed
+Bodoni MT,Condensed,Bodoni MT\tCondensed,BodoniMTCondensed
+Bodoni MT,Condensed Italic,Bodoni MT\tCondensed Italic,BodoniMTCondensed-Italic
+Bodoni MT,Condensed Bold,Bodoni MT\tCondensed Bold,BodoniMTCondensed-Bold
+Bodoni MT,Condensed Bold Italic,Bodoni MT\tCondensed Bold Italic,BodoniMTCondensed-BoldItalic
+Bodoni MT,Regular,Bodoni MT\tRegular,BodoniMT
+Bodoni MT,Italic,Bodoni MT\tItalic,BodoniMT-Italic
+Bodoni MT,Bold,Bodoni MT\tBold,BodoniMT-Bold
+Bodoni MT,Bold Italic,Bodoni MT\tBold Italic,BodoniMT-BoldItalic
+Bodoni MT,Black,Bodoni MT\tBlack,BodoniMTBlack
+Bodoni MT,Black Italic,Bodoni MT\tBlack Italic,BodoniMTBlack-Italic
+Book Antiqua,Regular,Book Antiqua\tRegular,BookAntiqua
+Book Antiqua,Italic,Book Antiqua\tItalic,BookAntiqua-Italic
+Book Antiqua,Bold,Book Antiqua\tBold,BookAntiqua-Bold
+Book Antiqua,Bold Italic,Book Antiqua\tBold Italic,BookAntiqua-BoldItalic
+Bookman Old Style,Regular,Bookman Old Style\tRegular,BookmanOldStyle
+Bookman Old Style,Italic,Bookman Old Style\tItalic,BookmanOldStyle-Italic
+Bookman Old Style,Bold,Bookman Old Style\tBold,BookmanOldStyle-Bold
+Bookman Old Style,Bold Italic,Bookman Old Style\tBold Italic,BookmanOldStyle-BoldItalic
+Bookshelf Symbol 7,Regular,Bookshelf Symbol 7\tRegular,BookshelfSymbolSeven
+Bradley Hand ITC,Regular,Bradley Hand ITC\tRegular,BradleyHandITC
+Britannic Bold,Regular,Britannic Bold\tRegular,BritannicBold
+Broadway,Regular,Broadway\tRegular,Broadway
+Brush Script MT,Italic,Brush Script MT\tItalic,BrushScriptMT
+Calibri,Light,Calibri\tLight,Calibri-Light
+Calibri,Light Italic,Calibri\tLight Italic,Calibri-LightItalic
+Calibri,Regular,Calibri\tRegular,Calibri
+Calibri,Italic,Calibri\tItalic,Calibri-Italic
+Calibri,Bold,Calibri\tBold,Calibri-Bold
+Calibri,Bold Italic,Calibri\tBold Italic,Calibri-BoldItalic
+Californian FB,Regular,Californian FB\tRegular,CalifornianFB-Reg
+Californian FB,Italic,Californian FB\tItalic,CalifornianFB-Italic
+Californian FB,Bold,Californian FB\tBold,CalifornianFB-Bold
+Calisto MT,Regular,Calisto MT\tRegular,CalistoMT
+Calisto MT,Italic,Calisto MT\tItalic,CalistoMT-Italic
+Calisto MT,Bold,Calisto MT\tBold,CalisMTBol
+Calisto MT,Bold Italic,Calisto MT\tBold Italic,CalistoMT-BoldItalic
+Cambria,Regular,Cambria\tRegular,Cambria
+Cambria,Italic,Cambria\tItalic,Cambria-Italic
+Cambria,Bold,Cambria\tBold,Cambria-Bold
+Cambria,Bold Italic,Cambria\tBold Italic,Cambria-BoldItalic
+Cambria Math,Regular,Cambria Math\tRegular,CambriaMath
+Candara,Light,Candara\tLight,Candara-Light
+Candara,Regular,Candara\tRegular,Candara
+Candara,Italic,Candara\tItalic,Candara-Italic
+Candara,Light Italic,Candara\tLight Italic,Candara-LightItalic
+Candara,Bold,Candara\tBold,Candara-Bold
+Candara,Bold Italic,Candara\tBold Italic,Candara-BoldItalic
+Cascadia Code,ExtraLight,Cascadia Code\tExtraLight,CascadiaCodeRoman-ExtraLight
+Cascadia Code,Light,Cascadia Code\tLight,CascadiaCodeRoman-Light
+Cascadia Code,SemiLight,Cascadia Code\tSemiLight,CascadiaCodeRoman-SemiLight
+Cascadia Code,Regular,Cascadia Code\tRegular,CascadiaCodeRoman-Regular
+Cascadia Code,SemiBold,Cascadia Code\tSemiBold,CascadiaCodeRoman-SemiBold
+Cascadia Code,Bold,Cascadia Code\tBold,CascadiaCodeRoman-Bold
+Cascadia Code,ExtraLight Italic,Cascadia Code\tExtraLight Italic,CascadiaCode-ExtraLightItalic
+Cascadia Code,Light Italic,Cascadia Code\tLight Italic,CascadiaCode-LightItalic
+Cascadia Code,SemiLight Italic,Cascadia Code\tSemiLight Italic,CascadiaCode-SemiLightItalic
+Cascadia Code,Italic,Cascadia Code\tItalic,CascadiaCode-Italic
+Cascadia Code,SemiBold Italic,Cascadia Code\tSemiBold Italic,CascadiaCode-SemiBoldItalic
+Cascadia Code,Bold Italic,Cascadia Code\tBold Italic,CascadiaCode-BoldItalic
+Cascadia Mono,ExtraLight,Cascadia Mono\tExtraLight,CascadiaMonoRoman-ExtraLight
+Cascadia Mono,Light,Cascadia Mono\tLight,CascadiaMonoRoman-Light
+Cascadia Mono,SemiLight,Cascadia Mono\tSemiLight,CascadiaMonoRoman-SemiLight
+Cascadia Mono,Regular,Cascadia Mono\tRegular,CascadiaMonoRoman-Regular
+Cascadia Mono,SemiBold,Cascadia Mono\tSemiBold,CascadiaMonoRoman-SemiBold
+Cascadia Mono,Bold,Cascadia Mono\tBold,CascadiaMonoRoman-Bold
+Cascadia Mono,ExtraLight Italic,Cascadia Mono\tExtraLight Italic,CascadiaMono-ExtraLightItalic
+Cascadia Mono,Light Italic,Cascadia Mono\tLight Italic,CascadiaMono-LightItalic
+Cascadia Mono,SemiLight Italic,Cascadia Mono\tSemiLight Italic,CascadiaMono-SemiLightItalic
+Cascadia Mono,Italic,Cascadia Mono\tItalic,CascadiaMono-Italic
+Cascadia Mono,SemiBold Italic,Cascadia Mono\tSemiBold Italic,CascadiaMono-SemiBoldItalic
+Cascadia Mono,Bold Italic,Cascadia Mono\tBold Italic,CascadiaMono-BoldItalic
+Castellar,Regular,Castellar\tRegular,Castellar
+Centaur,Regular,Centaur\tRegular,Centaur
+Century,Regular,Century\tRegular,Century
+Century Gothic,Regular,Century Gothic\tRegular,CenturyGothic
+Century Gothic,Italic,Century Gothic\tItalic,CenturyGothic-Italic
+Century Gothic,Bold,Century Gothic\tBold,CenturyGothic-Bold
+Century Gothic,Bold Italic,Century Gothic\tBold Italic,CenturyGothic-BoldItalic
+Century Schoolbook,Regular,Century Schoolbook\tRegular,CenturySchoolbook
+Century Schoolbook,Italic,Century Schoolbook\tItalic,CenturySchoolbook-Italic
+Century Schoolbook,Bold,Century Schoolbook\tBold,CenturySchoolbook-Bold
+Century Schoolbook,Bold Italic,Century Schoolbook\tBold Italic,CenturySchoolbook-BoldItalic
+Chiller,Regular,Chiller\tRegular,Chiller-Regular
+Colonna MT,Regular,Colonna MT\tRegular,ColonnaMT
+Comic Sans MS,Regular,Comic Sans MS\tRegular,ComicSansMS
+Comic Sans MS,Italic,Comic Sans MS\tItalic,ComicSansMS-Italic
+Comic Sans MS,Bold,Comic Sans MS\tBold,ComicSansMS-Bold
+Comic Sans MS,Bold Italic,Comic Sans MS\tBold Italic,ComicSansMS-BoldItalic
+Consolas,Regular,Consolas\tRegular,Consolas
+Consolas,Italic,Consolas\tItalic,Consolas-Italic
+Consolas,Bold,Consolas\tBold,Consolas-Bold
+Consolas,Bold Italic,Consolas\tBold Italic,Consolas-BoldItalic
+Constantia,Regular,Constantia\tRegular,Constantia
+Constantia,Italic,Constantia\tItalic,Constantia-Italic
+Constantia,Bold,Constantia\tBold,Constantia-Bold
+Constantia,Bold Italic,Constantia\tBold Italic,Constantia-BoldItalic
+Cooper Black,Regular,Cooper Black\tRegular,CooperBlack
+Copperplate Gothic Bold,Regular,Copperplate Gothic Bold\tRegular,CopperplateGothic-Bold
+Copperplate Gothic Light,Regular,Copperplate Gothic Light\tRegular,CopperplateGothic-Light
+Corbel,Light,Corbel\tLight,CorbelLight
+Corbel,Light Italic,Corbel\tLight Italic,CorbelLight-Italic
+Corbel,Regular,Corbel\tRegular,Corbel
+Corbel,Italic,Corbel\tItalic,Corbel-Italic
+Corbel,Bold,Corbel\tBold,Corbel-Bold
+Corbel,Bold Italic,Corbel\tBold Italic,Corbel-BoldItalic
+Monotype Corsiva,Regular,Monotype Corsiva\tRegular,MonotypeCorsiva
+Courier New,Regular,Courier New\tRegular,CourierNewPSMT
+Courier New,Italic,Courier New\tItalic,CourierNewPS-ItalicMT
+Courier New,Bold,Courier New\tBold,CourierNewPS-BoldMT
+Courier New,Bold Italic,Courier New\tBold Italic,CourierNewPS-BoldItalicMT
+Curlz MT,Regular,Curlz MT\tRegular,CurlzMT
+Dejanire Headline,Italic,Dejanire Headline\tItalic,DejanireHeadline-Italic
+Dejanire Headline,Bold Italic,Dejanire Headline\tBold Italic,DejanireHeadline-BoldItalic
+Ebrima,Regular,Ebrima\tRegular,Ebrima
+Ebrima,Bold,Ebrima\tBold,Ebrima-Bold
+Edwardian Script ITC,Regular,Edwardian Script ITC\tRegular,EdwardianScriptITC
+Elephant,Regular,Elephant\tRegular,Elephant-Regular
+Elephant,Italic,Elephant\tItalic,Elephant-Italic
+Engravers MT,Regular,Engravers MT\tRegular,EngraversMT
+Eras Bold ITC,Regular,Eras Bold ITC\tRegular,ErasITC-Bold
+Eras Demi ITC,Regular,Eras Demi ITC\tRegular,ErasITC-Demi
+Eras Light ITC,Regular,Eras Light ITC\tRegular,ErasITC-Light
+Eras Medium ITC,Regular,Eras Medium ITC\tRegular,ErasITC-Medium
+Felix Titling,Regular,Felix Titling\tRegular,FelixTitlingMT
+Footlight MT Light,Regular,Footlight MT Light\tRegular,FootlightMTLight
+Forte,Regular,Forte\tRegular,ForteMT
+Franklin Gothic Book,Regular,Franklin Gothic Book\tRegular,FranklinGothic-Book
+Franklin Gothic Book,Italic,Franklin Gothic Book\tItalic,FranklinGothic-BookItalic
+Franklin Gothic Demi,Regular,Franklin Gothic Demi\tRegular,FranklinGothic-Demi
+Franklin Gothic Demi,Italic,Franklin Gothic Demi\tItalic,FranklinGothic-DemiItalic
+Franklin Gothic Demi Cond,Regular,Franklin Gothic Demi Cond\tRegular,FranklinGothic-DemiCond
+Franklin Gothic Heavy,Regular,Franklin Gothic Heavy\tRegular,FranklinGothic-Heavy
+Franklin Gothic Heavy,Italic,Franklin Gothic Heavy\tItalic,FranklinGothic-HeavyItalic
+Franklin Gothic Medium,Regular,Franklin Gothic Medium\tRegular,FranklinGothic-Medium
+Franklin Gothic Medium,Italic,Franklin Gothic Medium\tItalic,FranklinGothic-MediumItalic
+Franklin Gothic Medium Cond,Regular,Franklin Gothic Medium Cond\tRegular,FranklinGothic-MediumCond
+Freestyle Script,Regular,Freestyle Script\tRegular,FreestyleScript-Regular
+French Script MT,Regular,French Script MT\tRegular,FrenchScriptMT
+Gabriola,Regular,Gabriola\tRegular,Gabriola
+Gadugi,Regular,Gadugi\tRegular,Gadugi
+Gadugi,Bold,Gadugi\tBold,Gadugi-Bold
+Garamond,Regular,Garamond\tRegular,Garamond
+Garamond,Italic,Garamond\tItalic,Garamond-Italic
+Garamond,Bold,Garamond\tBold,Garamond-Bold
+Adobe Garamond Pro,Regular,Adobe Garamond Pro\tRegular,AGaramondPro-Regular
+Adobe Garamond Pro,Italic,Adobe Garamond Pro\tItalic,AGaramondPro-Italic
+Adobe Garamond Pro,Semibold,Adobe Garamond Pro\tSemibold,AGaramondPro-Semibold
+Adobe Garamond Pro,Bold,Adobe Garamond Pro\tBold,AGaramondPro-Bold
+Georgia,Regular,Georgia\tRegular,Georgia
+Georgia,Italic,Georgia\tItalic,Georgia-Italic
+Georgia,Bold,Georgia\tBold,Georgia-Bold
+Georgia,Bold Italic,Georgia\tBold Italic,Georgia-BoldItalic
+Gigi,Regular,Gigi\tRegular,Gigi-Regular
+Gill Sans MT,Regular,Gill Sans MT\tRegular,GillSansMT
+Gill Sans MT,Italic,Gill Sans MT\tItalic,GillSansMT-Italic
+Gill Sans MT,Bold,Gill Sans MT\tBold,GillSansMT-Bold
+Gill Sans MT,Bold Italic,Gill Sans MT\tBold Italic,GillSansMT-BoldItalic
+Gill Sans MT Condensed,Regular,Gill Sans MT Condensed\tRegular,GillSansMT-Condensed
+Gill Sans MT Ext Condensed Bold,Regular,Gill Sans MT Ext Condensed Bold\tRegular,GillSansMT-ExtraCondensedBold
+Gill Sans Ultra Bold,Regular,Gill Sans Ultra Bold\tRegular,GillSans-UltraBold
+Gill Sans Ultra Bold Condensed,Regular,Gill Sans Ultra Bold Condensed\tRegular,GillSans-UltraBoldCondensed
+Gloucester MT Extra Condensed,Regular,Gloucester MT Extra Condensed\tRegular,GloucesterMT-ExtraCondensed
+Gotham,Book,Gotham\tBook,Gotham-Book
+Gotham,Medium,Gotham\tMedium,Gotham-Medium
+Gotham,Bold,Gotham\tBold,Gotham-Bold
+Goudy Old Style,Italic,Goudy Old Style\tItalic,GoudyOldStyleT-Italic
+Goudy Old Style,Regular,Goudy Old Style\tRegular,GoudyOldStyleT-Regular
+Goudy Old Style,Bold,Goudy Old Style\tBold,GoudyOldStyleT-Bold
+Goudy Stout,Regular,Goudy Stout\tRegular,GoudyStout
+Haettenschweiler,Regular,Haettenschweiler\tRegular,Haettenschweiler
+Harlow Solid Italic,Italic,Harlow Solid Italic\tItalic,HarlowSolid
+Harrington,Regular,Harrington\tRegular,Harrington
+High Tower Text,Regular,High Tower Text\tRegular,HighTowerText-Reg
+High Tower Text,Italic,High Tower Text\tItalic,HighTowerText-Italic
+Impact,Regular,Impact\tRegular,Impact
+Imprint MT Shadow,Regular,Imprint MT Shadow\tRegular,ImprintMT-Shadow
+Informal Roman,Regular,Informal Roman\tRegular,InformalRoman-Regular
+Ink Free,Regular,Ink Free\tRegular,InkFree
+Javanese Text,Regular,Javanese Text\tRegular,JavaneseText
+Jokerman,Regular,Jokerman\tRegular,Jokerman-Regular
+Juice ITC,Regular,Juice ITC\tRegular,JuiceITC-Regular
+Kristen ITC,Regular,Kristen ITC\tRegular,KristenITC-Regular
+Kunstler Script,Regular,Kunstler Script\tRegular,KunstlerScript
+Letter Gothic Std,Medium,Letter Gothic Std\tMedium,LetterGothicStd
+Letter Gothic Std,Slanted,Letter Gothic Std\tSlanted,LetterGothicStd-Slanted
+Letter Gothic Std,Bold,Letter Gothic Std\tBold,LetterGothicStd-Bold
+Letter Gothic Std,Bold Slanted,Letter Gothic Std\tBold Slanted,LetterGothicStd-BoldSlanted
+Lucida Bright,Regular,Lucida Bright\tRegular,LucidaBright
+Lucida Bright,Italic,Lucida Bright\tItalic,LucidaBright-Italic
+Lucida Bright,Demibold,Lucida Bright\tDemibold,LucidaBright-Demi
+Lucida Bright,Demibold Italic,Lucida Bright\tDemibold Italic,LucidaBright-DemiItalic
+Lucida Calligraphy,Italic,Lucida Calligraphy\tItalic,LucidaCalligraphy-Italic
+Lucida Console,Regular,Lucida Console\tRegular,LucidaConsole
+Lucida Fax,Regular,Lucida Fax\tRegular,LucidaFax
+Lucida Fax,Italic,Lucida Fax\tItalic,LucidaFax-Italic
+Lucida Fax,Demibold,Lucida Fax\tDemibold,LucidaFax-Demi
+Lucida Fax,Demibold Italic,Lucida Fax\tDemibold Italic,LucidaFax-DemiItalic
+Lucida Handwriting,Italic,Lucida Handwriting\tItalic,LucidaHandwriting-Italic
+Lucida Sans,Regular,Lucida Sans\tRegular,LucidaSans
+Lucida Sans,Italic,Lucida Sans\tItalic,LucidaSans-Italic
+Lucida Sans,Demibold Roman,Lucida Sans\tDemibold Roman,LucidaSans-Demi
+Lucida Sans,Demibold Italic,Lucida Sans\tDemibold Italic,LucidaSans-DemiItalic
+Lucida Sans Typewriter,Regular,Lucida Sans Typewriter\tRegular,LucidaSans-Typewriter
+Lucida Sans Typewriter,Oblique,Lucida Sans Typewriter\tOblique,LucidaSans-TypewriterOblique
+Lucida Sans Typewriter,Bold,Lucida Sans Typewriter\tBold,LucidaSans-TypewriterBold
+Lucida Sans Typewriter,Bold Oblique,Lucida Sans Typewriter\tBold Oblique,LucidaSans-TypewriterBoldOblique
+Lucida Sans Unicode,Regular,Lucida Sans Unicode\tRegular,LucidaSansUnicode
+Magneto,Bold,Magneto\tBold,Magneto-Bold
+Maiandra GD,Regular,Maiandra GD\tRegular,MaiandraGD-Regular
+Marlett,Regular,Marlett\tRegular,Marlett
+Matura MT Script Capitals,Regular,Matura MT Script Capitals\tRegular,MaturaMTScriptCapitals
+Microsoft Himalaya,Regular,Microsoft Himalaya\tRegular,Microsoft-Himalaya
+Microsoft New Tai Lue,Regular,Microsoft New Tai Lue\tRegular,MicrosoftNewTaiLue
+Microsoft New Tai Lue,Bold,Microsoft New Tai Lue\tBold,MicrosoftNewTaiLue-Bold
+Microsoft PhagsPa,Regular,Microsoft PhagsPa\tRegular,MicrosoftPhagsPa
+Microsoft PhagsPa,Bold,Microsoft PhagsPa\tBold,MicrosoftPhagsPa-Bold
+Microsoft Sans Serif,Regular,Microsoft Sans Serif\tRegular,MicrosoftSansSerif
+Microsoft Tai Le,Regular,Microsoft Tai Le\tRegular,MicrosoftTaiLe
+Microsoft Tai Le,Bold,Microsoft Tai Le\tBold,MicrosoftTaiLe-Bold
+Microsoft Yi Baiti,Regular,Microsoft Yi Baiti\tRegular,Microsoft-Yi-Baiti
+Minion Pro,Regular,Minion Pro\tRegular,MinionPro-Regular
+Minion Pro,Italic,Minion Pro\tItalic,MinionPro-It
+Minion Pro,Bold,Minion Pro\tBold,MinionPro-Bold
+Minion Variable Concept,Regular,Minion Variable Concept\tRegular,MinionConceptRoman-Regular
+Minion Variable Concept,Medium,Minion Variable Concept\tMedium,MinionConceptRoman-Medium
+Minion Variable Concept,Semibold,Minion Variable Concept\tSemibold,MinionConceptRoman-Semibold
+Minion Variable Concept,Bold,Minion Variable Concept\tBold,MinionConceptRoman-Bold
+Minion Variable Concept,Display,Minion Variable Concept\tDisplay,MinionConceptRoman-Display
+Minion Variable Concept,Display Medium,Minion Variable Concept\tDisplay Medium,MinionConceptRoman-DisplayMedium
+Minion Variable Concept,Display Semibold,Minion Variable Concept\tDisplay Semibold,MinionConceptRoman-DisplaySemibold
+Minion Variable Concept,Display Bold,Minion Variable Concept\tDisplay Bold,MinionConceptRoman-DisplayBold
+Minion Variable Concept,Italic,Minion Variable Concept\tItalic,MinionConceptItalic-Regular
+Minion Variable Concept,Medium Italic,Minion Variable Concept\tMedium Italic,MinionConceptItalic-Medium
+Minion Variable Concept,Semibold Italic,Minion Variable Concept\tSemibold Italic,MinionConceptItalic-Semibold
+Minion Variable Concept,Bold Italic,Minion Variable Concept\tBold Italic,MinionConceptItalic-Bold
+Minion Variable Concept,Display Italic,Minion Variable Concept\tDisplay Italic,MinionConceptItalic-Display
+Minion Variable Concept,Display Medium Italic,Minion Variable Concept\tDisplay Medium Italic,MinionConceptItalic-DisplayMedium
+Minion Variable Concept,Display Semibold Italic,Minion Variable Concept\tDisplay Semibold Italic,MinionConceptItalic-DisplaySemibold
+Minion Variable Concept,Display Bold Italic,Minion Variable Concept\tDisplay Bold Italic,MinionConceptItalic-DisplayBold
+Mistral,Regular,Mistral\tRegular,Mistral
+Modern No. 20,Regular,Modern No. 20\tRegular,Modern-Regular
+Mongolian Baiti,Regular,Mongolian Baiti\tRegular,MongolianBaiti
+Montserrat,Regular,Montserrat\tRegular,Montserrat-Regular
+Montserrat,Italic,Montserrat\tItalic,Montserrat-Italic
+Montserrat,Medium,Montserrat\tMedium,Montserrat-Medium
+Montserrat,Medium Italic,Montserrat\tMedium Italic,Montserrat-MediumItalic
+Montserrat,SemiBold,Montserrat\tSemiBold,Montserrat-SemiBold
+Montserrat,Bold,Montserrat\tBold,Montserrat-Bold
+MS Outlook,Regular,MS Outlook\tRegular,MSOutlook
+MS Reference Sans Serif,Regular,MS Reference Sans Serif\tRegular,MSReferenceSansSerif
+MS Reference Specialty,Regular,MS Reference Specialty\tRegular,MSReferenceSpecialty
+MT Extra,Regular,MT Extra\tRegular,MT-Extra
+MV Boli,Regular,MV Boli\tRegular,MVBoli
+Myriad Pro,Regular,Myriad Pro\tRegular,MyriadPro-Regular
+Myriad Pro,Italic,Myriad Pro\tItalic,MyriadPro-It
+Myriad Pro,Bold,Myriad Pro\tBold,MyriadPro-Bold
+Myriad Pro,Bold Italic,Myriad Pro\tBold Italic,MyriadPro-BoldIt
+Myriad Variable Concept,Light Condensed,Myriad Variable Concept\tLight Condensed,MyriadConceptRoman-LightCond
+Myriad Variable Concept,Light SemiCondensed,Myriad Variable Concept\tLight SemiCondensed,MyriadConceptRoman-LightSemiCn
+Myriad Variable Concept,Light,Myriad Variable Concept\tLight,MyriadConceptRoman-Light
+Myriad Variable Concept,Light SemiExtended,Myriad Variable Concept\tLight SemiExtended,MyriadConceptRoman-LightSemiExt
+Myriad Variable Concept,Condensed,Myriad Variable Concept\tCondensed,MyriadConceptRoman-Cond
+Myriad Variable Concept,SemiCondensed,Myriad Variable Concept\tSemiCondensed,MyriadConceptRoman-SemiCn
+Myriad Variable Concept,Regular,Myriad Variable Concept\tRegular,MyriadConceptRoman-Regular
+Myriad Variable Concept,SemiExtended,Myriad Variable Concept\tSemiExtended,MyriadConceptRoman-SemiExt
+Myriad Variable Concept,Semibold Condensed,Myriad Variable Concept\tSemibold Condensed,MyriadConceptRoman-SemiboldCond
+Myriad Variable Concept,Semibold SemiCondensed,Myriad Variable Concept\tSemibold SemiCondensed,MyriadConceptRoman-SemiboldSemiCn
+Myriad Variable Concept,Semibold,Myriad Variable Concept\tSemibold,MyriadConceptRoman-Semibold
+Myriad Variable Concept,Semibold SemiExtended,Myriad Variable Concept\tSemibold SemiExtended,MyriadConceptRoman-SemiboldSemiExt
+Myriad Variable Concept,Bold Condensed,Myriad Variable Concept\tBold Condensed,MyriadConceptRoman-BoldCond
+Myriad Variable Concept,Bold SemiCondensed,Myriad Variable Concept\tBold SemiCondensed,MyriadConceptRoman-BoldSemiCn
+Myriad Variable Concept,Bold,Myriad Variable Concept\tBold,MyriadConceptRoman-Bold
+Myriad Variable Concept,Bold SemiExtended,Myriad Variable Concept\tBold SemiExtended,MyriadConceptRoman-BoldSemiExt
+Myriad Variable Concept,Black Condensed,Myriad Variable Concept\tBlack Condensed,MyriadConceptRoman-BlackCond
+Myriad Variable Concept,Black SemiCondensed,Myriad Variable Concept\tBlack SemiCondensed,MyriadConceptRoman-BlackSemiCn
+Myriad Variable Concept,Black,Myriad Variable Concept\tBlack,MyriadConceptRoman-Black
+Myriad Variable Concept,Black SemiExtended,Myriad Variable Concept\tBlack SemiExtended,MyriadConceptRoman-BlackSemiExt
+Myriad Variable Concept,Light Condensed Italic,Myriad Variable Concept\tLight Condensed Italic,MyriadConceptItalic-LightCond
+Myriad Variable Concept,Light SemiCondensed Italic,Myriad Variable Concept\tLight SemiCondensed Italic,MyriadConceptItalic-LightSemiCn
+Myriad Variable Concept,Light Italic,Myriad Variable Concept\tLight Italic,MyriadConceptItalic-Light
+Myriad Variable Concept,Light SemiExtended Italic,Myriad Variable Concept\tLight SemiExtended Italic,MyriadConceptItalic-LightSemiExt
+Myriad Variable Concept,Condensed Italic,Myriad Variable Concept\tCondensed Italic,MyriadConceptItalic-Cond
+Myriad Variable Concept,SemiCondensed Italic,Myriad Variable Concept\tSemiCondensed Italic,MyriadConceptItalic-SemiCn
+Myriad Variable Concept,Italic,Myriad Variable Concept\tItalic,MyriadConceptItalic-Regular
+Myriad Variable Concept,SemiExtended Italic,Myriad Variable Concept\tSemiExtended Italic,MyriadConceptItalic-SemiExt
+Myriad Variable Concept,Semibold Condensed Italic,Myriad Variable Concept\tSemibold Condensed Italic,MyriadConceptItalic-SemiboldCond
+Myriad Variable Concept,Semibold SemiCondensed Italic,Myriad Variable Concept\tSemibold SemiCondensed Italic,MyriadConceptItalic-SemiboldSemiCn
+Myriad Variable Concept,Semibold Italic,Myriad Variable Concept\tSemibold Italic,MyriadConceptItalic-Semibold
+Myriad Variable Concept,Semibold SemiExtended Italic,Myriad Variable Concept\tSemibold SemiExtended Italic,MyriadConceptItalic-SemiboldSemiExt
+Myriad Variable Concept,Bold Condensed Italic,Myriad Variable Concept\tBold Condensed Italic,MyriadConceptItalic-BoldCond
+Myriad Variable Concept,Bold SemiCondensed Italic,Myriad Variable Concept\tBold SemiCondensed Italic,MyriadConceptItalic-BoldSemiCn
+Myriad Variable Concept,Bold Italic,Myriad Variable Concept\tBold Italic,MyriadConceptItalic-Bold
+Myriad Variable Concept,Bold SemiExtended Italic,Myriad Variable Concept\tBold SemiExtended Italic,MyriadConceptItalic-BoldSemiExt
+Myriad Variable Concept,Black Condensed Italic,Myriad Variable Concept\tBlack Condensed Italic,MyriadConceptItalic-BlackCond
+Myriad Variable Concept,Black SemiCondensed Italic,Myriad Variable Concept\tBlack SemiCondensed Italic,MyriadConceptItalic-BlackSemiCn
+Myriad Variable Concept,Black Italic,Myriad Variable Concept\tBlack Italic,MyriadConceptItalic-Black
+Myriad Variable Concept,Black SemiExtended Italic,Myriad Variable Concept\tBlack SemiExtended Italic,MyriadConceptItalic-BlackSemiExt
+Niagara Engraved,Regular,Niagara Engraved\tRegular,NiagaraEngraved-Reg
+Niagara Solid,Regular,Niagara Solid\tRegular,NiagaraSolid-Reg
+OCR A Extended,Regular,OCR A Extended\tRegular,OCRAExtended
+Old English Text MT,Regular,Old English Text MT\tRegular,OldEnglishTextMT
+Onyx,Regular,Onyx\tRegular,Onyx
+Palace Script MT,Regular,Palace Script MT\tRegular,PalaceScriptMT
+Palatino Linotype,Regular,Palatino Linotype\tRegular,PalatinoLinotype-Roman
+Palatino Linotype,Italic,Palatino Linotype\tItalic,PalatinoLinotype-Italic
+Palatino Linotype,Bold,Palatino Linotype\tBold,PalatinoLinotype-Bold
+Palatino Linotype,Bold Italic,Palatino Linotype\tBold Italic,PalatinoLinotype-BoldItalic
+Papyrus,Regular,Papyrus\tRegular,Papyrus-Regular
+Parchment,Regular,Parchment\tRegular,Parchment-Regular
+Perpetua,Regular,Perpetua\tRegular,Perpetua
+Perpetua,Italic,Perpetua\tItalic,Perpetua-Italic
+Perpetua,Bold,Perpetua\tBold,Perpetua-Bold
+Perpetua,Bold Italic,Perpetua\tBold Italic,Perpetua-BoldItalic
+Perpetua Titling MT,Light,Perpetua Titling MT\tLight,PerpetuaTitlingMT-Light
+Perpetua Titling MT,Bold,Perpetua Titling MT\tBold,PerpetuaTitlingMT-Bold
+Playbill,Regular,Playbill\tRegular,Playbill
+Poor Richard,Regular,Poor Richard\tRegular,PoorRichard-Regular
+Pristina,Regular,Pristina\tRegular,Pristina-Regular
+Rage Italic,Regular,Rage Italic\tRegular,RageItalic
+Raleway,Regular,Raleway\tRegular,Raleway-Regular
+Raleway,Italic,Raleway\tItalic,Raleway-Italic
+Ravie,Regular,Ravie\tRegular,Ravie
+Rockwell,Regular,Rockwell\tRegular,Rockwell
+Rockwell,Italic,Rockwell\tItalic,Rockwell-Italic
+Rockwell,Bold,Rockwell\tBold,Rockwell-Bold
+Rockwell,Bold Italic,Rockwell\tBold Italic,Rockwell-BoldItalic
+Rockwell Condensed,Regular,Rockwell Condensed\tRegular,Rockwell-Condensed
+Rockwell Condensed,Bold,Rockwell Condensed\tBold,Rockwell-CondensedBold
+Rockwell Extra Bold,Regular,Rockwell Extra Bold\tRegular,Rockwell-ExtraBold
+Sans Serif Collection,Regular,Sans Serif Collection\tRegular,SansSerifCollection
+Script MT Bold,Regular,Script MT Bold\tRegular,ScriptMTBold
+Segoe Fluent Icons,Regular,Segoe Fluent Icons\tRegular,SegoeFluentIcons
+Segoe MDL2 Assets,Regular,Segoe MDL2 Assets\tRegular,SegoeMDL2Assets
+Segoe Print,Regular,Segoe Print\tRegular,SegoePrint
+Segoe Print,Bold,Segoe Print\tBold,SegoePrint-Bold
+Segoe Script,Regular,Segoe Script\tRegular,SegoeScript
+Segoe Script,Bold,Segoe Script\tBold,SegoeScript-Bold
+Segoe UI,Light,Segoe UI\tLight,SegoeUI-Light
+Segoe UI,Light Italic,Segoe UI\tLight Italic,SegoeUI-LightItalic
+Segoe UI,Semilight,Segoe UI\tSemilight,SegoeUI-Semilight
+Segoe UI,Semilight Italic,Segoe UI\tSemilight Italic,SegoeUI-SemilightItalic
+Segoe UI,Regular,Segoe UI\tRegular,SegoeUI
+Segoe UI,Italic,Segoe UI\tItalic,SegoeUI-Italic
+Segoe UI,Semibold,Segoe UI\tSemibold,SegoeUI-Semibold
+Segoe UI,Semibold Italic,Segoe UI\tSemibold Italic,SegoeUI-SemiboldItalic
+Segoe UI,Bold,Segoe UI\tBold,SegoeUI-Bold
+Segoe UI,Bold Italic,Segoe UI\tBold Italic,SegoeUI-BoldItalic
+Segoe UI,Black,Segoe UI\tBlack,SegoeUIBlack
+Segoe UI,Black Italic,Segoe UI\tBlack Italic,SegoeUIBlack-Italic
+Segoe UI Historic,Regular,Segoe UI Historic\tRegular,SegoeUIHistoric
+Segoe UI Symbol,Regular,Segoe UI Symbol\tRegular,SegoeUISymbol
+Segoe UI Variable,Light Small,Segoe UI Variable\tLight Small,SegoeUIVariable-LightSmall
+Segoe UI Variable,Semilight Small,Segoe UI Variable\tSemilight Small,SegoeUIVariable-SemilightSmall
+Segoe UI Variable,Regular Small,Segoe UI Variable\tRegular Small,SegoeUIVariable-RegularSmall
+Segoe UI Variable,Semibold Small,Segoe UI Variable\tSemibold Small,SegoeUIVariable-SemiboldSmall
+Segoe UI Variable,Bold Small,Segoe UI Variable\tBold Small,SegoeUIVariable-BoldSmall
+Segoe UI Variable,Light Text,Segoe UI Variable\tLight Text,SegoeUIVariable-LightText
+Segoe UI Variable,Semilight Text,Segoe UI Variable\tSemilight Text,SegoeUIVariable-SemilightText
+Segoe UI Variable,Regular,Segoe UI Variable\tRegular,SegoeUIVariable-Regular
+Segoe UI Variable,Semibold Text,Segoe UI Variable\tSemibold Text,SegoeUIVariable-SemiboldText
+Segoe UI Variable,Bold Text,Segoe UI Variable\tBold Text,SegoeUIVariable-BoldText
+Segoe UI Variable,Light Display,Segoe UI Variable\tLight Display,SegoeUIVariable-LightDisplay
+Segoe UI Variable,Semilight Display,Segoe UI Variable\tSemilight Display,SegoeUIVariable-SemilightDisplay
+Segoe UI Variable,Regular Display,Segoe UI Variable\tRegular Display,SegoeUIVariable-RegularDisplay
+Segoe UI Variable,Semibold Display,Segoe UI Variable\tSemibold Display,SegoeUIVariable-SemiboldDisplay
+Segoe UI Variable,Bold Display,Segoe UI Variable\tBold Display,SegoeUIVariable-BoldDisplay
+Showcard Gothic,Regular,Showcard Gothic\tRegular,ShowcardGothic-Reg
+Sitka,Small,Sitka\tSmall,Sitka-Small
+Sitka,Small Semibold,Sitka\tSmall Semibold,Sitka-SmallSemibold
+Sitka,Small Bold,Sitka\tSmall Bold,Sitka-SmallBold
+Sitka,Text,Sitka\tText,Sitka-Text
+Sitka,Text Semibold,Sitka\tText Semibold,Sitka-TextSemibold
+Sitka,Text Bold,Sitka\tText Bold,Sitka-TextBold
+Sitka,Subheading,Sitka\tSubheading,Sitka-Subheading
+Sitka,Subheading Semibold,Sitka\tSubheading Semibold,Sitka-SubheadingSemibold
+Sitka,Subheading Bold,Sitka\tSubheading Bold,Sitka-SubheadingBold
+Sitka,Heading,Sitka\tHeading,Sitka-Heading
+Sitka,Heading Semibold,Sitka\tHeading Semibold,Sitka-HeadingSemibold
+Sitka,Heading Bold,Sitka\tHeading Bold,Sitka-HeadingBold
+Sitka,Display,Sitka\tDisplay,Sitka-Display
+Sitka,Display Semibold,Sitka\tDisplay Semibold,Sitka-DisplaySemibold
+Sitka,Display Bold,Sitka\tDisplay Bold,Sitka-DisplayBold
+Sitka,Banner,Sitka\tBanner,Sitka-Banner
+Sitka,Banner Semibold,Sitka\tBanner Semibold,Sitka-BannerSemibold
+Sitka,Banner Bold,Sitka\tBanner Bold,Sitka-BannerBold
+Sitka,Small Italic,Sitka\tSmall Italic,Sitka-SmallItalic
+Sitka,Small Semibold Italic,Sitka\tSmall Semibold Italic,Sitka-SmallSemiboldItalic
+Sitka,Small Bold Italic,Sitka\tSmall Bold Italic,Sitka-SmallBoldItalic
+Sitka,Text Italic,Sitka\tText Italic,Sitka-TextItalic
+Sitka,Text Semibold Italic,Sitka\tText Semibold Italic,Sitka-TextSemiboldItalic
+Sitka,Text Bold Italic,Sitka\tText Bold Italic,Sitka-TextBoldItalic
+Sitka,Subheading Italic,Sitka\tSubheading Italic,Sitka-SubheadingItalic
+Sitka,Subheading Semibold Italic,Sitka\tSubheading Semibold Italic,Sitka-SubheadingSemiboldItalic
+Sitka,Subheading Bold Italic,Sitka\tSubheading Bold Italic,Sitka-SubheadingBoldItalic
+Sitka,Heading Italic,Sitka\tHeading Italic,Sitka-HeadingItalic
+Sitka,Heading Semibold Italic,Sitka\tHeading Semibold Italic,Sitka-HeadingSemiboldItalic
+Sitka,Heading Bold Italic,Sitka\tHeading Bold Italic,Sitka-HeadingBoldItalic
+Sitka,Display Italic,Sitka\tDisplay Italic,Sitka-DisplayItalic
+Sitka,Display Semibold Italic,Sitka\tDisplay Semibold Italic,Sitka-DisplaySemiboldItalic
+Sitka,Display Bold Italic,Sitka\tDisplay Bold Italic,Sitka-DisplayBoldItalic
+Sitka,Banner Italic,Sitka\tBanner Italic,Sitka-BannerItalic
+Sitka,Banner Semibold Italic,Sitka\tBanner Semibold Italic,Sitka-BannerSemiboldItalic
+Sitka,Banner Bold Italic,Sitka\tBanner Bold Italic,Sitka-BannerBoldItalic
+Snap ITC,Regular,Snap ITC\tRegular,SnapITC-Regular
+Source Code Variable,ExtraLight,Source Code Variable\tExtraLight,SourceCodeRoman-ExtraLight
+Source Code Variable,Light,Source Code Variable\tLight,SourceCodeRoman-Light
+Source Code Variable,Regular,Source Code Variable\tRegular,SourceCodeRoman-Regular
+Source Code Variable,Medium,Source Code Variable\tMedium,SourceCodeRoman-Medium
+Source Code Variable,Semibold,Source Code Variable\tSemibold,SourceCodeRoman-Semibold
+Source Code Variable,Bold,Source Code Variable\tBold,SourceCodeRoman-Bold
+Source Code Variable,Black,Source Code Variable\tBlack,SourceCodeRoman-Black
+Source Code Variable,ExtraLight Italic,Source Code Variable\tExtraLight Italic,SourceCodeItalic-ExtraLight
+Source Code Variable,Light Italic,Source Code Variable\tLight Italic,SourceCodeItalic-Light
+Source Code Variable,Italic,Source Code Variable\tItalic,SourceCodeItalic-Regular
+Source Code Variable,Medium Italic,Source Code Variable\tMedium Italic,SourceCodeItalic-Medium
+Source Code Variable,Semibold Italic,Source Code Variable\tSemibold Italic,SourceCodeItalic-Semibold
+Source Code Variable,Bold Italic,Source Code Variable\tBold Italic,SourceCodeItalic-Bold
+Source Code Variable,Black Italic,Source Code Variable\tBlack Italic,SourceCodeItalic-Black
+Source Sans 3,Regular,Source Sans 3\tRegular,SourceSans3-Regular
+Source Sans 3,Semibold Italic,Source Sans 3\tSemibold Italic,SourceSans3-SemiboldIt
+Source Sans 3,Bold,Source Sans 3\tBold,SourceSans3-Bold
+Source Sans Variable,ExtraLight,Source Sans Variable\tExtraLight,SourceSansRoman-ExtraLight
+Source Sans Variable,Light,Source Sans Variable\tLight,SourceSansRoman-Light
+Source Sans Variable,Regular,Source Sans Variable\tRegular,SourceSansRoman-Regular
+Source Sans Variable,Semibold,Source Sans Variable\tSemibold,SourceSansRoman-Semibold
+Source Sans Variable,Bold,Source Sans Variable\tBold,SourceSansRoman-Bold
+Source Sans Variable,Black,Source Sans Variable\tBlack,SourceSansRoman-Black
+Source Sans Variable,ExtraLight Italic,Source Sans Variable\tExtraLight Italic,SourceSansItalic-ExtraLight
+Source Sans Variable,Light Italic,Source Sans Variable\tLight Italic,SourceSansItalic-Light
+Source Sans Variable,Italic,Source Sans Variable\tItalic,SourceSansItalic-Regular
+Source Sans Variable,Semibold Italic,Source Sans Variable\tSemibold Italic,SourceSansItalic-Semibold
+Source Sans Variable,Bold Italic,Source Sans Variable\tBold Italic,SourceSansItalic-Bold
+Source Sans Variable,Black Italic,Source Sans Variable\tBlack Italic,SourceSansItalic-Black
+Source Serif Variable,Regular-389.344,Source Serif Variable\tRegular-389.344,SourceSerifRoman_389.344wght_0ital
+Source Serif Variable,ExtraLight,Source Serif Variable\tExtraLight,SourceSerifRoman-ExtraLight
+Source Serif Variable,Light,Source Serif Variable\tLight,SourceSerifRoman-Light
+Source Serif Variable,Regular,Source Serif Variable\tRegular,SourceSerifRoman-Regular
+Source Serif Variable,Semibold,Source Serif Variable\tSemibold,SourceSerifRoman-Semibold
+Source Serif Variable,Bold,Source Serif Variable\tBold,SourceSerifRoman-Bold
+Source Serif Variable,Black,Source Serif Variable\tBlack,SourceSerifRoman-Black
+Source Serif Variable,Regular-389.344 Italic,Source Serif Variable\tRegular-389.344 Italic,SourceSerifItalic_389.344wght_1ital
+Source Serif Variable,ExtraLight Italic,Source Serif Variable\tExtraLight Italic,SourceSerifItalic-ExtraLight
+Source Serif Variable,Light Italic,Source Serif Variable\tLight Italic,SourceSerifItalic-Light
+Source Serif Variable,Italic,Source Serif Variable\tItalic,SourceSerifItalic-Regular
+Source Serif Variable,Semibold Italic,Source Serif Variable\tSemibold Italic,SourceSerifItalic-Semibold
+Source Serif Variable,Bold Italic,Source Serif Variable\tBold Italic,SourceSerifItalic-Bold
+Source Serif Variable,Black Italic,Source Serif Variable\tBlack Italic,SourceSerifItalic-Black
+Stencil,Regular,Stencil\tRegular,Stencil
+Sylfaen,Regular,Sylfaen\tRegular,Sylfaen
+Symbol,Regular,Symbol\tRegular,SymbolMT
+Tahoma,Regular,Tahoma\tRegular,Tahoma
+Tahoma,Bold,Tahoma\tBold,Tahoma-Bold
+Tempus Sans ITC,Regular,Tempus Sans ITC\tRegular,TempusSansITC
+Times New Roman,Regular,Times New Roman\tRegular,TimesNewRomanPSMT
+Times New Roman,Italic,Times New Roman\tItalic,TimesNewRomanPS-ItalicMT
+Times New Roman,Bold,Times New Roman\tBold,TimesNewRomanPS-BoldMT
+Times New Roman,Bold Italic,Times New Roman\tBold Italic,TimesNewRomanPS-BoldItalicMT
+Trajan Color,Concept,Trajan Color\tConcept,TrajanColor-Concept
+Trebuchet MS,Regular,Trebuchet MS\tRegular,TrebuchetMS
+Trebuchet MS,Italic,Trebuchet MS\tItalic,TrebuchetMS-Italic
+Trebuchet MS,Bold,Trebuchet MS\tBold,TrebuchetMS-Bold
+Trebuchet MS,Bold Italic,Trebuchet MS\tBold Italic,Trebuchet-BoldItalic
+Tw Cen MT,Regular,Tw Cen MT\tRegular,TwCenMT-Regular
+Tw Cen MT,Italic,Tw Cen MT\tItalic,TwCenMT-Italic
+Tw Cen MT,Bold,Tw Cen MT\tBold,TwCenMT-Bold
+Tw Cen MT,Bold Italic,Tw Cen MT\tBold Italic,TwCenMT-BoldItalic
+Tw Cen MT Condensed,Regular,Tw Cen MT Condensed\tRegular,TwCenMT-Condensed
+Tw Cen MT Condensed,Bold,Tw Cen MT Condensed\tBold,TwCenMT-CondensedBold
+Tw Cen MT Condensed Extra Bold,Regular,Tw Cen MT Condensed Extra Bold\tRegular,TwCenMT-CondensedExtraBold
+Verdana,Regular,Verdana\tRegular,Verdana
+Verdana,Italic,Verdana\tItalic,Verdana-Italic
+Verdana,Bold,Verdana\tBold,Verdana-Bold
+Verdana,Bold Italic,Verdana\tBold Italic,Verdana-BoldItalic
+Viner Hand ITC,Regular,Viner Hand ITC\tRegular,VinerHandITC
+Vivaldi,Italic,Vivaldi\tItalic,Vivaldii
+Vladimir Script,Regular,Vladimir Script\tRegular,VladimirScript
+Webdings,Regular,Webdings\tRegular,Webdings
+Wide Latin,Regular,Wide Latin\tRegular,LatinWide
+Wingdings,Regular,Wingdings\tRegular,Wingdings-Regular
+Wingdings 2,Regular,Wingdings 2\tRegular,Wingdings2
+Wingdings 3,Regular,Wingdings 3\tRegular,Wingdings3
+Kozuka Gothic Pr6N,R,Kozuka Gothic Pr6N\tR,KozGoPr6N-Regular
+Kozuka Gothic Pr6N,B,Kozuka Gothic Pr6N\tB,KozGoPr6N-Bold
+Kozuka Mincho Pr6N,R,Kozuka Mincho Pr6N\tR,KozMinPr6N-Regular
+MS Gothic,Regular,MS Gothic\tRegular,MS-Gothic
+MS PGothic,Regular,MS PGothic\tRegular,MS-PGothic
+MS UI Gothic,Regular,MS UI Gothic\tRegular,MS-UIGothic
+Yu Gothic,Light,Yu Gothic\tLight,YuGothic-Light
+Yu Gothic,Regular,Yu Gothic\tRegular,YuGothic-Regular
+Yu Gothic,Medium,Yu Gothic\tMedium,YuGothic-Medium
+Yu Gothic,Bold,Yu Gothic\tBold,YuGothic-Bold
+Yu Gothic UI,Light,Yu Gothic UI\tLight,YuGothicUI-Light
+Yu Gothic UI,Semilight,Yu Gothic UI\tSemilight,YuGothicUI-Semilight
+Yu Gothic UI,Regular,Yu Gothic UI\tRegular,YuGothicUI-Regular
+Yu Gothic UI,Semibold,Yu Gothic UI\tSemibold,YuGothicUI-Semibold
+Yu Gothic UI,Bold,Yu Gothic UI\tBold,YuGothicUI-Bold
+Microsoft JhengHei,Light,Microsoft JhengHei\tLight,MicrosoftJhengHeiLight
+Microsoft JhengHei,Regular,Microsoft JhengHei\tRegular,MicrosoftJhengHeiRegular
+Microsoft JhengHei,Bold,Microsoft JhengHei\tBold,MicrosoftJhengHeiBold
+Microsoft JhengHei UI,Light,Microsoft JhengHei UI\tLight,MicrosoftJhengHeiUILight
+Microsoft JhengHei UI,Regular,Microsoft JhengHei UI\tRegular,MicrosoftJhengHeiUIRegular
+Microsoft JhengHei UI,Bold,Microsoft JhengHei UI\tBold,MicrosoftJhengHeiUIBold
+Adobe Ming Std,L,Adobe Ming Std\tL,AdobeMingStd-Light
+MingLiU-ExtB,Regular,MingLiU-ExtB\tRegular,MingLiU-ExtB
+MingLiU_HKSCS-ExtB,Regular,MingLiU_HKSCS-ExtB\tRegular,Ming-Lt-HKSCS-ExtB
+MingLiU_MSCS-ExtB,Regular,MingLiU_MSCS-ExtB\tRegular,Ming-Lt-MSCS-ExtB
+PMingLiU-ExtB,Regular,PMingLiU-ExtB\tRegular,PMingLiU-ExtB
+Microsoft YaHei,Light,Microsoft YaHei\tLight,MicrosoftYaHeiLight
+Microsoft YaHei,Regular,Microsoft YaHei\tRegular,MicrosoftYaHei
+Microsoft YaHei,Bold,Microsoft YaHei\tBold,MicrosoftYaHei-Bold
+Microsoft YaHei UI,Light,Microsoft YaHei UI\tLight,MicrosoftYaHeiUILight
+Microsoft YaHei UI,Regular,Microsoft YaHei UI\tRegular,MicrosoftYaHeiUI
+Microsoft YaHei UI,Bold,Microsoft YaHei UI\tBold,MicrosoftYaHeiUI-Bold
+NSimSun,Regular,NSimSun\tRegular,NSimSun
+SimSun,Regular,SimSun\tRegular,SimSun
+SimSun-ExtB,Regular,SimSun-ExtB\tRegular,SimSun-ExtB
+SimSun-ExtG,Regular,SimSun-ExtG\tRegular,SimSun-ExtG
+Adobe Song Std,L,Adobe Song Std\tL,AdobeSongStd-Light
+Malgun Gothic,Semilight,Malgun Gothic\tSemilight,MalgunGothic-Semilight
+Malgun Gothic,Regular,Malgun Gothic\tRegular,MalgunGothic
+Malgun Gothic,Bold,Malgun Gothic\tBold,MalgunGothicBold
+Adobe Myungjo Std,M,Adobe Myungjo Std\tM,AdobeMyungjoStd-Medium
+Adobe Arabic,Regular,Adobe Arabic\tRegular,AdobeArabic-Regular
+Adobe Arabic,Italic,Adobe Arabic\tItalic,AdobeArabic-Italic
+Adobe Arabic,Bold,Adobe Arabic\tBold,AdobeArabic-Bold
+Adobe Arabic,Bold Italic,Adobe Arabic\tBold Italic,AdobeArabic-BoldItalic
+Dubai,Light,Dubai\tLight,Dubai-Light
+Dubai,Regular,Dubai\tRegular,Dubai-Regular
+Dubai,Medium,Dubai\tMedium,Dubai-Medium
+Dubai,Bold,Dubai\tBold,Dubai-Bold
+Microsoft Uighur,Regular,Microsoft Uighur\tRegular,MicrosoftUighur
+Microsoft Uighur,Bold,Microsoft Uighur\tBold,MicrosoftUighur-Bold
+Adobe Hebrew,Regular,Adobe Hebrew\tRegular,AdobeHebrew-Regular
+Adobe Hebrew,Italic,Adobe Hebrew\tItalic,AdobeHebrew-Italic
+Adobe Hebrew,Bold,Adobe Hebrew\tBold,AdobeHebrew-Bold
+Adobe Hebrew,Bold Italic,Adobe Hebrew\tBold Italic,AdobeHebrew-BoldItalic
+Adobe Devanagari,Regular,Adobe Devanagari\tRegular,AdobeDevanagari-Regular
+Nirmala Text,Semilight,Nirmala Text\tSemilight,NirmalaText-Semilight
+Nirmala Text,Regular,Nirmala Text\tRegular,NirmalaText
+Nirmala Text,Bold,Nirmala Text\tBold,NirmalaText-Bold
+Nirmala UI,Semilight,Nirmala UI\tSemilight,NirmalaUI-Semilight
+Nirmala UI,Regular,Nirmala UI\tRegular,NirmalaUI
+Nirmala UI,Bold,Nirmala UI\tBold,NirmalaUI-Bold
+Myanmar Text,Regular,Myanmar Text\tRegular,MyanmarText
+Myanmar Text,Bold,Myanmar Text\tBold,MyanmarText-Bold
+Leelawadee,Regular,Leelawadee\tRegular,Leelawadee
+Leelawadee,Bold,Leelawadee\tBold,Leelawadee-Bold
+Leelawadee UI,Semilight,Leelawadee UI\tSemilight,LeelawadeeUI-Semilight
+Leelawadee UI,Regular,Leelawadee UI\tRegular,LeelawadeeUI
+Leelawadee UI,Bold,Leelawadee UI\tBold,LeelawadeeUI-Bold
