@@ -7,6 +7,19 @@ from typing import Literal
 
 FieldType = Literal["text", "image"]
 
+# Terms that indicate the layout needs a raster/vector visual supplied by URL.
+# Keep the surrounding word boundaries so short aliases such as "pic" do not
+# match unrelated words such as "topic" or "picturebook".
+IMAGE_TERM = (
+    r"(?:photos?|photographs?|photography|images?|pictures?|pics?|snapshots?|"
+    r"graphics?|illustrations?|artworks?|cover\s+art|logos?|portraits?|"
+    r"headshots?|product\s+shots?|screenshots?|scans?|thumbnails?|avatars?|"
+    r"icons?|banners?|posters?|drawings?|sketch(?:es)?|paintings?|collages?|"
+    r"visuals?|diagrams?|infographics?|charts?|maps?|qr\s+codes?|jpe?gs?|"
+    r"pngs?|gifs?|webps?|svgs?)"
+)
+IMAGE_PATTERN = rf"\b{IMAGE_TERM}\b"
+
 
 @dataclass(frozen=True)
 class RequiredField:
@@ -26,15 +39,16 @@ class RequirementAgent:
     CUSTOM_RULES = (
         (r"\b(?:author|writer)\b", RequiredField("author_name", "Author/writer name")),
         (
-            r"\b(?:author|writer).{0,20}\b(?:photo|image)|\b(?:photo|image).{0,20}\b(?:author|writer)",
+            rf"\b(?:author|writer)\b.{{0,20}}{IMAGE_PATTERN}|"
+            rf"{IMAGE_PATTERN}.{{0,20}}\b(?:author|writer)\b",
             RequiredField(
                 "author_photo_url", "Author/writer photo URL", "image"
             ),
         ),
         (r"\bpublisher\b", RequiredField("publisher_name", "Publisher name", required=False)),
         (r"\bpublication\b", RequiredField("publication_name", "Publication name", required=False)),
-        (r"\bhero (?:photo|image)\b", RequiredField("hero_image_url", "Hero image URL", "image")),
-        (r"\bcover (?:photo|image)\b", RequiredField("cover_image_url", "Cover image URL", "image")),
+        (rf"\bhero\s+{IMAGE_TERM}\b", RequiredField("hero_image_url", "Hero image URL", "image")),
+        (rf"\bcover\s+{IMAGE_TERM}\b", RequiredField("cover_image_url", "Cover image URL", "image")),
         (r"\bpublication date\b|\bissue date\b", RequiredField("publication_date", "Publication/issue date", required=False)),
     )
 
@@ -55,7 +69,7 @@ class RequirementAgent:
             is_guest_writer = bool(re.search(r"\bguest writer\b", lowered))
             if is_guest_writer:
                 fields.append(RequiredField("guest_writer_name", "Guest writer name"))
-                if re.search(r"\b(?:photo|image)\b", lowered):
+                if re.search(IMAGE_PATTERN, lowered):
                     fields.append(
                         RequiredField(
                             "guest_writer_photo_url",
@@ -71,7 +85,7 @@ class RequirementAgent:
                     continue
                 if re.search(pattern, lowered):
                     fields.append(field)
-            if re.search(r"\b(?:photo|image)\b", lowered) and not any(
+            if re.search(IMAGE_PATTERN, lowered) and not any(
                 field.field_type == "image" for field in fields
             ):
                 fields.append(RequiredField("image_url", "Image HTTPS URL", "image"))
