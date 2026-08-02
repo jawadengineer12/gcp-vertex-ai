@@ -24,7 +24,8 @@ file://, gs://, or operating-system paths.
 Text frames stay inside the 0.25-inch safe margin. Images may extend exactly 0.125 inches
 for bleed. Text frames must not overlap each other; image/text overlap is permitted.
 Use only an approved exact font name. Font names contain the two literal characters \\t,
-not an actual tab. Article formatting belongs inside the Article content object.
+not an actual tab. Article content contains only textBody. Place columns, gutterSize,
+margins, and textStyle beside content on the Article asset.
 Do not add continuation metadata. Split continuation text between page Article assets.
 """
 

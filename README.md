@@ -35,6 +35,19 @@ The validated layout is written under `outputs/`, and optional execution traces
 are written under `outputs/run_traces/`. Both locations are intentionally
 excluded from Git.
 
+## Publisher demo
+
+To queue each validated layout automatically, set the publisher URL and a
+rotated API key in `.env`:
+
+```env
+PUBLISHER_API_URL=https://magazine-publisher-0f8b8f449e87.herokuapp.com/api/bubble/queue-job
+PUBLISHER_API_KEY=replace-with-rotated-key
+```
+
+The local file remains valid JSON. Only the API request wraps it as
+`var documentData=<json>`.
+
 ## Refresh vector data
 
 ```powershell

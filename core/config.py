@@ -53,6 +53,10 @@ class AppConfig:
     LOCAL_OUTPUT = _bool("LOCAL_OUTPUT", "true")
     GCS_BUCKET = _get("GCS_BUCKET")
     GCS_OBJECT_NAME = _get("GCS_OBJECT_NAME") or None
+    PUBLISHER_API_URL = _get("PUBLISHER_API_URL")
+    PUBLISHER_API_KEY = _get("PUBLISHER_API_KEY")
+    PUBLISHER_CREATED_BY = _get("PUBLISHER_CREATED_BY", "test_user@bubble.com")
+    PUBLISHER_PROJECT = _get("PUBLISHER_PROJECT", "Heroku Integration Test")
 
     LOG_DIR = _path("LOG_DIR", "logs")
     LOG_LEVEL = _get("LOG_LEVEL", "INFO")

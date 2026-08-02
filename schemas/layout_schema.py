@@ -69,10 +69,6 @@ class TextStyle(StrictModel):
 
 class ArticleContent(StrictModel):
     textBody: str
-    columns: int = Field(ge=1)
-    gutterSize: float = Field(ge=0)
-    margins: Margins
-    textStyle: TextStyle
 
 
 class ImageContent(StrictModel):
@@ -100,6 +96,10 @@ class ArticleAsset(StrictModel):
     position: Position
     size: Size
     content: ArticleContent
+    columns: int = Field(ge=1)
+    gutterSize: float = Field(ge=0)
+    margins: Margins
+    textStyle: TextStyle
 
 
 class ImageAsset(StrictModel):

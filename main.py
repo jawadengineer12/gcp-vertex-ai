@@ -102,14 +102,28 @@ def main() -> None:
             print(f"- {error}")
         raise SystemExit(1)
 
-    destinations = OutputService(
+    output = OutputService(
         output_file=AppConfig.OUTPUT_FILE,
         local_output=AppConfig.LOCAL_OUTPUT,
         gcs_bucket=AppConfig.GCS_BUCKET,
         gcs_object_name=AppConfig.GCS_OBJECT_NAME,
-    ).save_json(final_json_data)
+        publisher_url=AppConfig.PUBLISHER_API_URL,
+        publisher_api_key=AppConfig.PUBLISHER_API_KEY,
+        publisher_created_by=AppConfig.PUBLISHER_CREATED_BY,
+        publisher_project=AppConfig.PUBLISHER_PROJECT,
+    )
+    destinations = output.save_json(final_json_data)
     for kind, destination in destinations.items():
         print(f"Validated JSON saved ({kind}): {destination}")
+    try:
+        publisher_response = output.queue_job(final_json_data)
+    except RuntimeError as error:
+        print(f"Publisher submission failed: {error}")
+        raise SystemExit(1) from error
+    if publisher_response:
+        status, body = publisher_response
+        destinations["publisher"] = AppConfig.PUBLISHER_API_URL
+        print(f"Publisher queue accepted ({status}): {body or 'empty response'}")
 
     trace = build_trace(
         user_prompt=user_prompt,
