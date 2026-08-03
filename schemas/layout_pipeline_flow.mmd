@@ -1,0 +1,113 @@
+%%{init: {"theme": "base", "flowchart": {"curve": "basis"}}}%%
+flowchart TB
+
+    subgraph DEPLOY["Deployment flow"]
+        SOURCE["Local source / GitHub"]
+        ARCHIVE["Cloud Storage<br/>source archive"]
+        BUILD["Cloud Build<br/>builds Docker image"]
+        IMAGE["Artifact Registry<br/>stores container image"]
+        RUN["Cloud Run revision<br/>FastAPI + 1 Uvicorn worker"]
+
+        SOURCE -->|"gcloud run deploy --source ."| ARCHIVE
+        ARCHIVE --> BUILD
+        BUILD --> IMAGE
+        IMAGE --> RUN
+    end
+
+    subgraph INPUT["Request entry points"]
+        CLIENT["Postman / API client"]
+        CLI["Local CLI"]
+        INFO["InformationAgent<br/>terminal questions"]
+        API["FastAPI"]
+        AUTH{"Valid x-api-key?"}
+
+        CLIENT -->|"HTTPS request"| API
+        CLI --> INFO
+        RUN --> API
+        API --> AUTH
+        AUTH -->|"No"| UNAUTHORIZED["401 Unauthorized"]
+    end
+
+    subgraph REQUIREMENTS["Information gathering"]
+        REQ["RequirementAgent<br/>resolve template fields<br/>and extract prompt values"]
+        COMPLETE{"All fields resolved?"}
+        NEEDS["200 needs_input<br/>known values + questions"]
+        COLLECT["Client collects answers<br/>and resends original prompt"]
+
+        AUTH -->|"Yes"| REQ
+        INFO --> REQ
+        REQ --> COMPLETE
+        COMPLETE -->|"No"| NEEDS
+        NEEDS --> COLLECT
+        COLLECT --> API
+    end
+
+    subgraph PIPELINE["Shared LayoutPipeline - starts only when fields are resolved"]
+        START["Enrich prompt with<br/>confirmed information"]
+        EMBED["Vertex AI embedding<br/>text-embedding-004"]
+        VECTOR["Vertex Vector Search<br/>semantic candidates"]
+        LIBRARY["Local prompt library"]
+        BM25["BM25 keyword search"]
+        MERGE["Weighted candidate merge<br/>70% vector + 30% BM25"]
+        RERANK["Cached CrossEncoder<br/>reranking"]
+        SANITIZE["Sanitize selected<br/>structural references"]
+        GEMINI["Vertex AI Gemini<br/>gemini-2.5-flash"]
+        VALIDATE["Strict schema and<br/>layout-quality validation"]
+        VALID{"Output valid?"}
+
+        COMPLETE -->|"Yes"| START
+        START --> EMBED
+        START --> BM25
+        EMBED --> VECTOR
+        LIBRARY --> BM25
+        VECTOR --> MERGE
+        BM25 --> MERGE
+        MERGE --> RERANK
+        RERANK --> SANITIZE
+        SANITIZE --> GEMINI
+        GEMINI --> VALIDATE
+        VALIDATE --> VALID
+        VALID -->|"No - retry up to 3 times"| GEMINI
+    end
+
+    subgraph OUTPUT["Result and optional publishing"]
+        PUBLISH{"publish = true?"}
+        RESPONSE["200 completed<br/>validated layout JSON<br/>publisher: null"]
+        PUBLISHER["OutputService<br/>submit publisher envelope"]
+        SUCCESS["200 completed<br/>layout + publisher response"]
+        FAILURE["502 publish_failed<br/>generated layout preserved"]
+
+        VALID -->|"Yes"| PUBLISH
+        PUBLISH -->|"No"| RESPONSE
+        PUBLISH -->|"Yes"| PUBLISHER
+        PUBLISHER -->|"Accepted"| SUCCESS
+        PUBLISHER -->|"Failed"| FAILURE
+    end
+
+    subgraph SECURITY["Security and Google Cloud identity"]
+        LAYOUT_SECRET["Secret Manager<br/>layout-api-key"]
+        PUBLISHER_SECRET["Secret Manager<br/>publisher-api-key"]
+        SERVICE_ACCOUNT["Cloud Run service account<br/>Application Default Credentials"]
+        EXTERNAL["External publisher API"]
+
+        LAYOUT_SECRET -. "injects LAYOUT_API_KEY" .-> RUN
+        PUBLISHER_SECRET -. "injects PUBLISHER_API_KEY" .-> RUN
+        SERVICE_ACCOUNT -. "IAM authentication" .-> EMBED
+        SERVICE_ACCOUNT -. "IAM authentication" .-> VECTOR
+        SERVICE_ACCOUNT -. "IAM authentication" .-> GEMINI
+        PUBLISHER -->|"HTTPS + x-api-key"| EXTERNAL
+    end
+
+    classDef infrastructure fill:#e8f1ff,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef process fill:#eafaf1,stroke:#16834b,color:#052e16,stroke-width:2px;
+    classDef decision fill:#fff7d6,stroke:#ca8a04,color:#422006,stroke-width:2px;
+    classDef response fill:#f3e8ff,stroke:#9333ea,color:#3b0764,stroke-width:2px;
+    classDef failure fill:#fee2e2,stroke:#dc2626,color:#450a0a,stroke-width:2px;
+    classDef security fill:#fff1e6,stroke:#ea580c,color:#431407,stroke-width:2px;
+
+    class SOURCE,ARCHIVE,BUILD,IMAGE,RUN,VECTOR,LIBRARY infrastructure;
+    class CLIENT,CLI,INFO,API,REQ,COLLECT,START,EMBED,BM25,MERGE,RERANK,SANITIZE,GEMINI,VALIDATE,PUBLISHER process;
+    class AUTH,COMPLETE,VALID,PUBLISH decision;
+    class NEEDS,RESPONSE,SUCCESS response;
+    class UNAUTHORIZED,FAILURE failure;
+    class LAYOUT_SECRET,PUBLISHER_SECRET,SERVICE_ACCOUNT,EXTERNAL security;
