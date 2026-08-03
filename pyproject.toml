@@ -5,6 +5,7 @@ description = "Vertex AI RAG pipeline for generating and validating InDesign lay
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "fastapi>=0.115.0",
     "google-cloud-aiplatform>=1.95.0",
     "google-cloud-storage>=2.19.0",
     "google-genai>=1.20.0",
@@ -13,4 +14,8 @@ dependencies = [
     "pydantic>=2.13.4",
     "python-dotenv>=1.1.0",
     "sentence-transformers>=4.1.0",
+    "uvicorn>=0.34.0",
 ]
+
+[dependency-groups]
+dev = ["httpx2>=2.0.0"]

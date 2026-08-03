@@ -12,10 +12,11 @@ Pipeline:
   7. Sort and return top merged candidates for reranking.
 """
 import logging
+from functools import cache
 from pathlib import Path
 
 from core.config import AppConfig
-from core.vertex_client import vertex_client
+from core.vertex_client import get_vertex_client
 from services.vector_store import VertexVectorStore
 from utils.retrieval_utils import (
     load_library,
@@ -63,7 +64,7 @@ class RetrievalService:
         """
         # 1. Embed user query
         logger.info("Generating query embedding.")
-        embedding_response = vertex_client.models.embed_content(
+        embedding_response = get_vertex_client().models.embed_content(
             model=AppConfig.EMBEDDING_MODEL,
             contents=[user_prompt],
         )
@@ -216,6 +217,7 @@ class RetrievalService:
 
 # ── Module-level convenience function (for standalone scripts) ────────────────
 
+@cache
 def load_library(path: Path) -> list:
     """Re-exported for scripts that import directly from this module."""
     from utils.retrieval_utils import load_library as _load

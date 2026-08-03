@@ -30,13 +30,17 @@ Link billing in the Console: **Billing → Link a billing account**.
 ```powershell
 gcloud services enable `
   aiplatform.googleapis.com `
+  artifactregistry.googleapis.com `
+  cloudbuild.googleapis.com `
+  run.googleapis.com `
+  secretmanager.googleapis.com `
   iam.googleapis.com `
   storage.googleapis.com `
   cloudresourcemanager.googleapis.com `
   serviceusage.googleapis.com
 ```
 
-## 3. Service account + key
+## 3. Service account
 
 ```powershell
 gcloud iam service-accounts create vertex-layout-dev-sa `
@@ -54,7 +58,9 @@ gcloud iam service-accounts keys create secrets/gcp-sa-key.json `
   --iam-account=$SA_EMAIL
 ```
 
-`secrets/` is already in `.gitignore` — never commit this key.
+`secrets/` is already in `.gitignore` — never commit this key. This JSON key is
+for local CLI development only. Cloud Run must use the service account directly
+as its service identity; never set `GOOGLE_APPLICATION_CREDENTIALS` on Cloud Run.
 
 Set credentials for local runs:
 
@@ -166,6 +172,11 @@ Copy three values into `.env`:
 - `VERTEX_DEPLOYED_INDEX_ID` — `layout_rag_index` (what you set with
   `--deployed-index-id` above)
 
+Verify that `deployedIndexes` is present in the description before testing a
+completed generation request. An endpoint without a deployed index can serve
+the API's question flow but cannot perform vector retrieval. A deployed Vector
+Search index has ongoing cost, so do not leave an unused deployment running.
+
 ## 11. Font list
 
 Place the client's exact InDesign font export at `raw_data/Font List.csv`
@@ -192,6 +203,105 @@ python tests/validate_prompt_library.py
 ```
 
 Both should pass cleanly before you consider the environment good.
+
+## 14. Deploy the hosted test API to Cloud Run
+
+The hosted API is synchronous and stateless. It is a testing surface, not yet
+declared Bubble-ready. Cloud Run builds the checked-in `Dockerfile` remotely,
+including the cached CrossEncoder model; a local Docker build is optional.
+
+Create or reuse a dedicated runtime service account and grant only the access
+the pipeline needs:
+
+```powershell
+$RUN_SA="vertex-layout-dev-sa@${PROJECT_ID}.iam.gserviceaccount.com"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID `
+  --member="serviceAccount:$RUN_SA" `
+  --role="roles/aiplatform.user"
+```
+
+Create the required Secret Manager secret for inbound API authentication.
+Generate/rotate its value outside the repository:
+
+```powershell
+gcloud secrets create layout-api-key --replication-policy=automatic
+gcloud secrets versions add layout-api-key --data-file=-
+
+gcloud secrets add-iam-policy-binding layout-api-key `
+  --member="serviceAccount:$RUN_SA" `
+  --role="roles/secretmanager.secretAccessor"
+```
+
+Publisher configuration is optional. Leave it absent for JSON-only operation
+and keep `publish=false`. If publishing is enabled later, create a separate
+`publisher-api-key`; never reuse the layout API key.
+
+Use numeric Secret Manager versions in the deployment, never `latest`:
+
+```powershell
+gcloud run deploy layout-test-api --source . `
+  --project=$PROJECT_ID --region=us-central1 --allow-unauthenticated `
+  --service-account=$RUN_SA `
+  --cpu=2 --memory=2Gi --concurrency=1 --timeout=900 `
+  --min=0 --max=2 `
+  --set-env-vars="GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,VERTEX_API_ENDPOINT=$VECTOR_API_ENDPOINT,VERTEX_INDEX_ENDPOINT=$VECTOR_INDEX_ENDPOINT,VERTEX_DEPLOYED_INDEX_ID=layout_rag_index,ENABLE_RUN_TRACE=false,LOCAL_OUTPUT=false" `
+  --set-secrets="LAYOUT_API_KEY=layout-api-key:1"
+```
+
+The repository's `.gcloudignore` excludes `.env`, `secrets/`, service-account
+JSON, virtual environments, logs, outputs, caches, and archives from source
+uploads.
+
+Cloud Run reserves some paths ending in `z`, so the hosted health endpoint is
+`GET /health`. The required `GET /healthz` route remains available when running
+FastAPI locally. Verify the deployed no-paid-call flow:
+
+```powershell
+$SERVICE_URL = gcloud run services describe layout-test-api `
+  --project=$PROJECT_ID --region=us-central1 --format="value(status.url)"
+$LAYOUT_KEY = gcloud secrets versions access 1 --secret=layout-api-key
+$HEADERS = @{ "x-api-key" = $LAYOUT_KEY }
+
+Invoke-RestMethod "$SERVICE_URL/health"
+Invoke-RestMethod "$SERVICE_URL/v1/templates" -Headers $HEADERS
+
+$BODY = @{
+  request_id = $null
+  prompt = "Create a cat article with an image"
+  template_id = "magazine_article"
+  answers = @{}
+  publish = $false
+} | ConvertTo-Json
+
+Invoke-RestMethod "$SERVICE_URL/v1/layouts" -Method Post `
+  -Headers $HEADERS -ContentType application/json -Body $BODY
+```
+
+The final call must return `needs_input`; it does not initialize Vertex,
+Gemini, or the reranker. Ask before sending a fully resolved request because
+that performs paid retrieval and generation. `publish=true` additionally
+requires a rotated publisher key and contacts the external publisher.
+
+For Postman testing, key access and rotation, the full request/response loop,
+and publisher setup behavior, see [API_DOCUMENTATION.md](API_DOCUMENTATION.md).
+
+### Current hosted verification
+
+On 2026-08-03, revision `layout-test-api-00002-kfn` was verified at:
+
+```text
+https://layout-test-api-6euw7jlffa-uc.a.run.app
+```
+
+The public health check, API-key rejection, template listing, and stateless
+`needs_input` flow passed. One authorized cold `publish=false` generation also
+completed with one page, five assets, no publisher result, and one validation
+retry. Server timings were 687 ms retrieval, 56,700 ms reranking/cold model
+load, 38,347 ms generation across both attempts, 1 ms validation, and 95,753 ms
+total. Treat this as one cold observation, not p50/p95 evidence; collect a
+larger warm sample before making latency claims. Publisher variables and
+credentials are intentionally absent from this revision.
 
 ---
 

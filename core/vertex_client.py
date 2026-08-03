@@ -1,20 +1,18 @@
-# core/vertex_client.py
+"""Lazy, container-scoped Vertex GenAI client."""
+
+from functools import cache
+
 from google import genai
+
 from core.config import AppConfig
 
-AppConfig.validate_vertex_config()
 
-# Module-level singleton — initialized once, reused everywhere.
-vertex_client = genai.Client(
-    vertexai=True,
-    project=AppConfig.PROJECT_ID,
-    location=AppConfig.LOCATION,
-)
-
-
+@cache
 def get_vertex_client() -> genai.Client:
-    """
-    Returns the shared Vertex AI GenAI client singleton.
-    Use this factory import in scripts that need an explicit function call.
-    """
-    return vertex_client
+    """Create the shared client only when the paid pipeline starts."""
+    AppConfig.validate_vertex_config()
+    return genai.Client(
+        vertexai=True,
+        project=AppConfig.PROJECT_ID,
+        location=AppConfig.LOCATION,
+    )

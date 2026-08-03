@@ -21,16 +21,14 @@ class OutputService:
         publisher_created_by: str = "test_user@bubble.com",
         publisher_project: str = "Heroku Integration Test",
     ) -> None:
-        if not local_output and not gcs_bucket:
-            raise ValueError("Enable LOCAL_OUTPUT or configure GCS_BUCKET")
+        if not local_output and not gcs_bucket and not publisher_url:
+            raise ValueError("Enable LOCAL_OUTPUT, configure GCS_BUCKET, or configure publishing")
         self.output_file = output_file
         self.local_output = local_output
         self.gcs_bucket = gcs_bucket.removeprefix("gs://").rstrip("/")
         self.gcs_object_name = gcs_object_name or output_file.name
-        if bool(publisher_url) != bool(publisher_api_key):
-            raise ValueError("Configure both PUBLISHER_API_URL and PUBLISHER_API_KEY")
-        if publisher_url and urlparse(publisher_url).scheme != "https":
-            raise ValueError("PUBLISHER_API_URL must use HTTPS")
+        if publisher_url or publisher_api_key:
+            self.validate_publisher_config(publisher_url, publisher_api_key)
         self.publisher_url = publisher_url
         self.publisher_api_key = publisher_api_key
         self.publisher_created_by = publisher_created_by
@@ -91,3 +89,11 @@ class OutputService:
             ) from error
         except (URLError, TimeoutError) as error:
             raise RuntimeError(f"Publisher queue request failed: {error}") from error
+
+    @staticmethod
+    def validate_publisher_config(url: str, api_key: str) -> None:
+        if not url or not api_key:
+            raise ValueError("Configure both PUBLISHER_API_URL and PUBLISHER_API_KEY")
+        parsed = urlparse(url)
+        if parsed.scheme != "https" or not parsed.netloc:
+            raise ValueError("PUBLISHER_API_URL must use HTTPS")

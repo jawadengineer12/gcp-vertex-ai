@@ -36,7 +36,7 @@ class ValidationService:
         try:
             project = LayoutProject.model_validate(json_data)
         except ValidationError as error:
-            logger.error("LayoutProject schema validation failed: %s", error)
+            logger.error("LayoutProject schema validation failed")
             raise
 
         errors = self._quality_errors(project)

@@ -6,7 +6,7 @@ import logging
 from google.genai import types
 
 from core.config import AppConfig
-from core.vertex_client import vertex_client
+from core.vertex_client import get_vertex_client
 from schemas.layout_schema import LayoutProject
 
 logger = logging.getLogger(__name__)
@@ -67,7 +67,7 @@ class GenerationService:
             f"{active_prompt}"
         )
         try:
-            response = vertex_client.models.generate_content(
+            response = get_vertex_client().models.generate_content(
                 model=self.model,
                 contents=combined_prompt,
                 config=types.GenerateContentConfig(
