@@ -15,7 +15,7 @@ store sessions or request history, and does not accept image uploads.
 | Region | `us-central1` |
 | Cloud Run service | `layout-test-api` |
 | Base URL | `https://layout-test-api-6euw7jlffa-uc.a.run.app` |
-| Verified revision | `layout-test-api-00002-kfn` |
+| Verified revision | `layout-test-api-00003-kcp` |
 | Runtime service account | `vertex-layout-dev-sa@angular-lambda-421320.iam.gserviceaccount.com` |
 | CPU / memory | 2 vCPU / 2 GiB |
 | Concurrency / timeout | 1 / 900 seconds |
@@ -33,7 +33,9 @@ It is not a Google access token and it is separate from the publisher key.
 - Active version: `1` (enabled)
 - Cloud Run mapping: `LAYOUT_API_KEY=layout-api-key:1`
 - The value is intentionally not written in this repository or this guide.
-- There is currently no `publisher-api-key` secret in the project.
+- Publisher secret: `publisher-api-key`, pinned version `1`.
+- Publisher URL and secret reference are configured on Cloud Run, but no live
+  publisher submission has been made from this revision.
 
 ### Copy the current key for Postman
 
@@ -386,7 +388,7 @@ If other fields remain unresolved, the response returns `needs_input` with
 
 ## Publishing
 
-For current testing, always send:
+For tests that must not contact the publisher, send:
 
 ```json
 "publish": false
@@ -395,13 +397,13 @@ For current testing, always send:
 That guarantees the publisher is not contacted and `publisher` is `null` in a
 completed response.
 
-Publishing is not configured in the current Cloud Run revision: there is no
-`publisher-api-key` secret and no `PUBLISHER_API_URL`. Consequently,
-`publish:true` currently returns `503` before retrieval or generation begins.
-This protects against paying for a layout that cannot be submitted.
+Revision `layout-test-api-00003-kcp` has the HTTPS publisher URL and
+`PUBLISHER_API_KEY=publisher-api-key:1` configured. This configuration has been
+verified without reading the key value or submitting a job. Sending
+`publish:true` now performs paid generation and then contacts the real publisher.
 
-After separate publisher credentials are rotated and configured, a successful
-`publish:true` response includes the publisher HTTP status and response body:
+A successful `publish:true` response includes the publisher HTTP status and
+response body:
 
 ```json
 "publisher": {
@@ -440,7 +442,7 @@ preserving the generated layout:
 | `401` | Missing or wrong `x-api-key` | `{"detail":"Invalid API key"}`; verify the header and Postman environment |
 | `422` | Strict request validation failed | Read `detail`; common causes are an unknown template/answer, empty or oversized text, extra properties, wrong JSON types, or an invalid image URL |
 | `502` | Generation failed, or publishing failed after generation | Retry only after reading logs; `publish_failed` includes the generated layout |
-| `503` | Server API-key configuration missing, or `publish:true` requested without publisher configuration | Use `publish:false` for current tests |
+| `503` | Server API-key or publisher configuration is missing from the active revision | Inspect Cloud Run variables and secret references |
 
 Useful `422` examples:
 
@@ -496,8 +498,8 @@ validation, publisher when enabled, and the overall request. Use the returned
   previous request state. Use JSON `null` to accept a placeholder.
 - Long request: generation is synchronous. Increase Postman's timeout and allow
   for a scale-to-zero cold start plus reranker loading.
-- `503` with `publish:true`: expected in the current deployment; switch back to
-  `false` until publisher configuration is deliberately added.
+- `503` with `publish:true`: publisher configuration is missing or inaccessible
+  in the active revision; inspect its URL, secret reference, and IAM access.
 - `502`: keep the request ID and inspect Cloud Run logs. Do not blindly retry a
   `publish:true` request because the external publisher may have accepted it
   before a response failed.

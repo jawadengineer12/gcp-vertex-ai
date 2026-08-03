@@ -288,20 +288,22 @@ and publisher setup behavior, see [API_DOCUMENTATION.md](API_DOCUMENTATION.md).
 
 ### Current hosted verification
 
-On 2026-08-03, revision `layout-test-api-00002-kfn` was verified at:
+On 2026-08-04, revision `layout-test-api-00003-kcp` was verified at:
 
 ```text
 https://layout-test-api-6euw7jlffa-uc.a.run.app
 ```
 
-The public health check, API-key rejection, template listing, and stateless
-`needs_input` flow passed. One authorized cold `publish=false` generation also
-completed with one page, five assets, no publisher result, and one validation
-retry. Server timings were 687 ms retrieval, 56,700 ms reranking/cold model
-load, 38,347 ms generation across both attempts, 1 ms validation, and 95,753 ms
-total. Treat this as one cold observation, not p50/p95 evidence; collect a
-larger warm sample before making latency claims. Publisher variables and
-credentials are intentionally absent from this revision.
+The public health check and publisher URL/secret reference passed on this
+configuration-only revision. Its unchanged application image was previously
+verified on revision `layout-test-api-00002-kfn`: API-key rejection, template
+listing, stateless `needs_input`, and one authorized cold `publish=false`
+generation all passed. That generation produced one page and five assets with
+one validation retry and no publisher result. Server timings were 687 ms
+retrieval, 56,700 ms reranking/cold model load, 38,347 ms generation across both
+attempts, 1 ms validation, and 95,753 ms total. Treat this as one cold
+observation, not p50/p95 evidence. No live publisher submission has been made
+from revision `layout-test-api-00003-kcp`.
 
 ---
 
