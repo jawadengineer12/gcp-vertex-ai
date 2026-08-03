@@ -1,6 +1,5 @@
 # services/reranker_service.py
 import logging
-from sentence_transformers import CrossEncoder
 from core.config import AppConfig
 
 logger = logging.getLogger(__name__)
@@ -13,6 +12,8 @@ class RerankerService:
     """
 
     def __init__(self) -> None:
+        from sentence_transformers import CrossEncoder
+
         logger.info("Loading reranker model: %s",
                     AppConfig.RERANKER_MODEL_NAME)
         self.model = CrossEncoder(AppConfig.RERANKER_MODEL_NAME)

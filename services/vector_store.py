@@ -1,9 +1,19 @@
 # services/vector_store.py
 import logging
+from functools import cache
+
 from google.cloud import aiplatform_v1
 from core.config import AppConfig
 
 logger = logging.getLogger(__name__)
+
+
+@cache
+def get_vector_search_client() -> aiplatform_v1.MatchServiceClient:
+    AppConfig.validate_vertex_config()
+    return aiplatform_v1.MatchServiceClient(
+        client_options={"api_endpoint": AppConfig.API_ENDPOINT}
+    )
 
 
 class VertexVectorStore:
@@ -13,10 +23,7 @@ class VertexVectorStore:
     """
 
     def __init__(self) -> None:
-        client_options = {"api_endpoint": AppConfig.API_ENDPOINT}
-        self.vector_search_client = aiplatform_v1.MatchServiceClient(
-            client_options=client_options
-        )
+        self.vector_search_client = get_vector_search_client()
         self.index_endpoint = AppConfig.INDEX_ENDPOINT
         self.deployed_index_id = AppConfig.DEPLOYED_INDEX_ID
         logger.info(

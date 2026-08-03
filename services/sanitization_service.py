@@ -4,9 +4,6 @@ from copy import deepcopy
 from pathlib import PurePosixPath, PureWindowsPath
 
 
-ARTICLE_FIELDS = ("columns", "gutterSize", "margins", "textStyle")
-
-
 def sanitize_retrieved_examples(
     candidates: list[dict], allowed_fonts: list[str]
 ) -> list[dict]:
@@ -31,10 +28,7 @@ def _normalize_layout(layout: dict, allowed_fonts: list[str]) -> None:
             if not isinstance(content, dict):
                 continue
             if asset.get("assetType") == "Article":
-                for field in ARTICLE_FIELDS:
-                    if field in asset and field not in content:
-                        content[field] = asset.pop(field)
-                style = content.get("textStyle")
+                style = asset.get("textStyle")
                 if isinstance(style, dict) and isinstance(style.get("fontFamily"), str):
                     style["fontFamily"] = _approved_font(
                         style["fontFamily"], allowed_fonts

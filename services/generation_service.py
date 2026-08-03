@@ -6,7 +6,7 @@ import logging
 from google.genai import types
 
 from core.config import AppConfig
-from core.vertex_client import vertex_client
+from core.vertex_client import get_vertex_client
 from schemas.layout_schema import LayoutProject
 
 logger = logging.getLogger(__name__)
@@ -24,7 +24,8 @@ file://, gs://, or operating-system paths.
 Text frames stay inside the 0.25-inch safe margin. Images may extend exactly 0.125 inches
 for bleed. Text frames must not overlap each other; image/text overlap is permitted.
 Use only an approved exact font name. Font names contain the two literal characters \\t,
-not an actual tab. Article formatting belongs inside the Article content object.
+not an actual tab. Article content contains only textBody. Place columns, gutterSize,
+margins, and textStyle beside content on the Article asset.
 Do not add continuation metadata. Split continuation text between page Article assets.
 """
 
@@ -66,7 +67,7 @@ class GenerationService:
             f"{active_prompt}"
         )
         try:
-            response = vertex_client.models.generate_content(
+            response = get_vertex_client().models.generate_content(
                 model=self.model,
                 contents=combined_prompt,
                 config=types.GenerateContentConfig(

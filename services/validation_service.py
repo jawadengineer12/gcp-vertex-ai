@@ -36,7 +36,7 @@ class ValidationService:
         try:
             project = LayoutProject.model_validate(json_data)
         except ValidationError as error:
-            logger.error("LayoutProject schema validation failed: %s", error)
+            logger.error("LayoutProject schema validation failed")
             raise
 
         errors = self._quality_errors(project)
@@ -91,7 +91,7 @@ class ValidationService:
                             f"{label}: Article frame must remain inside the "
                             f'{self.safe_margin}" safe margin'
                         )
-                    font = asset.content.textStyle.fontFamily
+                    font = asset.textStyle.fontFamily
                     if font not in self.allowed_fonts:
                         errors.append(f"{label}: unapproved fontFamily {font!r}")
                 else:
