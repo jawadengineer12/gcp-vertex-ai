@@ -2,15 +2,14 @@
 
 This covers everything needed to get the pipeline running on a brand new
 Google Cloud account: project creation through the first successful
-`python main.py` run. It extends `docs/Vertex AI Development Setup Guide
-From Scratch.docx` (written for the old `indesign-layout-ai` project) with
-the Vector Search pieces that guide didn't cover yet.
+`python main.py` run and hosted Cloud Run deployment. Semantic retrieval runs
+inside the application over the checked-in embedding file; no continuously
+deployed Vector Search endpoint is required.
 
 Set these once at the start of your PowerShell session:
 
 ```powershell
 $PROJECT_ID = "your-google-cloud-project"
-$VECTOR_BUCKET = "gs://${PROJECT_ID}-vector-data"
 ```
 
 ---
@@ -50,22 +49,14 @@ $SA_EMAIL="vertex-layout-dev-sa@${PROJECT_ID}.iam.gserviceaccount.com"
 
 gcloud projects add-iam-policy-binding $PROJECT_ID `
   --member="serviceAccount:$SA_EMAIL" --role="roles/aiplatform.user"
-gcloud projects add-iam-policy-binding $PROJECT_ID `
-  --member="serviceAccount:$SA_EMAIL" --role="roles/storage.objectAdmin"
-
-mkdir secrets
-gcloud iam service-accounts keys create secrets/gcp-sa-key.json `
-  --iam-account=$SA_EMAIL
 ```
 
-`secrets/` is already in `.gitignore` — never commit this key. This JSON key is
-for local CLI development only. Cloud Run must use the service account directly
-as its service identity; never set `GOOGLE_APPLICATION_CREDENTIALS` on Cloud Run.
-
-Set credentials for local runs:
+Cloud Run uses this service account directly as its service identity. Do not
+create, download, package, or set a service-account JSON key. For local runs,
+use Application Default Credentials tied to your own authenticated account:
 
 ```powershell
-$env:GOOGLE_APPLICATION_CREDENTIALS="secrets/gcp-sa-key.json"
+gcloud auth application-default login
 ```
 
 ## 4. Python environment
@@ -83,6 +74,9 @@ pip install -e .
 
 ## 5. Confirm Gemini access
 
+This optional command makes a paid model request. Skip it unless that test is
+explicitly authorized:
+
 ```powershell
 python -c "from google import genai; c = genai.Client(vertexai=True, project='$PROJECT_ID', location='us-central1'); print(c.models.generate_content(model='gemini-2.5-flash', contents='Hello').text)"
 ```
@@ -94,108 +88,40 @@ Copy `.env.example` to `.env` and fill in:
 ```env
 GOOGLE_CLOUD_PROJECT=your-google-cloud-project
 GOOGLE_CLOUD_LOCATION=us-central1
-GCS_VECTOR_BUCKET_URI=gs://your-google-cloud-project-vector-data
 ```
 
-Leave `VERTEX_API_ENDPOINT`, `VERTEX_INDEX_ENDPOINT`, and
-`VERTEX_DEPLOYED_INDEX_ID` blank for now — steps 8–10 produce them.
+## 7. Verify local retrieval data
 
-## 7. Create the GCS bucket for vector data
+`normalized_data/vertex_index_data.json` is checked into the repository and
+contains the 32 normalized 768-dimensional embeddings used for exact cosine
+search. It is loaded and cached once per Cloud Run container. Verify that its
+IDs and dimensions match the prompt library:
 
 ```powershell
-gcloud storage buckets create $VECTOR_BUCKET `
-  --location=us-central1 --uniform-bucket-level-access
+python -m unittest tests.test_layout_pipeline.LocalVectorStoreTests
 ```
 
-## 8. Generate embeddings and upload
+No GCS bucket, Vector Search index, or deployed index endpoint is required.
 
-```powershell
-python -m scripts.prepare_vertex_vector_data
-gcloud storage cp normalized_data/vertex_index_data.json $VECTOR_BUCKET/
-```
-
-This embeds all 32 prompt library entries and writes
-`normalized_data/vertex_index_data.json` as newline-delimited JSON in the
-`{"id", "embedding"}` format Vector Search requires. The `.json` extension
-is required by the batch import service.
-
-If replacing a previous upload that used the unsupported `.jsonl` extension,
-remove that stale object first:
-
-```powershell
-gcloud storage rm "${VECTOR_BUCKET}/vertex_index_data.jsonl"
-```
-
-## 9. Create the Vector Search index
-
-```powershell
-python -m scripts.create_cloud_index
-```
-
-This takes 15–30 minutes. It prints an index resource name like:
-
-```
-projects/123456789/locations/us-central1/indexes/1234567890123456789
-```
-
-Save that as `VERTEX_INDEX_RESOURCE_NAME` in `.env` — you'll need it later
-whenever you add new examples via `scripts/update_vector_index.py`.
-
-## 10. Deploy an index endpoint
-
-The index isn't queryable until it's deployed behind an endpoint.
-
-```powershell
-gcloud ai index-endpoints create `
-  --display-name=layout-rag-endpoint `
-  --region=us-central1 `
-  --public-endpoint-enabled
-
-gcloud ai index-endpoints deploy-index INDEX_ENDPOINT_ID `
-  --deployed-index-id=layout_rag_index `
-  --display-name=layout_rag_index `
-  --index=INDEX_RESOURCE_NAME_FROM_STEP_9 `
-  --region=us-central1
-```
-
-Deployment takes another 15–30 minutes. When it finishes:
-
-```powershell
-gcloud ai index-endpoints describe INDEX_ENDPOINT_ID --region=us-central1
-```
-
-Copy three values into `.env`:
-
-- `VERTEX_API_ENDPOINT` — the `publicEndpointDomainName` field
-- `VERTEX_INDEX_ENDPOINT` — the full endpoint resource name
-  (`projects/.../locations/.../indexEndpoints/...`)
-- `VERTEX_DEPLOYED_INDEX_ID` — `layout_rag_index` (what you set with
-  `--deployed-index-id` above)
-
-Verify that `deployedIndexes` is present in the description before testing a
-completed generation request. An endpoint without a deployed index can serve
-the API's question flow but cannot perform vector retrieval. A deployed Vector
-Search index has ongoing cost, so do not leave an unused deployment running.
-
-## 11. Font list
+## 8. Font list
 
 Place the client's exact InDesign font export at `raw_data/Font List.csv`
 (already included in this delivery). Only column C (exact InDesign name)
 is read — it's the source of truth for every approved font in generation
 and validation.
 
-## 12. Run the pipeline
+## 9. Run the pipeline
 
 ```powershell
 python main.py
 ```
 
 You should see: template selection → prompt → any missing-field questions →
-hybrid retrieval trace → generation attempts → validation → saved output
+local hybrid retrieval trace → generation attempts → validation → saved output
 at `outputs/generated_layout.json` and a full run trace under
 `outputs/run_traces/`.
 
-## 13. Run the test suite
+## 10. Run the test suite
 
 ```powershell
 python -m unittest discover tests
@@ -204,7 +130,7 @@ python tests/validate_prompt_library.py
 
 Both should pass cleanly before you consider the environment good.
 
-## 14. Deploy the hosted test API to Cloud Run
+## 11. Deploy the hosted test API to Cloud Run
 
 The hosted API is synchronous and stateless. It is a testing surface, not yet
 declared Bubble-ready. Cloud Run builds the checked-in `Dockerfile` remotely,
@@ -245,7 +171,7 @@ gcloud run deploy layout-test-api --source . `
   --service-account=$RUN_SA `
   --cpu=2 --memory=2Gi --concurrency=1 --timeout=900 `
   --min=0 --max=2 `
-  --set-env-vars="GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,VERTEX_API_ENDPOINT=$VECTOR_API_ENDPOINT,VERTEX_INDEX_ENDPOINT=$VECTOR_INDEX_ENDPOINT,VERTEX_DEPLOYED_INDEX_ID=layout_rag_index,ENABLE_RUN_TRACE=false,LOCAL_OUTPUT=false" `
+  --set-env-vars="GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,ENABLE_RUN_TRACE=false,LOCAL_OUTPUT=false" `
   --set-secrets="LAYOUT_API_KEY=layout-api-key:1"
 ```
 
@@ -280,7 +206,7 @@ Invoke-RestMethod "$SERVICE_URL/v1/layouts" -Method Post `
 
 The final call must return `needs_input`; it does not initialize Vertex,
 Gemini, or the reranker. Ask before sending a fully resolved request because
-that performs paid retrieval and generation. `publish=true` additionally
+that performs paid embedding and generation calls. `publish=true` additionally
 requires a rotated publisher key and contacts the external publisher.
 
 For Postman testing, key access and rotation, the full request/response loop,
@@ -288,22 +214,56 @@ and publisher setup behavior, see [API_DOCUMENTATION.md](API_DOCUMENTATION.md).
 
 ### Current hosted verification
 
-On 2026-08-04, revision `layout-test-api-00003-kcp` was verified at:
+On 2026-08-04, local-retrieval revision `layout-test-api-00004-8vd` was
+deployed with 100% traffic at:
 
 ```text
 https://layout-test-api-6euw7jlffa-uc.a.run.app
 ```
 
-The public health check and publisher URL/secret reference passed on this
-configuration-only revision. Its unchanged application image was previously
-verified on revision `layout-test-api-00002-kfn`: API-key rejection, template
-listing, stateless `needs_input`, and one authorized cold `publish=false`
-generation all passed. That generation produced one page and five assets with
-one validation retry and no publisher result. Server timings were 687 ms
-retrieval, 56,700 ms reranking/cold model load, 38,347 ms generation across both
-attempts, 1 ms validation, and 95,753 ms total. Treat this as one cold
-observation, not p50/p95 evidence. No live publisher submission has been made
-from revision `layout-test-api-00003-kcp`.
+The public health route returned HTTP 200 and a keyless `/v1/templates` request
+returned HTTP 401. The publisher URL and pinned secret reference were retained,
+the obsolete managed-index variables were removed, and the managed Vector
+Search endpoint was confirmed to have no deployed indexes. Local compilation,
+24 tests, and prompt-library validation passed.
+
+One authorized end-to-end `publish=false` request then completed successfully
+on this revision with one page, five assets, `publisher: null`, and two bounded
+validation retries. Server timings were 478 ms retrieval, 60,114 ms reranking
+including cold model load, 104,509 ms generation across three attempts, 1 ms
+validation, and 165,124 ms total. The managed endpoint still had no deployed
+indexes afterward, and no publisher request was made.
+
+The earlier managed-index revision had one authorized cold `publish=false`
+generation: one page, five assets, one validation retry, and no publisher
+result. Its timings were 687 ms retrieval, 56,700 ms reranking/cold model load,
+38,347 ms generation across both attempts, 1 ms validation, and 95,753 ms
+total. Treat this only as a historical cold observation, not p50/p95 evidence.
+
+### Existing managed-index rollback
+
+The original managed index is preserved but undeployed, so it has no serving
+replicas. The local-retrieval application does not use it. Only redeploy it for
+an explicit comparison or when rolling back to the older application code:
+
+```powershell
+gcloud ai index-endpoints deploy-index 4607598034195316736 `
+  --project=angular-lambda-421320 --region=us-central1 `
+  --deployed-index-id=layout_rag_index `
+  --display-name=layout_rag_index `
+  --index=projects/596225948068/locations/us-central1/indexes/555673385468690432 `
+  --machine-type=e2-standard-2 `
+  --min-replica-count=1 --max-replica-count=1
+```
+
+It is billed continuously while deployed and cannot scale to zero. Undeploy it
+immediately after the comparison:
+
+```powershell
+gcloud ai index-endpoints undeploy-index 4607598034195316736 `
+  --project=angular-lambda-421320 --region=us-central1 `
+  --deployed-index-id=layout_rag_index
+```
 
 ---
 
@@ -312,12 +272,13 @@ from revision `layout-test-api-00003-kcp`.
 ```
 1. Append new examples to normalized_data/layout_prompt_library_updated.json
    (scripts/append_excel_to_prompt_library.py if coming from Excel)
-2. python -m scripts.prepare_vertex_vector_data   # regenerates full vector JSON
-3. python -m scripts.update_vector_index          # upserts into the live index
+2. python -m scripts.prepare_vertex_vector_data   # paid embedding regeneration
+3. python -m unittest tests.test_layout_pipeline.LocalVectorStoreTests
+4. Deploy the new application image
 ```
 
-No index rebuild needed for incremental additions — only step 9 (full
-recreate) if you ever need to change the embedding dimensions or start over.
+Commit the prompt library and regenerated vector file together so their stable
+IDs cannot drift. No hosted index update or serving deployment is required.
 
 ## What's out of scope here
 

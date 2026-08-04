@@ -30,6 +30,7 @@ tests/
 raw_data/*
 !raw_data/Font List.csv
 normalized_data/vertex_index_data*
+!normalized_data/vertex_index_data.json
 *.docx
 *.idml
 .coverage*

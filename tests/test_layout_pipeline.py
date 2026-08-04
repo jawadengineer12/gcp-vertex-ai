@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from copy import deepcopy
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 from urllib.error import URLError
 
@@ -11,7 +12,9 @@ from pydantic import ValidationError
 from schemas.layout_schema import LayoutProject
 from services.font_service import load_allowed_fonts
 from services.output_service import OutputService
+from services.retrieval_service import RetrievalService
 from services.validation_service import ValidationService
+from services.vector_store import LocalVectorStore
 
 
 VALID_LAYOUT = {
@@ -90,6 +93,74 @@ class LayoutContractTests(unittest.TestCase):
                 "Adobe Garamond Pro\\tBold",
             }.issubset(fonts)
         )
+
+
+class LocalVectorStoreTests(unittest.TestCase):
+    def test_exact_cosine_ranking_and_dimension_validation(self) -> None:
+        records = [
+            {"id": "x", "embedding": [1.0, 0.0]},
+            {"id": "y", "embedding": [0.0, 1.0]},
+            {"id": "diagonal", "embedding": [1.0, 1.0]},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "vectors.json"
+            path.write_text(
+                "\n".join(json.dumps(record) for record in records),
+                encoding="utf-8",
+            )
+            store = LocalVectorStore(path)
+
+            self.assertEqual(
+                store.find_nearest_neighbors([0.9, 0.1], k=2),
+                ["x", "diagonal"],
+            )
+            with self.assertRaisesRegex(ValueError, "expected 2"):
+                store.find_nearest_neighbors([1.0], k=1)
+
+    def test_packaged_vectors_match_prompt_library(self) -> None:
+        root = Path(__file__).parents[1]
+        library = json.loads(
+            (root / "normalized_data" / "layout_prompt_library_updated.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        records = [
+            json.loads(line)
+            for line in (
+                root / "normalized_data" / "vertex_index_data.json"
+            ).read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+
+        self.assertEqual(
+            {record["id"] for record in records},
+            {item["id"] for item in library},
+        )
+        self.assertEqual({len(record["embedding"]) for record in records}, {768})
+        store = LocalVectorStore(
+            root / "normalized_data" / "vertex_index_data.json"
+        )
+        for record in records:
+            self.assertEqual(
+                store.find_nearest_neighbors(record["embedding"], k=1),
+                [record["id"]],
+            )
+
+    @patch("services.retrieval_service.get_vertex_client")
+    def test_retrieval_pipeline_uses_packaged_vectors(self, client_factory) -> None:
+        root = Path(__file__).parents[1]
+        first_record = json.loads(
+            (root / "normalized_data" / "vertex_index_data.json")
+            .read_text(encoding="utf-8")
+            .splitlines()[0]
+        )
+        client_factory.return_value.models.embed_content.return_value = SimpleNamespace(
+            embeddings=[SimpleNamespace(values=first_record["embedding"])]
+        )
+
+        result = RetrievalService().execute_pipeline("local vector integration test")
+
+        self.assertEqual(result["vector_candidates"][0]["id"], first_record["id"])
 
 
 class PublisherSubmissionTests(unittest.TestCase):

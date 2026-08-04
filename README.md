@@ -1,14 +1,14 @@
 # Vertex AI Layout RAG
 
-Python pipeline that retrieves relevant layout examples with Vertex AI Vector
-Search, generates structured layout JSON with Gemini, and validates the result
-against strict converter-facing layout rules.
+Python pipeline that retrieves relevant layout examples with exact local vector
+search plus BM25, generates structured layout JSON with Gemini, and validates
+the result against strict converter-facing layout rules.
 
 ## Requirements
 
 - Python 3.12 or newer
-- A Google Cloud project with Vertex AI and Cloud Storage enabled
-- A deployed Vertex AI Vector Search index
+- A Google Cloud project with Vertex AI enabled
+- The checked-in local embedding file under `normalized_data/`
 
 ## Local setup
 
@@ -19,11 +19,11 @@ pip install -e .
 Copy-Item .env.example .env
 ```
 
-Fill in the Google Cloud and Vector Search values in `.env`. Never commit that
-file or a service-account key.
+Fill in the Google Cloud project and location in `.env`. Never commit that file
+or a service-account key.
 
-For the complete Google Cloud setup, vector-data import, index creation, and
-endpoint deployment workflow, see [GCP_SETUP.md](GCP_SETUP.md).
+For the complete Google Cloud and Cloud Run setup, see
+[GCP_SETUP.md](GCP_SETUP.md).
 
 ## Run
 
@@ -85,7 +85,7 @@ gcloud run deploy layout-test-api --source . `
   --service-account "layout-runner@PROJECT_ID.iam.gserviceaccount.com" `
   --cpu 2 --memory 2Gi --concurrency 1 --timeout 900 `
   --min 0 --max 2 `
-  --set-env-vars "GOOGLE_CLOUD_PROJECT=PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,VERTEX_API_ENDPOINT=VECTOR_API_ENDPOINT,VERTEX_INDEX_ENDPOINT=VECTOR_INDEX_ENDPOINT,VERTEX_DEPLOYED_INDEX_ID=DEPLOYED_INDEX_ID,ENABLE_RUN_TRACE=false,LOCAL_OUTPUT=false" `
+  --set-env-vars "GOOGLE_CLOUD_PROJECT=PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,ENABLE_RUN_TRACE=false,LOCAL_OUTPUT=false" `
   --set-secrets "LAYOUT_API_KEY=layout-api-key:1"
 ```
 
@@ -115,9 +115,9 @@ The local file remains valid JSON. Only the API request wraps it as
 
 ```powershell
 python -m scripts.prepare_vertex_vector_data
-gcloud.cmd storage cp normalized_data/vertex_index_data.json `
-  gs://YOUR_VECTOR_BUCKET/
+python -m unittest tests.test_layout_pipeline.LocalVectorStoreTests
 ```
 
-The generated file contains one JSON vector record per line but deliberately
-uses the `.json` extension required by Vertex AI batch import.
+The generated file contains one JSON vector record per line and is packaged in
+the application image. Regeneration calls the configured embedding model, so
+only run it after the prompt library changes and include it in cost planning.

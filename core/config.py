@@ -30,9 +30,6 @@ def _path(key: str, default: str) -> Path:
 class AppConfig:
     PROJECT_ID = _get("GOOGLE_CLOUD_PROJECT")
     LOCATION = _get("GOOGLE_CLOUD_LOCATION", "us-central1")
-    API_ENDPOINT = _get("VERTEX_API_ENDPOINT")
-    INDEX_ENDPOINT = _get("VERTEX_INDEX_ENDPOINT")
-    DEPLOYED_INDEX_ID = _get("VERTEX_DEPLOYED_INDEX_ID")
     GCS_VECTOR_BUCKET_URI = _get("GCS_VECTOR_BUCKET_URI")
 
     PROMPT_LIBRARY_PATH = _path(
@@ -91,9 +88,6 @@ class AppConfig:
             key
             for key, value in {
                 "GOOGLE_CLOUD_PROJECT": cls.PROJECT_ID,
-                "VERTEX_API_ENDPOINT": cls.API_ENDPOINT,
-                "VERTEX_INDEX_ENDPOINT": cls.INDEX_ENDPOINT,
-                "VERTEX_DEPLOYED_INDEX_ID": cls.DEPLOYED_INDEX_ID,
             }.items()
             if not value
         ]

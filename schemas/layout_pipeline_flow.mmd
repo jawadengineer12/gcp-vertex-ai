@@ -45,7 +45,7 @@ flowchart TB
     subgraph PIPELINE["Shared LayoutPipeline - starts only when fields are resolved"]
         START["Enrich prompt with<br/>confirmed information"]
         EMBED["Vertex AI embedding<br/>text-embedding-004"]
-        VECTOR["Vertex Vector Search<br/>semantic candidates"]
+        VECTOR["Cached local embeddings<br/>exact cosine candidates"]
         LIBRARY["Local prompt library"]
         BM25["BM25 keyword search"]
         MERGE["Weighted candidate merge<br/>70% vector + 30% BM25"]
@@ -59,6 +59,7 @@ flowchart TB
         START --> EMBED
         START --> BM25
         EMBED --> VECTOR
+        LIBRARY --> VECTOR
         LIBRARY --> BM25
         VECTOR --> MERGE
         BM25 --> MERGE
@@ -93,7 +94,6 @@ flowchart TB
         LAYOUT_SECRET -. "injects LAYOUT_API_KEY" .-> RUN
         PUBLISHER_SECRET -. "injects PUBLISHER_API_KEY" .-> RUN
         SERVICE_ACCOUNT -. "IAM authentication" .-> EMBED
-        SERVICE_ACCOUNT -. "IAM authentication" .-> VECTOR
         SERVICE_ACCOUNT -. "IAM authentication" .-> GEMINI
         PUBLISHER -->|"HTTPS + x-api-key"| EXTERNAL
     end
@@ -105,8 +105,8 @@ flowchart TB
     classDef failure fill:#fee2e2,stroke:#dc2626,color:#450a0a,stroke-width:2px;
     classDef security fill:#fff1e6,stroke:#ea580c,color:#431407,stroke-width:2px;
 
-    class SOURCE,ARCHIVE,BUILD,IMAGE,RUN,VECTOR,LIBRARY infrastructure;
-    class CLIENT,CLI,INFO,API,REQ,COLLECT,START,EMBED,BM25,MERGE,RERANK,SANITIZE,GEMINI,VALIDATE,PUBLISHER process;
+    class SOURCE,ARCHIVE,BUILD,IMAGE,RUN,LIBRARY infrastructure;
+    class CLIENT,CLI,INFO,API,REQ,COLLECT,START,EMBED,VECTOR,BM25,MERGE,RERANK,SANITIZE,GEMINI,VALIDATE,PUBLISHER process;
     class AUTH,COMPLETE,VALID,PUBLISH decision;
     class NEEDS,RESPONSE,SUCCESS response;
     class UNAUTHORIZED,FAILURE failure;

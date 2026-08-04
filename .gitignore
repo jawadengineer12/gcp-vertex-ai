@@ -31,7 +31,6 @@ dist/
 logs/
 outputs/
 run_traces/
-normalized_data/vertex_index_data.json
 normalized_data/vertex_index_data.jsonl
 
 # Client/source design documents not required at runtime

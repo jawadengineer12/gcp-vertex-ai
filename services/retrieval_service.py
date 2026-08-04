@@ -1,10 +1,10 @@
 # services/retrieval_service.py
 """
-Hybrid retrieval service: Vertex AI Vector Search + BM25 lexical scoring.
+Hybrid retrieval service: exact local vector search + BM25 lexical scoring.
 
 Pipeline:
   1. Embed user query via Vertex AI.
-  2. Retrieve vector candidates from Vertex AI Vector Search.
+  2. Retrieve vector candidates from the cached local embedding matrix.
   3. Retrieve BM25 candidates from the full local prompt library.
   4. Normalize both score sets independently.
   5. Merge candidates by stable unique ID.
@@ -17,7 +17,7 @@ from pathlib import Path
 
 from core.config import AppConfig
 from core.vertex_client import get_vertex_client
-from services.vector_store import VertexVectorStore
+from services.vector_store import LocalVectorStore
 from utils.retrieval_utils import (
     load_library,
     score_prompt,
@@ -35,7 +35,7 @@ class RetrievalService:
     """
 
     def __init__(self) -> None:
-        self.vector_store = VertexVectorStore()
+        self.vector_store = LocalVectorStore()
         self.library = self._load_library(AppConfig.PROMPT_LIBRARY_PATH)
         # Build a fast ID → item lookup map
         self._id_map: dict[str, dict] = {
@@ -89,16 +89,16 @@ class RetrievalService:
     # ── Stage: Vector retrieval ───────────────────────────────────────────────
 
     def _get_vector_candidates(self, query_embedding: list[float]) -> list[dict]:
-        """Fetch top-K candidates from Vertex AI Vector Search."""
+        """Fetch top-K candidates using exact local cosine similarity."""
         logger.info(
-            "Querying Vertex AI Vector Search | top_k=%d", AppConfig.TOP_K_VECTOR
+            "Querying local vector store | top_k=%d", AppConfig.TOP_K_VECTOR
         )
         candidate_ids = self.vector_store.find_nearest_neighbors(
             query_embedding, k=AppConfig.TOP_K_VECTOR
         )
 
         if not candidate_ids:
-            logger.warning("Vector Search returned zero candidates.")
+            logger.warning("Local vector search returned zero candidates.")
             return []
 
         candidates = []
@@ -106,7 +106,7 @@ class RetrievalService:
             item = self._id_map.get(cid)
             if item is None:
                 logger.warning(
-                    "Vector Search returned ID not found in library: %s", cid
+                    "Local vector search returned ID not found in library: %s", cid
                 )
                 continue
             # Score: rank-based (1.0 for rank 0, decaying)

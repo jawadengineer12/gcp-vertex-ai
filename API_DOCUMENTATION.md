@@ -15,7 +15,7 @@ store sessions or request history, and does not accept image uploads.
 | Region | `us-central1` |
 | Cloud Run service | `layout-test-api` |
 | Base URL | `https://layout-test-api-6euw7jlffa-uc.a.run.app` |
-| Verified revision | `layout-test-api-00003-kcp` |
+| Verified revision | `layout-test-api-00004-8vd` |
 | Runtime service account | `vertex-layout-dev-sa@angular-lambda-421320.iam.gserviceaccount.com` |
 | CPU / memory | 2 vCPU / 2 GiB |
 | Concurrency / timeout | 1 / 900 seconds |
@@ -397,10 +397,12 @@ For tests that must not contact the publisher, send:
 That guarantees the publisher is not contacted and `publisher` is `null` in a
 completed response.
 
-Revision `layout-test-api-00003-kcp` has the HTTPS publisher URL and
+Revision `layout-test-api-00004-8vd` has the HTTPS publisher URL and
 `PUBLISHER_API_KEY=publisher-api-key:1` configured. This configuration has been
-verified without reading the key value or submitting a job. Sending
-`publish:true` now performs paid generation and then contacts the real publisher.
+verified without displaying the key value or submitting a publisher job. An
+end-to-end `publish:false` request completed successfully using exact local
+vector retrieval and returned `publisher:null`. Sending `publish:true` performs
+paid generation and then contacts the real publisher.
 
 A successful `publish:true` response includes the publisher HTTP status and
 response body:

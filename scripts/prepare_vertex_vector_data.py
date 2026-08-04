@@ -1,13 +1,12 @@
 # scripts/prepare_vertex_vector_data.py
 """
-Generates embeddings for every prompt library entry and writes them
-as newline-delimited JSON in a Vertex-supported .json file.
+Generates embeddings for every prompt library entry for exact local retrieval.
 
 Output format (one JSON object per line):
     {"id": "<stable_id>", "embedding": [0.1, 0.2, ...]}
 
-The 'id' field matches the stable IDs stored in the prompt library,
-so Vector Search results can be looked up directly in the library.
+The 'id' field matches the stable IDs stored in the prompt library. The file is
+packaged with the application and searched in-process with cosine similarity.
 
 Run this script whenever the prompt library is updated.
 """
@@ -79,8 +78,6 @@ def main() -> None:
             normalized_embedding = normalize_vector(
                 response.embeddings[idx].values)
 
-            # Vertex AI expects one JSON object per line, but batch import
-            # requires the filename to use a supported .json extension.
             vertex_record = {
                 "id": stable_id,
                 "embedding": normalized_embedding,
@@ -92,7 +89,7 @@ def main() -> None:
         "Vector JSON written | path=%s | records=%d", output_path, written
     )
     print(f"✅ Success! {written} records written to: {output_path}")
-    print("Next step: upload this file to GCS and rebuild/update the index.")
+    print("Next step: run the tests, then deploy the updated application image.")
 
 
 if __name__ == "__main__":
