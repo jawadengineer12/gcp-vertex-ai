@@ -73,6 +73,18 @@ For Postman examples, the complete stateless request flow, API-key access and
 rotation, route details, errors, and troubleshooting, see
 [API_DOCUMENTATION.md](API_DOCUMENTATION.md).
 
+## Streamlit demo
+
+Start the API as shown above, then open a second PowerShell terminal:
+
+```powershell
+uv run streamlit run streamlit_app.py
+```
+
+Connect to `http://localhost:8080` with the same `LAYOUT_API_KEY`. Choose a
+template, describe the layout, and optionally enable publishing. The validated
+JSON remains visible and downloadable whether publishing succeeds or fails.
+
 ## Cloud Run deployment
 
 Create a runtime service account with only the required Vertex AI access, then

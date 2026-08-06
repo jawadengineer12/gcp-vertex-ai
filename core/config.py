@@ -55,6 +55,7 @@ class AppConfig:
     PUBLISHER_CREATED_BY = _get("PUBLISHER_CREATED_BY", "test_user@bubble.com")
     PUBLISHER_PROJECT = _get("PUBLISHER_PROJECT", "Heroku Integration Test")
     LAYOUT_API_KEY = _get("LAYOUT_API_KEY")
+    LAYOUT_API_URL = _get("LAYOUT_API_URL", "http://localhost:8080")
 
     LOG_DIR = _path("LOG_DIR", "logs")
     LOG_LEVEL = _get("LOG_LEVEL", "INFO")
