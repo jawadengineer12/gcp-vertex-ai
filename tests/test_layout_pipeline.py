@@ -187,14 +187,19 @@ class PublisherSubmissionTests(unittest.TestCase):
 
             self.assertEqual(request.method, "POST")
             self.assertEqual(request.get_header("Content-type"), "application/json")
+            self.assertEqual(request.get_header("User-agent"), "Requestly/1.0")
             self.assertEqual(request.get_header("X-api-key"), "rotated-test-key")
             self.assertEqual(mocked_urlopen.call_args.kwargs["timeout"], 30)
             self.assertTrue(envelope["_id"].startswith("test_"))
             self.assertEqual(envelope["Created Date"], envelope["Modified Date"])
             self.assertTrue(envelope["Prompt"].startswith("var documentData="))
-            self.assertFalse(envelope["Prompt"].endswith(";"))
+            self.assertTrue(envelope["Prompt"].endswith(";"))
             self.assertEqual(
-                json.loads(envelope["Prompt"].removeprefix("var documentData=")),
+                json.loads(
+                    envelope["Prompt"]
+                    .removeprefix("var documentData=")
+                    .removesuffix(";")
+                ),
                 VALID_LAYOUT,
             )
 

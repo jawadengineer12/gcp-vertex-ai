@@ -68,13 +68,15 @@ class OutputService:
             "Created Date": timestamp,
             "Modified Date": timestamp,
             "Prompt": "var documentData="
-            + json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
+            + json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+            + ";",
         }
         request = Request(
             self.publisher_url,
             data=json.dumps(envelope, ensure_ascii=False).encode("utf-8"),
             headers={
                 "Content-Type": "application/json",
+                "User-Agent": "Requestly/1.0",
                 "x-api-key": self.publisher_api_key,
             },
             method="POST",

@@ -98,9 +98,8 @@ def _show_result(result: dict) -> None:
         st.error("Layout generated successfully, but publishing failed.")
     elif published:
         st.success(f"Layout published successfully (HTTP {published['status_code']}).")
-        if published.get("body"):
-            with st.expander("Publisher response"):
-                st.code(published["body"], language="json")
+        with st.expander("Publishing response"):
+            st.json(published, expanded=True)
     else:
         st.success("Layout generated successfully. It was not published.")
 

@@ -121,7 +121,7 @@ PUBLISHER_API_KEY=replace-with-rotated-key
 ```
 
 The local file remains valid JSON. Only the API request wraps it as
-`var documentData=<json>`.
+`var documentData=<json>;`.
 
 ## Refresh vector data
 

@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from urllib.error import HTTPError
 
-from streamlit_app import api_request
+from streamlit_app import _show_result, api_request
 
 
 class FakeResponse:
@@ -50,6 +50,25 @@ class ApiRequestTests(unittest.TestCase):
         self.assertEqual(status, 502)
         self.assertEqual(body["status"], "publish_failed")
         self.assertIn("layout", body)
+
+
+class ResultDisplayTests(unittest.TestCase):
+    @patch("streamlit_app.st")
+    def test_complete_publisher_response_is_shown_when_body_is_empty(self, streamlit) -> None:
+        publisher = {"status_code": 200, "body": ""}
+
+        _show_result(
+            {
+                "status": "completed",
+                "request_id": "req_demo",
+                "publisher": publisher,
+                "timing_ms": {},
+                "layout": {"pages": []},
+            }
+        )
+
+        streamlit.expander.assert_called_once_with("Publishing response")
+        streamlit.json.assert_any_call(publisher, expanded=True)
 
 
 if __name__ == "__main__":
