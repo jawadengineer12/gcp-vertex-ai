@@ -1,0 +1,145 @@
+{
+  "pageIndex": 0,
+  "documentSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11.0
+  },
+  "projectInfo": {
+    "projectName": "Community Gardens Article"
+  },
+  "pages": [
+    {
+      "pageIndex": 1,
+      "assets": [
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 0.5
+          },
+          "size": {
+            "width": 8.0,
+            "height": 0.5
+          },
+          "content": {
+            "textBody": "Community Gardens"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tBold",
+            "fontSize": 24.0,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 1.0
+          },
+          "size": {
+            "width": 8.0,
+            "height": 0.25
+          },
+          "content": {
+            "textBody": "By Jane Doe"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 12.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "expand": false,
+          "position": {
+            "startX": 0.25,
+            "startY": 1.5
+          },
+          "size": {
+            "width": 3.9,
+            "height": 9.25
+          },
+          "content": {
+            "textBody": "Community gardens bring neighbors together and make local food easier to share.",
+            "articleDocumentLink": "community_gardens_article"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "expand": true,
+          "position": {
+            "startX": 4.35,
+            "startY": 1.5
+          },
+          "size": {
+            "width": 3.9,
+            "height": 9.25
+          },
+          "content": {
+            "textBody": "",
+            "articleDocumentLink": "community_gardens_article"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        }
+      ]
+    }
+  ]
+}

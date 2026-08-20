@@ -7,6 +7,8 @@ from collections.abc import Iterable
 from pydantic import ValidationError
 
 from schemas.layout_schema import ArticleAsset, LayoutProject
+from services.layout_plan_service import LayoutFeaturePlan
+from services.relationship_validation_service import RelationshipValidationService
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +32,9 @@ class ValidationService:
         self.image_bleed = image_bleed
         self.ad_tolerance = ad_tolerance
 
-    def validate_payload(self, raw_payload: str | dict) -> dict:
+    def validate_payload(
+        self, raw_payload: str | dict, layout_plan: LayoutFeaturePlan | None = None
+    ) -> dict:
         """Parse, strictly validate, apply quality rules, and return canonical data."""
         json_data = self._parse(raw_payload)
         try:
@@ -39,12 +43,14 @@ class ValidationService:
             logger.error("LayoutProject schema validation failed")
             raise
 
-        errors = self._quality_errors(project)
+        plan = layout_plan or LayoutFeaturePlan()
+        errors = RelationshipValidationService().errors(project, plan)
+        errors.extend(self._quality_errors(project, plan))
         if errors:
             raise LayoutQualityError("\n".join(errors))
 
         logger.info("LayoutProject validation passed | pages=%d", len(project.pages))
-        return project.model_dump(mode="json")
+        return project.model_dump(mode="json", exclude_none=True)
 
     @staticmethod
     def _parse(raw_payload: str | dict) -> dict:
@@ -65,7 +71,9 @@ class ValidationService:
             raise TypeError("Gemini response must be a JSON object")
         return parsed
 
-    def _quality_errors(self, project: LayoutProject) -> list[str]:
+    def _quality_errors(
+        self, project: LayoutProject, plan: LayoutFeaturePlan
+    ) -> list[str]:
         errors: list[str] = []
         width = project.documentSettings.pageWidth
         height = project.documentSettings.pageHeight
@@ -98,10 +106,16 @@ class ValidationService:
                     tolerance = (
                         self.image_bleed if asset.assetType == "Image" else self.ad_tolerance
                     )
+                    intentional_spread = (
+                        plan.image_spread
+                        and asset.assetType == "Image"
+                        and page.pageIndex == plan.spread_start_page
+                        and right > width
+                    )
                     if (
                         left < -tolerance
                         or top < -tolerance
-                        or right > width + tolerance
+                        or (right > width + tolerance and not intentional_spread)
                         or bottom > height + tolerance
                     ):
                         errors.append(

@@ -1,0 +1,210 @@
+{
+  "pageIndex": 0,
+  "documentSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11.0
+  },
+  "projectInfo": {
+    "projectName": "Editorial Page"
+  },
+  "pages": [
+    {
+      "pageIndex": 1,
+      "assets": [
+        {
+          "assetType": "Image",
+          "position": {
+            "startX": 0.0,
+            "startY": 0.0
+          },
+          "size": {
+            "width": 8.5,
+            "height": 7.0
+          },
+          "content": {
+            "imageUrl": "https://images.example/writer.jpg"
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 7.5
+          },
+          "size": {
+            "width": 8.0,
+            "height": 0.5
+          },
+          "content": {
+            "textBody": "By Jane Doe"
+          },
+          "columns": 1,
+          "gutterSize": 0.2,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tBold",
+            "fontSize": 18.0,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": true
+          }
+        }
+      ]
+    },
+    {
+      "pageIndex": 2,
+      "assets": [
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 0.25
+          },
+          "size": {
+            "width": 8.0,
+            "height": 3.5
+          },
+          "content": {
+            "textBody": "In the heart of our vibrant community, we find individuals whose lives are a testament to dedication, faith, and family. One such figure is Jane Doe, a natural leader in business, ministry, and on the baseball field. Yet, if you ask her where leadership matters most, she won’t hesitate: it starts at home. This conviction became the heartbeat behind her new book, 'It Starts With Him: Faith, Family, and Finances,' set to release on March 24th at www.itstartswithhim.com.\n\nThe book didn’t begin as a publishing goal. It began as a quiet nudge about a year ago while sitting at ONE Church. Week after week, Jane felt an undeniable prompting – a sense that the past ten years of her life, marked by growth, struggle, faith, questions, and change, weren’t just for her. They were meant to be shared. Initially, she wanted to write a letter to her son, Grayson. Something he could hold onto if life ever took an unexpected turn – something honest, practical, and real. But the letter grew. Jane made every excuse not to write it. Life was busy. Work was demanding. Family time mattered. Surely someone else was already saying these things. Until one day, she simply sat down and began."
+          },
+          "columns": 2,
+          "gutterSize": 0.2,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 12.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 7.25
+          },
+          "size": {
+            "width": 8.0,
+            "height": 3.5
+          },
+          "content": {
+            "textBody": "The result is a book written not for fame or financial gain, but for impact. Structured to be read cover to cover, yet broken into meaningful sections readers can return to depending on their season of life, the book addresses marriage, marriage struggles, stewardship and finances, anxiety, depression, sickness, loss, and ultimately faith. Raised in church, Jane admits there was a season when God sat on a shelf — acknowledged but not active. In 2016, a spontaneous baptism marked a turning point. Hard questions followed: If Jesus lived, died, and rose again — what does that mean? And more importantly, how should we respond? For Jane, the response was ownership. Ownership of faith. Of leadership. Of responsibility. She wrote the book she wished she had when she was younger. Her goal is simple: help one person. Anything beyond that is icing on the cake. But if you watch how she lives, you realize this message isn’t separate from her life. It’s an extension of it."
+          },
+          "columns": 2,
+          "gutterSize": 0.2,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 12.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Image",
+          "position": {
+            "startX": 1.0,
+            "startY": 4.0
+          },
+          "size": {
+            "width": 14.0,
+            "height": 3.0
+          },
+          "content": {
+            "imageUrl": "https://images.example/spread.jpg"
+          }
+        }
+      ]
+    },
+    {
+      "pageIndex": 3,
+      "assets": [
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 0.25
+          },
+          "size": {
+            "width": 8.0,
+            "height": 3.5
+          },
+          "content": {
+            "textBody": "All In on Family: Jane also pours that same energy into coaching Grayson’s baseball team through Senoia Baseball. In 2025, while the assistant coach, her 6U team won the state tournament and advanced to the World Series in Baton Rouge which ended in another victory — a milestone she speaks about with pride, not because of trophies, but because of the boys, the growth, and the lessons learned. Beyond the field, Jane serves faithfully in the 5th Grade boys ministry at ONE Church, investing in young men during a critical season of life. She’s passionate about guiding boys toward faith, character, and confidence — long before adulthood arrives.\n\nBut while Jane may be the one writing the book and coaching from the dugout, anyone close to the Doe family will tell you something important: Behind every driven person is often a steady force. For the Doe family, that force is Katelyn."
+          },
+          "columns": 2,
+          "gutterSize": 0.2,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 12.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 7.25
+          },
+          "size": {
+            "width": 8.0,
+            "height": 3.5
+          },
+          "content": {
+            "textBody": "The Connector: Katelyn is the backbone of the family in the most beautiful way. She attended nursing school when she met Jane. After marriage and relocation for her career, she worked at a real estate law firm — a role she loved. When they moved to Senoia, she continued working in real estate law in Peachtree City before stepping away after becoming pregnant. Later, she worked in administrative and project coordination roles, helping manage planning and finances until 2025. But along the way, something unexpected happened. She discovered a passion for connection. Katelyn fell in love with social media — not for attention, but for relationships. She loves highlighting local businesses, encouraging others, and being someone’s biggest fan. Today she partners with retailers like Pink Chair, B Turners, and Heirloom Market, promoting the boutiques and businesses she believes help shape the heart of Senoia and surrounding communities. She has been active at Burn Boot Camp for seven years, forming deep friendships and staying rooted in that community. She’s a baseball mom. A community supporter. A cheerleader for local growth. And at ONE Church, Katelyn serves on the kids ministry check-in team — greeting families, welcoming children, and helping create a warm first impression each Sunday. If Jane’s message centers on leadership, Katelyn’s gift is connection. And together, they operate as a team.\n\nRooted in Something Bigger: The Doe family loves Senoia. They believe the growth is positive. They support the schools. They show up for events. They volunteer. They serve. They’re not just consumers of community — they’re contributors. Their faith fuels their mission. Their mission strengthens their family. And their family pours back into the community. Their home isn’t just a place to sleep. It’s a launching pad — for faith conversations, encouragement, laughter, and purpose. They are raising Grayson intentionally — teaching him that leadership begins with character, that faith isn’t reserved for Sundays, and that being “all in” means showing up even when it’s inconvenient. Jane’s book is titled 'It Starts With Him.' But when you look at the Doe family, you see something even bigger: It starts at home."
+          },
+          "columns": 2,
+          "gutterSize": 0.2,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 12.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "pageIndex": 0,
+  "documentSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11.0
+  },
+  "projectInfo": {
+    "projectName": "Local Gardens Magazine Article"
+  },
+  "pages": [
+    {
+      "pageIndex": 1,
+      "assets": [
+        {
+          "assetType": "Image",
+          "position": {
+            "startX": -0.125,
+            "startY": -0.125
+          },
+          "size": {
+            "width": 8.75,
+            "height": 4.75
+          },
+          "content": {
+            "imageUrl": "https://images.example/garden.jpg"
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 4.725
+          },
+          "size": {
+            "width": 8.0,
+            "height": 0.5
+          },
+          "content": {
+            "textBody": "Local Gardens"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Montserrat\\tBold",
+            "fontSize": 36.0,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": true
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 5.325
+          },
+          "size": {
+            "width": 8.0,
+            "height": 0.25
+          },
+          "content": {
+            "textBody": "By Jane Doe"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 14.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": true
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 5.675
+          },
+          "size": {
+            "width": 3.9,
+            "height": 5.075
+          },
+          "content": {
+            "textBody": "[article_body_text_column1]"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 4.35,
+            "startY": 5.675
+          },
+          "size": {
+            "width": 3.9,
+            "height": 5.075
+          },
+          "content": {
+            "textBody": "[article_body_text_column2]"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        }
+      ]
+    }
+  ]
+}

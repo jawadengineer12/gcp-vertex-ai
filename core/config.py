@@ -35,6 +35,9 @@ class AppConfig:
     PROMPT_LIBRARY_PATH = _path(
         "PROMPT_LIBRARY_PATH", "normalized_data/layout_prompt_library_updated.json"
     )
+    SPECIAL_CASE_LIBRARY_PATH = _path(
+        "SPECIAL_CASE_LIBRARY_PATH", "normalized_data/special_case_library.json"
+    )
     RAW_TEXT_DATA_PATH = _path(
         "RAW_TEXT_DATA_PATH", "raw_data/LAS 4_V8_links_data with Descriptions.txt"
     )

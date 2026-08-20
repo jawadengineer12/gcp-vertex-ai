@@ -2,12 +2,14 @@
 
 import json
 import logging
+from dataclasses import asdict
 
 from google.genai import types
 
 from core.config import AppConfig
 from core.vertex_client import get_vertex_client
 from schemas.layout_schema import LayoutProject
+from services.layout_plan_service import LayoutFeaturePlan
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +32,39 @@ Do not add continuation metadata. Split continuation text between page Article a
 """
 
 
+def _relationship_instruction(plan: LayoutFeaturePlan) -> str:
+    instructions: list[str] = []
+    if plan.threaded_text:
+        instructions.append(
+            "When threaded text is requested, create at least two linked Article frames. "
+            "Put one shared articleDocumentLink inside each content object. The head uses "
+            "expand=false and contains the complete textBody. Every continuation uses "
+            "expand=true with an empty textBody so InDesign performs the flow. "
+            f"Thread scope: {plan.text_thread_scope}."
+        )
+    if plan.image_spread:
+        instructions.append(
+            f"Create one cross-page Image on even page {plan.spread_start_page}; its width "
+            f"must cross into page {plan.spread_end_page}. Include the target page but do "
+            "not duplicate the image there. This is an intentional spread, not normal bleed."
+        )
+    return "\n".join(instructions)
+
+
+def _system_instruction(plan: LayoutFeaturePlan) -> str:
+    instruction = SYSTEM_INSTRUCTION
+    if plan.threaded_text:
+        instruction = instruction.replace(
+            "Article content contains only textBody. ", ""
+        ).replace(
+            "Do not add continuation metadata. Split continuation text between page "
+            "Article assets.\n",
+            "",
+        )
+    relationship = _relationship_instruction(plan)
+    return instruction + relationship if relationship else instruction
+
+
 class GenerationService:
     def __init__(self) -> None:
         self.model = AppConfig.GENERATION_MODEL
@@ -42,15 +77,29 @@ class GenerationService:
         collected_fields: dict[str, str],
         allowed_fonts: list[str],
         template: dict | None = None,
+        layout_plan: LayoutFeaturePlan | None = None,
     ) -> str | None:
+        plan = layout_plan or LayoutFeaturePlan()
         schema = LayoutProject.model_json_schema()
         safe_template = {
             key: value for key, value in (template or {}).items() if key != "_source"
         }
         context_string = "\n\n".join(
-            f"Reference page {example.get('pageIndex')}:\n"
-            f"{json.dumps(example.get('expected_layout_json'), ensure_ascii=False)}"
+            (
+                "Special Case Description:\n"
+                f"{example['special_case_description']}\n\nExample JSON:\n"
+                f"{json.dumps(example.get('expected_layout_json'), ensure_ascii=False)}"
+                if example.get("special_case_description")
+                else f"Reference page {example.get('pageIndex')}:\n"
+                f"{json.dumps(example.get('expected_layout_json'), ensure_ascii=False)}"
+            )
             for example in context_examples
+        )
+        relationship_context = (
+            "INTERNAL LAYOUT RELATIONSHIPS (constraints only; never emit this object):\n"
+            f"{json.dumps(asdict(plan), ensure_ascii=False)}\n\n"
+            if plan.threaded_text or plan.image_spread
+            else ""
         )
         combined_prompt = (
             "TARGET JSON SCHEMA:\n"
@@ -63,6 +112,7 @@ class GenerationService:
             f"{json.dumps(collected_fields, ensure_ascii=False)}\n\n"
             "SANITIZED STRUCTURAL REFERENCES (patterns only; do not copy their content):\n"
             f"{context_string}\n\n"
+            f"{relationship_context}"
             "DESIGN REQUEST:\n"
             f"{active_prompt}"
         )
@@ -71,7 +121,7 @@ class GenerationService:
                 model=self.model,
                 contents=combined_prompt,
                 config=types.GenerateContentConfig(
-                    system_instruction=SYSTEM_INSTRUCTION,
+                    system_instruction=_system_instruction(plan),
                     temperature=self.temperature,
                     response_mime_type="application/json",
                 ),

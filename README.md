@@ -35,6 +35,12 @@ The validated layout is written under `outputs/`, and optional execution traces
 are written under `outputs/run_traces/`. Both locations are intentionally
 excluded from Git.
 
+Publishing is opt-in even when publisher credentials exist in `.env`:
+
+```powershell
+python main.py --publish
+```
+
 ## Hosted test API
 
 Set a dedicated inbound key and start one Uvicorn worker:
@@ -112,13 +118,16 @@ is optional and should be added only when `publish=true` testing is authorized.
 
 ## Publisher demo
 
-To queue each validated layout automatically, set the publisher URL and a
-rotated API key in `.env`:
+To enable explicit CLI publishing, set the publisher URL and a rotated API key
+in `.env`:
 
 ```env
 PUBLISHER_API_URL=https://magazine-publisher-0f8b8f449e87.herokuapp.com/api/bubble/queue-job
 PUBLISHER_API_KEY=replace-with-rotated-key
 ```
+
+Then run `python main.py --publish`. A normal `python main.py` run only saves
+locally and never contacts the publisher.
 
 The local file remains valid JSON. Only the API request wraps it as
 `var documentData=<json>;`.

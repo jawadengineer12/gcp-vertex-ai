@@ -1,0 +1,93 @@
+{
+  "pageIndex": 0,
+  "documentSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11.0
+  },
+  "projectInfo": {
+    "projectName": "Local Living"
+  },
+  "pages": [
+    {
+      "pageIndex": 1,
+      "assets": [
+        {
+          "assetType": "Image",
+          "position": {
+            "startX": -0.125,
+            "startY": -0.125
+          },
+          "size": {
+            "width": 8.75,
+            "height": 11.25
+          },
+          "content": {
+            "imageUrl": "https://images.example/cover.jpg"
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 0.25
+          },
+          "size": {
+            "width": 8.0,
+            "height": 1.0
+          },
+          "content": {
+            "textBody": "Local Living"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Gotham\\tBook",
+            "fontSize": 48.0,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#FFFFFF",
+            "autoFit": true
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 10.25
+          },
+          "size": {
+            "width": 8.0,
+            "height": 0.5
+          },
+          "content": {
+            "textBody": "August 2026"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Gotham\\tBook",
+            "fontSize": 18.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#FFFFFF",
+            "autoFit": true
+          }
+        }
+      ]
+    }
+  ]
+}
