@@ -31,5 +31,129 @@
         {"pageIndex": 3, "assets": []}
       ]
     }
+  },
+  {
+    "case_id": "same_page_text_thread_001",
+    "feature": "threaded_text",
+    "scope": "same_page",
+    "source": "raw_data/JSON and IDML Files/Project_with_2_text_boxes_and_overflow.idml",
+    "description": "This is a confirmed same-page InDesign text thread. IDML frame uff flows into u116 through one parent story.",
+    "rules": [
+      "multiple Article frames share one articleDocumentLink",
+      "head frame contains the complete story and uses expand=false",
+      "continuation frame uses expand=true with empty textBody",
+      "frames follow the IDML PreviousTextFrame and NextTextFrame order"
+    ],
+    "relationship_metadata": {
+      "parent_story": "ued",
+      "head_frame": "uff",
+      "continuation_frames": ["u116"],
+      "frame_chain": ["uff", "u116"]
+    },
+    "example": {
+      "pageIndex": 0,
+      "projectInfo": {"projectName": "Confirmed same-page IDML thread"},
+      "documentSettings": {"pageWidth": 8.5, "pageHeight": 11.0},
+      "pages": [
+        {
+          "pageIndex": 1,
+          "assets": [
+            {
+              "assetType": "Article",
+              "expand": false,
+              "position": {"startX": 0.25, "startY": 0.25},
+              "size": {"width": 4.0, "height": 5.25},
+              "content": {
+                "articleDocumentLink": "ued",
+                "textBody": "caught a performance by Olivia Hughes. With her close friend Sam Wood, Olivia sang all through high school and college, sharing her love of music with the community.\nAt school, the Hughes kids carved their own unique paths. Olivia attended Canyon Creek Elementary, then pursued art through Richardson's magnet program, eventually earning a Fine Art degree from USC. Today, she's building a career in animation—already working on two music videos and contributing to Apple TV's Shape Island. Most recently, she created a whimsical photo op installation for the 2024 Wildflower! Festival.\nMeanwhile, Owen's journey took him in another direction. A talented musician in the JJ Pearce Mighty Mustang Band, he eventually followed his interest in communication and numbers. Now in his third year at UT Austin, Owen is majoring in advertising and minoring in statistics and data science.\nMeanwhile, Owen's journey took him in another direction. A talented musician in the JJ Pearce Mighty Mustang Band, he eventually followed his interest in communication and numbers. Now in his third year at UT Austin, Owen is majoring in advertising and minoring in statistics and data science."
+              },
+              "columns": 1,
+              "gutterSize": 0.1667,
+              "margins": {"top": 0.0, "left": 0.0, "bottom": 0.0, "right": 0.0},
+              "textStyle": {"fontFamily": "Arial\\tRegular", "fontSize": 12.0, "bold": false, "italic": false, "underline": false, "color": "#000000", "autoFit": false}
+            },
+            {
+              "assetType": "Article",
+              "expand": true,
+              "position": {"startX": 4.25, "startY": 5.75},
+              "size": {"width": 4.0, "height": 4.5},
+              "content": {"articleDocumentLink": "ued", "textBody": ""},
+              "columns": 1,
+              "gutterSize": 0.1667,
+              "margins": {"top": 0.0, "left": 0.0, "bottom": 0.0, "right": 0.0},
+              "textStyle": {"fontFamily": "Arial\\tRegular", "fontSize": 12.0, "bold": false, "italic": false, "underline": false, "color": "#000000", "autoFit": false}
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "image_spread_with_overlays_001",
+    "feature": "image_spread",
+    "scope": "cross_page",
+    "source": "normalized_data/layout_prompt_library_updated.json pages 26-27",
+    "description": "This is a confirmed two-page events spread. One image originates on the even source page while text overlays and unrelated assets remain usable on both pages.",
+    "rules": [
+      "one spanning image originates on the source page",
+      "target page does not duplicate the spanning image",
+      "text overlays may appear on both pages",
+      "target page may contain other images with different URLs"
+    ],
+    "relationship_metadata": {
+      "original_pages": [26, 27],
+      "normalized_pages": [2, 3],
+      "source_example_id": "example_26_25"
+    },
+    "example": {
+      "pageIndex": 0,
+      "projectInfo": {"projectName": "Confirmed events spread with overlays"},
+      "documentSettings": {"pageWidth": 8.5, "pageHeight": 11.0},
+      "pages": [
+        {"pageIndex": 1, "assets": []},
+        {
+          "pageIndex": 2,
+          "assets": [
+            {
+              "assetType": "Image",
+              "position": {"startX": -0.125, "startY": -0.125},
+              "size": {"width": 17.0, "height": 11.125},
+              "content": {"imageUrl": "[spread_image_url]"}
+            },
+            {
+              "assetType": "Article",
+              "position": {"startX": 0.4, "startY": 0.68},
+              "size": {"width": 7.57, "height": 1.53},
+              "content": {"textBody": "Events — March 20 to May 31"},
+              "columns": 1,
+              "gutterSize": 0.1667,
+              "margins": {"top": 0.0, "left": 0.0, "bottom": 0.0, "right": 0.0},
+              "textStyle": {"fontFamily": "Arial\\tRegular", "fontSize": 24.0, "bold": true, "italic": false, "underline": false, "color": "#000000", "autoFit": false}
+            }
+          ]
+        },
+        {
+          "pageIndex": 3,
+          "assets": [
+            {
+              "assetType": "Article",
+              "position": {"startX": 0.75, "startY": 1.1},
+              "size": {"width": 6.8, "height": 3.6},
+              "content": {"textBody": "More event details continue on the facing page."},
+              "columns": 1,
+              "gutterSize": 0.1667,
+              "margins": {"top": 0.0, "left": 0.0, "bottom": 0.0, "right": 0.0},
+              "textStyle": {"fontFamily": "Arial\\tRegular", "fontSize": 12.0, "bold": false, "italic": false, "underline": false, "color": "#000000", "autoFit": false}
+            },
+            {
+              "assetType": "Image",
+              "position": {"startX": 4.62, "startY": 9.4},
+              "size": {"width": 3.11, "height": 0.59},
+              "content": {"imageUrl": "[secondary_image_url]"}
+            }
+          ]
+        }
+      ]
+    }
   }
 ]

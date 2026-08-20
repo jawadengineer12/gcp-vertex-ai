@@ -20,18 +20,22 @@ class LayoutFeaturePlan:
 class LayoutPlanService:
     THREAD_PATTERN = re.compile(
         r"\b(?:continue text|overflow text|flow into another box|linked text frames?|"
-        r"continue (?:the )?article)\b",
+        r"continue (?:the )?article|continue (?:the )?story into (?:another |the )?frame|"
+        r"overflow into (?:another |the )?(?:box|frame|lower box)|"
+        r"flow (?:text|article|story) into (?:another |the )?(?:box|frame))\b",
         re.IGNORECASE,
     )
     CROSS_PAGE_PATTERN = re.compile(
-        r"\b(?:continue(?: (?:text|article))? (?:on|to) (?:the )?next page|"
+        r"\b(?:continue(?: (?:text|article|story))? (?:on|to) (?:the )?next page|"
+        r"flow (?:text|article|story) to (?:the )?next page|"
         r"overflow to (?:the )?next page|"
         r"article continues? on (?:the )?following page)\b",
         re.IGNORECASE,
     )
     SPREAD_PATTERN = re.compile(
         r"\b(?:two[ -]page (?:image )?spread|facing pages|image across pages|"
-        r"image spanning pages|spread image)\b",
+        r"image spanning pages|spread image|extend (?:the )?image into (?:the )?facing page|"
+        r"full width across pages|panoramic image (?:over|across) both pages)\b",
         re.IGNORECASE,
     )
     PAGE_PAIR_PATTERN = re.compile(

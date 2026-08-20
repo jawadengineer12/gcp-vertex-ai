@@ -6,9 +6,11 @@ deployed or modified.
 
 ## Automated checks
 
-- 37 unit/integration tests passed.
+- 49 unit/integration tests passed.
 - Four pre-change normal baselines still validate to identical JSON.
 - `git diff --check` passed.
+- Saved special outputs are now loaded and audited directly by the test suite.
+- Eight prompt phrasings and image-field collision behavior are covered.
 
 ## Live generation
 
@@ -28,6 +30,16 @@ The shared local pipeline generated and validated:
   with `publish=false`.
 - Streamlit started headlessly against the local API and its health endpoint
   returned 200.
+- CLI publishing now requires an explicit `--publish` flag; credentials in
+  `.env` alone cannot queue a document.
+
+## Confirmed references
+
+- Added one IDML-derived same-page thread using `ParentStory=ued` and the
+  confirmed `uff -> u116` frame chain.
+- Added the existing pages 26-27 events spread as a relationship example with
+  overlays and unrelated target-page assets.
+- Cross-page threading still has no confirmed IDML reference.
 
 ## Publisher testing
 
@@ -46,3 +58,8 @@ This repository exposes queue submission but no job-status, PDF-download, or
 visual-comparison path. PDF rendering and visual confirmation remain pending
 in the publisher/testing environment. Deployment remains blocked until that
 manual approval is recorded.
+
+The publisher dashboard does expose `pdfUrl` through
+`GET /api/dashboard/jobs`, but that route requires a dashboard bearer token.
+The configured publisher submission API key returns HTTP 401 and cannot read
+jobs. Dashboard login access is therefore required to retrieve the three PDFs.

@@ -1,5 +1,6 @@
 """Interactive CLI adapter for the shared layout pipeline."""
 
+import argparse
 import json
 import logging
 import sys
@@ -15,7 +16,28 @@ from services.trace_service import build_trace, write_trace
 logger = logging.getLogger(__name__)
 
 
-def main() -> None:
+def _publisher_settings(enabled: bool) -> tuple[str, str]:
+    if not enabled:
+        return "", ""
+    if not AppConfig.PUBLISHER_API_URL or not AppConfig.PUBLISHER_API_KEY:
+        raise ValueError(
+            "--publish requires PUBLISHER_API_URL and PUBLISHER_API_KEY"
+        )
+    return AppConfig.PUBLISHER_API_URL, AppConfig.PUBLISHER_API_KEY
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--publish",
+        action="store_true",
+        help="submit validated JSON to the configured publisher",
+    )
+    args = parser.parse_args(argv)
+    try:
+        publisher_url, publisher_api_key = _publisher_settings(args.publish)
+    except ValueError as error:
+        parser.error(str(error))
     setup_logging()
     logger.info("Layout Generation Pipeline started")
 
@@ -47,16 +69,13 @@ def main() -> None:
             print(f"- {detail}")
         raise SystemExit(1) from error
 
-    publisher_configured = bool(
-        AppConfig.PUBLISHER_API_URL and AppConfig.PUBLISHER_API_KEY
-    )
     output = OutputService(
         output_file=AppConfig.OUTPUT_FILE,
         local_output=AppConfig.LOCAL_OUTPUT,
         gcs_bucket=AppConfig.GCS_BUCKET,
         gcs_object_name=AppConfig.GCS_OBJECT_NAME,
-        publisher_url=AppConfig.PUBLISHER_API_URL if publisher_configured else "",
-        publisher_api_key=AppConfig.PUBLISHER_API_KEY if publisher_configured else "",
+        publisher_url=publisher_url,
+        publisher_api_key=publisher_api_key,
         publisher_created_by=AppConfig.PUBLISHER_CREATED_BY,
         publisher_project=AppConfig.PUBLISHER_PROJECT,
     )

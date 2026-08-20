@@ -30,4 +30,8 @@ class SpecialCaseService:
             }
             for case in self.cases
             if case.get("feature") in features
+            and (
+                case.get("feature") != "threaded_text"
+                or case.get("scope") == plan.text_thread_scope
+            )
         ]
