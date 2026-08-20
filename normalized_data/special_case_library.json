@@ -1,0 +1,35 @@
+[
+  {
+    "case_id": "image_spread_001",
+    "feature": "image_spread",
+    "scope": "cross_page",
+    "source": "raw_data/New_doc_with_image_bleed_data.json",
+    "description": "This is a cross-page image spread. The image begins on page 2, extends into page 3, and must not be duplicated.",
+    "rules": [
+      "source page is even",
+      "image originates on the source page",
+      "image width crosses the source page boundary",
+      "following page exists and does not duplicate the image"
+    ],
+    "example": {
+      "pageIndex": 0,
+      "projectInfo": {"projectName": "Confirmed image spread"},
+      "documentSettings": {"pageWidth": 8.5, "pageHeight": 11.0},
+      "pages": [
+        {"pageIndex": 1, "assets": []},
+        {
+          "pageIndex": 2,
+          "assets": [
+            {
+              "assetType": "Image",
+              "position": {"startX": 1.0, "startY": 5.5},
+              "size": {"width": 14.0, "height": 3.0},
+              "content": {"imageUrl": "[spread_image_url]"}
+            }
+          ]
+        },
+        {"pageIndex": 3, "assets": []}
+      ]
+    }
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "pageIndex": 0,
+  "documentSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11.0
+  },
+  "projectInfo": {
+    "projectName": "Advertisement"
+  },
+  "pages": [
+    {
+      "pageIndex": 1,
+      "assets": [
+        {
+          "assetType": "Ad",
+          "position": {
+            "startX": -0.125,
+            "startY": -0.125
+          },
+          "size": {
+            "width": 8.75,
+            "height": 11.25
+          },
+          "content": {
+            "imageUrl": "https://images.example/ad.jpg"
+          }
+        }
+      ]
+    }
+  ]
+}

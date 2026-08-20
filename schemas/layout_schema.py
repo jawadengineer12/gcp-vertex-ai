@@ -69,6 +69,9 @@ class TextStyle(StrictModel):
 
 class ArticleContent(StrictModel):
     textBody: str
+    articleDocumentLink: NonEmptyString | None = Field(
+        default=None, exclude_if=lambda value: value is None
+    )
 
 
 class ImageContent(StrictModel):
@@ -93,6 +96,7 @@ class ImageContent(StrictModel):
 
 class ArticleAsset(StrictModel):
     assetType: Literal["Article"]
+    expand: bool | None = Field(default=None, exclude_if=lambda value: value is None)
     position: Position
     size: Size
     content: ArticleContent

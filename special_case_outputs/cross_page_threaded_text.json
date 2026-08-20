@@ -1,0 +1,216 @@
+{
+  "pageIndex": 0,
+  "documentSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11.0
+  },
+  "projectInfo": {
+    "projectName": "Magazine Article"
+  },
+  "pages": [
+    {
+      "pageIndex": 1,
+      "assets": [
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 0.25
+          },
+          "size": {
+            "width": 8.0,
+            "height": 0.5
+          },
+          "content": {
+            "textBody": "Historic Park"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tBold",
+            "fontSize": 24.0,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 0.8
+          },
+          "size": {
+            "width": 8.0,
+            "height": 0.25
+          },
+          "content": {
+            "textBody": "By Jane Doe"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tItalic",
+            "fontSize": 12.0,
+            "bold": false,
+            "italic": true,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "expand": false,
+          "position": {
+            "startX": 0.25,
+            "startY": 1.1
+          },
+          "size": {
+            "width": 3.9,
+            "height": 9.65
+          },
+          "content": {
+            "textBody": "Local volunteers restored the historic park so families can enjoy it for years to come.",
+            "articleDocumentLink": "article_main_story"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "expand": true,
+          "position": {
+            "startX": 4.35,
+            "startY": 1.1
+          },
+          "size": {
+            "width": 3.9,
+            "height": 9.65
+          },
+          "content": {
+            "textBody": "",
+            "articleDocumentLink": "article_main_story"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        }
+      ]
+    },
+    {
+      "pageIndex": 2,
+      "assets": [
+        {
+          "assetType": "Article",
+          "expand": true,
+          "position": {
+            "startX": 0.25,
+            "startY": 0.25
+          },
+          "size": {
+            "width": 3.9,
+            "height": 10.5
+          },
+          "content": {
+            "textBody": "",
+            "articleDocumentLink": "article_main_story"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "expand": true,
+          "position": {
+            "startX": 4.35,
+            "startY": 0.25
+          },
+          "size": {
+            "width": 3.9,
+            "height": 10.5
+          },
+          "content": {
+            "textBody": "",
+            "articleDocumentLink": "article_main_story"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        }
+      ]
+    }
+  ]
+}

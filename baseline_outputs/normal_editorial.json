@@ -1,0 +1,93 @@
+{
+  "pageIndex": 0,
+  "documentSettings": {
+    "pageWidth": 8.5,
+    "pageHeight": 11.0
+  },
+  "projectInfo": {
+    "projectName": "Editorial Page Project"
+  },
+  "pages": [
+    {
+      "pageIndex": 1,
+      "assets": [
+        {
+          "assetType": "Image",
+          "position": {
+            "startX": -0.125,
+            "startY": -0.125
+          },
+          "size": {
+            "width": 4.25,
+            "height": 4.25
+          },
+          "content": {
+            "imageUrl": "https://images.example/writer.jpg"
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 4.25,
+            "startY": 0.25
+          },
+          "size": {
+            "width": 4.0,
+            "height": 0.75
+          },
+          "content": {
+            "textBody": "Guest Editorial: Jane Doe"
+          },
+          "columns": 1,
+          "gutterSize": 0.0,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Acumin Variable Concept\\tBold",
+            "fontSize": 24.0,
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        },
+        {
+          "assetType": "Article",
+          "position": {
+            "startX": 0.25,
+            "startY": 4.375
+          },
+          "size": {
+            "width": 8.0,
+            "height": 6.375
+          },
+          "content": {
+            "textBody": "This is a placeholder for the guest editorial content written by Jane Doe. It will discuss various topics relevant to the community and provide insights from her perspective. The editorial aims to engage readers and stimulate thought on important local issues. As a valued contributor, Jane Doe shares her unique viewpoint with our audience. We are pleased to feature her work in this edition. The content will flow into two columns as per the template settings, ensuring readability and a professional appearance. The editorial will conclude with a brief mention of the publisher, Local Press, reinforcing the source of this publication. This section will fill the remaining space on the page, providing ample room for the article. The text will be formatted with a standard body font and size to maintain consistency with other articles in the publication. We encourage our readers to reflect on the points raised and consider their implications for our community. Thank you for reading. \n\n— Jane Doe, Guest Writer\nPublished by Local Press"
+          },
+          "columns": 2,
+          "gutterSize": 0.2,
+          "margins": {
+            "top": 0.0,
+            "left": 0.0,
+            "bottom": 0.0,
+            "right": 0.0
+          },
+          "textStyle": {
+            "fontFamily": "Adobe Garamond Pro\\tRegular",
+            "fontSize": 10.0,
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "color": "#000000",
+            "autoFit": false
+          }
+        }
+      ]
+    }
+  ]
+}

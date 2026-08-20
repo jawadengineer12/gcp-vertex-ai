@@ -9,9 +9,11 @@ from time import perf_counter
 from core.config import AppConfig
 from services.font_service import load_allowed_fonts
 from services.generation_service import GenerationService
+from services.layout_plan_service import LayoutPlanService
 from services.reranker_service import RerankerService
 from services.retrieval_service import RetrievalService
 from services.sanitization_service import sanitize_retrieved_examples
+from services.special_case_service import SpecialCaseService
 from services.validation_service import ValidationService
 
 logger = logging.getLogger(__name__)
@@ -58,6 +60,7 @@ class LayoutPipeline:
         request_id: str | None = None,
     ) -> PipelineResult:
         total_started = perf_counter()
+        layout_plan = LayoutPlanService().plan(user_prompt)
         allowed_fonts = list(get_allowed_fonts())
         enriched_prompt = user_prompt
         if collected_fields:
@@ -77,6 +80,7 @@ class LayoutPipeline:
         selected_context = sanitize_retrieved_examples(
             reranked_candidates[: AppConfig.TOP_K_CONTEXT], allowed_fonts
         )
+        selected_context.extend(get_special_case_service().context_for(layout_plan))
         reranking_ms = _milliseconds(started)
         _log(request_id, "reranking", reranking_ms, retries=0, result="completed")
 
@@ -98,6 +102,7 @@ class LayoutPipeline:
                 collected_fields,
                 allowed_fonts,
                 template,
+                layout_plan,
             )
             elapsed = _milliseconds(started)
             generation_ms += elapsed
@@ -115,7 +120,7 @@ class LayoutPipeline:
 
             started = perf_counter()
             try:
-                final_layout = validator.validate_payload(response)
+                final_layout = validator.validate_payload(response, layout_plan)
             except Exception as error:
                 elapsed = _milliseconds(started)
                 validation_ms += elapsed
@@ -208,6 +213,11 @@ def get_validation_service() -> ValidationService:
         image_bleed=AppConfig.IMAGE_BLEED,
         ad_tolerance=AppConfig.AD_BOUNDARY_TOLERANCE,
     )
+
+
+@cache
+def get_special_case_service() -> SpecialCaseService:
+    return SpecialCaseService()
 
 
 @cache

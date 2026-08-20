@@ -4,6 +4,8 @@ import re
 from dataclasses import dataclass
 from typing import Literal
 
+from services.layout_plan_service import LayoutFeaturePlan, LayoutPlanService
+
 
 FieldType = Literal["text", "image"]
 
@@ -52,7 +54,12 @@ class RequirementAgent:
         (r"\bpublication date\b|\bissue date\b", RequiredField("publication_date", "Publication/issue date", required=False)),
     )
 
-    def resolve(self, prompt: str, template: dict | None = None) -> list[RequiredField]:
+    def resolve(
+        self,
+        prompt: str,
+        template: dict | None = None,
+        layout_plan: LayoutFeaturePlan | None = None,
+    ) -> list[RequiredField]:
         fields: list[RequiredField] = []
         if template:
             fields.extend(
@@ -64,31 +71,43 @@ class RequirementAgent:
                 )
                 for item in template.get("requiredFields", [])
             )
-        else:
-            lowered = prompt.casefold()
-            is_guest_writer = bool(re.search(r"\bguest writer\b", lowered))
-            if is_guest_writer:
-                fields.append(RequiredField("guest_writer_name", "Guest writer name"))
-                if re.search(IMAGE_PATTERN, lowered):
-                    fields.append(
-                        RequiredField(
-                            "guest_writer_photo_url",
-                            "Guest writer photo URL",
-                            "image",
-                        )
+        lowered = prompt.casefold()
+        is_guest_writer = bool(re.search(r"\bguest writer\b", lowered))
+        if is_guest_writer:
+            fields.append(RequiredField("guest_writer_name", "Guest writer name"))
+            if re.search(IMAGE_PATTERN, lowered):
+                fields.append(
+                    RequiredField(
+                        "guest_writer_photo_url",
+                        "Guest writer photo URL",
+                        "image",
                     )
-            for pattern, field in self.CUSTOM_RULES:
-                if is_guest_writer and field.name in {
-                    "author_name",
-                    "author_photo_url",
-                }:
-                    continue
-                if re.search(pattern, lowered):
-                    fields.append(field)
-            if re.search(IMAGE_PATTERN, lowered) and not any(
-                field.field_type == "image" for field in fields
-            ):
-                fields.append(RequiredField("image_url", "Image HTTPS URL", "image"))
+                )
+        for pattern, field in self.CUSTOM_RULES:
+            if is_guest_writer and field.name in {"author_name", "author_photo_url"}:
+                continue
+            if re.search(pattern, lowered):
+                fields.append(field)
+
+        plan = layout_plan or LayoutPlanService().plan(prompt)
+        count_match = re.search(rf"\b(two|2)\s+{IMAGE_TERM}\b", lowered)
+        if count_match:
+            fields.extend(
+                (
+                    RequiredField("image_url", "Image 1 HTTPS URL", "image"),
+                    RequiredField("image_2_url", "Image 2 HTTPS URL", "image"),
+                )
+            )
+        elif (
+            re.search(IMAGE_PATTERN, lowered)
+            and not any(field.field_type == "image" for field in fields)
+            and not plan.image_spread
+        ):
+            fields.append(RequiredField("image_url", "Image HTTPS URL", "image"))
+        if plan.image_spread:
+            fields.append(
+                RequiredField("spread_image_url", "Spread image HTTPS URL", "image")
+            )
 
         for name in re.findall(r"\[([a-zA-Z0-9_]+)\]", prompt):
             field_type: FieldType = "image" if name.endswith("_url") else "text"
