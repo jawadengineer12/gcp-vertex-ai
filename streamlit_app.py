@@ -202,6 +202,10 @@ def main() -> None:
 
     missing_fields = st.session_state.get("missing_fields", [])
     if missing_fields:
+        st.info(
+            "Looking good, just a few more steps. Please press Continue to complete "
+            "the work."
+        )
         st.subheader("A few more details")
         st.caption("Leave a field blank to use its standard placeholder.")
         with st.form("missing_details"):

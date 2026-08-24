@@ -12,7 +12,11 @@ from services.generation_service import (
     SYSTEM_INSTRUCTION,
     _system_instruction,
 )
-from services.layout_plan_service import LayoutFeaturePlan, LayoutPlanService
+from services.layout_plan_service import (
+    ArticleFrameConstraint,
+    LayoutFeaturePlan,
+    LayoutPlanService,
+)
 from services.relationship_validation_service import RelationshipValidationService
 from services.requirement_agent import RequirementAgent
 from services.special_case_service import SpecialCaseService
@@ -112,6 +116,43 @@ class LayoutPlanTests(unittest.TestCase):
                 self.assertTrue(plan.threaded_text)
                 self.assertEqual(plan.text_thread_scope, scope)
 
+    def test_client_thread_geometry_is_parsed_and_clamped(self) -> None:
+        prompt = (
+            "Create a 2 page magazine article. Begin the text below 8 inches from "
+            "the top of the first page formatted into 3 columns. Continue the text "
+            "in the second page formatted into 2 columns that are 4 inches in height."
+        )
+        plan = LayoutPlanService().plan(prompt)
+        self.assertEqual(plan.text_thread_scope, "cross_page")
+        self.assertIn("autoFit=false", _system_instruction(plan))
+        self.assertIn("resolved hard requirements", _system_instruction(plan))
+        self.assertEqual(
+            plan.article_constraints,
+            (
+                ArticleFrameConstraint(1, start_y=8.0, columns=3),
+                ArticleFrameConstraint(2, height=4.0, columns=2),
+            ),
+        )
+
+        clamped = LayoutPlanService().plan(
+            "Continue text on the next page. On page 1 start 9 inches from the "
+            "top with height 4 inches in 3 columns."
+        )
+        self.assertEqual(clamped.article_constraints[0].height, 1.75)
+
+        minimal = LayoutPlanService().plan(
+            "Begin text in 3 columns starting 9 inches from the top and continue "
+            "text on the following page."
+        )
+        self.assertEqual(minimal.article_constraints[0].page_index, 1)
+        self.assertEqual(minimal.article_constraints[0].start_y, 9.0)
+
+        combined = LayoutPlanService().plan(
+            "Place one image on page 2 with height 3 inches. Continue text on the "
+            "following page in 2 columns."
+        )
+        self.assertNotIn(3.0, {item.height for item in combined.article_constraints})
+
     def test_image_field_names_do_not_collide(self) -> None:
         template = {
             "requiredFields": [
@@ -164,6 +205,38 @@ class RelationshipValidationTests(unittest.TestCase):
             ]
         )
         self.validator.validate_payload(payload, LayoutFeaturePlan(True, "cross_page"))
+
+    def test_thread_constraints_and_fixed_frames_are_enforced(self) -> None:
+        head = article(0.25, "Full story", "story_004", False)
+        head["position"]["startY"] = 9.0
+        head["size"]["height"] = 1.75
+        head["columns"] = 3
+        continuation = article(0.25, "", "story_004", True)
+        continuation["size"]["height"] = 4.0
+        continuation["columns"] = 2
+        payload = project(
+            [
+                {"pageIndex": 1, "assets": [head]},
+                {"pageIndex": 2, "assets": [continuation]},
+            ]
+        )
+        plan = LayoutFeaturePlan(
+            threaded_text=True,
+            text_thread_scope="cross_page",
+            article_constraints=(
+                ArticleFrameConstraint(1, start_y=9.0, height=1.75, columns=3),
+                ArticleFrameConstraint(2, height=4.0, columns=2),
+            ),
+        )
+        self.validator.validate_payload(payload, plan)
+
+        payload["pages"][0]["assets"][0]["size"]["height"] = 1.76
+        with self.assertRaisesRegex(LayoutQualityError, "maximum legal height"):
+            self.validator.validate_payload(payload, plan)
+        payload["pages"][0]["assets"][0]["size"]["height"] = 1.75
+        payload["pages"][1]["assets"][0]["textStyle"]["autoFit"] = True
+        with self.assertRaisesRegex(LayoutQualityError, "autoFit=false"):
+            self.validator.validate_payload(payload, plan)
 
     def test_expand_is_a_json_boolean(self) -> None:
         payload = project(

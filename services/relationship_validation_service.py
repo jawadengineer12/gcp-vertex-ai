@@ -41,6 +41,8 @@ class RelationshipValidationService:
             errors.append("every non-head threaded frame must use expand=true")
         if any(asset.content.textBody for _, _, asset in continuations):
             errors.append("thread continuation frames must have empty textBody")
+        if any(asset.textStyle.autoFit for _, _, asset in frames):
+            errors.append("threaded Article frames must use textStyle.autoFit=false")
         if heads and continuations:
             head_key = heads[0][:2]
             if any(frame[:2] <= head_key for frame in continuations):

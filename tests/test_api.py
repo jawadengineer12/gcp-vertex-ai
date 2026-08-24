@@ -111,6 +111,15 @@ class ApiTests(unittest.TestCase):
             ["article_title", "author_name", "hero_image_url"],
         )
 
+    @patch("api.get_pipeline_service", side_effect=AssertionError("paid service loaded"))
+    def test_spread_does_not_request_optional_hero_image(self, _pipeline) -> None:
+        response = self.request(prompt="Create an article with a two page image spread")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            [field["name"] for field in response.json()["missing_fields"]],
+            ["article_title", "author_name", "spread_image_url"],
+        )
+
     @patch("api.get_pipeline_service")
     def test_prompt_values_and_https_url_are_extracted(self, pipeline_factory) -> None:
         pipeline_factory.return_value.generate.return_value = completed_result()

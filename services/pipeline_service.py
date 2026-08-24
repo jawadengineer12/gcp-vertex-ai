@@ -60,7 +60,9 @@ class LayoutPipeline:
         request_id: str | None = None,
     ) -> PipelineResult:
         total_started = perf_counter()
-        layout_plan = LayoutPlanService().plan(user_prompt)
+        layout_plan = LayoutPlanService().plan(
+            user_prompt, template, safe_margin=AppConfig.SAFE_MARGIN
+        )
         allowed_fonts = list(get_allowed_fonts())
         enriched_prompt = user_prompt
         if collected_fields:

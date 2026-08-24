@@ -246,7 +246,9 @@ def create_layout(request: LayoutRequest) -> NeedsInputResponse | CompletedRespo
             detail=f"Image values must be public HTTPS URLs: {', '.join(invalid_images)}",
         )
 
-    missing_fields = [field for field in fields if field.name not in known_values]
+    missing_fields = [
+        field for field in fields if field.required and field.name not in known_values
+    ]
     if missing_fields:
         _event(request_id, "requirements", started, 0, "needs_input")
         return NeedsInputResponse(
