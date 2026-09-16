@@ -1,0 +1,34 @@
+# Internal client-review checklist
+
+- [x] Verify GitHub URL, visibility, default branch, and navigation.
+- [x] Explain repository onboarding and flag unknown access owner/Henry status.
+- [x] Map every referenced top-level and data/output folder.
+- [x] Verify primary CLI/API/Streamlit/pipeline/schema files.
+- [x] Put venv creation and activation before installation/runs.
+- [x] Verify locked dependency installation; document that `openpyxl` is not directly declared by the approved baseline and may be required by the XLSX importer.
+- [x] Verify GCP login, project selection, ADC, runtime identity, and secret locations.
+- [x] Document configuration/environment variables without secret values.
+- [x] Verify CLI, local API, and Streamlit startup procedures.
+- [x] Verify normal XLSX append in an isolated one-row exercise.
+- [x] Verify maintenance-script commands without changing their output or unrelated behavior.
+- [x] Verify normal and special-case normalization commands.
+- [x] Verify paid embedding regeneration to a temporary vector file and vector alignment.
+- [x] Verify 58 tests after the focused change, prompt-library validation, and baseline/special JSON schema validity.
+- [x] Verify the baseline contains no demo-matrix scripts; document the actual special-case suite and interactive non-publishing CLI generation command instead.
+- [x] Define JSON validation success/failure criteria.
+- [x] Clarify baseline/special output repository locations versus GCS.
+- [x] Document Local, GCS, and Publisher output behavior.
+- [x] Define branch, publisher handoff, special cases, baselines, GCS output, deployment revision.
+- [x] Reproduce 502 from Cloud Run logs and separate generation from publisher failure.
+- [x] Inspect active/latest revision, traffic, resources, timeout, concurrency, secrets, identity.
+- [x] Reconcile the deployed source against the task-start backend and identify `3ceb766`/`layout-test-api-constraints-20260824` as the approved baseline.
+- [x] Restore the approved baseline revision to 100% traffic and return the broader manual-fix revision to 0%.
+- [x] Exclude semantic-planning, hardening, Hugging Face offline, dependency, Docker, and other unrelated changes from the focused branch.
+- [x] Reserve Continue for a retryable generation 5xx; use Submit details for missing fields.
+- [x] Verify a deterministic failed-first/success-second Streamlit flow preserves all answers and starts a fresh request ID.
+- [x] Deploy the corrected retry-Continue implementation and repeat the candidate/stable checks.
+- [x] Explain that external Cloud Run checks use `/health`; Google Front End intercepts the exact `/healthz` path in this environment.
+- [x] Capture only redacted screenshots/evidence.
+- [x] Add complete guided end-to-end exercise with per-stage success indicators.
+- [x] Explicitly state corpus extension/embedding regeneration is not Gemini fine-tuning.
+- [x] Keep Phase 2 out of scope.
