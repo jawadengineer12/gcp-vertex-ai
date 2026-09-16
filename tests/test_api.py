@@ -238,6 +238,24 @@ class ApiTests(unittest.TestCase):
         get_pipeline_service.cache_clear()
         self.assertIs(api.get_pipeline_service(), api.get_pipeline_service())
 
+    @patch("api.get_pipeline_service")
+    def test_exhausted_generation_returns_retryable_502(self, pipeline_factory) -> None:
+        pipeline_factory.return_value.generate.side_effect = RuntimeError(
+            "Generation failed validation after all retries"
+        )
+        response = self.request(
+            answers={
+                "article_title": "Cats",
+                "author_name": "Jane Doe",
+                "hero_image_url": None,
+            }
+        )
+
+        self.assertEqual(response.status_code, 502)
+        self.assertEqual(response.json()["status"], "generation_failed")
+        self.assertTrue(response.json()["retryable"])
+        self.assertTrue(response.json()["request_id"].startswith("req_"))
+
 
 if __name__ == "__main__":
     unittest.main()

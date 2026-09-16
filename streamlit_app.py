@@ -48,7 +48,14 @@ def api_request(
 
 
 def _clear_run() -> None:
-    for key in ("request_id", "answers", "missing_fields", "result", "active_request"):
+    for key in (
+        "request_id",
+        "answers",
+        "missing_fields",
+        "retry_error",
+        "result",
+        "active_request",
+    ):
         st.session_state.pop(key, None)
     for key in list(st.session_state):
         if key.startswith("answer_"):
@@ -60,15 +67,16 @@ def _error_message(status: int, body: dict) -> str:
     return f"HTTP {status}: {detail}"
 
 
-def _submit(answers: dict[str, str | None]) -> None:
+def _submit(answers: dict[str, str | None], *, fresh_request: bool = False) -> None:
     active = st.session_state["active_request"]
     payload = {
-        "request_id": st.session_state.get("request_id"),
+        "request_id": None if fresh_request else st.session_state.get("request_id"),
         "prompt": active["prompt"],
         "template_id": active["template_id"],
         "answers": answers,
         "publish": active["publish"],
     }
+    st.session_state.pop("retry_error", None)
     try:
         with st.spinner("Generating and validating the layout..."):
             status, body = api_request(
@@ -87,6 +95,14 @@ def _submit(answers: dict[str, str | None]) -> None:
         st.session_state["missing_fields"] = body.get("missing_fields", [])
     elif body.get("status") in {"completed", "publish_failed"} and "layout" in body:
         st.session_state["result"] = body
+        st.session_state.pop("missing_fields", None)
+    elif (
+        status >= 500
+        and body.get("status") == "generation_failed"
+        and body.get("retryable")
+    ):
+        st.session_state["answers"] = answers
+        st.session_state["retry_error"] = body
         st.session_state.pop("missing_fields", None)
     else:
         st.error(_error_message(status, body))
@@ -202,10 +218,7 @@ def main() -> None:
 
     missing_fields = st.session_state.get("missing_fields", [])
     if missing_fields:
-        st.info(
-            "Looking good, just a few more steps. Please press Continue to complete "
-            "the work."
-        )
+        st.info("Looking good, just a few more details are needed before generation.")
         st.subheader("A few more details")
         st.caption("Leave a field blank to use its standard placeholder.")
         with st.form("missing_details"):
@@ -219,8 +232,8 @@ def main() -> None:
                         else field.get("placeholder", "")
                     ),
                 )
-            continue_generation = st.form_submit_button("Continue", type="primary")
-        if continue_generation:
+            submit_details = st.form_submit_button("Submit details", type="primary")
+        if submit_details:
             answers = dict(st.session_state.get("answers", {}))
             answers.update(
                 {
@@ -230,6 +243,21 @@ def main() -> None:
                 }
             )
             _submit(answers)
+            st.rerun()
+
+    retry_error = st.session_state.get("retry_error")
+    if retry_error:
+        st.warning(
+            "This layout is taking longer than expected and could not be completed "
+            "after the available attempts."
+        )
+        st.caption(
+            "Select Continue to start a fresh generation request with the same "
+            "prompt, template, answers, and publishing choice."
+        )
+        if st.button("Continue", type="primary"):
+            _submit(dict(st.session_state.get("answers", {})), fresh_request=True)
+            st.rerun()
 
     result = st.session_state.get("result")
     if result:

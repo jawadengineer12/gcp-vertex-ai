@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from urllib.error import HTTPError
 
-from streamlit_app import _show_result, api_request
+from streamlit_app import _show_result, _submit, api_request
 
 
 class FakeResponse:
@@ -69,6 +69,77 @@ class ResultDisplayTests(unittest.TestCase):
 
         streamlit.expander.assert_called_once_with("Publishing response")
         streamlit.json.assert_any_call(publisher, expanded=True)
+
+
+class RetryFlowTests(unittest.TestCase):
+    @patch("streamlit_app.api_request")
+    @patch("streamlit_app.st")
+    def test_retryable_failure_preserves_input_for_continue(
+        self, streamlit, request
+    ) -> None:
+        streamlit.session_state = {
+            "api_url": "https://api.example",
+            "api_key": "secret",
+            "request_id": "req_failed",
+            "active_request": {
+                "prompt": "Create a cat article",
+                "template_id": "magazine_article",
+                "publish": False,
+            },
+        }
+        request.return_value = (
+            502,
+            {
+                "status": "generation_failed",
+                "request_id": "req_failed",
+                "retryable": True,
+                "error": "Generation failed validation after all retries",
+            },
+        )
+        answers = {"article_title": "Cats", "author_name": "Jane Doe"}
+
+        _submit(answers)
+
+        self.assertEqual(streamlit.session_state["answers"], answers)
+        self.assertEqual(
+            streamlit.session_state["retry_error"]["status"], "generation_failed"
+        )
+
+    @patch("streamlit_app.api_request")
+    @patch("streamlit_app.st")
+    def test_continue_starts_fresh_request_with_preserved_input(
+        self, streamlit, request
+    ) -> None:
+        streamlit.session_state = {
+            "api_url": "https://api.example",
+            "api_key": "secret",
+            "request_id": "req_failed",
+            "retry_error": {"status": "generation_failed"},
+            "active_request": {
+                "prompt": "Create a cat article",
+                "template_id": "magazine_article",
+                "publish": False,
+            },
+        }
+        request.return_value = (
+            200,
+            {
+                "status": "completed",
+                "request_id": "req_new",
+                "layout": {"pages": []},
+                "publisher": None,
+                "timing_ms": {},
+            },
+        )
+        answers = {"article_title": "Cats", "author_name": "Jane Doe"}
+
+        _submit(answers, fresh_request=True)
+
+        payload = request.call_args.args[3]
+        self.assertIsNone(payload["request_id"])
+        self.assertEqual(payload["answers"], answers)
+        self.assertEqual(streamlit.session_state["result"]["request_id"], "req_new")
+        self.assertNotIn("retry_error", streamlit.session_state)
 
 
 if __name__ == "__main__":

@@ -112,6 +112,13 @@ class PublishFailedResponse(ApiModel):
     error: str = "Publisher submission failed"
 
 
+class GenerationFailedResponse(ApiModel):
+    status: Literal["generation_failed"] = "generation_failed"
+    request_id: str
+    retryable: Literal[True] = True
+    error: str
+
+
 def _event(request_id: str, stage: str, started: float, retries: int, result: str) -> None:
     logger.info(
         json.dumps(
@@ -198,7 +205,7 @@ def templates() -> TemplatesResponse:
 @app.post(
     "/v1/layouts",
     response_model=NeedsInputResponse | CompletedResponse,
-    responses={502: {"model": PublishFailedResponse}},
+    responses={502: {"model": GenerationFailedResponse | PublishFailedResponse}},
     dependencies=[Depends(require_api_key)],
 )
 def create_layout(request: LayoutRequest) -> NeedsInputResponse | CompletedResponse | JSONResponse:
@@ -270,7 +277,8 @@ def create_layout(request: LayoutRequest) -> NeedsInputResponse | CompletedRespo
             request.prompt, known_values, template, request_id=request_id
         )
     except RuntimeError as error:
-        raise HTTPException(status_code=502, detail=str(error)) from error
+        failure = GenerationFailedResponse(request_id=request_id, error=str(error))
+        return JSONResponse(status_code=502, content=failure.model_dump(mode="json"))
 
     publisher = None
     if request.publish:
