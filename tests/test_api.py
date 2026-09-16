@@ -111,6 +111,15 @@ class ApiTests(unittest.TestCase):
             ["article_title", "author_name", "hero_image_url"],
         )
 
+    @patch("api.get_pipeline_service", side_effect=AssertionError("paid service loaded"))
+    def test_spread_does_not_request_optional_hero_image(self, _pipeline) -> None:
+        response = self.request(prompt="Create an article with a two page image spread")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            [field["name"] for field in response.json()["missing_fields"]],
+            ["article_title", "author_name", "spread_image_url"],
+        )
+
     @patch("api.get_pipeline_service")
     def test_prompt_values_and_https_url_are_extracted(self, pipeline_factory) -> None:
         pipeline_factory.return_value.generate.return_value = completed_result()
@@ -228,6 +237,24 @@ class ApiTests(unittest.TestCase):
 
         get_pipeline_service.cache_clear()
         self.assertIs(api.get_pipeline_service(), api.get_pipeline_service())
+
+    @patch("api.get_pipeline_service")
+    def test_exhausted_generation_returns_retryable_502(self, pipeline_factory) -> None:
+        pipeline_factory.return_value.generate.side_effect = RuntimeError(
+            "Generation failed validation after all retries"
+        )
+        response = self.request(
+            answers={
+                "article_title": "Cats",
+                "author_name": "Jane Doe",
+                "hero_image_url": None,
+            }
+        )
+
+        self.assertEqual(response.status_code, 502)
+        self.assertEqual(response.json()["status"], "generation_failed")
+        self.assertTrue(response.json()["retryable"])
+        self.assertTrue(response.json()["request_id"].startswith("req_"))
 
 
 if __name__ == "__main__":

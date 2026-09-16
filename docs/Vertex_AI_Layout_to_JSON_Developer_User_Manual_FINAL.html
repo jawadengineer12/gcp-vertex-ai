@@ -1,0 +1,281 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Vertex AI Layout to JSON Developer and User Manual</title>
+<style>
+@page{size:Letter;margin:0.75in}body{font-family:Aptos,Arial,sans-serif;color:#172033;line-height:1.45;max-width:980px;margin:auto}h1{color:#000;font-size:30px;margin-top:34px}h2{color:#000;font-size:23px;margin-top:32px}h3{color:#000;font-size:18px;margin-top:24px}p,li,td,th{font-size:11.5pt}code{font-family:Consolas,monospace;background:#eef2f6;padding:1px 4px}pre{background:#0d1117;color:#e6edf3;padding:14px;border-radius:6px;white-space:pre-wrap;font-size:9.5pt}table{border-collapse:collapse;width:100%;margin:12px 0 16px}th,td{border:1px solid #d9d9d9;padding:6px;vertical-align:middle}th{background:#17365d;color:#fff;text-align:left}.cover{min-height:850px;display:flex;flex-direction:column;justify-content:center;text-align:center}.cover h1{font-size:38px}.cover h2{border:0}.meta{margin:30px auto;width:78%}.note,.success,.danger,.procedure{margin:12px 0}.shot{page-break-inside:avoid;margin:18px 0}.shot img{width:100%;border:1px solid #aab7c4}.caption{color:#53657a;font-size:9.5pt;margin-top:4px}.pagebreak{page-break-before:always}.small{font-size:9.5pt;color:#53657a}
+</style></head><body>
+<section class="cover"><h1>Vertex AI Layout to JSON System</h1><h2>Developer and User Manual</h2>
+<table class="meta"><tr><th>Status</th><td>Phase 1 handoff manual</td></tr><tr><th>Audience</th><td>Developer or operator with no prior project knowledge</td></tr><tr><th>Verified</th><td>16 September 2026</td></tr><tr><th>Repository</th><td>https://github.com/jawadengineer12/gcp-vertex-ai</td></tr><tr><th>Stable service</th><td>https://layout-test-api-6euw7jlffa-uc.a.run.app</td></tr><tr><th>Original backend source</th><td><code>3ceb766</code></td></tr><tr><th>Focused fix source</th><td><code>230e505</code></td></tr><tr><th>Active revision</th><td><code>layout-test-api-continue-20260916</code> (100% traffic)</td></tr></table>
+<p><strong>Scope:</strong> Phase 1 operation, maintenance, corpus extension, validation, troubleshooting, and Cloud Run deployment. Phase 2 is excluded.</p></section>
+
+<h1>How to use this manual</h1>
+<p>This manual is both an onboarding guide and an operating procedure. A first-time developer should complete Sections 2 through 5 before changing data or code. Sections 7 and 8 describe the two sample-maintenance paths. Sections 9 through 12 are the release and incident procedures. Section 14 is a guided exercise that combines the entire workflow.</p>
+<table><tr><th>Reader goal</th><th>Start here</th><th>Stop when</th></tr><tr><td>Run an existing layout locally</td><td>Sections 2 through 5</td><td>A validated JSON file is written and passes the schema check</td></tr><tr><td>Add a normal example</td><td>Section 7</td><td>Corpus and vector counts match and tests pass</td></tr><tr><td>Add a relationship-aware example</td><td>Section 8</td><td>Special-case normalization and dedicated tests pass</td></tr><tr><td>Deploy an approved change</td><td>Sections 9 through 11</td><td>The candidate and stable URLs both pass the API checks</td></tr><tr><td>Investigate a 502</td><td>Section 12</td><td>The request ID identifies the failing stage and the corrected revision is verified</td></tr></table>
+<p><strong>Before using any command:</strong> read the label immediately above it. Commands run either in PowerShell at the repository root, inside the activated Python environment, or in the Google Cloud project. Do not paste placeholder values literally.</p>
+
+<h1>1. Purpose and verified behavior</h1>
+<p>The system converts natural-language page-layout intent into strict <code>LayoutProject</code> JSON for a downstream Adobe/InDesign-oriented workflow. It combines deterministic layout planning, template/requirement resolution, retrieval, reranking, Gemini generation, bounded retries, and validation.</p>
+<div class="note"><strong>“Training” means corpus extension, not Gemini fine-tuning.</strong> Adding an example appends an input/expected-JSON pair to the retrieval library and regenerates embeddings. The repository contains no Gemini foundation-model tuning job or tuned-model endpoint.</div>
+<pre>User prompt → deterministic layout plan/template requirements → information collection
+→ local vector + BM25 retrieval → CrossEncoder reranking → sanitized context
+→ Gemini JSON generation → strict validation
+→ bounded retry → local/GCS output and optional publisher handoff</pre>
+<table><tr><th>Entry point</th><th>File</th><th>Purpose</th></tr><tr><td>CLI</td><td><code>main.py</code></td><td>Local interactive generation; optional <code>--publish</code>.</td></tr><tr><td>API</td><td><code>api.py</code></td><td>Stateless FastAPI local/Cloud Run test surface.</td></tr><tr><td>Layout Generator</td><td><code>streamlit_app.py</code></td><td>Internal Streamlit client for the API.</td></tr><tr><td>Pipeline</td><td><code>services/pipeline_service.py</code></td><td>Shared retrieval, generation, repair, retry, validation.</td></tr><tr><td>Schema</td><td><code>schemas/layout_schema.py</code></td><td>Strict converter-facing contract.</td></tr></table>
+
+<h2>1.1 What the system does</h2>
+<p>The caller chooses one of four templates and describes the desired page or spread. The system resolves required information, finds similar examples, generates strict JSON, repairs deterministic constraint violations where possible, and rejects output that still violates the schema or layout rules. A successful response is suitable for the downstream converter contract. It is not automatically published unless the caller explicitly enables publishing.</p>
+<h2>1.2 What the system does not do</h2>
+<ul><li>It does not fine-tune Gemini when a developer adds examples.</li><li>It does not manage the external publisher dashboard or retrieve a generated PDF.</li><li>It does not deploy a managed Vertex Vector Search index. Retrieval uses the checked-in vector JSON file.</li><li>It does not store API conversation state. A caller must resubmit the original prompt, request ID, and answers after a <code>needs_input</code> response. The Streamlit client retains those values in its own session while the page remains open.</li><li>It does not include Phase 2 implementation.</li></ul>
+<h2>1.3 Processing stages and ownership</h2>
+<table><tr><th>Stage</th><th>Primary implementation</th><th>Observable success</th></tr><tr><td>Configuration</td><td><code>core/config.py</code></td><td>Required project, region, paths, and optional output settings load without an exception</td></tr><tr><td>Requirement resolution</td><td><code>services/requirement_agent.py</code></td><td>Known values and missing fields match the selected template and deterministic plan</td></tr><tr><td>Retrieval and reranking</td><td><code>services/retrieval_service.py</code></td><td>Candidate examples are returned and reranked</td></tr><tr><td>Generation</td><td><code>services/generation_service.py</code></td><td>Gemini returns a JSON-compatible object</td></tr><tr><td>Validation</td><td><code>services/validation_service.py</code></td><td>Schema and production layout rules pass</td></tr><tr><td>Output</td><td><code>services/output_service.py</code></td><td>Validated JSON is returned and optionally saved or handed to the publisher</td></tr></table>
+
+<h1>2. Access and first-day checklist</h1>
+<h2>2.1 Repository</h2>
+<ol><li>Open <code>https://github.com/jawadengineer12/gcp-vertex-ai</code>.</li><li>Confirm repository <code>jawadengineer12/gcp-vertex-ai</code>. It was publicly visible at verification time.</li><li>Confirm default branch <code>main</code>.</li><li>Clone and enter it:</li></ol>
+<pre>git clone https://github.com/jawadengineer12/gcp-vertex-ai.git
+cd gcp-vertex-ai
+git branch --show-current</pre>
+<p><strong>Success:</strong> <code>README.md</code>, <code>pyproject.toml</code>, <code>api.py</code>, <code>main.py</code>, <code>services/</code>, <code>scripts/</code>, and <code>tests/</code> exist. If cloning fails, verify URL, proxy policy, and GitHub access.</p>
+<p>The repository was public when this manual was verified. That does not establish whether a named person has been formally onboarded or should retain access if the repository becomes private. The project owner must confirm the GitHub organization, repository owner, and the client account that should administer access. Do not place personal access tokens in <code>.env</code> or repository files.</p>
+<div class="shot"><img src="manual_evidence/screenshots/01_github_repository.png"><div class="caption">Verified repository, default branch, and top-level folders.</div></div>
+
+<h2>2.2 Branch</h2>
+<p>A branch is a named Git line of work used to isolate and review a change.</p>
+<pre>git switch main
+git pull --ff-only
+git switch -c feature/add-layout-example</pre>
+<p><strong>Success:</strong> <code>git branch --show-current</code> prints the new branch.</p>
+<p>Work only on the focused branch. Before committing, use <code>git status --short</code> to distinguish intended files from local archives, generated output, credentials, or unrelated user changes. A branch is not delivered merely because it exists locally; it must be pushed and reviewed or merged according to the team process.</p>
+
+<h2>2.3 Google Cloud</h2>
+<table><tr><th>Item</th><th>Verified value</th></tr><tr><td>Project</td><td><code>angular-lambda-421320</code></td></tr><tr><td>Region/service</td><td><code>us-central1</code> / <code>layout-test-api</code></td></tr><tr><td>Runtime identity</td><td><code>vertex-layout-dev-sa@angular-lambda-421320.iam.gserviceaccount.com</code></td></tr><tr><td>Inbound key</td><td>Secret Manager <code>layout-api-key</code>; value never documented.</td></tr><tr><td>Publisher key</td><td>Separate Secret Manager <code>publisher-api-key</code>.</td></tr></table>
+<p>Run in Windows PowerShell:</p>
+<pre>gcloud.cmd auth login
+gcloud.cmd config set project angular-lambda-421320
+gcloud.cmd auth application-default login
+gcloud.cmd config get-value project</pre>
+<p><strong>Success:</strong> the last command prints the project and <code>gcloud.cmd auth list --filter=status:ACTIVE</code> shows the intended account. Local Python uses ADC; Cloud Run uses its service identity. If access fails, ask the project administrator. The repository verifies <code>roles/aiplatform.user</code> for model calls and Secret Manager accessor for mapped runtime secrets; organization-specific deployer roles were not fully enumerated.</p>
+<table><tr><th>Actor</th><th>Minimum responsibility</th><th>Verification</th></tr><tr><td>Local developer</td><td>Clone or pull the repository, create ADC, call Vertex in the approved project</td><td><code>gcloud auth list</code>, project check, and a non-publishing generation</td></tr><tr><td>Cloud Run deployer</td><td>Build source, deploy revisions, update traffic, and read logs</td><td>Zero-traffic deployment and service description succeed</td></tr><tr><td>Runtime service account</td><td>Call Vertex and access only mapped secrets or approved GCS objects</td><td>Revision configuration shows the expected identity and the application completes a request</td></tr><tr><td>Secret administrator</td><td>Create or rotate secret versions without exposing values</td><td>Secret metadata and numeric version mapping are correct</td></tr></table>
+<p>The exact human IAM roles depend on the client organization. Typical permissions may be delivered through custom roles or groups, so this manual does not invent role bindings. Ask the project administrator for least-privilege access if any verification command returns Permission Denied.</p>
+<div class="shot"><img src="manual_evidence/screenshots/02_gcp_project_and_auth.png"><div class="caption">Redacted project, authentication, service, region, and runtime identity verification.</div></div>
+
+<h1>3. Repository map</h1>
+<table><tr><th>Path</th><th>Purpose</th></tr><tr><td><code>core/</code></td><td>Configuration, logging, Vertex client.</td></tr><tr><td><code>services/</code></td><td>Primary application implementation.</td></tr><tr><td><code>schemas/</code></td><td>Strict Pydantic layout contract.</td></tr><tr><td><code>templates/</code></td><td>Four template definitions.</td></tr><tr><td><code>raw_data/</code></td><td>Training workbook, font list, source/reference data.</td></tr><tr><td><code>normalized_data/layout_prompt_library_updated.json</code></td><td>Normal retrieval corpus (32 verified examples).</td></tr><tr><td><code>normalized_data/vertex_index_data.json</code></td><td>Checked-in vectors (32 × 768 verified).</td></tr><tr><td><code>normalized_data/special_case_library.json</code></td><td>Three whole-project relationship cases.</td></tr><tr><td><code>scripts/</code></td><td>Import, normalization, embedding, retrieval, and index utilities.</td></tr><tr><td><code>tests/</code></td><td>58 verified tests after the focused retry change.</td></tr><tr><td><code>baseline_outputs/</code></td><td>Four checked-in normal JSON baselines.</td></tr><tr><td><code>special_case_outputs/</code></td><td>Three checked-in special-case JSON outputs.</td></tr></table>
+<h2>3.1 Files excluded from deployment or Git</h2>
+<p><code>.gitignore</code> and <code>.gcloudignore</code> serve different purposes. Git exclusions prevent local credentials, environments, logs, and generated files from entering source control. Cloud build exclusions keep unnecessary or sensitive files out of the deployment archive. The current Cloud Run source upload excludes <code>.git</code>, environment files, secret directories, key files, virtual environments, caches, logs, generated outputs, documentation, tests, most raw data, archives, and alternate vector-index files. It explicitly retains <code>raw_data/Font List.csv</code> and the configured <code>normalized_data/vertex_index_data.json</code>.</p>
+<p>Checked-in items can still be excluded from the Cloud Run archive. For example, the tracked training workbook remains available to developers but is not required by the API container. Verify exclusions with <code>gcloud meta list-files-for-upload</code> before a release. Stop if it prints a credential, <code>.env</code>, private key, or unexpected archive.</p>
+<div class="note"><strong>Storage clarification:</strong> both output folders are in the Git repository, not GCP Drive. They are not uploaded to GCS automatically. <code>GCS_BUCKET</code> controls optional runtime output only.</div>
+
+<h1>4. Local setup</h1>
+<h2>4.1 Virtual environment</h2>
+<p><strong>Start:</strong> PowerShell in the repository root.</p>
+<pre>python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python --version
+python -c "import sys; print(sys.executable)"</pre>
+<p><strong>Success:</strong> prompt normally shows <code>(.venv)</code>, Python is 3.12+, and executable is under <code>.venv\Scripts</code>. If activation is blocked, use <code>.\.venv\Scripts\python.exe</code> explicitly or follow administrator policy; do not weaken machine-wide security settings.</p>
+<p>Activation applies only to the current terminal. Open a new terminal only when a procedure explicitly calls for another process, such as starting the API and Streamlit separately. Activate the environment in each terminal, or prefix commands with <code>uv run</code>. Do not run maintenance scripts from <code>scripts/</code>; remain at the repository root so relative paths resolve correctly.</p>
+<h2>4.2 Dependencies</h2>
+<pre>uv sync --frozen
+uv lock --check</pre>
+<p><strong>Success:</strong> both exit 0. The XLSX importer uses pandas and requires an Excel engine available in the environment. Alternative: <code>python -m pip install -e .</code>; prefer the lockfile for reproducible handoff work. If pandas reports a missing <code>openpyxl</code> engine, install it in the active environment before running the importer; it is not declared directly by this baseline.</p>
+<div class="shot"><img src="manual_evidence/screenshots/03_virtual_environment.png"><div class="caption">Verified environment, Python, lock synchronization, and XLSX dependency.</div></div>
+
+<h2>4.3 Configuration</h2>
+<pre>Copy-Item .env.example .env</pre>
+<p>Set at least <code>GOOGLE_CLOUD_PROJECT=angular-lambda-421320</code> and <code>GOOGLE_CLOUD_LOCATION=us-central1</code>. Never commit <code>.env</code>.</p>
+<table><tr><th>Key</th><th>Behavior/default</th></tr><tr><td><code>PROMPT_LIBRARY_PATH</code></td><td><code>normalized_data/layout_prompt_library_updated.json</code></td></tr><tr><td><code>SPECIAL_CASE_LIBRARY_PATH</code></td><td><code>normalized_data/special_case_library.json</code></td></tr><tr><td><code>EXCEL_FILE_PATH</code></td><td><code>raw_data/trainingData_Local.xlsx</code></td></tr><tr><td><code>VERTEX_INDEX_DATA_PATH</code></td><td><code>normalized_data/vertex_index_data.json</code></td></tr><tr><td><code>FONT_LIST_PATH</code></td><td><code>raw_data/Font List.csv</code></td></tr><tr><td><code>OUTPUT_FILE</code></td><td><code>outputs/generated_layout.json</code></td></tr><tr><td><code>LOCAL_OUTPUT</code></td><td>Default true.</td></tr><tr><td><code>GCS_BUCKET</code>/<code>GCS_OBJECT_NAME</code></td><td>Optional GCS destination.</td></tr><tr><td><code>LAYOUT_API_KEY</code>/<code>LAYOUT_API_URL</code></td><td>Inbound API secret and Streamlit target.</td></tr><tr><td><code>PUBLISHER_API_URL</code>/<code>PUBLISHER_API_KEY</code></td><td>Both required for explicit publisher handoff.</td></tr><tr><td><code>ENABLE_RUN_TRACE</code></td><td>Default true locally; traces under <code>outputs/run_traces</code>.</td></tr><tr><td><code>MAX_RETRIES</code></td><td>Default 3 generation attempts.</td></tr></table>
+<p><strong>Configuration precedence:</strong> shell environment variables override values loaded from <code>.env</code>. Cloud Run uses revision environment variables and Secret Manager mappings rather than the developer's local file. When troubleshooting, verify the environment where the failing process actually runs.</p>
+<table><tr><th>Configuration type</th><th>Local development</th><th>Cloud Run</th></tr><tr><td>GCP identity</td><td>Application Default Credentials created by <code>gcloud auth application-default login</code></td><td>Attached service account</td></tr><tr><td>Non-secret settings</td><td><code>.env</code> or current PowerShell session</td><td>Revision environment variables</td></tr><tr><td>Inbound and publisher keys</td><td>Current session or uncommitted <code>.env</code></td><td>Pinned Secret Manager versions</td></tr><tr><td>Output files</td><td>Repository-relative local path or approved GCS bucket</td><td>Ephemeral container file system or approved GCS bucket</td></tr></table>
+
+<h2>4.4 First checks</h2>
+<pre>python -m unittest tests.test_layout_pipeline.LocalVectorStoreTests
+python -m unittest discover tests
+python tests/validate_prompt_library.py</pre>
+<p><strong>Verified:</strong> 3 vector tests pass; full suite reports 58 tests OK; prompt validation reports 32 examples and 108 Article assets.</p>
+
+<h1>5. Run locally</h1>
+<h2>5.1 CLI</h2><pre>python main.py</pre>
+<p>Select a template, enter a prompt, answer requested fields, and wait. <strong>Success:</strong> <code>Validated JSON saved (local): ...</code> and the configured output exists. Failure after all retries exits 1 and prints validation details; inspect <code>logs/pipeline.log</code>. Publishing is opt-in only:</p><pre>python main.py --publish</pre>
+<div class="danger">Use <code>--publish</code> only when a real external job is authorized.</div>
+
+<h2>5.2 API</h2>
+<p><strong>Terminal 1:</strong></p><pre>$env:LAYOUT_API_KEY="replace-with-a-long-random-local-value"
+$env:ENABLE_RUN_TRACE="false"
+uv run uvicorn api:app --host 0.0.0.0 --port 8080 --workers 1</pre>
+<p><strong>Success:</strong> Uvicorn listens and <code>Invoke-RestMethod http://localhost:8080/health</code> returns <code>{"status":"ok"}</code>. Protected routes without the key should return 401.</p>
+<p>Fully resolved request:</p><pre>$headers=@{"x-api-key"=$env:LAYOUT_API_KEY}
+$body=@{request_id=$null;prompt="Create a one-page article titled Service Verification";template_id="magazine_article";answers=@{article_title="Service Verification";author_name="Test Operator";hero_image_url=$null};publish=$false}|ConvertTo-Json -Depth 5
+Invoke-RestMethod http://localhost:8080/v1/layouts -Method Post -Headers $headers -ContentType application/json -Body $body</pre>
+<p><strong>Success:</strong> HTTP 200, <code>status=completed</code>, non-empty <code>layout</code>, and <code>publisher=null</code>. HTTP 200 <code>needs_input</code> is normal: resend the original prompt, returned request ID, and all answers. The API stores no session.</p>
+<table><tr><th>HTTP result</th><th>Meaning</th><th>Operator action</th></tr><tr><td>200 <code>needs_input</code></td><td>The request is valid but required template fields are unresolved</td><td>Enter the fields and select <strong>Submit details</strong>; the Streamlit client resubmits the same request ID</td></tr><tr><td>200 <code>completed</code></td><td>Generation and validation passed</td><td>Inspect or download the layout; confirm publisher is null when publishing was disabled</td></tr><tr><td>502 <code>generation_failed</code>, <code>retryable=true</code></td><td>Generation exhausted its configured validation attempts</td><td>The Layout Generator shows <strong>Continue</strong>; selecting it starts a fresh request with the saved prompt, template, answers, and publish choice</td></tr><tr><td>502 <code>publish_failed</code></td><td>Validated layout exists but outbound handoff failed</td><td>Preserve the layout and request ID; check publisher state before retrying because a duplicate job is possible</td></tr><tr><td>401</td><td>Inbound API key missing or incorrect</td><td>Load the current secret without printing it</td></tr><tr><td>422</td><td>Request body, template, answer, or URL violates the API contract</td><td>Read the structured detail and correct the request</td></tr><tr><td>503</td><td>Server or publisher configuration is unavailable</td><td>Correct configuration; the retry Continue control is not shown for this response</td></tr></table>
+
+<h2>5.3 Layout Generator</h2>
+<p><strong>Terminal 2:</strong></p><pre>$env:LAYOUT_API_URL="http://localhost:8080"
+uv run streamlit run streamlit_app.py</pre>
+<p>Open <code>http://localhost:8501</code>, enter the API URL and same password-masked key, select Connect, choose a template, enter a prompt, keep Publish off, and submit. <strong>Success:</strong> Connected, four templates, “Layout generated successfully. It was not published.”, timings, validated JSON, and Download JSON.</p>
+<h3>5.3.1 Missing information</h3>
+<ol><li>Choose Magazine Article.</li><li>Enter a prompt that omits its title or author.</li><li>Select Generate layout.</li><li>Expect HTTP 200 <code>needs_input</code>. The interface displays A few more details. This is expected, not an error.</li><li>Enter the requested values and select <strong>Submit details</strong>. This control is intentionally not labeled Continue.</li></ol>
+<p><strong>Success:</strong> generation begins using the same request ID and accumulated answers. If submission returns 422, inspect the answer type and require HTTPS for image URLs.</p>
+<h3>5.3.2 Continue after exhausted generation attempts</h3>
+<ol><li>If Gemini cannot produce a valid layout after the configured attempts, the API returns HTTP 502 with <code>status=generation_failed</code>, the failed request ID, and <code>retryable=true</code>.</li><li>The Layout Generator preserves the prompt, selected template, accumulated answers, and publish choice in its session.</li><li>The page displays: “This layout is taking longer than expected and could not be completed after the available attempts.”</li><li>Select <strong>Continue</strong>.</li><li>The client sends the saved input again with <code>request_id=null</code>. The API creates a fresh request ID and runs the complete pipeline again.</li></ol>
+<p><strong>Success:</strong> Continue is absent before a retryable generation failure; it appears after the structured 502 response; the fresh request completes; the retry panel disappears; validated JSON and Download JSON are available. Closing or refreshing the Streamlit page may discard the locally retained input. Publisher failures do not show Continue because blind resubmission could create a duplicate external job.</p>
+<div class="shot"><img src="manual_evidence/screenshots/11_layout_generator_retry_continue.png"><div class="caption">Deterministic verification of the retry screen after an exhausted generation response. Continue appears only after the structured 502 failure.</div></div>
+<div class="shot"><img src="manual_evidence/screenshots/13_layout_generator_retry_completed.png"><div class="caption">The fresh request completed with the saved prompt and answers. The retry panel disappeared and publishing remained disabled.</div></div>
+<div class="shot"><img src="manual_evidence/screenshots/12_api_swagger.png"><div class="caption">Deployed Swagger page showing health, templates, and layout routes.</div></div>
+
+<h1>6. Templates, special cases, and validation</h1>
+<p>The source of truth for the four templates (<code>magazine_article</code>, <code>editorial_page</code>, <code>cover_page</code>, <code>advertisement</code>) is <code>templates/*.json</code> and protected <code>GET /v1/templates</code>. Deterministic layout planning may add prompt-specific image requirements.</p>
+<p>A <strong>special case</strong> is a whole layout whose meaning depends on relationships: same-page threaded text, cross-page threaded text, or cross-page image spread. Source: <code>normalized_data/special_case_library.json</code>; outputs: <code>special_case_outputs/</code>; tests: <code>tests/test_special_cases/</code>.</p>
+<p>Validation covers strict schema/types, page indexes, safe margins/bleed, approved fonts, Article overlap, threading links and <code>autoFit</code>, image spreads, page counts, and explicit position/size/column constraints.</p>
+<pre>python -c "import json; from pathlib import Path; from schemas.layout_schema import LayoutProject; p=Path('baseline_outputs/normal_cover.json'); LayoutProject.model_validate(json.loads(p.read_text(encoding='utf-8'))); print('VALID:',p)"</pre>
+<p><strong>Success:</strong> prints VALID and exits 0. This checks schema; runtime <code>ValidationService</code> additionally applies layout rules. API <code>status=completed</code> and CLI validated-save text are the clearest end-to-end success criteria.</p>
+<table><tr><th>Validation layer</th><th>What it proves</th><th>What failure looks like</th></tr><tr><td>Pydantic schema</td><td>Required fields, strict types, enum values, nested assets, and forbidden extra fields are correct</td><td>The command exits nonzero with the failing field path</td></tr><tr><td>Production validation service</td><td>Page bounds, margins, overlap, fonts, threading, spreads, page count, and prompt constraints are safe</td><td>The pipeline records validation errors and retries with cumulative feedback</td></tr><tr><td>API completion</td><td>The shared pipeline produced a schema-valid and rule-valid layout</td><td>Status is not <code>completed</code>, or the layout is missing</td></tr><tr><td>Baseline regression</td><td>Checked-in representative outputs remain accepted by the current schema and rules</td><td>A baseline or special output fails its test or validation command</td></tr></table>
+<p>Do not treat valid JSON syntax alone as success. A file can parse with <code>json.loads</code> and still violate the converter schema, use an unapproved font, overlap Article frames, place an asset outside page bounds, or break a text thread.</p>
+<div class="shot"><img src="manual_evidence/screenshots/07_tests_and_validation.png"><div class="caption">Verified 74-test suite, prompt validation, and checked-in JSON baselines/special outputs.</div></div>
+
+<h1>7. Normal sample workflow</h1>
+<div class="note"><strong>Use a workbook containing only rows to append.</strong> The importer appends every valid non-empty row and does not deduplicate. Run once and inspect the diff.</div>
+<h2>7.1 Prepare and append</h2>
+<ol><li>Start on a branch.</li><li>Create <code>raw_data/new_examples.xlsx</code>.</li><li>Include exact columns <code>Page Number</code>, <code>Generated Prompt (Input)</code>, and <code>Expected JSON Object (Output)</code>. The expected value must parse as JSON and contain a non-empty <code>assets</code> array.</li><li>Point the session to it and append:</li></ol>
+<pre>$env:EXCEL_FILE_PATH="raw_data/new_examples.xlsx"
+python -m scripts.append_excel_to_prompt_library</pre>
+<p><strong>Success:</strong> Appended count equals intended rows, no unexpected invalid/empty rows, and total rises by that count. The verified one-row exercise increased 32 to 33. File/path failures mean the environment variable or working directory is wrong; Excel-engine errors mean dependencies are stale.</p>
+<p>The checked-in source workbook is <code>raw_data/trainingData_Local.xlsx</code>. Verification found 92 rows and these six columns:</p>
+<table><tr><th>Column</th><th>Use</th></tr><tr><td><code>Project Name</code></td><td>Human-readable source grouping</td></tr><tr><td><code>Source JSON File</code></td><td>Reference to the originating expected JSON</td></tr><tr><td><code>Source PDF File</code></td><td>Reference to the originating PDF when available</td></tr><tr><td><code>Page Number</code></td><td>Source page or page context</td></tr><tr><td><code>Generated Prompt (Input)</code></td><td>Retrieval intent stored as <code>intent</code></td></tr><tr><td><code>Expected JSON Object (Output)</code></td><td>JSON object stored as <code>expected_output</code></td></tr></table>
+<p>The importer requires the exact workbook headers, including the parenthetical Input and Output text. Do not use the full 92-row workbook as an append source unless every row is intentionally new. The script appends valid rows and does not deduplicate them.</p>
+<div class="shot"><img src="manual_evidence/screenshots/04b_training_workbook_preview.png"><div class="caption">Representative rows from the tracked XLSX workbook. Expected JSON cells are deliberately truncated for readability.</div></div>
+<div class="shot"><img src="manual_evidence/screenshots/04_sample_data.png"><div class="caption">Verified workbook columns and all sample/vector/output locations.</div></div>
+
+<h2>7.2 Validate and normalize</h2>
+<pre>python tests/validate_prompt_library.py
+python -m scripts.normalize_prompt_library `
+  --source normalized_data/layout_prompt_library_updated.json `
+  --output normalized_data/layout_prompt_library_sanitized.json</pre>
+<p>Runtime retrieval already sanitizes selected examples. The normalization command creates a review artifact; it does not update configured vectors unless configuration is deliberately changed.</p>
+<div class="shot"><img src="manual_evidence/screenshots/05_add_and_normalize_example.png"><div class="caption">Verified one-row append, validation, and normal-library normalization in an isolated copy.</div></div>
+
+<h2>7.3 Regenerate embeddings</h2>
+<pre>python -m scripts.prepare_vertex_vector_data
+python -m unittest tests.test_layout_pipeline.LocalVectorStoreTests</pre>
+<p>The first command is a paid Vertex <code>text-embedding-004</code> call over the full configured library. It rewrites <code>VERTEX_INDEX_DATA_PATH</code>. <strong>Success:</strong> vector count equals library count, command prints Success, and 3 alignment/dimension tests pass. Commit the prompt library and vector file together.</p>
+<div class="shot"><img src="manual_evidence/screenshots/06_embeddings.png"><div class="caption">Verified embedding regeneration to a temporary file and vector alignment.</div></div>
+
+<h1>8. Special-case workflow</h1>
+<ol><li>Document the relationship and evidence.</li><li>Add/update a whole-project case in a source JSON matching the special library shape.</li><li>Normalize to a candidate file:</li></ol>
+<pre>python -m scripts.normalize_special_case_library `
+  --source path/to/special_cases_source.json `
+  --output normalized_data/special_case_library.candidate.json</pre>
+<ol start="4"><li>Diff candidate against <code>normalized_data/special_case_library.json</code>.</li><li>Replace only after review and add/update dedicated tests.</li><li>Run:</li></ol>
+<pre>python -m unittest tests.test_special_cases.test_special_cases
+python -m unittest discover tests</pre>
+<p><strong>Success:</strong> both end in OK. Special-case changes do not require normal-library embeddings unless the normal prompt library also changed.</p>
+
+<h1>9. Representative generation and release checks</h1>
+<p>The baseline repository has no <code>demo_readiness_matrix</code> or <code>demo_generation_matrix</code> module. Do not document or run those names on this branch. Use the checked-in deterministic suites first:</p>
+<pre>python -m unittest tests.test_special_cases.test_special_cases
+python -m unittest discover -s tests</pre>
+<p><strong>Success:</strong> the special-case suite and full suite report OK. For a live representative generation, run <code>python main.py</code>, choose the relevant template, use a reviewed prompt, and keep publishing disabled. A live success requires the validated-save message and a saved JSON that passes the Section 6 schema check. Vertex/Gemini calls may cost money and vary between runs.</p>
+<pre>uv lock --check
+python -m unittest discover tests
+python tests/validate_prompt_library.py
+python -m unittest tests.test_layout_pipeline.LocalVectorStoreTests
+git diff --check</pre>
+
+<h1>10. Local, GCS, and publisher output</h1>
+<h2>10.1 Local</h2><pre>LOCAL_OUTPUT=true
+OUTPUT_FILE=outputs/generated_layout.json</pre><p>The CLI writes validated JSON. <code>outputs/</code> and traces are excluded from Git.</p>
+<p>Local output is the safest development default. The API returns the layout in its response and does not use <code>OUTPUT_FILE</code> as a persistent API store. Cloud Run container storage is ephemeral, so use GCS or the response body when an artifact must survive a revision restart.</p>
+<h2>10.2 GCS</h2><pre>LOCAL_OUTPUT=false
+GCS_BUCKET=approved-bucket-name
+GCS_OBJECT_NAME=layouts/generated_layout.json</pre><p><strong>Success:</strong> CLI prints <code>Validated JSON saved (gcs): gs://...</code>. On failure check bucket, project, IAM, and object path. This is unrelated to checked-in baseline/special output folders.</p>
+<h2>10.3 Publisher handoff</h2>
+<p>Publisher handoff is the optional outbound POST to the external queue configured by <code>PUBLISHER_API_URL</code>. <code>OutputService</code> wraps validated JSON as <code>var documentData=&lt;json&gt;;</code> in the publisher envelope. The repository does not include the external dashboard, job polling, or PDF retrieval workflow.</p>
+<pre>PUBLISHER_API_URL=https://approved-publisher-host/path
+PUBLISHER_API_KEY=[secure value; never committed]
+PUBLISHER_CREATED_BY=approved-operator-identity
+PUBLISHER_PROJECT=approved-project-label</pre>
+<p>CLI requires <code>--publish</code>; API requires <code>"publish":true</code>. Keep false for smoke tests. Publisher failure returns 502 with <code>status=publish_failed</code> and preserves the validated layout.</p>
+<p>A publisher smoke test is not equivalent to generation verification. It creates an outbound request that may create a real queued job. Before enabling it, identify the approved publisher environment, expected created-by/project metadata, who will confirm the queue entry, and how duplicate submissions are handled. If the API reports <code>publish_failed</code>, do not blindly resubmit because the remote system may have accepted the first request before the response failed.</p>
+
+<h1>11. Cloud Run deployment</h1>
+<h2>11.1 Preflight</h2>
+<ol><li>Use a reviewed commit in the repository root. Record <code>git rev-parse HEAD</code>.</li><li>Run Section 9 checks.</li><li>Require a clean <code>git status --short</code>. Do not deploy an uncommitted working tree.</li><li>Confirm <code>.gcloudignore</code> excludes secrets, <code>.env</code>, keys, archives, venv, logs, outputs, docs/tests, and raw data except font list.</li><li>Compare the candidate against the approved baseline with <code>git diff --name-status 3ceb766..HEAD</code>. For this fix, runtime changes must be limited to <code>api.py</code>, <code>streamlit_app.py</code>, and their focused tests.</li><li>Record the source commit in the release record. Do not add or change a Cloud Run environment variable merely for documentation.</li></ol>
+<h2>11.2 Zero-traffic candidate</h2>
+<pre>$PROJECT_ID="angular-lambda-421320"
+$REGION="us-central1"
+$SERVICE="layout-test-api"
+$SUFFIX="candidate-YYYYMMDD"
+gcloud.cmd run deploy $SERVICE --source . `
+  --project=$PROJECT_ID --region=$REGION `
+  --revision-suffix=$SUFFIX --tag=$SUFFIX --no-traffic `
+  --quiet</pre>
+<p><strong>Success:</strong> build SUCCESS, revision Ready, candidate URL printed, and stable traffic remains unchanged. Updating the existing service inherits configuration. For a new service/project, follow <code>GCP_SETUP.md</code> for APIs, runtime identity, pinned secrets, CPU/memory/concurrency/timeout/scale.</p>
+<h2>11.3 Candidate verification</h2>
+<ol><li>GET <code>/health</code> without key: 200 and status ok. Use this path for external Cloud Run checks.</li><li>GET <code>/v1/templates</code> with key from Secret Manager: 200 and four templates.</li><li>POST fully resolved <code>publish=false</code>: 200, completed, non-empty validated layout, publisher null.</li><li>Confirm missing information uses <strong>Submit details</strong>, not Continue.</li><li>Run the deterministic failed-first/success-second UI check: require structured generation failure, Continue, a fresh request ID, and successful validated output with the saved answers.</li><li>Filter logs by request ID; expect retrieval, reranking, generation, validation, pipeline, request.</li><li>Compare candidate CPU, memory, service account, environment variables, and secret mappings with the approved baseline revision before promotion.</li></ol>
+<p><strong>Cloud Run health-path note:</strong> the application defines both <code>/health</code> and <code>/healthz</code>, and both pass locally. In the verified Cloud Run environment, Google Front End returned its own HTML 404 for the exact external <code>/healthz</code> path while <code>/health</code>, <code>/docs</code>, and <code>/openapi.json</code> reached the application. No <code>/healthz</code> request appeared in container logs. Use <code>/health</code> as the documented external probe.</p>
+<h2>11.4 Promote and verify stable URL</h2>
+<pre>gcloud.cmd run services update-traffic layout-test-api `
+  --project=angular-lambda-421320 --region=us-central1 `
+  --to-revisions=layout-test-api-$SUFFIX=100</pre>
+<p>Repeat health, templates, and <code>publish=false</code> generation on the stable URL. Record revision, request ID, timings, and rollback target.</p>
+<div class="shot"><img src="manual_evidence/screenshots/08_cloud_run_deployment.png"><div class="caption">Verified zero-traffic deployment and 100% promotion.</div></div>
+<div class="shot"><img src="manual_evidence/screenshots/09_api_success.png"><div class="caption">Verified stable API end-to-end success with publishing disabled.</div></div>
+
+<h1>12. HTTP 502 investigation and resolution</h1>
+<h2>12.1 Evidence and cause</h2>
+<p>Cloud Run request logs contained three representative 502 responses on 28 August 2026 against <code>layout-test-api-constraints-20260824</code>, after 98-251 seconds. Request <code>req_6d1f20f4077949b392a61a2fb541a3c7</code> logged three Gemini generations, three validation retries, then <code>pipeline failed retries=2</code>. No publisher stage ran. The reported failures were therefore stochastic Gemini JSON/schema/geometry failures before publisher handoff, not a Cloud Run network gateway fault.</p>
+<p>The approved production baseline was revision <code>layout-test-api-constraints-20260824</code>, verified against Git commit <code>3ceb766</code>. A later, broader revision was temporarily promoted during documentation work; it was returned to 0% and the approved baseline was restored to 100% before this focused fix was prepared.</p>
+<h2>12.2 Applied fix and verification</h2>
+<ol><li>Kept the complete backend at the approved <code>3ceb766</code> baseline.</li><li>Changed exhausted generation failures from a generic HTTP detail response to structured JSON containing <code>status=generation_failed</code>, <code>retryable=true</code>, the request ID, and the error description.</li><li>Changed Streamlit to retain the prompt, template, accumulated answers, and publish choice after only that response.</li><li>Reserved <strong>Continue</strong> for this retryable generation-failure state. Missing required fields now use <strong>Submit details</strong>.</li><li>Continue resubmits the saved input with no request ID, which makes the API create a fresh request and run the full pipeline again.</li><li>Kept publisher failure separate; it preserves validated JSON but does not offer an automatic Continue because the remote queue may already have accepted the job.</li><li>Ran 58 tests. A deterministic browser scenario returned <code>needs_input</code>, then a retryable 502, then HTTP 200 completed; it asserted that the failed request carried all answers and the Continue request carried the same answers with <code>request_id=null</code>.</li><li>Confirmed with <code>git diff --name-only 3ceb766</code> that no semantic-planning, generation, retrieval, validation, dependency, Docker, or runtime-configuration implementation was added.</li></ol>
+<p class="success"><strong>Status:</strong> the requested Continue recovery is implemented, verified locally, deployed as <code>layout-test-api-continue-20260916</code>, and receiving 100% traffic. Candidate and stable checks passed: health 200, structured generation-failure schema present, four templates, and a real <code>publish=false</code> generation completed with one validated page and <code>publisher=null</code>. The rollback target is <code>layout-test-api-constraints-20260824</code>.</p>
+<div class="shot"><img src="manual_evidence/screenshots/10_http_502_investigation.png"><div class="caption">Redacted root-cause evidence, fixes, and verification.</div></div>
+<h2>12.3 Troubleshooting</h2>
+<table><tr><th>Symptom</th><th>Action</th></tr><tr><td>Google HTML 404 for <code>/healthz</code> with no request log</td><td>Use <code>/health</code> for the external Cloud Run probe; verify <code>/docs</code> or <code>/openapi.json</code> if routing is still uncertain.</td></tr><tr><td>Application JSON 404</td><td>Verify the requested application path against <code>/openapi.json</code>.</td></tr><tr><td>401</td><td>Verify <code>x-api-key</code>, secure local variable, and active secret mapping.</td></tr><tr><td>422</td><td>Read detail: strict type/extra field/unknown template or answer/unsafe image URL.</td></tr><tr><td>502 <code>generation_failed</code></td><td>Record the failed request ID. In Layout Generator, select Continue once to create a fresh request with the retained input. If it fails repeatedly, stop and inspect logs rather than looping indefinitely.</td></tr><tr><td>503</td><td>Verify revision environment variables, secret mappings, IAM, publisher configuration, and Vertex availability. Correct configuration before retrying.</td></tr><tr><td>502 <code>publish_failed</code></td><td>Preserve layout/request ID; do not blindly retry because the queue may have accepted it.</td></tr><tr><td>Long request</td><td>Check the 900-second client/service timeout and filter logs by request ID to identify the slow stage.</td></tr></table>
+<pre>gcloud.cmd logging read `
+  'resource.type="cloud_run_revision" AND resource.labels.service_name="layout-test-api" AND jsonPayload.request_id="&lt;REQUEST_ID&gt;"' `
+  --project=angular-lambda-421320 --limit=50 `
+  --format='table(timestamp,resource.labels.revision_name,jsonPayload.stage,jsonPayload.result,jsonPayload.retries,jsonPayload.duration_ms)'</pre>
+
+<h1>13. Security</h1>
+<ul><li>Never put live keys, service-account private keys, passwords, or tokens in Git, screenshots, documents, URLs, or shared Postman values.</li><li>Use separate Secret Manager secrets for inbound and publisher keys; pin numeric versions.</li><li>Use ADC locally and Cloud Run identity in deployment; do not package service-account JSON.</li><li>Keep <code>publish=false</code> until a real publisher job is authorized.</li><li>Use only public HTTPS image URLs.</li><li>The client review PDF contained an API-key value. Treat it as exposed and rotate it in a coordinated change. It was not rotated here because that would invalidate existing client configuration.</li></ul>
+
+<h1>14. Guided end-to-end exercise</h1>
+<h2>1 - Access and branch</h2><pre>git clone https://github.com/jawadengineer12/gcp-vertex-ai.git
+cd gcp-vertex-ai
+git switch -c exercise/add-one-example</pre><p><strong>Success:</strong> expected files exist and current branch matches.</p>
+<h2>2 - Environment/authentication</h2><pre>python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+uv sync --frozen
+gcloud.cmd auth application-default login
+gcloud.cmd config set project angular-lambda-421320</pre><p><strong>Success:</strong> venv Python is active, sync exits 0, project is correct.</p>
+<h2>3 - Add exactly one example</h2><p>Create <code>raw_data/exercise_one_example.xlsx</code> with one valid row and exact required columns.</p><pre>$env:EXCEL_FILE_PATH="raw_data/exercise_one_example.xlsx"
+python -m scripts.append_excel_to_prompt_library</pre><p><strong>Success:</strong> appended 1, invalid 0, empty 0, total +1. Stop if different.</p>
+<h2>4 - Normalize and validate</h2><pre>python tests/validate_prompt_library.py
+python -m scripts.normalize_prompt_library --source normalized_data/layout_prompt_library_updated.json --output normalized_data/layout_prompt_library_sanitized.json</pre><p><strong>Success:</strong> new total validates and same number is normalized; review Git diff.</p>
+<h2>5 - Regenerate embeddings</h2><pre>python -m scripts.prepare_vertex_vector_data
+python -m unittest tests.test_layout_pipeline.LocalVectorStoreTests</pre><p><strong>Success:</strong> vector count equals corpus, 3 tests OK.</p>
+<h2>6 - Tests</h2><pre>python -m unittest discover -s tests
+python tests/validate_prompt_library.py
+git diff --check</pre><p><strong>Success:</strong> 58 or current higher count OK, prompt validation passes, no diff errors.</p>
+<h2>7 - Generation and JSON</h2><pre>python main.py</pre><p>Use relevant template, representative prompt, no <code>--publish</code>. <strong>Success:</strong> validated save message; run Section 6 direct schema check on saved file and require exit 0.</p>
+<h2>8 - Test revision</h2><pre>$SUFFIX="exercise-YYYYMMDD"
+gcloud.cmd run deploy layout-test-api --source . --project=angular-lambda-421320 --region=us-central1 --revision-suffix=$SUFFIX --tag=$SUFFIX --no-traffic --quiet</pre><p><strong>Success:</strong> build SUCCESS, revision Ready, tagged URL, 0% stable traffic.</p>
+<h2>9 API and Layout Generator verification</h2><ol><li>Use candidate URL.</li><li>Load the inbound key from Secret Manager into a secure local variable without printing it.</li><li>Verify <code>/health</code> and four templates.</li><li>Confirm an incomplete request shows <strong>Submit details</strong> and not Continue.</li><li>Use the deterministic retry check to force a generation failure after the available attempts.</li><li>Require the friendly warning and Continue; select it once.</li><li>Require a fresh request ID, completed status, non-empty validated JSON, publisher null, and Download JSON.</li><li>Filter logs by both request IDs.</li></ol><p><strong>Success:</strong> Continue appears only for the retryable generation failure; the second request reuses all saved input, succeeds, and removes the retry panel.</p>
+<h2>10 Handoff</h2><pre>git status --short
+git diff --check
+git add &lt;intentional files&gt;
+git commit -m "docs: complete Phase 1 handoff"
+git push -u origin &lt;branch&gt;</pre><p>Commit the prompt library and vector file together with intentional code and tests. Do not add local archives, credentials, generated output, or unrelated user files. Record the source commit, revision, request ID, and rollback target. Stable promotion follows the normal team approval process.</p>
+
+<h1>15 Phase 1 release checklist</h1>
+<table><tr><th>Gate</th><th>Required evidence</th></tr><tr><td>Source control</td><td>Focused branch pushed, working tree clean except known local-only files, source commit recorded</td></tr><tr><td>Baseline scope</td><td><code>git diff --name-status 3ceb766..HEAD</code> contains only the approved retry behavior, focused tests, and documentation</td></tr><tr><td>Dependencies</td><td><code>uv lock --check</code> succeeds</td></tr><tr><td>Unit tests</td><td>58 or current higher count reports OK</td></tr><tr><td>Corpus</td><td>Prompt library validates and vector count matches corpus count</td></tr><tr><td>Representative generation</td><td>Reviewed prompt completes with publishing disabled and saved JSON passes schema validation</td></tr><tr><td>Retry recovery</td><td>Forced generation failure shows Continue only after the structured 5xx; the fresh request keeps all input and can complete</td></tr><tr><td>Candidate revision</td><td>Ready at zero stable traffic and tagged URL passes health, templates, generation, and retry recovery</td></tr><tr><td>Stable revision</td><td>100% traffic, <code>/health</code> returns 200, API and Layout Generator pass</td></tr><tr><td>Security</td><td>No secret value appears in Git, screenshots, commands, logs, or the manual</td></tr><tr><td>Documentation</td><td>Manual, feedback matrix, screenshots, revision, and unresolved external checks agree</td></tr></table>
+
+<h2>15.1 Items outside repository verification</h2>
+<ul><li>The client organization must identify the permanent GitHub access owner and confirm Henry's account onboarding if the repository becomes private.</li><li>The client IAM administrator must define the exact human deployer grants.</li><li>The external publisher owner must define queue inspection, job-status polling, generated-PDF retrieval, and duplicate-submission handling.</li><li>The inbound API key exposed in the review PDF requires a coordinated rotation. Do not rotate it without updating every approved client.</li></ul>
+
+<h1>Appendix A - Command reference</h1>
+<table><tr><th>Task</th><th>Command</th></tr><tr><td>Venv</td><td><code>python -m venv .venv</code></td></tr><tr><td>Activate</td><td><code>.\.venv\Scripts\Activate.ps1</code></td></tr><tr><td>Install</td><td><code>uv sync --frozen</code></td></tr><tr><td>ADC</td><td><code>gcloud.cmd auth application-default login</code></td></tr><tr><td>CLI</td><td><code>python main.py</code></td></tr><tr><td>API</td><td><code>uv run uvicorn api:app --host 0.0.0.0 --port 8080 --workers 1</code></td></tr><tr><td>Streamlit</td><td><code>uv run streamlit run streamlit_app.py</code></td></tr><tr><td>Append</td><td><code>python -m scripts.append_excel_to_prompt_library</code></td></tr><tr><td>Normal normalize</td><td><code>python -m scripts.normalize_prompt_library --source ... --output ...</code></td></tr><tr><td>Special normalize</td><td><code>python -m scripts.normalize_special_case_library --source ... --output ...</code></td></tr><tr><td>Embeddings</td><td><code>python -m scripts.prepare_vertex_vector_data</code></td></tr><tr><td>Tests</td><td><code>python -m unittest discover -s tests</code></td></tr><tr><td>Special-case tests</td><td><code>python -m unittest tests.test_special_cases.test_special_cases</code></td></tr><tr><td>Live generation</td><td><code>python main.py</code> with a reviewed prompt and no <code>--publish</code></td></tr></table>
+<h1 class="pagebreak">Appendix B - Glossary</h1>
+<table><tr><th>Term</th><th>Meaning</th></tr><tr><td>Baseline outputs</td><td>Checked-in normal regression JSON under <code>baseline_outputs/</code>.</td></tr><tr><td>Branch</td><td>Named Git line of work.</td></tr><tr><td>Deployment revision</td><td>Immutable Cloud Run version to which traffic can be routed.</td></tr><tr><td>Embedding</td><td>768-dimensional retrieval vector; not a fine-tuned model.</td></tr><tr><td>GCS output</td><td>Optional validated-JSON upload to configured Cloud Storage.</td></tr><tr><td>Publisher handoff</td><td>Explicit outbound submission to external publisher queue.</td></tr><tr><td>Special case</td><td>Relationship-aware whole layout such as threaded frames or image spread.</td></tr><tr><td>Validation success</td><td>Schema and all production rules passed; API completed or CLI validated save.</td></tr></table>
+<p class="small">End of Phase 1 final manual. Phase 2 is intentionally excluded.</p>
+</body></html>

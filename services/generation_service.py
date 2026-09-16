@@ -40,8 +40,15 @@ def _relationship_instruction(plan: LayoutFeaturePlan) -> str:
             "Put one shared articleDocumentLink inside each content object. The head uses "
             "expand=false and contains the complete textBody. Every continuation uses "
             "expand=true with an empty textBody so InDesign performs the flow. "
+            "Every linked frame must use textStyle.autoFit=false so its geometry stays "
+            "fixed and overflow reaches the continuation frame. "
             f"Thread scope: {plan.text_thread_scope}."
         )
+        if plan.article_constraints:
+            instructions.append(
+                "ARTICLE FRAME CONSTRAINTS are resolved hard requirements. Match each "
+                "listed page's start_y, height, and columns when those values are present."
+            )
     if plan.image_spread:
         instructions.append(
             f"Create one cross-page Image on even page {plan.spread_start_page}; its width "

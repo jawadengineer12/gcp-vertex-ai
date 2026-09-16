@@ -1,7 +1,7 @@
 """Deterministic pre-generation requirement extraction."""
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Literal
 
 from services.layout_plan_service import LayoutFeaturePlan, LayoutPlanService
@@ -87,7 +87,7 @@ class RequirementAgent:
             if is_guest_writer and field.name in {"author_name", "author_photo_url"}:
                 continue
             if re.search(pattern, lowered):
-                fields.append(field)
+                fields.append(replace(field, required=True))
 
         plan = layout_plan or LayoutPlanService().plan(prompt)
         count_match = re.search(rf"\b(two|2)\s+{IMAGE_TERM}\b", lowered)
@@ -98,12 +98,15 @@ class RequirementAgent:
                     RequiredField("image_2_url", "Image 2 HTTPS URL", "image"),
                 )
             )
-        elif (
-            re.search(IMAGE_PATTERN, lowered)
-            and not any(field.field_type == "image" for field in fields)
-            and not plan.image_spread
-        ):
-            fields.append(RequiredField("image_url", "Image HTTPS URL", "image"))
+        elif re.search(IMAGE_PATTERN, lowered) and not plan.image_spread:
+            image_index = next(
+                (index for index, field in enumerate(fields) if field.field_type == "image"),
+                None,
+            )
+            if image_index is None:
+                fields.append(RequiredField("image_url", "Image HTTPS URL", "image"))
+            elif not fields[image_index].required:
+                fields[image_index] = replace(fields[image_index], required=True)
         if plan.image_spread:
             fields.append(
                 RequiredField("spread_image_url", "Spread image HTTPS URL", "image")

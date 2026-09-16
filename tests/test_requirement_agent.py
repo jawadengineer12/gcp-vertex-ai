@@ -1,6 +1,8 @@
 import unittest
 
 from services.requirement_agent import RequirementAgent
+from services.information_agent import InformationAgent
+from services.requirement_agent import RequiredField
 
 
 class RequirementAgentImageDetectionTests(unittest.TestCase):
@@ -79,6 +81,53 @@ class RequirementAgentImageDetectionTests(unittest.TestCase):
         names = {field.name for field in fields}
         self.assertIn("guest_writer_photo_url", names)
         self.assertNotIn("image_url", names)
+
+    def test_optional_template_image_only_blocks_when_requested(self) -> None:
+        template = {
+            "requiredFields": [
+                {
+                    "name": "hero_image_url",
+                    "question": "Hero image URL",
+                    "type": "image",
+                    "required": False,
+                }
+            ]
+        }
+        normal = {field.name: field for field in self.agent.resolve("Write an article", template)}
+        requested = {
+            field.name: field
+            for field in self.agent.resolve("Write an article with an image", template)
+        }
+        spread = {
+            field.name: field
+            for field in self.agent.resolve("Use a two page image spread", template)
+        }
+        self.assertFalse(normal["hero_image_url"].required)
+        self.assertTrue(requested["hero_image_url"].required)
+        self.assertFalse(spread["hero_image_url"].required)
+        self.assertTrue(spread["spread_image_url"].required)
+
+    def test_prompt_mention_upgrades_optional_field_to_required(self) -> None:
+        fields = {
+            field.name: field
+            for field in self.agent.resolve("Include the publisher and publication date")
+        }
+        self.assertTrue(fields["publisher_name"].required)
+        self.assertTrue(fields["publication_date"].required)
+
+    def test_cli_skips_unrequested_optional_fields(self) -> None:
+        prompts: list[str] = []
+        collected = InformationAgent(
+            input_fn=lambda prompt: prompts.append(prompt) or "required value",
+            output_fn=lambda _message: None,
+        ).collect(
+            [
+                RequiredField("title", "Title"),
+                RequiredField("hero_image_url", "Hero", "image", required=False),
+            ]
+        )
+        self.assertEqual(collected, {"title": "required value"})
+        self.assertEqual(len(prompts), 1)
 
 
 if __name__ == "__main__":

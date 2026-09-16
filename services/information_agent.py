@@ -18,7 +18,9 @@ class InformationAgent:
         self, fields: list[RequiredField], known_values: dict[str, str] | None = None
     ) -> dict[str, str]:
         collected = dict(known_values or {})
-        pending = [field for field in fields if field.name not in collected]
+        pending = [
+            field for field in fields if field.required and field.name not in collected
+        ]
         if pending:
             self.output_fn("\nI need some additional information before generation.")
             self.output_fn("Press Enter to keep a standardized placeholder.\n")

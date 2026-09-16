@@ -46,6 +46,7 @@ class ValidationService:
         plan = layout_plan or LayoutFeaturePlan()
         errors = RelationshipValidationService().errors(project, plan)
         errors.extend(self._quality_errors(project, plan))
+        errors.extend(self._constraint_errors(project, plan))
         if errors:
             raise LayoutQualityError("\n".join(errors))
 
@@ -96,8 +97,12 @@ class ValidationService:
                         or bottom > height - self.safe_margin
                     ):
                         errors.append(
-                            f"{label}: Article frame must remain inside the "
-                            f'{self.safe_margin}" safe margin'
+                            f"{label}: Article frame ({left}, {top}, "
+                            f"{asset.size.width}, {asset.size.height}) must remain inside "
+                            f'the {self.safe_margin}" safe margin; maximum legal width '
+                            f"from this X is {max(width - self.safe_margin - left, 0):.4g} "
+                            f"and maximum legal height from this Y is "
+                            f"{max(height - self.safe_margin - top, 0):.4g}"
                         )
                     font = asset.textStyle.fontFamily
                     if font not in self.allowed_fonts:
@@ -124,6 +129,51 @@ class ValidationService:
                         )
 
             errors.extend(self._article_overlap_errors(page.pageIndex, articles))
+        return errors
+
+    @staticmethod
+    def _constraint_errors(
+        project: LayoutProject, plan: LayoutFeaturePlan
+    ) -> list[str]:
+        errors: list[str] = []
+        pages = {page.pageIndex: page for page in project.pages}
+        head_pages = {
+            page.pageIndex
+            for page in project.pages
+            for asset in page.assets
+            if isinstance(asset, ArticleAsset) and asset.expand is False
+        }
+        for constraint in plan.article_constraints:
+            page = pages.get(constraint.page_index)
+            if page is None:
+                errors.append(
+                    f"Article constraint requires missing page {constraint.page_index}"
+                )
+                continue
+            linked = [
+                asset
+                for asset in page.assets
+                if isinstance(asset, ArticleAsset) and asset.expand is not None
+            ]
+            expected_expand = constraint.page_index not in head_pages
+            matches = [asset for asset in linked if asset.expand is expected_expand]
+            if not matches:
+                errors.append(
+                    f"page {constraint.page_index} has no threaded Article frame for its "
+                    "explicit constraints"
+                )
+                continue
+            asset = matches[0]
+            for name, actual, expected in (
+                ("startY", asset.position.startY, constraint.start_y),
+                ("height", asset.size.height, constraint.height),
+                ("columns", asset.columns, constraint.columns),
+            ):
+                if expected is not None and abs(actual - expected) > 0.001:
+                    errors.append(
+                        f"page {constraint.page_index} threaded Article {name} must be "
+                        f"{expected}; got {actual}"
+                    )
         return errors
 
     @staticmethod
